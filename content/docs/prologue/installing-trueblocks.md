@@ -14,15 +14,53 @@ toc: true
 
 To use the core tools of TrueBlocks, you need to go through a few installation steps.
 
-0. Install dependencies
-1. Compile from the codebase
-2. Add `trueblock-core/bin` to your shell PATH.
-3. Update configs for your RPC endpoints and API keys
+## Quick Install
+
+These instructions assume you can use a shell to navigate directories and open files
+
+0. Install dependencies  
+&#x2611; [Install go 1.12 or later](https://golang.org/doc/install)  
+&#x2611; Install core utilities. You'll need:
+   `git` `cmake` `python` `python-dev` `libcurl3-dev` `clang-format` `jq`
+  
+1. Clone and compile from the codebase
+    ```shell
+    git clone -b develop https://github.com/trueblocks/trueblocks-core
+    cd trueblocks-core
+    mkdir build && cd build
+    cmake ../src
+    make
+    ```
+    _Speed up `make` with `make -j <nproc>`, where `nproc` is the number of cores to devote to the build._
+2. Add `trueblocks-core/bin` to your shell `PATH`.
+
+3. Find your TrueBlocks configuration directory. This should be at either 
+`$XDG_DATA_HOME`, or:
+    * if on Linux, at `~/.local/share/trueblocks`
+    * if on Mac, at `~/Library/Application/Support/TrueBlocks`
+
+4. Edit `trueblocks.toml` to include your RPC endpoint and relevant API keys.
+Something like this:
+
+    ```toml
+     [settings]
+     rpcProvider = "<url-to-rpc-endpoint>"
+     etherscan_key = "<key>"
+     ```
+
+5. Test that chifra commands can query blockchain data.
+
+    ```shell
+    chifra blocks 100
+    ```
 
 _Optional steps:_
 
-4. To use all features, get your index.
-5. To explore the data visually, install the explorer application.
+<!--
+These links are hardcoded, so that they won't break on the repository README)
+-->
+6. To use TrueBlocks to its full capabilities, [get your index](https://trueblocks.io/docs/prologue/how-can-i-get-the-index/).
+7. To explore the data visually, [install the explorer application](https://trueblocks.io/docs/prologue/install-explorer/).
 
 ## Install
 
