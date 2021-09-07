@@ -9,7 +9,11 @@ info:
     url: http://www.gnu.org/licenses/
   version: 0.12.1-alpha
   description: >
-
+ 
+   
+   Testing an API update, some crazy stuff going on here.
+   
+   
    A REST layer over the TrueBlocks application. With `chifra serve`, you can
    run this on your own machine, and make calls to `localhost`.
 
