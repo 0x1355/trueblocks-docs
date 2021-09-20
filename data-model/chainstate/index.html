@@ -18,22 +18,24 @@
 <meta name=twitter:title content="Chain State">
 <meta name=twitter:description content="These commands compare the balance of an address against a particular token or block.
 Each data structure is created by one or more tools which are detailed below
-State The balance of an address at a given block.
+State The following commands produce and manage states:
+   Tools     The balance of an address at a given block.
  CLI: chifra state API  State data is made of the following data fields:
-   Field Description Type     blockNumber the block number at which this state was taken blknum   balance the balance at the address at the given block height wei   nonce the nonce of the address at the given block height uint64   code the byte code at the address (if this is a smart contract) bytes   storage this field is un-implemented and current returns the first storage location in a smart contract bytes   address the address of the state being queried address   deployed the block number at which this smart contract was deployed (if a smart contact) blknum   accttype the type of the address at the given block string   ether the balance of the address in ethers double    Token  CLI: chifra tokens API  Token data is made of the following data fields:">
+   Field Description Type     blockNumber the block number at which this state was taken blknum   balance the balance at the address at the given block height wei   nonce the nonce of the address at the given block height uint64   code the byte code at the address (if this is a smart contract) bytes   storage this field is un-implemented and current returns the first storage location in a smart contract bytes   address the address of the state being queried address   deployed the block number at which this smart contract was deployed (if a smart contact) blknum   accttype the type of the address at the given block string   ether the balance of the address in ethers double    Token The following commands produce and manage tokens:">
 <meta name=twitter:site content="@TrueBlocks">
 <meta name=twitter:creator content="@TrueBlocks">
 <meta property="og:title" content="Chain State">
 <meta property="og:description" content="These commands compare the balance of an address against a particular token or block.
 Each data structure is created by one or more tools which are detailed below
-State The balance of an address at a given block.
+State The following commands produce and manage states:
+   Tools     The balance of an address at a given block.
  CLI: chifra state API  State data is made of the following data fields:
-   Field Description Type     blockNumber the block number at which this state was taken blknum   balance the balance at the address at the given block height wei   nonce the nonce of the address at the given block height uint64   code the byte code at the address (if this is a smart contract) bytes   storage this field is un-implemented and current returns the first storage location in a smart contract bytes   address the address of the state being queried address   deployed the block number at which this smart contract was deployed (if a smart contact) blknum   accttype the type of the address at the given block string   ether the balance of the address in ethers double    Token  CLI: chifra tokens API  Token data is made of the following data fields:">
+   Field Description Type     blockNumber the block number at which this state was taken blknum   balance the balance at the address at the given block height wei   nonce the nonce of the address at the given block height uint64   code the byte code at the address (if this is a smart contract) bytes   storage this field is un-implemented and current returns the first storage location in a smart contract bytes   address the address of the state being queried address   deployed the block number at which this smart contract was deployed (if a smart contact) blknum   accttype the type of the address at the given block string   ether the balance of the address in ethers double    Token The following commands produce and manage tokens:">
 <meta property="og:type" content="article">
 <meta property="og:url" content="/data-model/chainstate/">
 <meta property="og:image" content="/trueblocks.png">
-<meta property="article:published_time" content="2021-09-20T13:27:50+00:00">
-<meta property="article:modified_time" content="2021-09-20T13:41:41-04:00">
+<meta property="article:published_time" content="2021-09-20T18:07:02+00:00">
+<meta property="article:modified_time" content="2021-09-20T19:03:48-04:00">
 <meta property="og:site_name" content="TrueBlocks">
 <meta property="article:publisher" content="https://www.facebook.com/">
 <meta property="article:author" content="https://www.facebook.com/">
@@ -131,6 +133,15 @@ State The balance of an address at a given block.
 <p>These commands compare the balance of an address against a particular token or block.</p>
 <p><em>Each data structure is created by one or more tools which are detailed below</em></p>
 <h2 id=state>State<a href=#state class=anchor aria-hidden=true>#</a> </h2>
+<p>The following commands produce and manage states:</p>
+<table>
+<thead>
+<tr>
+<th>Tools</th>
+<th></th>
+</tr>
+</thead>
+</table>
 <p>The balance of an address at a given block.</p>
 <ul>
 <li>CLI: <a href=/docs/chifra/chainstate/#chifra-state>chifra state</a></li>
@@ -194,6 +205,15 @@ State The balance of an address at a given block.
 </tbody>
 </table>
 <h2 id=token>Token<a href=#token class=anchor aria-hidden=true>#</a> </h2>
+<p>The following commands produce and manage tokens:</p>
+<table>
+<thead>
+<tr>
+<th>Tools</th>
+<th></th>
+</tr>
+</thead>
+</table>
 <ul>
 <li>CLI: <a href=/docs/chifra/chainstate/#chifra-tokens>chifra tokens</a></li>
 <li><a href=/api#operation/chainstate-tokens>API</a></li>

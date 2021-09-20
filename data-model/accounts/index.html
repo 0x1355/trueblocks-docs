@@ -26,8 +26,8 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 <meta property="og:type" content="article">
 <meta property="og:url" content="/data-model/accounts/">
 <meta property="og:image" content="/trueblocks.png">
-<meta property="article:published_time" content="2021-09-20T13:27:50+00:00">
-<meta property="article:modified_time" content="2021-09-20T13:41:41-04:00">
+<meta property="article:published_time" content="2021-09-20T18:07:02+00:00">
+<meta property="article:modified_time" content="2021-09-20T19:03:48-04:00">
 <meta property="og:site_name" content="TrueBlocks">
 <meta property="article:publisher" content="https://www.facebook.com/">
 <meta property="article:author" content="https://www.facebook.com/">
@@ -275,6 +275,15 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 <p>When exported with the <code>--accounting</code> option from <code>chifra export</code>, each transaction will have field called <code>statements</code>. Statements are an array for reconciliations. All such exported transactions will have at least one reconcilation (for ETH), however, many will have additional reconciliations for other assets (such as ERC20 and ERC721 tokens).</p>
 <p>Because DeFi is essentially swaps and trades around ERC20s, and because and &lsquo;programmable money&rsquo; allows for unlimited actions to happen under a single transaction,many times a transaction has four or five reconciliations.</p>
 <p>Reconciliations are relative to an <code>accountedFor</code> address. For this reason, the same transaction will probably have different reconciliations depending on the <code>accountedFor</code> address. Consider a simple transfer of ETH from one address to another. Obviously, the sender&rsquo;s and the recipient&rsquo;s reconciliations will differ (in opposite proportion to each other). The <code>accountedFor</code> address is always present as the <code>assetAddress</code> in the first reconciliation of the statements array.</p>
+<p>The following commands produce and manage reconciliations:</p>
+<table>
+<thead>
+<tr>
+<th>Tools</th>
+<th></th>
+</tr>
+</thead>
+</table>
 <p>Reconciliation data is made of the following data fields:</p>
 <table>
 <thead>
@@ -666,12 +675,6 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 <th></th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td><a href=/docs/chifra/accounts/#chifra-abis>chifra abis</a></td>
-<td>fetches the ABI for a smart contract</td>
-</tr>
-</tbody>
 </table>
 <p>Parameter data is made of the following data fields:</p>
 <table>
