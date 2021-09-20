@@ -1,0 +1,272 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="ie=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<link rel=preload as=font href=/fonts/vendor/jost/jost-v4-latin-regular.woff2 type=font/woff2 crossorigin>
+<link rel=preload as=font href=/fonts/vendor/jost/jost-v4-latin-700.woff2 type=font/woff2 crossorigin>
+<link rel=stylesheet href=/main.b97465d3e9dbb04b0919a61f5c5766b97ddb3b30835a2bf75ec252e8c570f518d52f1e59944be75f9c92a4c5bc6f1bbe84962010976216b41d653fb6802056b7.css integrity="sha512-uXRl0+nbsEsJGaYfXFdmuX3bOzCDWiv3XsJS6MVw9RjVLx5ZlEvnX5ySpMW8bxu+hJYgEJdiFrQdZT+2gCBWtw==" crossorigin=anonymous>
+<noscript><style>img.lazyload{display:none}</style></noscript>
+<meta name=robots content="index, follow">
+<meta name=googlebot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name=bingbot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<title>TrueBlarks - TrueBlocks</title>
+<meta name=description content="Ethereum as it was meant to be: local-first, P2P, and accurate queries to all the data you’ll ever need.">
+<link rel=canonical href=/blog/trueblarks/>
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="/trueblocks.png">
+<meta name=twitter:title content="TrueBlarks">
+<meta name=twitter:description content="I wanted to share with you (through a series of charts) what happens when one releases a world-class data scientist such as Ed Mazurek on fresh-baked Ethereum difficulty data.
+You get TrueBlarks (that’s a portmanteau of “TrueBlocks” and “R” in case you were wondering). If you don’t know about “R” and R Studio, you should. It’s amazing.
+With little to no explanation, I am going to copy and paste the “R” code right next to the chart used to create it.">
+<meta name=twitter:site content="@TrueBlocks">
+<meta name=twitter:creator content="@TrueBlocks">
+<meta property="og:title" content="TrueBlarks">
+<meta property="og:description" content="I wanted to share with you (through a series of charts) what happens when one releases a world-class data scientist such as Ed Mazurek on fresh-baked Ethereum difficulty data.
+You get TrueBlarks (that’s a portmanteau of “TrueBlocks” and “R” in case you were wondering). If you don’t know about “R” and R Studio, you should. It’s amazing.
+With little to no explanation, I am going to copy and paste the “R” code right next to the chart used to create it.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/blog/trueblarks/">
+<meta property="og:image" content="/trueblocks.png">
+<meta property="article:published_time" content="2019-01-21T22:18:40+00:00">
+<meta property="article:modified_time" content="2021-09-03T16:57:17-03:00">
+<meta property="og:site_name" content="TrueBlocks">
+<meta property="article:publisher" content="https://www.facebook.com/">
+<meta property="article:author" content="https://www.facebook.com/">
+<meta property="og:locale" content="en_US">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"\/blog\/trueblarks\/"},"headline":"TrueBlarks","image":[],"datePublished":"2019-01-21T22:18:40CET","dateModified":"2021-09-03T16:57:17CET","author":{"@type":"Organization","name":"TrueBlocks"},"publisher":{"@type":"Organization","name":"TrueBlocks","logo":{"@type":"ImageObject","url":"\/logo-doks.png"}},"description":""}</script>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"\/"},{"@type":"ListItem","position":2,"name":"Blogtrueblarks","item":"\/blogtrueblarks\/"}]}</script>
+<meta name=theme-color content="#fff">
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/site.webmanifest>
+</head>
+<body class="blog single">
+<div class="header-bar fixed-top"></div>
+<script>(localStorage.getItem('theme')==='dark'||localStorage.getItem('theme')===null)&&document.body.classList.add('dark')</script>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+<div class=container>
+<input class="menu-btn order-0" type=checkbox id=menu-btn>
+<label class="menu-icon d-md-none" for=menu-btn><span class=navicon></span></label>
+<a class="navbar-brand order-1 order-md-0 me-auto" href=/>TrueBlocks</a>
+<button id=mode class="btn btn-link order-2 order-md-4" type=button aria-label="Toggle mode">
+<span class=toggle-dark><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span>
+<span class=toggle-light><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+</button>
+<ul class="navbar-nav social-nav order-3 order-md-5">
+<li class=nav-item>
+<a class=nav-link href=https://twitter.com/trueblocks><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9.0 01-3.14 1.53 4.48 4.48.0 00-7.86 3v1A10.66 10.66.0 013 4s-4 9 5 13a11.64 11.64.0 01-7 2c9 5 20 0 20-11.5a4.5 4.5.0 00-.08-.83A7.72 7.72.0 0023 3z"/></svg><span class="ms-2 visually-hidden">Twitter</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://discord.com/invite/kAFcZH2x7K><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="simple icon-discord"><path d="M20.317 4.3698a19.7913 19.7913.0 00-4.8851-1.5152.0741.0741.0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868.0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077.0 00-.0785-.037 19.7363 19.7363.0 00-4.8852 1.515.0699.0699.0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824.0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777.0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076.0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077.0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743.0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614.0a.0739.0739.0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077.0 01-.0066.1276 12.2986 12.2986.0 01-1.873.8914.0766.0766.0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076.0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077.0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061.0 00-.0312-.0286zM8.02 15.3312c-1.1825.0-2.1569-1.0857-2.1569-2.419.0-1.3332.9555-2.4189 2.157-2.4189 1.2108.0 2.1757 1.0952 2.1568 2.419.0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748.0c-1.1825.0-2.1569-1.0857-2.1569-2.419.0-1.3332.9554-2.4189 2.1569-2.4189 1.2108.0 2.1757 1.0952 2.1568 2.419.0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg><span class="ms-2 visually-hidden">Discord</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://github.com/trueblocks/trueblocks-core><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/api>API Reference<span class="ms-2 visually-hidden">API</span></a>
+</li>
+</ul>
+<div class="collapse navbar-collapse order-4 order-md-1">
+<ul class="navbar-nav main-nav me-auto order-5 order-md-2"><li class=nav-item>
+<a class=nav-link href=/docs/>Docs</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/data-model/intro>Data Model</a>
+</li>
+<li class="nav-item active">
+<a class=nav-link href=/blog/>Blog</a>
+</li>
+</ul>
+<div class="break order-6 d-md-none"></div>
+<form class="navbar-form flex-grow-1 order-7 order-md-3">
+<input id=userinput class="form-control is-search" type=search placeholder="Search docs..." aria-label="Search docs..." autocomplete=off>
+<div id=suggestions class="shadow bg-white rounded"></div>
+</form>
+</div>
+</div>
+</header>
+<div class="wrap container" role=document>
+<div class=content>
+<div class="row flex-xl-nowrap">
+<div class="col-lg-5 col-xl-4 docs-sidebar">
+<nav class=docs-links aria-label="Main navigation">
+<ul>
+<h3>Blog Topics</h3>
+<li><a href=/tags/ethereum>ethereum</a> (29)</li>
+<li><a href=/tags/trueblocks>trueblocks</a> (15)</li>
+<li><a href=/tags/recipes>recipes</a> (3)</li>
+<li><a href=/tags/explainers>explainers</a> (1)</li>
+</ul>
+</nav>
+</div>
+<nav class="docs-toc d-none d-xl-block col-xl-3" aria-label="Secondary navigation">
+<div class=page-links>
+<h3>On this page</h3>
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</nav>
+<main class="docs-content col-lg-11 col-xl-9 mx-xl-auto">
+<h1>TrueBlarks</h1>
+<p class=lead>Ethereum data on crack</p>
+<p>I wanted to share with you (through a series of charts) what happens when one releases a world-class data scientist such as <a href=https://medium.com/u/d272dbeef59a>Ed Mazurek</a> on fresh-baked Ethereum difficulty data.</p>
+<p>You get TrueBlarks (that’s a <a href="https://www.google.com/search?q=define+portmanteau&rlz=1C5CHFA_enUS740US740&oq=define+portman&aqs=chrome.0.0j69i57j0l4.4375j1j7&sourceid=chrome&ie=UTF-8">portmanteau</a> of “TrueBlocks” and “R” in case you were wondering). If you don’t know about “R” and <a href=https://www.rstudio.com/>R Studio</a>, you should. It’s amazing.</p>
+<p>With little to no explanation, I am going to copy and paste the “R” code right next to the chart used to create it. Ask Ed what the code means.</p>
+<p>The comma-separated data looks like this:</p>
+<blockquote>
+<p>block.number,timestamp,difficulty<br>
+1,1438269988,17171480576<br>
+2,1438270017,17163096064<br>
+3,1438270048,17154715646<br>
+4,1438270077,17146339321<br>
+…</p>
+</blockquote>
+<p>One record for each of the 7,105,056 blocks that had been produced at the time of this writing. Here’s some preliminary setup code that reads the data and cleans it up a bit.</p>
+<p>require(tidyverse)<br>
+require(scales)<br>
+require(dplyr)<br>
+require(magrittr)</p>
+<p>homestead.block &lt;- 1150000<br>
+byzantium.block &lt;- 4370000<br>
+bin_size &lt;- 200<br>
+period_size &lt;- 100000<br>
+sample_size &lt;- 50000</p>
+<p>difficulty &lt;- read_csv(‘difficulty-generated-1a.csv’) %>%<br>
+filter(block.number > homestead.block) %>%<br>
+mutate(block.bin = floor(block.number / bin_size) * bin_size) %>%<br>
+mutate(fake.block =<br>
+ifelse(block.number >= byzantium.block,<br>
+block.number — 3000000,<br>
+block.number) + 1) %>%<br>
+mutate(period = floor(fake.block / period_size)) %>%<br>
+mutate(bomb = 2 ^ period) %>%<br>
+mutate(parent.difficulty = lag(difficulty)) %>%<br>
+mutate(parent.ts = lag(timestamp)) %>%<br>
+mutate(diff.delta = difficulty — parent.difficulty) %>%<br>
+mutate(ts.delta = timestamp — parent.ts) %>%<br>
+mutate(diff.sensitivity = diff.delta / difficulty) %>%<br>
+mutate(ts.sensitivity = ts.delta / timestamp)</p>
+<p>current.block &lt;- difficulty$block.number %>% tail(1)<br>
+current.bomb &lt;- max(difficulty$bomb)</p>
+<h4 id=the-code>The Code<a href=#the-code class=anchor aria-hidden=true>#</a> </h4>
+<p>Here’s the code for our first chart:</p>
+<p>difficulty %>%<br>
+sample_n(sample_size) %>%<br>
+group_by(block.bin) %>%<br>
+ggplot(aes(x=block.number)) +<br>
+geom_line(aes(y=diff.delta, color=’diff.delta’)) +<br>
+geom_line(aes(y=bomb, color=’bomb’))</p>
+<p>And here’s the first chart showing the <code>delta</code> in each block’s <code>difficulty</code> through the first 7.1 million blocks. It also shows, as a red line, the difficulty bomb. You can see it’s creeping up again.</p>
+<p><img src=/blog/img/028-TrueBlarks-001.png alt></p>
+<p>The next chart, built with this code,</p>
+<p>difficulty %>%<br>
+sample_n(sample_size) %>%<br>
+group_by(block.bin) %>%<br>
+ggplot(aes(x=block.number)) +<br>
+geom_line(aes(y=diff.sensitivity, color=’diff.sensitivity’))</p>
+<p>shows the ‘responsiveness’ of the difficulty calc to its current situation. We calculate <code>sensitivity</code> by dividing <code>diff.delta</code> by <code>block.difficulty</code>. I’m not sure, but I think the jaggys come from the way the difficulty value is calculated. It snaps to the next nearest 10 seconds to adjust, so 10, 11, 12, … 19 all give the same adjustment, but 20, 21, 22, … give different adjustments.</p>
+<p><img src=/blog/img/028-TrueBlarks-002.png alt></p>
+<p>The next chart, generated from this “R” code,</p>
+<p>difficulty %>%<br>
+group_by(block.bin) %>%<br>
+summarize(sum.diff.delta = sum(diff.delta), na.rm=T) %>%<br>
+ggplot(aes(x=block.bin, y=sum.diff.delta)) +<br>
+geom_line()</p>
+<p>shows the accumulated sum of the <code>diff.delta</code> values. You can clearly see the battle waged by the pre-byzantium difficulty bomb. Up, down, up, down. The fact that the difficulty hovers around a target is exactly what the difficulty calc is supposed to do. It keeps the timing of the blocks consistent.</p>
+<p><a href=https://medium.com/u/9f3988a56032>Lane Rettig</a> wondered if, because of the increased hash rate of the current chain, the effect of the difficulty bomb might be obscured. I’m not sure (I’m not sure of anything), but the wider spread of the difficulty on blocks since byzantium may indicate that his intuition was correct. Is the difficulty bomb hiding in the big black static?</p>
+<p><img src=/blog/img/028-TrueBlarks-003.png alt></p>
+<p>In the following charts, we show some other shit made with some more “R” code. In this section, we calculate either the deltas of the means of the timestamps of the blocks or the means of the deltas of the timestamps of the blocks and we lay whatever that is against the previous charts (you’ll have to ask Ed if you want to understand it).</p>
+<p>difficulty %>%<br>
+group_by(block.bin) %>%<br>
+summarize(sum.diff.delta = sum(diff.delta, na.rm=T), mean.ts.delta = mean(ts.delta, na.rm=T)) %>%<br>
+gather(key = vars, value = val, -block.bin) %>%<br>
+ggplot(aes(x=block.bin, y = val)) +<br>
+geom_line() +<br>
+facet_wrap(facets = ‘vars’, scales = ‘free’, ncol = 1)</p>
+<p><img src=/blog/img/028-TrueBlarks-004.png alt></p>
+<p>And now we’re just showing a whole bunch of crazy charts with cool looking black jaggies (hang in there, there’s some interesting stuff below).</p>
+<p><img src=/blog/img/028-TrueBlarks-005.png alt></p>
+<p>The above chart was made with this nearly unintelligible code:</p>
+<p>difficulty %>%<br>
+group_by(block.bin) %>%<br>
+summarize(sum.difficulty = sum(difficulty), sum.diff.delta = sum(diff.delta, na.rm=T),mean.ts.delta=mean(ts.delta, na.rm=T)) %>%<br>
+mutate(percent.delta = sum.diff.delta / sum.difficulty) %>%<br>
+gather(key = vars, value = val, -block.bin) %>%<br>
+ggplot(aes(x=block.bin, y = val)) +<br>
+geom_line() +<br>
+facet_wrap(facets = ‘vars’, scales = ‘free’, ncol = 2)</p>
+<h4 id=finally-something-truly-interesting>Finally, Something Truly Interesting<a href=#finally-something-truly-interesting class=anchor aria-hidden=true>#</a> </h4>
+<p>Ed and I were inspired to work on the problem of the Ethereum’s difficulty calculation at the Status Hackathon in Prague back in October by <a href=https://medium.com/u/9f3988a56032>Lane Rettig</a>. He was concerned that the hash rate of the current chain, which was so much higher now than it was during the pre-byzantium bomb, would obscure the bomb longer, and then, once it exploded, it would take people by surprise.</p>
+<p>We wanted to see if his intuition was correct.</p>
+<p>A quick word about the bomb. It explodes in a exponential growth curve doubling every 100,000 blocks. This has the effect of creating a saw tooth curve, as the chain responds to dampen the rise in difficutly, as <a href=https://medium.com/@tjayrush/ethereum-block-production-continues-to-slide-1b74a2123e3f>we discussed in a previous post</a>.</p>
+<p>In this next set of charts, we’ve bucketed the data into buckets of 100,000 blocks and called these buckets <code>periods</code>. (The black line below shows the current <code>period</code>.) This bucketing is evident in the following chart where we also broke the data into groupings: pre-byzantium and post-byzantium. This allows us line up and compare the two exploding bombs.</p>
+<p>What do we see when we look at the data this way? First, we see that the post-byzantium bomb is beginning to rear its head.</p>
+<p>difficulty %>%<br>
+mutate(era = ifelse(block.number &lt;= byzantium.block, ‘before byzantium’, ‘post byzantium’)) %>%<br>
+sample_n(sample_size) %>%<br>
+ggplot(aes(y = diff.sensitivity, x = period, color=block.number)) +<br>
+scale_colour_gradient2(low = “red”, mid = “green”, high = “blue”, midpoint = byzantium.block, space = “Lab”, na.value = “grey50”, guide = “colourbar”) +<br>
+geom_point(size = point_size) +
+facet_wrap(facets = ‘era’, nrow = 2) +<br>
+geom_vline(xintercept = 41)</p>
+<p>The above code gives us this chart:</p>
+<p><img src=/blog/img/028-TrueBlarks-006.png alt></p>
+<p>And here, I think, we’ve finally gotten to something interesting. Although, we’re not quite done.</p>
+<p>Next, we lay the post-byzantium data and the pre-byzantium data on top of each other.</p>
+<p>What we see now, if we look closely enough, is that the little purple dots (current bomblets) are lower down than the little green dots (previous bomblets).</p>
+<p>Lane was right! This time, the effect of the difficulty bomb will be obscured and be less apparent than before. This may make its effect less obvious until it explodes. How soon will that be? When is the bomb coming? We’re already at period 41. The last bomb (<a href=https://medium.com/@tjayrush/ethereum-block-production-continues-to-slide-1b74a2123e3f>see this chart</a>) started showing a slow down by now. The last bomb was already starting to speed up by now. I think that is true this time as well, but it’s hidden behind the heavier hash rate.</p>
+<p><img src=/blog/img/028-TrueBlarks-007.png alt></p>
+<h4 id=conclusion>Conclusion<a href=#conclusion class=anchor aria-hidden=true>#</a> </h4>
+<p>It’s time to fork.</p>
+<p><strong>Thomas Jay Rush</strong> owns the software company TrueBlocks whose primary project is also called TrueBlocks, a collection of software libraries and applications enabling real-time, per-block smart contract monitoring and analytics to the Ethereum blockchain. Contact him through <a href=http://trueblocks.io>the website</a>.</p>
+<div class="docs-navigation d-flex justify-content-between">
+<a href=/blog/counting-shit-on-ethereum/>
+<div class="card my-1">
+<div class="card-body py-2">
+&larr; Counting Shit on Ethereum
+</div>
+</div>
+</a>
+<a class=ms-auto href=/blog/a-short-take-on-decentralization/>
+<div class="card my-1">
+<div class="card-body py-2">
+A Short Take on Decentralization &rarr;
+</div>
+</div>
+</a>
+</div>
+</main>
+</div>
+</div>
+</div>
+<footer class="footer text-muted">
+<div class=container>
+<div class=row>
+<div class="col-lg-8 order-last order-lg-first">
+<ul class=list-inline>
+<li class=list-inline-item>Powered by <a href=https://gohugo.io/>Hugo</a>, and <a href=https://getdoks.org/>Doks</a></li>
+</ul>
+</div>
+<div class="col-lg-8 order-first order-lg-last text-lg-end">
+<ul class=list-inline>
+<li class=list-inline-item><a href=https://github.com/TrueBlocks/trueblocks-docs>Improve these Docs</a></li>
+<li class=list-inline-item><a href=/privacy-policy/>Privacy</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+<script src=/js/highlight.min.ec942a9dc705691c6545c0ea48b4a76dd7a730be9478c31c9139089f95e82ccfccaee7fd8b5823a0fe005ac3dec10b8f825d9ace55908f4b6e6da407af3df293.js integrity="sha512-7JQqnccFaRxlRcDqSLSnbdenML6UeMMckTkIn5XoLM/Mruf9i1gjoP4AWsPewQuPgl2azlWQj0tubaQHrz3ykw==" crossorigin=anonymous defer></script>
+<script src=/main.min.9e62c9b0c5dc8279689cc9cb693a32c8ea1d19032f574f98c782ff59a0417d3662ff94b1a7755ab72a7a1862644bf00a58492c65aa0adabbc58080f4018c61bc.js integrity="sha512-nmLJsMXcgnlonMnLaToyyOodGQMvV0+Yx4L/WaBBfTZi/5Sxp3Vatyp6GGJkS/AKWEksZaoK2rvFgID0AYxhvA==" crossorigin=anonymous defer></script>
+<script src=/index.min.2920392d3bee72ff57da922db3d93f87bbdbae7d85d9bdfd6bac93a24c8ad220ebd77bacb49367cdadc381a7f57b96fa16cbee3821c085548638d591f04eb7cf.js integrity="sha512-KSA5LTvucv9X2pIts9k/h7vbrn2F2b39a6yTokyK0iDr13ustJNnza3Dgaf1e5b6FsvuOCHAhVSGONWR8E63zw==" crossorigin=anonymous defer></script>
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="ie=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<link rel=preload as=font href=/fonts/vendor/jost/jost-v4-latin-regular.woff2 type=font/woff2 crossorigin>
+<link rel=preload as=font href=/fonts/vendor/jost/jost-v4-latin-700.woff2 type=font/woff2 crossorigin>
+<link rel=stylesheet href=/main.b97465d3e9dbb04b0919a61f5c5766b97ddb3b30835a2bf75ec252e8c570f518d52f1e59944be75f9c92a4c5bc6f1bbe84962010976216b41d653fb6802056b7.css integrity="sha512-uXRl0+nbsEsJGaYfXFdmuX3bOzCDWiv3XsJS6MVw9RjVLx5ZlEvnX5ySpMW8bxu+hJYgEJdiFrQdZT+2gCBWtw==" crossorigin=anonymous>
+<noscript><style>img.lazyload{display:none}</style></noscript>
+<meta name=robots content="index, follow">
+<meta name=googlebot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name=bingbot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<title>Building Your Own Ethereum Archive Node - TrueBlocks</title>
+<meta name=description content="Ethereum as it was meant to be: local-first, P2P, and accurate queries to all the data you’ll ever need.">
+<link rel=canonical href=/blog/building-your-own-ethereum-archive-node/>
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="/trueblocks.png">
+<meta name=twitter:title content="Building Your Own Ethereum Archive Node">
+<meta name=twitter:description content="This article is incomplete in the extreme.
+[Jan 20, 2021: Since writing this article, we’ve come upon a project called TurboGeth. It reduces the size of the hard drive needed for an archive node from 6TB to around 1.5TB. Significant difference. Same data. Less costs.]
+In the first part, we simply present pictures and prices for the components we used to build the two Ethereum archive nodes we run in house.">
+<meta name=twitter:site content="@TrueBlocks">
+<meta name=twitter:creator content="@TrueBlocks">
+<meta property="og:title" content="Building Your Own Ethereum Archive Node">
+<meta property="og:description" content="This article is incomplete in the extreme.
+[Jan 20, 2021: Since writing this article, we’ve come upon a project called TurboGeth. It reduces the size of the hard drive needed for an archive node from 6TB to around 1.5TB. Significant difference. Same data. Less costs.]
+In the first part, we simply present pictures and prices for the components we used to build the two Ethereum archive nodes we run in house.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/blog/building-your-own-ethereum-archive-node/">
+<meta property="og:image" content="/trueblocks.png">
+<meta property="article:published_time" content="2020-08-13T18:21:08+00:00">
+<meta property="article:modified_time" content="2021-09-03T16:57:17-03:00">
+<meta property="og:site_name" content="TrueBlocks">
+<meta property="article:publisher" content="https://www.facebook.com/">
+<meta property="article:author" content="https://www.facebook.com/">
+<meta property="og:locale" content="en_US">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"\/blog\/building-your-own-ethereum-archive-node\/"},"headline":"Building Your Own Ethereum Archive Node","image":[],"datePublished":"2020-08-13T18:21:08CET","dateModified":"2021-09-03T16:57:17CET","author":{"@type":"Organization","name":"TrueBlocks"},"publisher":{"@type":"Organization","name":"TrueBlocks","logo":{"@type":"ImageObject","url":"\/logo-doks.png"}},"description":""}</script>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"\/"},{"@type":"ListItem","position":2,"name":"Blogbuilding Your Own Ethereum Archive Node","item":"\/blogbuilding-your-own-ethereum-archive-node\/"}]}</script>
+<meta name=theme-color content="#fff">
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/site.webmanifest>
+</head>
+<body class="blog single">
+<div class="header-bar fixed-top"></div>
+<script>(localStorage.getItem('theme')==='dark'||localStorage.getItem('theme')===null)&&document.body.classList.add('dark')</script>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+<div class=container>
+<input class="menu-btn order-0" type=checkbox id=menu-btn>
+<label class="menu-icon d-md-none" for=menu-btn><span class=navicon></span></label>
+<a class="navbar-brand order-1 order-md-0 me-auto" href=/>TrueBlocks</a>
+<button id=mode class="btn btn-link order-2 order-md-4" type=button aria-label="Toggle mode">
+<span class=toggle-dark><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span>
+<span class=toggle-light><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+</button>
+<ul class="navbar-nav social-nav order-3 order-md-5">
+<li class=nav-item>
+<a class=nav-link href=https://twitter.com/trueblocks><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9.0 01-3.14 1.53 4.48 4.48.0 00-7.86 3v1A10.66 10.66.0 013 4s-4 9 5 13a11.64 11.64.0 01-7 2c9 5 20 0 20-11.5a4.5 4.5.0 00-.08-.83A7.72 7.72.0 0023 3z"/></svg><span class="ms-2 visually-hidden">Twitter</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://discord.com/invite/kAFcZH2x7K><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="simple icon-discord"><path d="M20.317 4.3698a19.7913 19.7913.0 00-4.8851-1.5152.0741.0741.0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868.0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077.0 00-.0785-.037 19.7363 19.7363.0 00-4.8852 1.515.0699.0699.0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824.0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777.0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076.0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077.0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743.0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614.0a.0739.0739.0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077.0 01-.0066.1276 12.2986 12.2986.0 01-1.873.8914.0766.0766.0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076.0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077.0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061.0 00-.0312-.0286zM8.02 15.3312c-1.1825.0-2.1569-1.0857-2.1569-2.419.0-1.3332.9555-2.4189 2.157-2.4189 1.2108.0 2.1757 1.0952 2.1568 2.419.0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748.0c-1.1825.0-2.1569-1.0857-2.1569-2.419.0-1.3332.9554-2.4189 2.1569-2.4189 1.2108.0 2.1757 1.0952 2.1568 2.419.0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg><span class="ms-2 visually-hidden">Discord</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://github.com/trueblocks/trueblocks-core><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/api>API Reference<span class="ms-2 visually-hidden">API</span></a>
+</li>
+</ul>
+<div class="collapse navbar-collapse order-4 order-md-1">
+<ul class="navbar-nav main-nav me-auto order-5 order-md-2"><li class=nav-item>
+<a class=nav-link href=/docs/>Docs</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/data-model/intro>Data Model</a>
+</li>
+<li class="nav-item active">
+<a class=nav-link href=/blog/>Blog</a>
+</li>
+</ul>
+<div class="break order-6 d-md-none"></div>
+<form class="navbar-form flex-grow-1 order-7 order-md-3">
+<input id=userinput class="form-control is-search" type=search placeholder="Search docs..." aria-label="Search docs..." autocomplete=off>
+<div id=suggestions class="shadow bg-white rounded"></div>
+</form>
+</div>
+</div>
+</header>
+<div class="wrap container" role=document>
+<div class=content>
+<div class="row flex-xl-nowrap">
+<div class="col-lg-5 col-xl-4 docs-sidebar">
+<nav class=docs-links aria-label="Main navigation">
+<ul>
+<h3>Blog Topics</h3>
+<li><a href=/tags/ethereum>ethereum</a> (29)</li>
+<li><a href=/tags/trueblocks>trueblocks</a> (15)</li>
+<li><a href=/tags/recipes>recipes</a> (3)</li>
+<li><a href=/tags/explainers>explainers</a> (1)</li>
+</ul>
+</nav>
+</div>
+<nav class="docs-toc d-none d-xl-block col-xl-3" aria-label="Secondary navigation">
+<div class=page-links>
+<h3>On this page</h3>
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</nav>
+<main class="docs-content col-lg-11 col-xl-9 mx-xl-auto">
+<h1>Building Your Own Ethereum Archive Node</h1>
+<p class=lead>And why you may want to</p>
+<p>This article is incomplete in the extreme.</p>
+<p>[Jan 20, 2021: Since writing this article, we’ve come upon a project called TurboGeth. It reduces the size of the hard drive needed for an archive node from 6TB to around 1.5TB. Significant difference. Same data. Less costs.]</p>
+<p>In the first part, we simply present pictures and prices for the components we used to build the two Ethereum archive nodes we run in house. This list is outdated. About eight months ago we were forced to add a second 4TB hard drive to each machine, as the Ethereum archive node we were running (Parity) was getting close to filling up our single 4TB drive.</p>
+<p>After the pretty pictures, is the beginning of an article we started but never finished about running archive nodes and why one might wish to do that. Skip ahead if you wish.</p>
+<h4 id=pictures-of-components-and-2018-prices-needed-to-run-an-ethereum-archivenode>Pictures of Components (and 2018 Prices) Needed to Run an Ethereum Archive Node<a href=#pictures-of-components-and-2018-prices-needed-to-run-an-ethereum-archivenode class=anchor aria-hidden=true>#</a> </h4>
+<p><img src=/blog/img/039-Building-Your-Own-Ethereum-Archive-Node-001.jpg alt>
+<img src=/blog/img/039-Building-Your-Own-Ethereum-Archive-Node-002.jpg alt>
+<img src=/blog/img/039-Building-Your-Own-Ethereum-Archive-Node-003.jpg alt></p>
+<p>[We recently added a second one of these in a Raid 0 configuration as the data needs of the archive node overtopped 4TB]</p>
+<p><img src=/blog/img/039-Building-Your-Own-Ethereum-Archive-Node-004.jpg alt>
+<img src=/blog/img/039-Building-Your-Own-Ethereum-Archive-Node-005.jpg alt>
+<img src=/blog/img/039-Building-Your-Own-Ethereum-Archive-Node-006.jpg alt>
+<img src=/blog/img/039-Building-Your-Own-Ethereum-Archive-Node-007.jpg alt>
+<img src=/blog/img/039-Building-Your-Own-Ethereum-Archive-Node-008.jpg alt></p>
+<p>The above pictures and prices are of the components we used to build an Ubuntu machine that we use to run archive nodes. To be honest, these machines may be over built. Once they are synchronized, the easily keep up with the chain with little or no effort. We do not mine. There’s only one block every 14 seconds, so it’s not as if a lot is going on once the node is caught up.</p>
+<p><strong>Building Your Own Ethereum Audit Node</strong></p>
+<p>If you listen to Crypto-Twitter concerning Ethereum, you will be under the impression that running a “big, scary Ethereum archive node” is nearly impossible.</p>
+<p>There are companies starting to play off of this impression. In fact, in the last few months, two different companies rolled out pay-to-play plans granting access to Ethereum archive nodes. One of them charges nearly $10,000 a year. Imagine that — almost $1,000 US dollars per month to access the “shared-global-ledger-that-anyone-can-read.” Sounds more like “shared-global-ledger-that-any-rich-person-can-read.”</p>
+<p>This is simply not necessary.</p>
+<p>At TrueBlocks we run two Ethereum archive nodes <em>in house</em>, and we’ve been doing so since early 2016. We’ve long ago depreciated the cost of the machines. The ongoing cost of running these machines is negligible. The software has been amazingly stable (knock-on-wood). They run nearly unattended.</p>
+<p><strong>Outline</strong></p>
+<p>To make things simple in this article, I will refer to four <code>modes</code> for running an Ethereum node: <em>light, full</em>, <em>tracing</em>, and <em>archive</em>. This translates roughly into having access to <em>little, some</em>, <em>most</em>, or <em>all</em> of the Ethereum data.</p>
+<p>I’ll start by explaining the difference between these modes and then proceed to describe running archive nodes. To complete the article, I’ll try to explain why I want to run archive nodes.</p>
+<p>This article concerns the Parity Ethereum client. The concepts are similar with Geth and other Ethereum node software, but the words we use may carry slightly different meanings.</p>
+<p><strong>Full, Tracing, and Archive Nodes</strong></p>
+<p>There are basically four ways one can run an Ethereum node: light, full, tracing, and archive. Light nodes will be ignored in this article.</p>
+<p>We start by describing full nodes.</p>
+<p><em>Full Node</em></p>
+<p>Running an Ethereum full node allows you to interact with the Ethereum blockchain trustlessly. In this mode, the software receives and validates each new block as it is produced. With a full node, you may view only the <em>recent</em> state of the blockchain. A full node also allows you to broadcast transactions to the network. You cannot see deeply into the transactions (i.e. dig into the traces) or retrieve historical balances or state (i.e. dig into the archive), but you can interact effectively with the network. The time to sync a full node is much shorter than the time to sync tracing and archive nodes. You may also enable an option called “fast sync” that speeds up syncing even more.</p>
+<p>If you only need to interact with the front of the chain — for example, you just want to interact with some dApps — a fast-sync full node is probably the best option. A full node easily keeps up with the front of the chain and takes up a couple of hundred GB on your hard drive.</p>
+<p>While a full node allows you to transact with the network, it does not provide the deep access that TrueBlocks needs. Creating a complete, accurate, and audit-quality history of transactions for individual accounts, gaining access to historical account balances, historical token balances, and historical smart contract state is technically possible with a full node — but in practice, it’s not. Even simple queries for some historical state takes hours. For access to the rich data everyone thought we would get from the blockchain, one must run a different configuration.</p>
+<p><em>Tracing Node</em></p>
+<p>Ethereum runs Turing-complete smart contracts. These contracts execute computations on a virtual machine (the EVM).</p>
+<p>Like Bitcoin, many of Ethereum’s transactions are simply transfers of Ether from one account to another. Unlike Bitcoin, however, many Ethereum transactions are sent to a smart contract. This means executing instructions on the virtual machine. And as these instructions execute, they sometimes generate other instructions to other smart contracts. Some people call these other instructions “internal transactions.” Following Parity, we will call them traces.</p>
+<p>Here’s a simple example: Imagine a smart contract, that, each time it receives a payment, sends half of the payment to Alice and half to Bob. Oscar sends a transaction of two ether. During execution, the smart contract creates two messages (internal transactions/traces) — one to Alice and one to Bob. Oscar’s seemingly simple transaction generated multiple traces. You can imagine it can get way more complicated in a real life scenario such as DeFi.</p>
+<p>A tracing node allows you to retrieve these internal transactions quickly. As we mentioned above, you could get the traces from a full node, but it would take forever as they would have to be re-created. If you want to produce an audit-quality histories, without waiting forever, you need traces.</p>
+<p>The downside of running a tracing node is that it takes WAY longer to synchronize. There is no ‘fast-sync’ mode for a tracing node. In fact, when you start Parity with tracing enabled, you get this message: “Warning: Warp Sync is disabled because tracing is turned on.”</p>
+<p>Furthermore, the tracing node takes up a lot more disc space (although surprisingly not that much more). The synchronization for a tracing node takes significantly longer than a full node (more than a month), utilizes more RAM and CPU, and performs astronomically more reads and writes to your hard drive. (This is why we bought an SSD drive above.)</p>
+<p>The tracing node can produce audit-quality histories on a given Ethereum account. However, if you’re trying to build an audit-quality history of an account, there’s a problem. You need one other thing: you need to be able to verify that the process you’ve used to build the audit trail is correct.</p>
+<p><em>Archive Node</em></p>
+<p>Now that you have a tracing node and something like TrueBlocks to make the tracing node responsive to queries, why would you need an archive node?</p>
+<p>The first thing you need to know about an archive node is that it takes up a <em>lot</em>, <em>lot</em>, <em>lot</em> of hard drive space. 4.5 Terabytes as of the date of this writing and growing quickly.</p>
+<p>You can run an archive node without tracing enable, but we never do. If we’re going to use four terabytes or more, why not go all the way? We run Parity with <code>—-tracing on</code> and <code>—-pruning archive</code> enabled. It takes about as long to sync as the tracing node.</p>
+<p>When you run a full node, your node keeps only the current state — the state that exists at at blocks close to the head. All the of the history (the states that existed before that block, not to mention the interim states during transactions), are effectively thrown away. (In reality, full nodes actually temporarily cache the states of a few hundred past blocks, but this is largely an implementation detail).</p>
+<p>A tracing node, which we discussed earlier, also throws out historical states, but keeps enough information to replay transactions. From that, historical state can be re-created in a reasonable time, but the historical state is not stored on the hard drive.</p>
+<p>An archive node, in comparison, keeps around not only the most recent state, but the historical states of the network itself between blocks. As you might expect, this takes a ton of storage.</p>
+<p>Both interim states and traces can all be derived on a full node — the data needed to regenerate them is there — but to do so on the fly is prohibitively slow, making it, for all intents and purposes, useless.</p>
+<p>This is also why syncing an archive node doesn’t take much longer than syncing a tracing node. The bottleneck isn’t in what needs to be downloaded, or even in what needs to be executed by your processor. It’s primarily about the disk reads and writes that need to take place while calculating all the interim states. The big difference is that the archive node keeps the states around, while the tracing node saves only the internal transactions.</p>
+<p>[ THE FOLLOWING REMAINS INCOMPLETE AND PROBABLY WILL FOREVER ]</p>
+<p>At this point, you might be asking yourself a simple question. Tracing nodes store traces, and archive nodes store interim states, but:</p>
+<p>[ Why not both meme]</p>
+<p>Good question! It turns out, traces and states are better together.</p>
+<p><em>Audit Node</em></p>
+<p>We’ve talked about regular full nodes, about tracing nodes, and finally about archive nodes. Each have their own pluses and minuses, but the ultimate node in the blockchain auditer’s toolbelt is what we aptly call an “audit node.”</p>
+<p>Simply put, an audit node is one that stores both traces and interim states. It’s a tracing node and an archive node. If you’re going to run an archive node, you should almost certainly also keep the traces around. It doesn’t make syncing longer, and traces don’t take much extra space relative to the states.</p>
+<p>When you operate an audit node, what you’re essentially running is a living cache. You first sync and validate all the historical transactions, keeping a bunch of data around for faster queries. Then, you continue to update this data storehouse as new blocks are mined, validating each new block, and saving the traces and states in the process.</p>
+<p>Importantly, your audit node is yours, and you have access to this data without anyone’s permission. When you run an audit node, you’re living in the decentralized future, by trustlessly examining the blockchain’s past.</p>
+<p><em>Which Node Is Right For You?</em></p>
+<p>We’ve talked about regular full nodes, tracing nodes, archive nodes, and audit nodes. Which one is right for you? Let’s dig more into the requirements and tradeoffs that come with each node type, to help you make that decision.</p>
+<p>First, there’s a question of whether you need to run a full node in the first place. Call us crazy, but we think virtually everyone should.</p>
+<p>If you’re doing anything non-trivial on the blockchain, then you’re putting yourself at risk by relying on a trusted third party. This includes storing or sending any amount of ETH you’d be upset to lose. If you want to really live in the decentralized future, then running a regular full node to transact on the network is the first step.</p>
+<p>Running a regular full node is relatively straightforward. It can be accomplished on moderate to high-end consumer hardware, including MacBooks and other laptops. What about the next step, though? Who should go from a regular full node to a tracing node, or beyond?</p>
+<p>In short, if you need any non-trivial access to your past data, then you probably ought to consider jumping up to a tracing node. Again, we might be crazy, but we think this includes a large number of people and businesses — many more than are doing so today.</p>
+<p>Are you actively trading ETH and other tokens? Are you borrowing or lending using Maker, Compound, or other DeFi banks? Are you paying employees or contractors in Dai? Are you trading CryptoKitties, investing in Decentraland, buying art on SuperRare, battling on Gods Unchained, funding an Aragon DAO, or working on Gitcoin grants?</p>
+<p>In each of these cases, and many others, you should be in control of your own data. You should be capable of doing your own accounting, tracking your own statistics, and pulling your own figures for tax compliance. You should be running at least a tracing node.</p>
+<p>A tracing node requires a slightly beefier machine and it will take much longer to sync, but it’s a huge step toward controlling your own decentralized destiny. It gives you “accounting quality” access to your data, which is good enough for many users.</p>
+<p>Who, then, should consider jumping from a tracing node up to a full blown audit node? The answer is surprisingly simple: anyone who can afford the large solid state drive you’ll need to do so.</p>
+<p>Syncing an audit node takes about the same time as a tracing node, and requires roughly equivalent specs from your machine in terms of processor, RAM, and disk speed. The only meaningful difference is the size of the disk you need. That extra disk space comes with a hefty price tag, but if you can afford it, we think you should spring for it.</p>
+<p>This brings us to an important question. What does it cost to acquire, sync, and operate the various types of nodes? Until now, we’ve talked about hardware and time requirements in abstract and relative terms. Let’s now get down to brass tax, and address these concretely, based on the state of the Ethereum network, and the cost of computing hardware, in 2019.</p>
+<p><em>Hardware</em></p>
+<p>In this section, we’ll discuss in concrete terms the hardware you’ll need to run a full node. We’ll start by discussing general requirements at a high level, then dive into specific recommendations for hardware you can acquire. For the specific hardware, we’ll go from easiest to hardest in terms of time and effort.</p>
+<p>Before we dive in, a quick note on operating systems. We recommend that you run your node on a Unix based operating system like Linux or macOS. While it’s absolutely possible to run your full node on Windows, we’ve found Unix based systems to be more stable and reliable, perhaps because of its legacy on the server.</p>
+<p>For this reason, we’ll be covering vendors that offer machines with these operating systems out of the box. If you choose to run your node on Windows, or to buy a Windows machine and install Linux on it, you obviously have a host of other vendors to choose from, such as Dell, Lenovo, HP and countless others. The recommendations made in this section can still be useful when searching for comparable machines from those vendors.</p>
+<p><em>Specs</em></p>
+<p>A minimum viable full node carries the following base requirements:</p>
+<p>A solid state drive (SSD) of 512 GB or greater</p>
+<p>At least 8 GB of RAM</p>
+<p>Intel i3 or equivalent</p>
+<p>Your solid state drive needs to be fast — preferably it would be connected via NVMe (Non-Volatile Memory Express), but this is not strictly required. While a full node does not currently require 512 GB, it’s best to have at least that much space for future proofing. Finally, a reasonably fast multi-core processor is needed. Most modern processors would fit the bill.</p>
+<p>When jumping up to a tracing node, we recommend the following specs:</p>
+<p>A solid state drive (SSD) of 1 TB or greater</p>
+<p>At least 16 GB of RAM</p>
+<p>Intel i5 or equivalent</p>
+<p>Again, the space requirements here allow some breathing room. In reality, a tracing node could run today with 512 GB or even less.</p>
+<p>Finally, to jump up to a full blown audit node, we recommend the following specs:</p>
+<p>A solid state drive (SSD) of 8 TB</p>
+<p>At least 32 GB of RAM</p>
+<p>Intel i7 or equivalent</p>
+<p>Once more, these specs are not strictly required for an audit node, but they help future proof your investment. Today, you could probably get away with the same specs of a tracing node, plus a 4 TB SSD, but a year down the road, you might need to upgrade.</p>
+<p><em>DAppNode</em></p>
+<p>DAppNode is a company that offers the absolute easiest way to get a node running: they sell you one that’s already set up. DAppNode’s machine’s come with Linux and your node software already installed and configured. They’re also (mostly) synced as well.</p>
+<p>DAppNode also layers some custom software to make configuring and updating your node easier. If you’re looking for a “plug and play” solution, DAppNode is as close as we have.</p>
+<p>[ DAppNode Product Page]</p>
+<p>As you can see, DAppNode currently offers three models: Basic, Advanced, and Archive.</p>
+<p>The Basic model ($640 USD) can easily run a regular full node, and might barely manage to run a tracing node.</p>
+<p>Their Advanced model ($885 USD) is a better option for tracing node, and we think it’s worth the price for the very large gain in functionality that running a tracing node gives you.</p>
+<p>Finally, their Archive model ($1,725 USD) is technically capable of running an Audit node today, however the 4TB harddrive makes it hard to recommend. The fully cached state will likely surpass that soon. We hope DAppNode will consider offering an upgraded model soon.</p>
+<p>Overall, DAppNode is a great option. They give you most of what you want out of the box, and as you’ll see, their prices are actually quite competitive with generic hardware vendors.</p>
+<p><em>System76</em></p>
+<p>System76 is a beloved vendor of laptop and desktop computers that come pre-installed with Ubuntu Linux. Their machines are affordable and remove the stress usually associated with having to configure Linux yourself.</p>
+<p>In the chart below, we summarize configurations for both desktop and laptop machines that can serve your needs for running each of the various node types.</p>
+<p>System76 Desktop</p>
+<p>[ TODO: turn this into a table ]</p>
+<p>Full Node — $558</p>
+<p>Meerkat</p>
+<p>Intel i3–8109U</p>
+<p>8 GB DDR4 RAM</p>
+<p>500 GB NVMe</p>
+<p>Tracing Node — $896</p>
+<p>Meerkat Base</p>
+<p>Intel i5–8259U</p>
+<p>16 GB DDR4 RAM</p>
+<p>1 TB NVMe</p>
+<p>Archive Node — $3,346</p>
+<p>Thelio Base</p>
+<p>AMD 3rd Gen Ryzen 7 3800X</p>
+<p>32 GB DDR4 RAM</p>
+<p>250 GB NVMe + 12 TB Secondary SSD</p>
+<p>System 76 Laptop</p>
+<p>Full Node — $1,024</p>
+<p>Galaga Base</p>
+<p>Intel I5–8265U</p>
+<p>8 GB DDR4 RAM</p>
+<p>500 GB NVMe</p>
+<p>Tracing Node — $1,263</p>
+<p>Galaga Base</p>
+<p>Intel I5–8265U</p>
+<p>16 GB DDR4 RAM</p>
+<p>1 TB NVMe</p>
+<p>Audit Node — $4,162</p>
+<p>Serval WS Base</p>
+<p>Intel I7–9700K</p>
+<p>32 GB DDR4 RAM @ 2400 MHz</p>
+<p>240 GB SSD + 2x4 TB Secondary SSD’s</p>
+<p>As you’d expect, there’s a premium to be paid for laptops. You’ll have to decide if portability is high enough priority to warrant the extra price. Overall, though, System76 provides a great option for acquiring an affordable Linux computer without the headache of installing Linux.</p>
+<p>Apple</p>
+<p>Apple is a company that needs no introduction. While they’ve come to dominate the tech landscape through the iPhone, they’ve been building premium computers for a rabid fanbase for more than 40 years.</p>
+<p>Macs are fine options for running your Ethereum node, but they come with a big caveat: price. Apple makes machines with a focus on design and aesthetics, and the people who want to run macOS are willing to pay a pretty penny for them. For this reason, we really only recommend using a Mac for a full node if you already have one, if you want to buy one for regular use anyway, or if price is no object.</p>
+<p>The table below summarizes the minimum configurations we recommend for Apple hardware, highlighting the model and the specific upgrades needed. The list is by no means intended to be exhaustive.</p>
+<p>[ TODO: Turn this into a table ]</p>
+<p>Apple Desktop</p>
+<p>Full Node — $1,199</p>
+<p>Base Mac Mini</p>
+<p>512 GB SSD Storage</p>
+<p>Tracing Node — $1,899</p>
+<p>Base Mac Mini</p>
+<p>Intel Core i7, 3.2GHz 6‑core 8th‑gen</p>
+<p>16 GB DDR4 RAM</p>
+<p>1TB SSD Storage</p>
+<p>Audit Node — N/A</p>
+<p>Apple Laptop</p>
+<p>Full Node — $1,699</p>
+<p>Base MacBook Pro 13’</p>
+<p>512 GB SSD Storage</p>
+<p>Tracing Node — $2,099</p>
+<p>Base MacBook Pro 13’</p>
+<p>1 TB SSD Storage</p>
+<p>16 GB DDR4 RAM</p>
+<p>Audit Node — N/A</p>
+<p>One thing you might notice is that there’s no configuration for an audit node. Currently, Apple does not sell a machine that fits the bill. They will be releasing a new Mac Pro in Fall 2019, but we estimate the price for a suitable machine would be upwards of $8,000.</p>
+<p>Build Your Own</p>
+<p>It even worse than that. Even if you do spend extra money to get yourself suitable hardware, and you’ve spent weeks syncing your node, getting usable data from the chain is horribly cumbersome. This is where our project, TrueBlocks, comes in. TrueBlocks creates “the missing Ethereum index” directly from the blockchain data. This index unlocks the chain’s full potential. We’ll talk more about this later.</p>
+<div class="docs-navigation d-flex justify-content-between">
+<a href=/blog/ethereums-issuance-minerreward/>
+<div class="card my-1">
+<div class="card-body py-2">
+&larr; Ethereum’s Issuance: minerReward
+</div>
+</div>
+</a>
+<a class=ms-auto href=/blog/how-accurate-is-etherscan/>
+<div class="card my-1">
+<div class="card-body py-2">
+How Accurate is EtherScan? &rarr;
+</div>
+</div>
+</a>
+</div>
+</main>
+</div>
+</div>
+</div>
+<footer class="footer text-muted">
+<div class=container>
+<div class=row>
+<div class="col-lg-8 order-last order-lg-first">
+<ul class=list-inline>
+<li class=list-inline-item>Powered by <a href=https://gohugo.io/>Hugo</a>, and <a href=https://getdoks.org/>Doks</a></li>
+</ul>
+</div>
+<div class="col-lg-8 order-first order-lg-last text-lg-end">
+<ul class=list-inline>
+<li class=list-inline-item><a href=https://github.com/TrueBlocks/trueblocks-docs>Improve these Docs</a></li>
+<li class=list-inline-item><a href=/privacy-policy/>Privacy</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+<script src=/js/highlight.min.ec942a9dc705691c6545c0ea48b4a76dd7a730be9478c31c9139089f95e82ccfccaee7fd8b5823a0fe005ac3dec10b8f825d9ace55908f4b6e6da407af3df293.js integrity="sha512-7JQqnccFaRxlRcDqSLSnbdenML6UeMMckTkIn5XoLM/Mruf9i1gjoP4AWsPewQuPgl2azlWQj0tubaQHrz3ykw==" crossorigin=anonymous defer></script>
+<script src=/main.min.9e62c9b0c5dc8279689cc9cb693a32c8ea1d19032f574f98c782ff59a0417d3662ff94b1a7755ab72a7a1862644bf00a58492c65aa0adabbc58080f4018c61bc.js integrity="sha512-nmLJsMXcgnlonMnLaToyyOodGQMvV0+Yx4L/WaBBfTZi/5Sxp3Vatyp6GGJkS/AKWEksZaoK2rvFgID0AYxhvA==" crossorigin=anonymous defer></script>
+<script src=/index.min.2920392d3bee72ff57da922db3d93f87bbdbae7d85d9bdfd6bac93a24c8ad220ebd77bacb49367cdadc381a7f57b96fa16cbee3821c085548638d591f04eb7cf.js integrity="sha512-KSA5LTvucv9X2pIts9k/h7vbrn2F2b39a6yTokyK0iDr13ustJNnza3Dgaf1e5b6FsvuOCHAhVSGONWR8E63zw==" crossorigin=anonymous defer></script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="ie=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<link rel=preload as=font href=/fonts/vendor/jost/jost-v4-latin-regular.woff2 type=font/woff2 crossorigin>
+<link rel=preload as=font href=/fonts/vendor/jost/jost-v4-latin-700.woff2 type=font/woff2 crossorigin>
+<link rel=stylesheet href=/main.b97465d3e9dbb04b0919a61f5c5766b97ddb3b30835a2bf75ec252e8c570f518d52f1e59944be75f9c92a4c5bc6f1bbe84962010976216b41d653fb6802056b7.css integrity="sha512-uXRl0+nbsEsJGaYfXFdmuX3bOzCDWiv3XsJS6MVw9RjVLx5ZlEvnX5ySpMW8bxu+hJYgEJdiFrQdZT+2gCBWtw==" crossorigin=anonymous>
+<noscript><style>img.lazyload{display:none}</style></noscript>
+<meta name=robots content="index, follow">
+<meta name=googlebot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name=bingbot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<title>A Too-Often Neglected Aspect of Smart Contract Security Auditability - TrueBlocks</title>
+<meta name=description content="Ethereum as it was meant to be: local-first, P2P, and accurate queries to all the data you’ll ever need.">
+<link rel=canonical href=/blog/a-too-often-neglected-aspect-of-smart-contract-security-auditability/>
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="/trueblocks.png">
+<meta name=twitter:title content="A Too-Often Neglected Aspect of Smart Contract Security Auditability">
+<meta name=twitter:description content="In the wake of The Great DAO Debacle of 2016™, there have been many articles and blog posts concerning the need for the community to write more secure Solidity smart contracts.
+One such article is Writing More Robust Smart Contracts by Elena Dimitrova of Colony.io. Here, Dimitrova discusses the use of function modifiers to verify — prior to a function’s execution — both the initiator of the transaction and the input to the transaction.">
+<meta name=twitter:site content="@TrueBlocks">
+<meta name=twitter:creator content="@TrueBlocks">
+<meta property="og:title" content="A Too-Often Neglected Aspect of Smart Contract Security Auditability">
+<meta property="og:description" content="In the wake of The Great DAO Debacle of 2016™, there have been many articles and blog posts concerning the need for the community to write more secure Solidity smart contracts.
+One such article is Writing More Robust Smart Contracts by Elena Dimitrova of Colony.io. Here, Dimitrova discusses the use of function modifiers to verify — prior to a function’s execution — both the initiator of the transaction and the input to the transaction.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/blog/a-too-often-neglected-aspect-of-smart-contract-security-auditability/">
+<meta property="og:image" content="/trueblocks.png">
+<meta property="article:published_time" content="2016-08-25T01:49:11+00:00">
+<meta property="article:modified_time" content="2021-09-03T16:57:17-03:00">
+<meta property="og:site_name" content="TrueBlocks">
+<meta property="article:publisher" content="https://www.facebook.com/">
+<meta property="article:author" content="https://www.facebook.com/">
+<meta property="og:locale" content="en_US">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"\/blog\/a-too-often-neglected-aspect-of-smart-contract-security-auditability\/"},"headline":"A Too-Often Neglected Aspect of Smart Contract Security Auditability","image":[],"datePublished":"2016-08-25T01:49:11CET","dateModified":"2021-09-03T16:57:17CET","author":{"@type":"Organization","name":"TrueBlocks"},"publisher":{"@type":"Organization","name":"TrueBlocks","logo":{"@type":"ImageObject","url":"\/logo-doks.png"}},"description":""}</script>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"\/"},{"@type":"ListItem","position":2,"name":"Bloga Too Often Neglected Aspect of Smart Contract Security Auditability","item":"\/bloga-too-often-neglected-aspect-of-smart-contract-security-auditability\/"}]}</script>
+<meta name=theme-color content="#fff">
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/site.webmanifest>
+</head>
+<body class="blog single">
+<div class="header-bar fixed-top"></div>
+<script>(localStorage.getItem('theme')==='dark'||localStorage.getItem('theme')===null)&&document.body.classList.add('dark')</script>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+<div class=container>
+<input class="menu-btn order-0" type=checkbox id=menu-btn>
+<label class="menu-icon d-md-none" for=menu-btn><span class=navicon></span></label>
+<a class="navbar-brand order-1 order-md-0 me-auto" href=/>TrueBlocks</a>
+<button id=mode class="btn btn-link order-2 order-md-4" type=button aria-label="Toggle mode">
+<span class=toggle-dark><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span>
+<span class=toggle-light><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+</button>
+<ul class="navbar-nav social-nav order-3 order-md-5">
+<li class=nav-item>
+<a class=nav-link href=https://twitter.com/trueblocks><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9.0 01-3.14 1.53 4.48 4.48.0 00-7.86 3v1A10.66 10.66.0 013 4s-4 9 5 13a11.64 11.64.0 01-7 2c9 5 20 0 20-11.5a4.5 4.5.0 00-.08-.83A7.72 7.72.0 0023 3z"/></svg><span class="ms-2 visually-hidden">Twitter</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://discord.com/invite/kAFcZH2x7K><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="simple icon-discord"><path d="M20.317 4.3698a19.7913 19.7913.0 00-4.8851-1.5152.0741.0741.0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868.0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077.0 00-.0785-.037 19.7363 19.7363.0 00-4.8852 1.515.0699.0699.0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824.0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777.0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076.0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077.0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743.0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614.0a.0739.0739.0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077.0 01-.0066.1276 12.2986 12.2986.0 01-1.873.8914.0766.0766.0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076.0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077.0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061.0 00-.0312-.0286zM8.02 15.3312c-1.1825.0-2.1569-1.0857-2.1569-2.419.0-1.3332.9555-2.4189 2.157-2.4189 1.2108.0 2.1757 1.0952 2.1568 2.419.0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748.0c-1.1825.0-2.1569-1.0857-2.1569-2.419.0-1.3332.9554-2.4189 2.1569-2.4189 1.2108.0 2.1757 1.0952 2.1568 2.419.0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg><span class="ms-2 visually-hidden">Discord</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://github.com/trueblocks/trueblocks-core><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/api>API Reference<span class="ms-2 visually-hidden">API</span></a>
+</li>
+</ul>
+<div class="collapse navbar-collapse order-4 order-md-1">
+<ul class="navbar-nav main-nav me-auto order-5 order-md-2"><li class=nav-item>
+<a class=nav-link href=/docs/>Docs</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/data-model/intro>Data Model</a>
+</li>
+<li class="nav-item active">
+<a class=nav-link href=/blog/>Blog</a>
+</li>
+</ul>
+<div class="break order-6 d-md-none"></div>
+<form class="navbar-form flex-grow-1 order-7 order-md-3">
+<input id=userinput class="form-control is-search" type=search placeholder="Search docs..." aria-label="Search docs..." autocomplete=off>
+<div id=suggestions class="shadow bg-white rounded"></div>
+</form>
+</div>
+</div>
+</header>
+<div class="wrap container" role=document>
+<div class=content>
+<div class="row flex-xl-nowrap">
+<div class="col-lg-5 col-xl-4 docs-sidebar">
+<nav class=docs-links aria-label="Main navigation">
+<ul>
+<h3>Blog Topics</h3>
+<li><a href=/tags/ethereum>ethereum</a> (29)</li>
+<li><a href=/tags/trueblocks>trueblocks</a> (15)</li>
+<li><a href=/tags/recipes>recipes</a> (3)</li>
+<li><a href=/tags/explainers>explainers</a> (1)</li>
+</ul>
+</nav>
+</div>
+<nav class="docs-toc d-none d-xl-block col-xl-3" aria-label="Secondary navigation">
+<div class=page-links>
+<h3>On this page</h3>
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</nav>
+<main class="docs-content col-lg-11 col-xl-9 mx-xl-auto">
+<h1>A Too-Often Neglected Aspect of Smart Contract Security Auditability</h1>
+<p class=lead>Write better Solidity events</p>
+<p><img src=/blog/img/007-A-Too-Often-Neglected-Aspect-of-Smart-Contracts-Auditability-001.png alt></p>
+<p>In the wake of The Great DAO Debacle of 2016™, there have been many articles and blog posts concerning the need for the community to write more secure Solidity smart contracts.</p>
+<p>One such article is <a href=https://blog.colony.io/writing-more-robust-smart-contracts-99ad0a11e948#.hwbkyvvnd>Writing More Robust Smart Contracts</a> by Elena Dimitrova of Colony.io. Here, Dimitrova discusses the use of function modifiers to verify — prior to a function’s execution — both the initiator of the transaction and the input to the transaction. The gist of the article, if I may summarize, is that by using readable and easily understandable modifiers, one may increase readability and help to insure that the function will execute only under certain conditions. This is an excellent idea, obviously, and one that all of us should follow.</p>
+<p>Another truly excellent article is <a href=https://medium.com/bitcorps-blog/onward-with-ethereum-smart-contract-security-97a827e47702#.mtl7qf9d2>Onward with Ethereum Smart Contract Security</a> by Manuel Aráoz an editor at BitCorps. The author discusses numerous well thought out ideas on how to better secure one’s contracts: fail [in a function] as early as possible, favor pull over push payments, limit the amount of funds [in a contract], and many other useful suggestions. You should read that article. It’s accessible and quite well done.</p>
+<p>At one point, Aráoz’s says, “Security comes from a match between our intention and what our code [is] actually [allowed] to do. This is very hard to verify, especially if the code is huge and messy. That’s why it’s important to write simple and modular code.” I would make an addition to this comment thus: “…it’s important to write simple and modular code…and make it easy for someone to later audit what happened…”</p>
+<p>In this article, I will discuss a too-often neglected aspect of smart contract security: auditability.</p>
+<h4 id=the-great-dao-debacle-of2016>The Great DAO Debacle of 2016™<a href=#the-great-dao-debacle-of2016 class=anchor aria-hidden=true>#</a> </h4>
+<p>It’s not necessary for me to spell out in detail what happened to The DAO. Let’s just say that the <em>un-hackable</em>, <em>impenetrable, immutable</em> DAO was both hacked and penetrated and then stolen from (by a bad guy), stolen from again (by a group of good guys), refunded (through the withdraw contract and a hard fork) and now lies nearly dormant.</p>
+<blockquote>
+<p><strong>Unattributed pseudo-quote from Ethereum’s founding fathers:</strong> The Ethereum blockchain is immutable (not in the sense that once a transaction is processed it will never change, but more in the sense that this is how we would like you to think of it…)”</p>
+</blockquote>
+<p>All of this is water under the bridge, but ever since the hack, I’ve been trying to re-create what happened with the DAO. I’ve been trying to verify that the number of tokens purchased was correctly recorded. I’ve been monitoring the DAO Withdraw contract to see how much of the community’s ether has been successfully returned. <a href=http://www.coindesk.com/25-million-of-dao-ether-still-remain-one-month-after-hard-fork/>Not as much as you might think.</a> I’ve also been <a href=http://daodeepdive.com/data/curator_watch.html>monitoring the DAO’s curators</a>.</p>
+<p>My two sources of information are the transactions initiated against the DAO, and the events generated as a result of those transactions. I’m finding recreating what happened to be very difficult because there appears to be a significant amount of missing or difficult-to-come-by information.</p>
+<h4 id=the-need-for-auditability>The Need for Auditability<a href=#the-need-for-auditability class=anchor aria-hidden=true>#</a> </h4>
+<p>Every user-initiated interaction with a smart contract creates a transaction on the Ethereum blockchain. These transactions are easily tracked on popular websites such as <a href=http://etherscan.io.>http://etherscan.io</a>. A transaction is created even if a function’s execution fails (for example, because it ran out of gas).</p>
+<p>During the execution of many of the transactions, events are also written to the blockchain; however, as we shall see, this is not always the case.</p>
+<p>Using a purposefully silly example, say you had a function that paid out ether to anyone who asked (obviously a ridiculous idea, intended only to entertain). A naive implementation might look something like this:</p>
+<p><img src=/blog/img/007-A-Too-Often-Neglected-Aspect-of-Smart-Contracts-Auditability-002.png alt></p>
+<p>In this case, a record of the transaction is laid on the blockchain as well as an event (or, as I think it would be better called, a log entry) would also be written with the same information.</p>
+<p>Notice, however, that there is a mistake here. Besides the obvious fact that anyone who wanted to could simply take all the ether, the function writes a log entry to the blockchain even if ‘send’ call fails. The contract’s author has neglected to check the return value of ‘send’. Before you scoff at this example, take a look at <a href=https://github.com/BitySA/whetcwithdraw/commit/731b6c0f31f2c4781411f47e2248895c696ea65b#diff-6abf7d6326637cc6a3023c6de66a5196L174>this line from the White Hat ETC Refund contract</a>. Before it was fixed, it did exactly this.</p>
+<p>This is one type of ‘auditing error’ or ‘logging error’ that I’ve identified as I’ve tried to understand exactly what’s been going on with the DAO. I present a few more in order of increasing severity.</p>
+<h4 id=too-much-information>Too Much Information<a href=#too-much-information class=anchor aria-hidden=true>#</a> </h4>
+<p>As I mentioned above, for each function invocation, a transaction is laid down on the blockchain even in the case of an error. These ‘in error’ transactions are identified with a flag called ‘isError.’ An example of providing too much information in a function would be something like this:</p>
+<p><img src=/blog/img/007-A-Too-Often-Neglected-Aspect-of-Smart-Contracts-Auditability-003.png alt></p>
+<p>I think, in this case, the contract’s author is over-reporting. No new information is given by the two log entries reporting the failure. The transaction carries with it the <em>to</em> and the <em>amount</em> already, and the absence of the <em>logPaidOut</em> message and the <em>isError</em> flag indicates a failure. There’s a balance to be won in reporting for auditing purposes. Try not to pollute the audit trail by providing redundant information. You’ll just have to sift through it later.</p>
+<p>Furthermore, simple function modifiers such as those discussed in Dimitrova’s article, if they contained a lot of error logging, would be made more difficult to understand, thereby defeating one of their purposes: readability. Finally, a contract’s state is not changed when an exception is ‘thrown.’ Perhaps it makes sense to only generate log entry when the state is changed, and refrain otherwise.</p>
+<h4 id=not-enough-information>Not Enough Information<a href=#not-enough-information class=anchor aria-hidden=true>#</a> </h4>
+<p>Another way you might mis-handle the auditing aspect of your smart contract is to not provide enough information in your log entries. For example, if <em>logPaidOut</em> only recorded the <em>to</em> account and neglected to record <em>amount</em>, that would be an example of providing too little information. While it would be possible for an auditor to figure out the amount, it would be much easier to simply include it to begin with.</p>
+<p>Not providing enough information is not as bad as not providing any information at all. In the above example, if the <em>logPaidOut</em> entry was removed, there would be no way for the auditor to figure out if the transaction succeeded or failed in sending the ether. While I am not 100% certain of this, I believe that without a ‘throw’ the error flag would not get set on this transaction. Without the <em>isError</em> flag, and without a log entry, I don’t know how one would properly audit this. I may be missing something.</p>
+<h4 id=incorrect-information>Incorrect Information<a href=#incorrect-information class=anchor aria-hidden=true>#</a> </h4>
+<p>The worst type of auditing error is providing incorrect information. One possible example appears in a familiar contract that many of you may have already interacted with: The DAO post-fork withdraw contract. Here’s code from that contract:</p>
+<p><img src=/blog/img/007-A-Too-Often-Neglected-Aspect-of-Smart-Contracts-Auditability-004.png alt></p>
+<p>When I first looked at this, I was convinced this was an example of reporting incorrect log information, but I have been since corrected by Mr. Nick Johnson (see his comment below). I initially thought that if the <em>transferFrom</em> call succeeded on the DAO but the <em>msg.sender.send</em> failed an event would have been written during the <em>transferFrom</em> call to the DAO’s log. Obviously, this would have been bad since the ether was not actually sent.</p>
+<p>Mr. Johnson informs me that in this case, because of the throw, the entire set of state changes (including parts of the transaction initiated in another contract — even if that contract call succeeded) are wiped out. This, of course, is a good thing.</p>
+<p>So what would be an example of an ‘incorrect information’?</p>
+<p>There’s the obvious bug scenario where, for example, you have two events with similar names and you incorrectly use one over the other. I also consider missing or misleading log entries as errors.</p>
+<p>The above examples illustrate where incorrect or incoherent information can be laid down on the blockchain making it nearly impossible for an auditor to recover exactly what happened.</p>
+<h4 id=conclusion>Conclusion<a href=#conclusion class=anchor aria-hidden=true>#</a> </h4>
+<p>I’ve heard it said that a contract is worthless when everything is working as it’s supposed to do. How many times, for example, have you read your pre-nuptial agreement? I know I don’t read mine — not to mention the consequences if my wife found me reading it.</p>
+<p>A contract matters most when things fall apart. Being able to audit something takes on more urgency when one it trying to figure out exactly what went wrong with something.</p>
+<p>When you’re designing your smart contracts, in addition to adhering to all of the recommendations from the many security-related articles, you should take great care in designing your logging system. Think about how you will audit your contract’s behavior if something goes wrong. Don’t be redundant; don’t be overly terse; but most of all make sure to lay down correct information.</p>
+<p><em>Thomas Jay Rush has owned and operated TrueBlocks, LLC for many years. After a four-year hiatus, during which time he pursued a career as a poet — not a good idea — Rush returned to software engineering with a passion for Ethereum. He now spends all day, every day and much of the wee hours of the night obsessed and working on</em> <a href=http://www.ethslurp.com><em>EthSlurp</em></a><em>, a tool designed to aid smart contract auditors. Contact us if you would like us to help you with your smart contract needs.</em></p>
+<div class="docs-navigation d-flex justify-content-between">
+<a href=/blog/a-eulogy-for-the-dao/>
+<div class="card my-1">
+<div class="card-body py-2">
+&larr; A Eulogy for The DAO
+</div>
+</div>
+</a>
+<a class=ms-auto href=/blog/knowing-the-future-and-proving-you-know-it/>
+<div class="card my-1">
+<div class="card-body py-2">
+Knowing the Future and Proving You Know It &rarr;
+</div>
+</div>
+</a>
+</div>
+</main>
+</div>
+</div>
+</div>
+<footer class="footer text-muted">
+<div class=container>
+<div class=row>
+<div class="col-lg-8 order-last order-lg-first">
+<ul class=list-inline>
+<li class=list-inline-item>Powered by <a href=https://gohugo.io/>Hugo</a>, and <a href=https://getdoks.org/>Doks</a></li>
+</ul>
+</div>
+<div class="col-lg-8 order-first order-lg-last text-lg-end">
+<ul class=list-inline>
+<li class=list-inline-item><a href=https://github.com/TrueBlocks/trueblocks-docs>Improve these Docs</a></li>
+<li class=list-inline-item><a href=/privacy-policy/>Privacy</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+<script src=/js/highlight.min.ec942a9dc705691c6545c0ea48b4a76dd7a730be9478c31c9139089f95e82ccfccaee7fd8b5823a0fe005ac3dec10b8f825d9ace55908f4b6e6da407af3df293.js integrity="sha512-7JQqnccFaRxlRcDqSLSnbdenML6UeMMckTkIn5XoLM/Mruf9i1gjoP4AWsPewQuPgl2azlWQj0tubaQHrz3ykw==" crossorigin=anonymous defer></script>
+<script src=/main.min.9e62c9b0c5dc8279689cc9cb693a32c8ea1d19032f574f98c782ff59a0417d3662ff94b1a7755ab72a7a1862644bf00a58492c65aa0adabbc58080f4018c61bc.js integrity="sha512-nmLJsMXcgnlonMnLaToyyOodGQMvV0+Yx4L/WaBBfTZi/5Sxp3Vatyp6GGJkS/AKWEksZaoK2rvFgID0AYxhvA==" crossorigin=anonymous defer></script>
+<script src=/index.min.2920392d3bee72ff57da922db3d93f87bbdbae7d85d9bdfd6bac93a24c8ad220ebd77bacb49367cdadc381a7f57b96fa16cbee3821c085548638d591f04eb7cf.js integrity="sha512-KSA5LTvucv9X2pIts9k/h7vbrn2F2b39a6yTokyK0iDr13ustJNnza3Dgaf1e5b6FsvuOCHAhVSGONWR8E63zw==" crossorigin=anonymous defer></script>
+</body>
+</html>

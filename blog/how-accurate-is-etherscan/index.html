@@ -1,0 +1,237 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="ie=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<link rel=preload as=font href=/fonts/vendor/jost/jost-v4-latin-regular.woff2 type=font/woff2 crossorigin>
+<link rel=preload as=font href=/fonts/vendor/jost/jost-v4-latin-700.woff2 type=font/woff2 crossorigin>
+<link rel=stylesheet href=/main.b97465d3e9dbb04b0919a61f5c5766b97ddb3b30835a2bf75ec252e8c570f518d52f1e59944be75f9c92a4c5bc6f1bbe84962010976216b41d653fb6802056b7.css integrity="sha512-uXRl0+nbsEsJGaYfXFdmuX3bOzCDWiv3XsJS6MVw9RjVLx5ZlEvnX5ySpMW8bxu+hJYgEJdiFrQdZT+2gCBWtw==" crossorigin=anonymous>
+<noscript><style>img.lazyload{display:none}</style></noscript>
+<meta name=robots content="index, follow">
+<meta name=googlebot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name=bingbot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<title>How Accurate is EtherScan? - TrueBlocks</title>
+<meta name=description content="Ethereum as it was meant to be: local-first, P2P, and accurate queries to all the data you’ll ever need.">
+<link rel=canonical href=/blog/how-accurate-is-etherscan/>
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="/trueblocks.png">
+<meta name=twitter:title content="How Accurate is EtherScan?">
+<meta name=twitter:description content="Why build an 18-decimal place accurate ledger if it doesn’t balance?
+[Accompanying Video]
+I had a call this morning with a cryptocurrency accountant. He’s a wonderful fellow. One of those people who can happily wade through thousands of rows of a spreadsheet trying to get the digits to behave themselves. He’s a man after my own heart.
+This accountant — call him Mr. Green — makes a good living helping people do their crypto-taxes.">
+<meta name=twitter:site content="@TrueBlocks">
+<meta name=twitter:creator content="@TrueBlocks">
+<meta property="og:title" content="How Accurate is EtherScan?">
+<meta property="og:description" content="Why build an 18-decimal place accurate ledger if it doesn’t balance?
+[Accompanying Video]
+I had a call this morning with a cryptocurrency accountant. He’s a wonderful fellow. One of those people who can happily wade through thousands of rows of a spreadsheet trying to get the digits to behave themselves. He’s a man after my own heart.
+This accountant — call him Mr. Green — makes a good living helping people do their crypto-taxes.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/blog/how-accurate-is-etherscan/">
+<meta property="og:image" content="/trueblocks.png">
+<meta property="article:published_time" content="2020-06-12T03:59:52+00:00">
+<meta property="article:modified_time" content="2021-09-03T16:57:17-03:00">
+<meta property="og:site_name" content="TrueBlocks">
+<meta property="article:publisher" content="https://www.facebook.com/">
+<meta property="article:author" content="https://www.facebook.com/">
+<meta property="og:locale" content="en_US">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"\/blog\/how-accurate-is-etherscan\/"},"headline":"How Accurate is EtherScan?","image":[],"datePublished":"2020-06-12T03:59:52CET","dateModified":"2021-09-03T16:57:17CET","author":{"@type":"Organization","name":"TrueBlocks"},"publisher":{"@type":"Organization","name":"TrueBlocks","logo":{"@type":"ImageObject","url":"\/logo-doks.png"}},"description":""}</script>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"\/"},{"@type":"ListItem","position":2,"name":"Bloghow Accurate Is Etherscan","item":"\/bloghow-accurate-is-etherscan\/"}]}</script>
+<meta name=theme-color content="#fff">
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/site.webmanifest>
+</head>
+<body class="blog single">
+<div class="header-bar fixed-top"></div>
+<script>(localStorage.getItem('theme')==='dark'||localStorage.getItem('theme')===null)&&document.body.classList.add('dark')</script>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+<div class=container>
+<input class="menu-btn order-0" type=checkbox id=menu-btn>
+<label class="menu-icon d-md-none" for=menu-btn><span class=navicon></span></label>
+<a class="navbar-brand order-1 order-md-0 me-auto" href=/>TrueBlocks</a>
+<button id=mode class="btn btn-link order-2 order-md-4" type=button aria-label="Toggle mode">
+<span class=toggle-dark><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span>
+<span class=toggle-light><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+</button>
+<ul class="navbar-nav social-nav order-3 order-md-5">
+<li class=nav-item>
+<a class=nav-link href=https://twitter.com/trueblocks><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9.0 01-3.14 1.53 4.48 4.48.0 00-7.86 3v1A10.66 10.66.0 013 4s-4 9 5 13a11.64 11.64.0 01-7 2c9 5 20 0 20-11.5a4.5 4.5.0 00-.08-.83A7.72 7.72.0 0023 3z"/></svg><span class="ms-2 visually-hidden">Twitter</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://discord.com/invite/kAFcZH2x7K><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="simple icon-discord"><path d="M20.317 4.3698a19.7913 19.7913.0 00-4.8851-1.5152.0741.0741.0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868.0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077.0 00-.0785-.037 19.7363 19.7363.0 00-4.8852 1.515.0699.0699.0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824.0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777.0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076.0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077.0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743.0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614.0a.0739.0739.0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077.0 01-.0066.1276 12.2986 12.2986.0 01-1.873.8914.0766.0766.0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076.0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077.0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061.0 00-.0312-.0286zM8.02 15.3312c-1.1825.0-2.1569-1.0857-2.1569-2.419.0-1.3332.9555-2.4189 2.157-2.4189 1.2108.0 2.1757 1.0952 2.1568 2.419.0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748.0c-1.1825.0-2.1569-1.0857-2.1569-2.419.0-1.3332.9554-2.4189 2.1569-2.4189 1.2108.0 2.1757 1.0952 2.1568 2.419.0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg><span class="ms-2 visually-hidden">Discord</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://github.com/trueblocks/trueblocks-core><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/api>API Reference<span class="ms-2 visually-hidden">API</span></a>
+</li>
+</ul>
+<div class="collapse navbar-collapse order-4 order-md-1">
+<ul class="navbar-nav main-nav me-auto order-5 order-md-2"><li class=nav-item>
+<a class=nav-link href=/docs/>Docs</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/data-model/intro>Data Model</a>
+</li>
+<li class="nav-item active">
+<a class=nav-link href=/blog/>Blog</a>
+</li>
+</ul>
+<div class="break order-6 d-md-none"></div>
+<form class="navbar-form flex-grow-1 order-7 order-md-3">
+<input id=userinput class="form-control is-search" type=search placeholder="Search docs..." aria-label="Search docs..." autocomplete=off>
+<div id=suggestions class="shadow bg-white rounded"></div>
+</form>
+</div>
+</div>
+</header>
+<div class="wrap container" role=document>
+<div class=content>
+<div class="row flex-xl-nowrap">
+<div class="col-lg-5 col-xl-4 docs-sidebar">
+<nav class=docs-links aria-label="Main navigation">
+<ul>
+<h3>Blog Topics</h3>
+<li><a href=/tags/ethereum>ethereum</a> (29)</li>
+<li><a href=/tags/trueblocks>trueblocks</a> (15)</li>
+<li><a href=/tags/recipes>recipes</a> (3)</li>
+<li><a href=/tags/explainers>explainers</a> (1)</li>
+</ul>
+</nav>
+</div>
+<nav class="docs-toc d-none d-xl-block col-xl-3" aria-label="Secondary navigation">
+<div class=page-links>
+<h3>On this page</h3>
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</nav>
+<main class="docs-content col-lg-11 col-xl-9 mx-xl-auto">
+<h1>How Accurate is EtherScan?</h1>
+<p class=lead>WTF?</p>
+<p>Why build an 18-decimal place accurate ledger if it doesn’t balance?</p>
+<p>[<a href="https://www.youtube.com/watch?v=IFbH010A-QA">Accompanying Video</a>]</p>
+<p>I had a call this morning with a cryptocurrency accountant. He’s a wonderful fellow. One of those people who can happily wade through thousands of rows of a spreadsheet trying to get the digits to behave themselves. He’s a man after my own heart.</p>
+<p>This accountant — call him Mr. Green — makes a good living helping people do their crypto-taxes. He’s busier than ever. He tells me, and here I quote, “Nothing ever balances.”</p>
+<p>How is this possible? Isn’t Ethereum supposed to be an 18-decimal-place accurate ledger? Doesn’t everyone using Ethereum have the same data?</p>
+<p>The answer, of course, is that Ethereum always does balance.</p>
+<p>Why then is Mr. Green having trouble? It’s because he’s not using the Ethereum data directly. He’s using OPD (other people’s data). Very few of us are using data straight from the chain. We almost all of us get our Ethereum data from an API or a website. In the Ethereum ecosystem, this means either Infura or EtherScan.</p>
+<p>I, like Mr. Green, want those annoying little digits to behave themselves. I’m becoming increasingly concerned, especially as smart contracts become more and more complicated, about the fact that “Nothing ever balances.”</p>
+<h4 id=think-before-tweeting>Think before Tweeting…<a href=#think-before-tweeting class=anchor aria-hidden=true>#</a> </h4>
+<p>This morning, I tweeted that EtherScan misses nearly 15% of what I call “appearances.”</p>
+<p>Of course, this was met with crypto-twitter skepticism, so I‘m writing this article as a way of showing my readers what I meant by that comment.</p>
+<h4 id=what-is-an-appearance>What is an Appearance?<a href=#what-is-an-appearance class=anchor aria-hidden=true>#</a> </h4>
+<p>I’ve written about appearances <a href=https://medium.com/@tjayrush/indexing-addresses-on-the-ethereum-blockchain-5c0806161eb9>here</a>. I’ll quote from that article:</p>
+<blockquote>
+<p>We define an “appearance” as either: (a) the use of the address in one of the common “address” fields of a transaction (such as <code>_to_</code>, <code>_from_</code>, <code>_eventEmmitter_</code>, or <code>_contractAddress_</code>) or (b) its use as data in the <code>_input_</code> or <code>_eventData_</code> fields of the transaction, or (c) its subsequent use in any smart contract invocation.</p>
+</blockquote>
+<p>In other words, given the byte string representing an address, an address’s appearance list is a list of every transaction where that byte string shows up. Sounds simple.</p>
+<p>It’s not!</p>
+<p>To try to solve this, TrueBlocks builds an index of every appearance we can find on the chain. To test our code, we use EtherScan’s APIs. You’ll understand how surprised we were this week when we discovered that TrueBlocks consistently finds more appearances than EtherScan.</p>
+<blockquote>
+<p><em>Want to read this story later? Save it in</em> <a href="https://usejournal.com/?utm_source=medium.com&utm_medium=blog&utm_campaign=noteworthy&utm_content=eid7"><em>Journal</em></a><em>.</em></p>
+</blockquote>
+<h4 id=etherscan-apis>EtherScan APIs<a href=#etherscan-apis class=anchor aria-hidden=true>#</a> </h4>
+<p>EtherScan provides <a href=https://etherscan.io/apis#accounts>five account-related APIs</a> which we use in our testing:</p>
+<ul>
+<li><a href="http://api.etherscan.io/api?module=account&action=txlist&address=0xddbd2b932c763ba5b1b7ae3b362eac3e8d40121a&startblock=0&endblock=99999999&sort=asc&apikey=YourApiKeyToken">Get a list of ‘Normal’ Transactions By Address</a></li>
+<li><a href="http://api.etherscan.io/api?module=account&action=txlistinternal&address=0x2c1ba59d6f58433fb1eaee7d20b26ed83bda51a3&startblock=0&endblock=2702578&sort=asc&apikey=YourApiKeyToken">Get a list of ‘Internal’ Transactions by Address</a></li>
+<li><a href="http://api.etherscan.io/api?module=account&action=tokentx&address=0x4e83362442b8d1bec281594cea3050c8eb01311c&startblock=0&endblock=999999999&sort=asc&apikey=YourApiKeyToken">Get a list of “ERC20 — Token Transfer Events” by Address</a></li>
+<li><a href="http://api.etherscan.io/api?module=account&action=tokennfttx&address=0x6975be450864c02b4613023c2152ee0743572325&startblock=0&endblock=999999999&sort=asc&apikey=YourApiKeyToken">Get a list of “ERC721 — Token Transfer Events” by Address</a></li>
+<li><a href="https://api.etherscan.io/api?module=account&action=getminedblocks&address=0x9dd134d14d1e65f84b706d6f205cd5b1cd03a46b&blocktype=blocks&apikey=YourApiKeyToken">Get [a] list of Blocks Mined by Address</a></li>
+</ul>
+<p>Quite some time ago we built a tool called <code>ethslurp</code> that makes use of these endpoints:</p>
+<p><img src=/blog/img/038-How-Accurate-is-EtherScan-001.png alt></p>
+<p>Given an address, <code>ethslurp</code> returns all the transactions where EtherScan says that address appears.</p>
+<p>This week we built a shell script, <code>fromES</code>, that successively calls each of these five endpoints and assembles the results into a single file and then compares those results against TrueBlocks.</p>
+<p>We ran tests against 99 randomly chosen addresses. For example, the command:</p>
+<p>fromES 0x91c5fa6872f3a93b999843eaf06eb34a18a69a12`</p>
+<p>produces these results:</p>
+<p><img src=/blog/img/038-How-Accurate-is-EtherScan-002.png alt></p>
+<p>Notice that the five EtherScan endpoints deliver 31, 0, 26, 2, and 0 records respectively. Summed, in the line labeled ‘all’, this totals 59 records.</p>
+<p>At first blush, we were concerned that this was more records than TrueBlocks returns (40). What we discovered was that EtherScan’s five endpoints include duplicate records. We altered our shell script to remove the duplicates producing the line ‘sorted uniq’.</p>
+<p>Looked at it this way, TrueBlocks finds one extra record not found by EtherScan. It turns out to be transaction #<code>8156524.14</code> (that is, the 14th transaction of block 8,156,524).</p>
+<p>TrueBlocks provides a few other tools that allow us to see the details of any Etherum transaction. The<code>getTrace</code> tool:</p>
+<p>getTrace 8156524.14</p>
+<p>returns</p>
+<p><img src=/blog/img/038-How-Accurate-is-EtherScan-003.png alt></p>
+<p>which I admit is a bit crazy looking, but it does contain the byte string for the given address (colored pink). It turns out that this transaction ended in a <code>revert</code>. This is probably why EtherScan doesn’t find it.</p>
+<p>Etherscan obviously finds all transactions of type (a) mentioned above. It finds most type (b) transactions as well (EtherScan calls these <code>internal transactions</code>). If this had not reverted, it would probably have been an internal transaction because (the address is used as data as opposed to being one of the <code>address-related</code> fields).</p>
+<p>This happens frequently on EtherScan. Of the 99 addresses we tested, TrueBlocks found more transactions than EtherScan did for 85 addresses. For not a single address did EtherScan identify a transaction that TrueBlocks did not find. 85–0. I call that significant.</p>
+<h4 id=but-is-it-relevant>But Is It Relevant?<a href=#but-is-it-relevant class=anchor aria-hidden=true>#</a> </h4>
+<p>I once spoke a different crypto accountant (Mr. Greenish-Blue?) and after listening to me talk about this issue, he asked, “Yeah, but is it relevant?” My reaction was “Of course, it’s relevant.” (I could explain why this is true, but if it isn’t self-evident to you already, I wouldn’t be able to convince you anyway.)</p>
+<p>Why build an 18-decimal place ledger that the entire world comes to agreement on and spends way more on than any previous computing system if we’re going to throw away data? Explain that to me, please.</p>
+<h4 id=analyzing-the-differences>Analyzing the Differences<a href=#analyzing-the-differences class=anchor aria-hidden=true>#</a> </h4>
+<p>Since we first published this article, a few people have asked us to further analyze the differences. To be honest, we really just don’t have the time. Perhaps someone else will pick this up. We published the raw data to this IPFS hash: QmYccKCCoYat8AsgMxVfFjcb9NG8cnFfikkrweRyjwo7rQ.</p>
+<p>As a quick summary, the missing transactions appear to be of at least six types:</p>
+<ul>
+<li><code>Input</code> data of both errored and completed transactions</li>
+<li>Log <code>topics</code> of both errored and completed transactions</li>
+<li>Log <code>data</code> of of both errored and completed transactions</li>
+<li>Output data of deeply embedded traces</li>
+<li>Uncle mining rewards</li>
+</ul>
+<p>An example of the first type is this transaction:</p>
+<p><a href=https://etherscan.io/tx/0xa4a96ca16373239fd679711b05bcbdc138bc40a5bb2a085799c23bbaf5fd2a3a>https://etherscan.io/tx/ 0xa4a96ca16373239fd679711b05bcbdc138bc40a5bb2a085799c23bbaf5fd2a3a</a></p>
+<p>which does not appear in the internal transaction list of the address:</p>
+<p><code>0x28f4a17f8a99ab90c1a401b85d694b2c0ea40c4b</code></p>
+<p>however, that address is clearly in the input data of the transaction.</p>
+<h4 id=future-work>Future Work<a href=#future-work class=anchor aria-hidden=true>#</a> </h4>
+<p>We’re going to dig deeper to see if we can’t figure out what some of the other missing transactions look like. We already know that EtherScan does not report on Uncle miner rewards from its Miner endpoint. We’ll write again as we discover more.</p>
+<p>Help us continue our work. Visit our GitCoin grant page here: <a href=https://gitcoin.co/grants/184/trueblocks>https://gitcoin.co/grants/184/trueblocks</a>, and donate today.</p>
+<p>Or, if you’d rather not expose yourself to scrutiny, and you’d still like to donate, send ETH to 0xf503017d7baf7fbc0fff7492b751025c6a78179b.</p>
+<p>📝 Save this story in <a href="https://usejournal.com/?utm_source=medium.com&utm_medium=noteworthy_blog&utm_campaign=tech&utm_content=guest_post_read_later_text">Journal</a>.</p>
+<p>👩‍💻 Wake up every Sunday morning to the week’s most noteworthy stories in Tech waiting in your inbox. <a href="https://usejournal.com/newsletter/noteworthy-in-tech/?utm_source=medium.com&utm_medium=noteworthy_blog&utm_campaign=tech&utm_content=guest_post_text">Read the Noteworthy in Tech newsletter</a>.</p>
+<div class="docs-navigation d-flex justify-content-between">
+<a href=/blog/building-your-own-ethereum-archive-node/>
+<div class="card my-1">
+<div class="card-body py-2">
+&larr; Building Your Own Ethereum Archive Node
+</div>
+</div>
+</a>
+<a class=ms-auto href=/blog/links-about-clr-/-radical-markets-/-gitcoin/>
+<div class="card my-1">
+<div class="card-body py-2">
+Links About CLR / Radical Markets / GitCoin &rarr;
+</div>
+</div>
+</a>
+</div>
+</main>
+</div>
+</div>
+</div>
+<footer class="footer text-muted">
+<div class=container>
+<div class=row>
+<div class="col-lg-8 order-last order-lg-first">
+<ul class=list-inline>
+<li class=list-inline-item>Powered by <a href=https://gohugo.io/>Hugo</a>, and <a href=https://getdoks.org/>Doks</a></li>
+</ul>
+</div>
+<div class="col-lg-8 order-first order-lg-last text-lg-end">
+<ul class=list-inline>
+<li class=list-inline-item><a href=https://github.com/TrueBlocks/trueblocks-docs>Improve these Docs</a></li>
+<li class=list-inline-item><a href=/privacy-policy/>Privacy</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+<script src=/js/highlight.min.ec942a9dc705691c6545c0ea48b4a76dd7a730be9478c31c9139089f95e82ccfccaee7fd8b5823a0fe005ac3dec10b8f825d9ace55908f4b6e6da407af3df293.js integrity="sha512-7JQqnccFaRxlRcDqSLSnbdenML6UeMMckTkIn5XoLM/Mruf9i1gjoP4AWsPewQuPgl2azlWQj0tubaQHrz3ykw==" crossorigin=anonymous defer></script>
+<script src=/main.min.9e62c9b0c5dc8279689cc9cb693a32c8ea1d19032f574f98c782ff59a0417d3662ff94b1a7755ab72a7a1862644bf00a58492c65aa0adabbc58080f4018c61bc.js integrity="sha512-nmLJsMXcgnlonMnLaToyyOodGQMvV0+Yx4L/WaBBfTZi/5Sxp3Vatyp6GGJkS/AKWEksZaoK2rvFgID0AYxhvA==" crossorigin=anonymous defer></script>
+<script src=/index.min.2920392d3bee72ff57da922db3d93f87bbdbae7d85d9bdfd6bac93a24c8ad220ebd77bacb49367cdadc381a7f57b96fa16cbee3821c085548638d591f04eb7cf.js integrity="sha512-KSA5LTvucv9X2pIts9k/h7vbrn2F2b39a6yTokyK0iDr13ustJNnza3Dgaf1e5b6FsvuOCHAhVSGONWR8E63zw==" crossorigin=anonymous defer></script>
+</body>
+</html>

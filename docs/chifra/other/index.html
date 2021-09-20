@@ -1,0 +1,351 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="ie=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<link rel=preload as=font href=/fonts/vendor/jost/jost-v4-latin-regular.woff2 type=font/woff2 crossorigin>
+<link rel=preload as=font href=/fonts/vendor/jost/jost-v4-latin-700.woff2 type=font/woff2 crossorigin>
+<link rel=stylesheet href=/main.b97465d3e9dbb04b0919a61f5c5766b97ddb3b30835a2bf75ec252e8c570f518d52f1e59944be75f9c92a4c5bc6f1bbe84962010976216b41d653fb6802056b7.css integrity="sha512-uXRl0+nbsEsJGaYfXFdmuX3bOzCDWiv3XsJS6MVw9RjVLx5ZlEvnX5ySpMW8bxu+hJYgEJdiFrQdZT+2gCBWtw==" crossorigin=anonymous>
+<noscript><style>img.lazyload{display:none}</style></noscript>
+<meta name=robots content="index, follow">
+<meta name=googlebot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name=bingbot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<title>Other - TrueBlocks</title>
+<meta name=description content="Ethereum as it was meant to be: local-first, P2P, and accurate queries to all the data you’ll ever need.">
+<link rel=canonical href=/docs/chifra/other/>
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="/trueblocks.png">
+<meta name=twitter:title content="Other">
+<meta name=twitter:description content="These commands call some useful miscellaneous tools:
+ chifra quotes, a rudimentary pricing tool, chifra explore a quick way to open a blockchain explorer, ethslurp an older tool that lets you call data from EtherScan. (This has issues of ceentralization and data quality, see explanation in its section).  👉 Note: some of these tools, like `ethslurp`, require an EtherScan key.  Follow these instructions to add a key to your config">
+<meta name=twitter:site content="@TrueBlocks">
+<meta name=twitter:creator content="@TrueBlocks">
+<meta property="og:title" content="Other">
+<meta property="og:description" content="These commands call some useful miscellaneous tools:
+ chifra quotes, a rudimentary pricing tool, chifra explore a quick way to open a blockchain explorer, ethslurp an older tool that lets you call data from EtherScan. (This has issues of ceentralization and data quality, see explanation in its section).  👉 Note: some of these tools, like `ethslurp`, require an EtherScan key.  Follow these instructions to add a key to your config">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/docs/chifra/other/">
+<meta property="og:image" content="/trueblocks.png">
+<meta property="article:published_time" content="2021-09-19T01:48:55+00:00">
+<meta property="article:modified_time" content="2021-09-19T01:49:55-04:00">
+<meta property="og:site_name" content="TrueBlocks">
+<meta property="article:publisher" content="https://www.facebook.com/">
+<meta property="article:author" content="https://www.facebook.com/">
+<meta property="og:locale" content="en_US">
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"\/"},{"@type":"ListItem","position":2,"name":"Docschifraother","item":"\/docschifraother\/"}]}</script>
+<meta name=theme-color content="#fff">
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/site.webmanifest>
+</head>
+<body class="docs single">
+<div class="header-bar fixed-top"></div>
+<script>(localStorage.getItem('theme')==='dark'||localStorage.getItem('theme')===null)&&document.body.classList.add('dark')</script>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+<div class=container>
+<input class="menu-btn order-0" type=checkbox id=menu-btn>
+<label class="menu-icon d-md-none" for=menu-btn><span class=navicon></span></label>
+<a class="navbar-brand order-1 order-md-0 me-auto" href=/>TrueBlocks</a>
+<button id=mode class="btn btn-link order-2 order-md-4" type=button aria-label="Toggle mode">
+<span class=toggle-dark><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span>
+<span class=toggle-light><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+</button>
+<ul class="navbar-nav social-nav order-3 order-md-5">
+<li class=nav-item>
+<a class=nav-link href=https://twitter.com/trueblocks><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9.0 01-3.14 1.53 4.48 4.48.0 00-7.86 3v1A10.66 10.66.0 013 4s-4 9 5 13a11.64 11.64.0 01-7 2c9 5 20 0 20-11.5a4.5 4.5.0 00-.08-.83A7.72 7.72.0 0023 3z"/></svg><span class="ms-2 visually-hidden">Twitter</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://discord.com/invite/kAFcZH2x7K><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="simple icon-discord"><path d="M20.317 4.3698a19.7913 19.7913.0 00-4.8851-1.5152.0741.0741.0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868.0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077.0 00-.0785-.037 19.7363 19.7363.0 00-4.8852 1.515.0699.0699.0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824.0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777.0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076.0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077.0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743.0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614.0a.0739.0739.0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077.0 01-.0066.1276 12.2986 12.2986.0 01-1.873.8914.0766.0766.0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076.0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077.0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061.0 00-.0312-.0286zM8.02 15.3312c-1.1825.0-2.1569-1.0857-2.1569-2.419.0-1.3332.9555-2.4189 2.157-2.4189 1.2108.0 2.1757 1.0952 2.1568 2.419.0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748.0c-1.1825.0-2.1569-1.0857-2.1569-2.419.0-1.3332.9554-2.4189 2.1569-2.4189 1.2108.0 2.1757 1.0952 2.1568 2.419.0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg><span class="ms-2 visually-hidden">Discord</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://github.com/trueblocks/trueblocks-core><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/api>API Reference<span class="ms-2 visually-hidden">API</span></a>
+</li>
+</ul>
+<div class="collapse navbar-collapse order-4 order-md-1">
+<ul class="navbar-nav main-nav me-auto order-5 order-md-2"><li class="nav-item active">
+<a class=nav-link href=/docs/>Docs</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/data-model/intro>Data Model</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/blog/>Blog</a>
+</li>
+</ul>
+<div class="break order-6 d-md-none"></div>
+<form class="navbar-form flex-grow-1 order-7 order-md-3">
+<input id=userinput class="form-control is-search" type=search placeholder="Search docs..." aria-label="Search docs..." autocomplete=off>
+<div id=suggestions class="shadow bg-white rounded"></div>
+</form>
+</div>
+</div>
+</header>
+<div class="wrap container" role=document>
+<div class=content>
+<div class="row flex-xl-nowrap">
+<div class="col-lg-5 col-xl-4 docs-sidebar">
+<nav class=docs-links aria-label="Main navigation">
+<h3>Prologue</h3>
+<ul class=list-unstyled>
+<li><a class="docs-link active" href=/docs/>What is this?</a></li>
+<li><a class=docs-link href=/docs/prologue/do-i-need-a-node/>Do I need a node?</a></li>
+<li><a class=docs-link href=/docs/prologue/installing-trueblocks/>Install TrueBlocks</a></li>
+<li><a class=docs-link href=/docs/prologue/how-can-i-get-the-index/>Get the Index</a></li>
+<li><a class=docs-link href=/docs/prologue/install-explorer/>Install the Explorer Browser app</a></li>
+</ul>
+<h3>Command line</h3>
+<ul class=list-unstyled>
+<li><a class=docs-link href=/docs/chifra/introducing-chifra/>Introducing Chifra</a></li>
+<li><a class=docs-link href=/docs/chifra/using-chifra/>Some Chifra Examples</a></li>
+<li><a class=docs-link href=/docs/chifra/accounts/>Accounts</a></li>
+<li><a class=docs-link href=/docs/chifra/chaindata/>Chain Data</a></li>
+<li><a class=docs-link href=/docs/chifra/chainstate/>Chain State</a></li>
+<li><a class=docs-link href=/docs/chifra/admin/>Admin</a></li>
+<li><a class="docs-link active" href=/docs/chifra/other/>Other</a></li>
+</ul>
+</nav>
+</div>
+<nav class="docs-toc d-none d-xl-block col-xl-3" aria-label="Secondary navigation">
+<div class=page-links>
+<h3>On this page</h3>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#chifra-quotes>chifra quotes</a>
+<ul>
+<li><a href=#usage>usage</a></li>
+</ul>
+</li>
+<li><a href=#chifra-explore>chifra explore</a>
+<ul>
+<li><a href=#usage-1>usage</a></li>
+</ul>
+</li>
+<li><a href=#chifra-slurp>chifra slurp</a>
+<ul>
+<li><a href=#usage-2>usage</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</nav>
+<main class="docs-content col-lg-11 col-xl-9">
+<h1>Other</h1>
+<p class=lead></p>
+<p>These commands call some useful miscellaneous tools:</p>
+<ul>
+<li><code>chifra quotes</code>, a rudimentary pricing tool,</li>
+<li><code>chifra explore</code> a quick way to open a blockchain explorer,</li>
+<li><code>ethslurp</code> an older tool that lets you call data from EtherScan. (This has issues of ceentralization and data quality, see explanation in its section).</li>
+</ul>
+<p><div class="alert alert-warning d-flex" role=alert>
+<div class="flex-shrink-1 alert-icon">👉</div>
+<div class=w-100>Note: some of these tools, like `ethslurp`, require an EtherScan key.</div>
+</div>
+<a href=https://docs.trueblocks.io/docs/prologue/installing-trueblocks/#3-update-the-configs-for-your-rpc-and-api-keys>Follow these instructions to add a key to your config</a></p>
+<h2 id=chifra-quotes>chifra quotes<a href=#chifra-quotes class=anchor aria-hidden=true>#</a> </h2>
+<p>The <code>chifra quotes</code> tool provides USD ($) price data to other tools and to the command line. Currently, <code>chifra quotes</code> retrieves its price data from the Poloniex API. In future versions, we will add other sources and provide a mechanism for fair averaging. Ultimately, as more of this type of price data becomes available on chain, we will use those source, but this is not yet implemented.</p>
+<h3 id=usage>usage<a href=#usage class=anchor aria-hidden=true>#</a> </h3>
+<p><code>Usage:</code> chifra quotes [-f|-p|-a|-e|-v|-h]<br>
+<code>Purpose:</code> Freshen and/or display Ethereum price data. This tool has been deprecated.</p>
+<p><code>Where:</code></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>‐f</td>
+<td nowrap>‐‐freshen</td>
+<td nowrap>Freshen price database</td>
+</tr>
+<tr>
+<td nowrap>‐p</td>
+<td nowrap>‐‐period &lt;val></td>
+<td nowrap>increment of display, one of [5, 15, 30, 60, 120, 240,<br>1440, 10080, hourly, daily, weekly]</td>
+</tr>
+<tr>
+<td nowrap>‐a</td>
+<td nowrap>‐‐pair &lt;str></td>
+<td nowrap>which price pair to freshen or list (see Poloniex)</td>
+</tr>
+<tr>
+<td nowrap>‐e</td>
+<td nowrap>‐‐feed &lt;val></td>
+<td nowrap>the feed for the price data, one of [poloniex, maker,<br>tellor]</td>
+</tr>
+<tr>
+<td nowrap>‐x</td>
+<td nowrap>‐‐fmt &lt;val></td>
+<td nowrap>export format, one of [none, json, txt, csv, api]</td>
+</tr>
+<tr>
+<td nowrap>‐v</td>
+<td nowrap>‐‐verbose</td>
+<td nowrap>set verbose level (optional level defaults to 1)</td>
+</tr>
+<tr>
+<td nowrap>‐h</td>
+<td nowrap>‐‐help</td>
+<td nowrap>display this help screen</td>
+</tr>
+</tbody>
+</table>
+<p><code>Notes:</code></p>
+<ul>
+<li>Valid pairs include any pair from the public Poloniex&rsquo;s API here:
+https://poloniex.com/public?command=returnCurrencies.</li>
+<li>Due to restrictions from Poloniex, this tool retrieves only 30 days of data
+at a time. You must repeatedly run this command until the data is up-to-date.</li>
+</ul>
+<p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/tools/getQuotes><code>tools/getQuotes</code></a></p>
+<h2 id=chifra-explore>chifra explore<a href=#chifra-explore class=anchor aria-hidden=true>#</a> </h2>
+<p><code>chifra explore</code> opens Etherscan (and other explorers &ndash; including our own) to the block, transaction hash, or address you specify. It&rsquo;s a handy (configurable) way to open an explorer from the command line, nothing more.</p>
+<h3 id=usage-1>usage<a href=#usage-1 class=anchor aria-hidden=true>#</a> </h3>
+<p><code>Usage:</code> chifra explore [-l|-g|-v|-h] &lt;term> [term&mldr;]<br>
+<code>Purpose:</code> Open an explorer for a given address, block, or transaction.</p>
+<p><code>Where:</code></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap></td>
+<td nowrap>terms</td>
+<td nowrap>one or more addresses, names, block, or transaction<br>identifiers</td>
+</tr>
+<tr>
+<td nowrap>‐l</td>
+<td nowrap>‐‐local</td>
+<td nowrap>open the local TrueBlocks explorer</td>
+</tr>
+<tr>
+<td nowrap>‐g</td>
+<td nowrap>‐‐google</td>
+<td nowrap>search google excluding popular blockchain explorers</td>
+</tr>
+<tr>
+<td nowrap>‐x</td>
+<td nowrap>‐‐fmt &lt;val></td>
+<td nowrap>export format, one of [none, json, txt, csv, api]</td>
+</tr>
+<tr>
+<td nowrap>‐v</td>
+<td nowrap>‐‐verbose</td>
+<td nowrap>set verbose level (optional level defaults to 1)</td>
+</tr>
+<tr>
+<td nowrap>‐h</td>
+<td nowrap>‐‐help</td>
+<td nowrap>display this help screen</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/apps/fireStorm><code>apps/fireStorm</code></a></p>
+<h2 id=chifra-slurp>chifra slurp<a href=#chifra-slurp class=anchor aria-hidden=true>#</a> </h2>
+<p><code>chifra slurp</code> is the first tool we built in the Ethereum space. It even has its <a href=http://ethslurp.com>own website</a>.</p>
+<p>While it&rsquo;s useful, it has two shortcomings. First, it is fully centralized, pulling its data from <a href=http://etherscan.io>http://etherscan.io</a>. Second, is that it does not report every transaction for a given account. This is actually a shortcoming with EtherScan. It&rsquo;s too complicated to explain here, but see our blog.</p>
+<p>While <code>chifra slurp</code> has its shortcomings, it does provides some nice features. You may use it to pull any transaction initiated by an EOA for example or to explore mining rewards. Visit the above referenced website for more information.</p>
+<h3 id=usage-2>usage<a href=#usage-2 class=anchor aria-hidden=true>#</a> </h3>
+<p><code>Usage:</code> chifra slurp [-t|-p|-v|-h] &lt;address> [address&mldr;] [block&mldr;]<br>
+<code>Purpose:</code> Fetch data from EtherScan for any address.</p>
+<p><code>Where:</code></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap></td>
+<td nowrap>addrs</td>
+<td nowrap>one or more addresses to slurp from Etherscan (required)</td>
+</tr>
+<tr>
+<td nowrap></td>
+<td nowrap>blocks</td>
+<td nowrap>an optional range of blocks to slurp</td>
+</tr>
+<tr>
+<td nowrap>‐t</td>
+<td nowrap>‐‐types &lt;val></td>
+<td nowrap>one or more types of transactions to request, one or<br>more of [ext, int, token, nfts, miner, uncles, all]</td>
+</tr>
+<tr>
+<td nowrap>‐p</td>
+<td nowrap>‐‐appearances</td>
+<td nowrap>show only the blocknumer.tx_id appearances of the exported<br>transactions</td>
+</tr>
+<tr>
+<td nowrap>‐x</td>
+<td nowrap>‐‐fmt &lt;val></td>
+<td nowrap>export format, one of [none, json, txt, csv, api]</td>
+</tr>
+<tr>
+<td nowrap>‐v</td>
+<td nowrap>‐‐verbose</td>
+<td nowrap>set verbose level (optional level defaults to 1)</td>
+</tr>
+<tr>
+<td nowrap>‐h</td>
+<td nowrap>‐‐help</td>
+<td nowrap>display this help screen</td>
+</tr>
+</tbody>
+</table>
+<p><code>Notes:</code></p>
+<ul>
+<li>Portions of this software are Powered by Etherscan.io APIs.</li>
+</ul>
+<p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/tools/ethslurp><code>tools/ethslurp</code></a></p>
+<div class="docs-navigation d-flex justify-content-between">
+<a href=/docs/chifra/admin/>
+<div class="card my-1">
+<div class="card-body py-2">
+&larr; Admin
+</div>
+</div>
+</a>
+</div>
+</main>
+</div>
+</div>
+</div>
+<footer class="footer text-muted">
+<div class=container>
+<div class=row>
+<div class="col-lg-8 order-last order-lg-first">
+<ul class=list-inline>
+<li class=list-inline-item>Powered by <a href=https://gohugo.io/>Hugo</a>, and <a href=https://getdoks.org/>Doks</a></li>
+</ul>
+</div>
+<div class="col-lg-8 order-first order-lg-last text-lg-end">
+<ul class=list-inline>
+<li class=list-inline-item><a href=https://github.com/TrueBlocks/trueblocks-docs>Improve these Docs</a></li>
+<li class=list-inline-item><a href=/privacy-policy/>Privacy</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+<script src=/js/highlight.min.ec942a9dc705691c6545c0ea48b4a76dd7a730be9478c31c9139089f95e82ccfccaee7fd8b5823a0fe005ac3dec10b8f825d9ace55908f4b6e6da407af3df293.js integrity="sha512-7JQqnccFaRxlRcDqSLSnbdenML6UeMMckTkIn5XoLM/Mruf9i1gjoP4AWsPewQuPgl2azlWQj0tubaQHrz3ykw==" crossorigin=anonymous defer></script>
+<script src=/main.min.9e62c9b0c5dc8279689cc9cb693a32c8ea1d19032f574f98c782ff59a0417d3662ff94b1a7755ab72a7a1862644bf00a58492c65aa0adabbc58080f4018c61bc.js integrity="sha512-nmLJsMXcgnlonMnLaToyyOodGQMvV0+Yx4L/WaBBfTZi/5Sxp3Vatyp6GGJkS/AKWEksZaoK2rvFgID0AYxhvA==" crossorigin=anonymous defer></script>
+<script src=/index.min.2920392d3bee72ff57da922db3d93f87bbdbae7d85d9bdfd6bac93a24c8ad220ebd77bacb49367cdadc381a7f57b96fa16cbee3821c085548638d591f04eb7cf.js integrity="sha512-KSA5LTvucv9X2pIts9k/h7vbrn2F2b39a6yTokyK0iDr13ustJNnza3Dgaf1e5b6FsvuOCHAhVSGONWR8E63zw==" crossorigin=anonymous defer></script>
+</body>
+</html>

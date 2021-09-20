@@ -1,0 +1,250 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="ie=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<link rel=preload as=font href=/fonts/vendor/jost/jost-v4-latin-regular.woff2 type=font/woff2 crossorigin>
+<link rel=preload as=font href=/fonts/vendor/jost/jost-v4-latin-700.woff2 type=font/woff2 crossorigin>
+<link rel=stylesheet href=/main.b97465d3e9dbb04b0919a61f5c5766b97ddb3b30835a2bf75ec252e8c570f518d52f1e59944be75f9c92a4c5bc6f1bbe84962010976216b41d653fb6802056b7.css integrity="sha512-uXRl0+nbsEsJGaYfXFdmuX3bOzCDWiv3XsJS6MVw9RjVLx5ZlEvnX5ySpMW8bxu+hJYgEJdiFrQdZT+2gCBWtw==" crossorigin=anonymous>
+<noscript><style>img.lazyload{display:none}</style></noscript>
+<meta name=robots content="index, follow">
+<meta name=googlebot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name=bingbot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<title>Dynamic Traversers for TrueBlocks - TrueBlocks</title>
+<meta name=description content="Ethereum as it was meant to be: local-first, P2P, and accurate queries to all the data you’ll ever need.">
+<link rel=canonical href=/blog/dynamic-traversers-for-trueblocks/>
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="/trueblocks.png">
+<meta name=twitter:title content="Dynamic Traversers for TrueBlocks">
+<meta name=twitter:description content="Dynamic Traversers in TrueBlocks Ethereum nodes come to consensus on a world-wide global ledger of smart contract invocations every 14 seconds. Everyone know this. This is what we celebrate about the chain. Not only is this data world-wide and consented-to, but it is also permissionless. At least that’s what we’re supposed to believe.
+But, is it really permissionless?
+I think the answer to that question is a resounding “No.” Ask yourself how you personally get data from the Ethereum blockchain.">
+<meta name=twitter:site content="@TrueBlocks">
+<meta name=twitter:creator content="@TrueBlocks">
+<meta property="og:title" content="Dynamic Traversers for TrueBlocks">
+<meta property="og:description" content="Dynamic Traversers in TrueBlocks Ethereum nodes come to consensus on a world-wide global ledger of smart contract invocations every 14 seconds. Everyone know this. This is what we celebrate about the chain. Not only is this data world-wide and consented-to, but it is also permissionless. At least that’s what we’re supposed to believe.
+But, is it really permissionless?
+I think the answer to that question is a resounding “No.” Ask yourself how you personally get data from the Ethereum blockchain.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/blog/dynamic-traversers-for-trueblocks/">
+<meta property="og:image" content="/trueblocks.png">
+<meta property="article:published_time" content="2020-12-09T12:29:07+00:00">
+<meta property="article:modified_time" content="2021-09-03T16:57:17-03:00">
+<meta property="og:site_name" content="TrueBlocks">
+<meta property="article:publisher" content="https://www.facebook.com/">
+<meta property="article:author" content="https://www.facebook.com/">
+<meta property="og:locale" content="en_US">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"\/blog\/dynamic-traversers-for-trueblocks\/"},"headline":"Dynamic Traversers for TrueBlocks","image":[],"datePublished":"2020-12-09T12:29:07CET","dateModified":"2021-09-03T16:57:17CET","author":{"@type":"Organization","name":"TrueBlocks"},"publisher":{"@type":"Organization","name":"TrueBlocks","logo":{"@type":"ImageObject","url":"\/logo-doks.png"}},"description":""}</script>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"\/"},{"@type":"ListItem","position":2,"name":"Blogdynamic Traversers for Trueblocks","item":"\/blogdynamic-traversers-for-trueblocks\/"}]}</script>
+<meta name=theme-color content="#fff">
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/site.webmanifest>
+</head>
+<body class="blog single">
+<div class="header-bar fixed-top"></div>
+<script>(localStorage.getItem('theme')==='dark'||localStorage.getItem('theme')===null)&&document.body.classList.add('dark')</script>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+<div class=container>
+<input class="menu-btn order-0" type=checkbox id=menu-btn>
+<label class="menu-icon d-md-none" for=menu-btn><span class=navicon></span></label>
+<a class="navbar-brand order-1 order-md-0 me-auto" href=/>TrueBlocks</a>
+<button id=mode class="btn btn-link order-2 order-md-4" type=button aria-label="Toggle mode">
+<span class=toggle-dark><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span>
+<span class=toggle-light><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+</button>
+<ul class="navbar-nav social-nav order-3 order-md-5">
+<li class=nav-item>
+<a class=nav-link href=https://twitter.com/trueblocks><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9.0 01-3.14 1.53 4.48 4.48.0 00-7.86 3v1A10.66 10.66.0 013 4s-4 9 5 13a11.64 11.64.0 01-7 2c9 5 20 0 20-11.5a4.5 4.5.0 00-.08-.83A7.72 7.72.0 0023 3z"/></svg><span class="ms-2 visually-hidden">Twitter</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://discord.com/invite/kAFcZH2x7K><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="simple icon-discord"><path d="M20.317 4.3698a19.7913 19.7913.0 00-4.8851-1.5152.0741.0741.0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868.0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077.0 00-.0785-.037 19.7363 19.7363.0 00-4.8852 1.515.0699.0699.0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824.0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777.0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076.0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077.0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743.0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614.0a.0739.0739.0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077.0 01-.0066.1276 12.2986 12.2986.0 01-1.873.8914.0766.0766.0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076.0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077.0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061.0 00-.0312-.0286zM8.02 15.3312c-1.1825.0-2.1569-1.0857-2.1569-2.419.0-1.3332.9555-2.4189 2.157-2.4189 1.2108.0 2.1757 1.0952 2.1568 2.419.0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748.0c-1.1825.0-2.1569-1.0857-2.1569-2.419.0-1.3332.9554-2.4189 2.1569-2.4189 1.2108.0 2.1757 1.0952 2.1568 2.419.0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg><span class="ms-2 visually-hidden">Discord</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://github.com/trueblocks/trueblocks-core><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/api>API Reference<span class="ms-2 visually-hidden">API</span></a>
+</li>
+</ul>
+<div class="collapse navbar-collapse order-4 order-md-1">
+<ul class="navbar-nav main-nav me-auto order-5 order-md-2"><li class=nav-item>
+<a class=nav-link href=/docs/>Docs</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/data-model/intro>Data Model</a>
+</li>
+<li class="nav-item active">
+<a class=nav-link href=/blog/>Blog</a>
+</li>
+</ul>
+<div class="break order-6 d-md-none"></div>
+<form class="navbar-form flex-grow-1 order-7 order-md-3">
+<input id=userinput class="form-control is-search" type=search placeholder="Search docs..." aria-label="Search docs..." autocomplete=off>
+<div id=suggestions class="shadow bg-white rounded"></div>
+</form>
+</div>
+</div>
+</header>
+<div class="wrap container" role=document>
+<div class=content>
+<div class="row flex-xl-nowrap">
+<div class="col-lg-5 col-xl-4 docs-sidebar">
+<nav class=docs-links aria-label="Main navigation">
+<ul>
+<h3>Blog Topics</h3>
+<li><a href=/tags/ethereum>ethereum</a> (29)</li>
+<li><a href=/tags/trueblocks>trueblocks</a> (15)</li>
+<li><a href=/tags/recipes>recipes</a> (3)</li>
+<li><a href=/tags/explainers>explainers</a> (1)</li>
+</ul>
+</nav>
+</div>
+<nav class="docs-toc d-none d-xl-block col-xl-3" aria-label="Secondary navigation">
+<div class=page-links>
+<h3>On this page</h3>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#dynamic-traversers-in-trueblocks>Dynamic Traversers in TrueBlocks</a></li>
+<li><a href=#using-trueblocks-to-get-permissionless-data>Using TrueBlocks to get Permissionless Data</a></li>
+<li><a href=#traversers>Traversers</a></li>
+<li><a href=#dynamic-traversers>Dynamic Traversers</a></li>
+<li><a href=#c-code>C++ Code</a></li>
+<li><a href=#example-folder>Example Folder</a></li>
+<li><a href=#example-gascost-traverser>Example GasCost Traverser</a></li>
+<li><a href=#conclusion>Conclusion</a></li>
+</ul>
+</nav>
+</div>
+</nav>
+<main class="docs-content col-lg-11 col-xl-9 mx-xl-auto">
+<h1>Dynamic Traversers for TrueBlocks</h1>
+<p class=lead>Customized scraping of the index</p>
+<h2 id=dynamic-traversers-in-trueblocks>Dynamic Traversers in TrueBlocks<a href=#dynamic-traversers-in-trueblocks class=anchor aria-hidden=true>#</a> </h2>
+<p>Ethereum nodes come to consensus on a world-wide global ledger of smart contract invocations every 14 seconds.
+Everyone know this. This is what we celebrate about the chain. Not only is this data world-wide and consented-to,
+but it is also permissionless. At least that’s what we’re supposed to believe.</p>
+<p>But, is it really permissionless?</p>
+<p>I think the answer to that question is a resounding “No.” Ask yourself how you personally get data from the
+Ethereum blockchain. There’s only two answers: (1) you visit a block explorer, or (2) you go to website built
+by the developers of the dApp you’re using.</p>
+<p>You want to know what’s going on with your ENS names? You go to <a href=http://ens.domain>http://ens.domain</a> (a website).</p>
+<p>You want to know how your GitCoin grant is doing? You go to <a href=http://gitcoin.co.>http://gitcoin.co</a> (another website).</p>
+<p>You want to invest in DeFi? You go to Zerion (a website).</p>
+<p>I got news for you. This is <strong>not</strong> permissionless.</p>
+<p>Every time you go to a website, you are at the mercy of the human being who runs that website. In effect, you have
+to say <em>please, oh please, great data-giver in the sky…please, please give me access to my own data.</em></p>
+<p>The trouble — and the thing that makes it very obvious that this data is not permissionless — is that at any time
+the server (or the human) can say “No.” They can choose to not give you your own data.</p>
+<p>That is the opposite of permissionlessness!</p>
+<p>In my mind, permissionlessness means you can say “Fuck you, Mr. ServerMan. It’s not possible for you to stop me from
+getting the data I want, no matter what you do.”</p>
+<p>If, in the end, blockchains are not permissionless, they are simply very expensive web servers. And if that’s the case,
+then everything we’re building will be for naught.</p>
+<h2 id=using-trueblocks-to-get-permissionless-data>Using TrueBlocks to get Permissionless Data<a href=#using-trueblocks-to-get-permissionless-data class=anchor aria-hidden=true>#</a> </h2>
+<p>We assume you’ve read some of our <a href=/blog>previous articles</a> concerning how TrueBlocks
+creates and publishes an index of address appearances. We won’t rehash that in this article.</p>
+<p>To proceed, visit the installation instructions for downloading and installing TrueBlocks: <a href=http://github.com/TrueBlocks/trueblocks-core.>http://github.com/TrueBlocks/trueblocks-core.</a>
+Once you finished installing (if you have trouble, join our discord server), try this:</p>
+<pre><code class=language-[shell]>chifra init
+</code></pre>
+<p>This will initialize the TrueBlocks indexes and downloads the most recent collection of Bloom filters. Next, run
+a small test to see if things are working properly</p>
+<pre><code class=language-[shell]>chifra list 0xf503017d7baf7fbc0fff7492b751025c6a78179b
+</code></pre>
+<p>This should return a list of about 600 appearances (<code>blockNumber. transaction_id</code> pairs. If it doesn’t, revisit the installation instructions.</p>
+<p>Next, run this command:</p>
+<pre><code class=language-[shell]>chifra export 0xf503017d7baf7fbc0fff7492b751025c6a78179b
+</code></pre>
+<p>This displays the same list of transactions but, for each one, <code>chifra</code> queries the blockchain and presents the full details of each transaction to the screen. Try the above command with your own address.</p>
+<p>There are many options to <code>chifra export</code>, all of which are presented with</p>
+<pre><code class=language-[shell]>chifra export --help
+</code></pre>
+<h2 id=traversers>Traversers<a href=#traversers class=anchor aria-hidden=true>#</a> </h2>
+<p>Under the hood of TrueBlocks, there is a piece of code called a Traverser. A Traverser “traverses” the list of appearances, queries the chain for transactional detail, and calls into whatever functions are associated with the Traverser.</p>
+<p>In the <code>list</code> option, the function simply prints the <code>blockNumber. transaction_id</code> pair to the screen.</p>
+<p>For <code>export</code> option, the display function prints the entire transaction and potentially a lot of more data such as articulation and accounting reconciliations.</p>
+<p>Traversers are very general, and because they are C++ classes, you may customize them to do practically anything. In fact, this is what this article is about.</p>
+<h2 id=dynamic-traversers>Dynamic Traversers<a href=#dynamic-traversers class=anchor aria-hidden=true>#</a> </h2>
+<p>Recently, we added an amazing new feature to TrueBlocks called “Dynamic Traversers.” The word “dynamic” has special meaning here, harkening back to an ancient computing idea called <em>dynamic link libraries</em>. A dynamic traverser is a dynamic link library that you can customize.</p>
+<p>It’s a way of extending the <code>chifra</code> command line (and at the same time, the TrueBlocks API which mirrors the command line). This allows you to preform any task you want on any or all transactions from your accounts.</p>
+<p>In the following paragraphs, we describe how you can write and build you own dynamic traversers.</p>
+<h2 id=c-code>C++ Code<a href=#c-code class=anchor aria-hidden=true>#</a> </h2>
+<p>I know many of you will feel flummoxed at having to use C++. Here’s our reaction to your concerns: “Get over it! It’s so freaking worth it.”</p>
+<h2 id=example-folder>Example Folder<a href=#example-folder class=anchor aria-hidden=true>#</a> </h2>
+<p>Assuming you’ve downloaded and installed TrueBlocks correctly, you may create your own Dynamic Traverser by completing these tasks. We’ll first build a simple example and then build a more complicated traverser that calculates the gas spent (and lost to error) by a given address.</p>
+<p>From the top of the TrueBlocks repo.</p>
+<pre><code class=language-[shell]>cd ./src/examples/dynamic  
+make trav1  
+cp -p ./libtrav1.dylib $CONFIG/cache/obj/
+</code></pre>
+<p>Where $CONFIG depends on your operating system (it’s <code>~/Library/ Application Support/TrueBlocks</code> on Mac, <code>~/.local/share/trublocks</code> on Linux).</p>
+<p>This will build a dynamic link library and copy it into the TrueBlocks’ cache where we store dynamic traversers.</p>
+<p>Try to run the dynamic traverser</p>
+<pre><code class=language-[shell]>chifra export --load libtrav1.dylib 0xf503017d...6a78179b
+</code></pre>
+<p>In order to run a dynamic traverser, you first put it in the right folder and the simply tell <code>chifra</code> to load it.</p>
+<p>This should print the hash for each transaction for the given address. Let’s take a look at the code. Open the file <code>trav1.cpp</code> in the example folder. It looks like this</p>
+<p><img src=https://miro.medium.com/max/3568/1*SnG659FoS0OA77uLeBNHnw.png alt></p>
+<p>This is the entirety of the traverser. That’s all you have to do to extract a perfect list of transaction hashes from your own accounts running straight up against your own Ethereum node. You don’t have to ask anyone for anything. Just permissionlessly take as much data as you want.</p>
+<p>If you don’t see how powerful this — how upsetting of the web server apple cart decentralized data is — please re-read the above. Getting permissionless access to globally-agreed-to, near-perfect, world-wide data only happens if people actually have permissionless access.</p>
+<h2 id=example-gascost-traverser>Example GasCost Traverser<a href=#example-gascost-traverser class=anchor aria-hidden=true>#</a> </h2>
+<p>Next we present another example in that same folder called <code>trav2</code>. Build it with the following commands:</p>
+<pre><code class=language-[shell]>cd ./src/examples/dynamic  
+make trav2  
+cp -p ./libtrav2.dylib $CONFIG/cache/objs/  
+chifra export --load libtrav2.dylib 0xf503017d...6a78179b
+</code></pre>
+<p>This prints a table of the gas consumed for each transaction, the accumulated gas used so far, and the accumulated gas used on transactions that ended in error. We leave it as an exercise to the reader to study this fairly straight-forward code. I’ll make a few comments on the code below.</p>
+<p><img src=https://miro.medium.com/max/4336/1*49tNDX89nLCoIWvF7qdyEg.png alt></p>
+<p>Notice that the <code>makeTraverser</code> function has not changed. Only the <code>header</code> and <code>display</code> function have changed.</p>
+<p>Also notice that the code is very simple and very short. That’s the whole beauty of these dynamic traversers. You can write them in a short afternoon and they can do amazing things. For example, you’ll notice we’re accumulating totals as we traverse the data. You could, if you wished, add subtotals once per day or once per month or whatever (notice there’s a timestamp on every transaction which makes this calculation easy).</p>
+<p>Another thing to notice is that we’ve derived our own C++ Traverser class in this second example. This gives you infinite flexibility as far as the design of your traverser. This is the holy grail of data access to the Ethereum chain. It’s fast (because it’s fully local and not shared like a web API); it’s 100% private and completely decentralized; it’s fully customizable; it’s not a website; and it’s <strong>permissionless</strong>.</p>
+<h2 id=conclusion>Conclusion<a href=#conclusion class=anchor aria-hidden=true>#</a> </h2>
+<p>Don’t build stuff if you don’t want to end up with the result. That’s what we always say. If you want the benefits of global permissionless data, you have to build a system that presents global permissionless data. That’s a simple straight-forward statement of fact. It’s won’t be easy, but it will be very much worth it.</p>
+<p>If you like this article or you simply wish to support our work go to our GitCoin grant <a href=https://gitcoin.co/grants/184/trueblocks>https://gitcoin.co/grants/184/trueblocks</a>. Donate to the next matching round. We get the added benefit of a larger matching grant. Even small amounts have a big impact.</p>
+<p>If you’d rather, please send ETH to our public Ethereum wallet here 0xf503017d7baf7fbc0fff7492b751025c6a78179b.</p>
+<p>Thanks for reading.</p>
+<div class="docs-navigation d-flex justify-content-between">
+<a href=/blog/a-long-winded-explanation-of-trueblocks/>
+<div class="card my-1">
+<div class="card-body py-2">
+&larr; A Long Winded Explanation of TrueBlocks
+</div>
+</div>
+</a>
+<a class=ms-auto href=/blog/how-safe-are-my-private-keys/>
+<div class="card my-1">
+<div class="card-body py-2">
+How Safe are My Private Keys? &rarr;
+</div>
+</div>
+</a>
+</div>
+</main>
+</div>
+</div>
+</div>
+<footer class="footer text-muted">
+<div class=container>
+<div class=row>
+<div class="col-lg-8 order-last order-lg-first">
+<ul class=list-inline>
+<li class=list-inline-item>Powered by <a href=https://gohugo.io/>Hugo</a>, and <a href=https://getdoks.org/>Doks</a></li>
+</ul>
+</div>
+<div class="col-lg-8 order-first order-lg-last text-lg-end">
+<ul class=list-inline>
+<li class=list-inline-item><a href=https://github.com/TrueBlocks/trueblocks-docs>Improve these Docs</a></li>
+<li class=list-inline-item><a href=/privacy-policy/>Privacy</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+<script src=/js/highlight.min.ec942a9dc705691c6545c0ea48b4a76dd7a730be9478c31c9139089f95e82ccfccaee7fd8b5823a0fe005ac3dec10b8f825d9ace55908f4b6e6da407af3df293.js integrity="sha512-7JQqnccFaRxlRcDqSLSnbdenML6UeMMckTkIn5XoLM/Mruf9i1gjoP4AWsPewQuPgl2azlWQj0tubaQHrz3ykw==" crossorigin=anonymous defer></script>
+<script src=/main.min.9e62c9b0c5dc8279689cc9cb693a32c8ea1d19032f574f98c782ff59a0417d3662ff94b1a7755ab72a7a1862644bf00a58492c65aa0adabbc58080f4018c61bc.js integrity="sha512-nmLJsMXcgnlonMnLaToyyOodGQMvV0+Yx4L/WaBBfTZi/5Sxp3Vatyp6GGJkS/AKWEksZaoK2rvFgID0AYxhvA==" crossorigin=anonymous defer></script>
+<script src=/index.min.2920392d3bee72ff57da922db3d93f87bbdbae7d85d9bdfd6bac93a24c8ad220ebd77bacb49367cdadc381a7f57b96fa16cbee3821c085548638d591f04eb7cf.js integrity="sha512-KSA5LTvucv9X2pIts9k/h7vbrn2F2b39a6yTokyK0iDr13ustJNnza3Dgaf1e5b6FsvuOCHAhVSGONWR8E63zw==" crossorigin=anonymous defer></script>
+</body>
+</html>

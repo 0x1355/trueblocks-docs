@@ -1,0 +1,209 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="ie=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<link rel=preload as=font href=/fonts/vendor/jost/jost-v4-latin-regular.woff2 type=font/woff2 crossorigin>
+<link rel=preload as=font href=/fonts/vendor/jost/jost-v4-latin-700.woff2 type=font/woff2 crossorigin>
+<link rel=stylesheet href=/main.b97465d3e9dbb04b0919a61f5c5766b97ddb3b30835a2bf75ec252e8c570f518d52f1e59944be75f9c92a4c5bc6f1bbe84962010976216b41d653fb6802056b7.css integrity="sha512-uXRl0+nbsEsJGaYfXFdmuX3bOzCDWiv3XsJS6MVw9RjVLx5ZlEvnX5ySpMW8bxu+hJYgEJdiFrQdZT+2gCBWtw==" crossorigin=anonymous>
+<noscript><style>img.lazyload{display:none}</style></noscript>
+<meta name=robots content="index, follow">
+<meta name=googlebot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name=bingbot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<title>Reading Byzantium’s Tea Leaves - TrueBlocks</title>
+<meta name=description content="Ethereum as it was meant to be: local-first, P2P, and accurate queries to all the data you’ll ever need.">
+<link rel=canonical href=/blog/reading-byzantiums-tea-leaves/>
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="/trueblocks.png">
+<meta name=twitter:title content="Reading Byzantium’s Tea Leaves">
+<meta name=twitter:description content="I used to watch a television show called “Wall Street Week with Louis Rukeyser.” The host would frequently laugh at the way Alan Greenspan, the Chairman of the Federal Reserve, would testify in front of Congress. Rukeyser found it comical that we all had to “read the tea leaves” after Greenspan spoke.
+ “I should warn you, if I turn out to be clear, you’ve probably misunderstood me.” ~Alan Greenspan">
+<meta name=twitter:site content="@TrueBlocks">
+<meta name=twitter:creator content="@TrueBlocks">
+<meta property="og:title" content="Reading Byzantium’s Tea Leaves">
+<meta property="og:description" content="I used to watch a television show called “Wall Street Week with Louis Rukeyser.” The host would frequently laugh at the way Alan Greenspan, the Chairman of the Federal Reserve, would testify in front of Congress. Rukeyser found it comical that we all had to “read the tea leaves” after Greenspan spoke.
+ “I should warn you, if I turn out to be clear, you’ve probably misunderstood me.” ~Alan Greenspan">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/blog/reading-byzantiums-tea-leaves/">
+<meta property="og:image" content="/trueblocks.png">
+<meta property="article:published_time" content="2017-10-02T01:43:50+00:00">
+<meta property="article:modified_time" content="2021-09-03T16:57:17-03:00">
+<meta property="og:site_name" content="TrueBlocks">
+<meta property="article:publisher" content="https://www.facebook.com/">
+<meta property="article:author" content="https://www.facebook.com/">
+<meta property="og:locale" content="en_US">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"\/blog\/reading-byzantiums-tea-leaves\/"},"headline":"Reading Byzantium’s Tea Leaves","image":[],"datePublished":"2017-10-02T01:43:50CET","dateModified":"2021-09-03T16:57:17CET","author":{"@type":"Organization","name":"TrueBlocks"},"publisher":{"@type":"Organization","name":"TrueBlocks","logo":{"@type":"ImageObject","url":"\/logo-doks.png"}},"description":""}</script>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"\/"},{"@type":"ListItem","position":2,"name":"Blogreading Byzantiums Tea Leaves","item":"\/blogreading-byzantiums-tea-leaves\/"}]}</script>
+<meta name=theme-color content="#fff">
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/site.webmanifest>
+</head>
+<body class="blog single">
+<div class="header-bar fixed-top"></div>
+<script>(localStorage.getItem('theme')==='dark'||localStorage.getItem('theme')===null)&&document.body.classList.add('dark')</script>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+<div class=container>
+<input class="menu-btn order-0" type=checkbox id=menu-btn>
+<label class="menu-icon d-md-none" for=menu-btn><span class=navicon></span></label>
+<a class="navbar-brand order-1 order-md-0 me-auto" href=/>TrueBlocks</a>
+<button id=mode class="btn btn-link order-2 order-md-4" type=button aria-label="Toggle mode">
+<span class=toggle-dark><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span>
+<span class=toggle-light><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+</button>
+<ul class="navbar-nav social-nav order-3 order-md-5">
+<li class=nav-item>
+<a class=nav-link href=https://twitter.com/trueblocks><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9.0 01-3.14 1.53 4.48 4.48.0 00-7.86 3v1A10.66 10.66.0 013 4s-4 9 5 13a11.64 11.64.0 01-7 2c9 5 20 0 20-11.5a4.5 4.5.0 00-.08-.83A7.72 7.72.0 0023 3z"/></svg><span class="ms-2 visually-hidden">Twitter</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://discord.com/invite/kAFcZH2x7K><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="simple icon-discord"><path d="M20.317 4.3698a19.7913 19.7913.0 00-4.8851-1.5152.0741.0741.0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868.0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077.0 00-.0785-.037 19.7363 19.7363.0 00-4.8852 1.515.0699.0699.0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824.0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777.0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076.0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077.0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743.0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614.0a.0739.0739.0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077.0 01-.0066.1276 12.2986 12.2986.0 01-1.873.8914.0766.0766.0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076.0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077.0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061.0 00-.0312-.0286zM8.02 15.3312c-1.1825.0-2.1569-1.0857-2.1569-2.419.0-1.3332.9555-2.4189 2.157-2.4189 1.2108.0 2.1757 1.0952 2.1568 2.419.0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748.0c-1.1825.0-2.1569-1.0857-2.1569-2.419.0-1.3332.9554-2.4189 2.1569-2.4189 1.2108.0 2.1757 1.0952 2.1568 2.419.0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg><span class="ms-2 visually-hidden">Discord</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://github.com/trueblocks/trueblocks-core><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/api>API Reference<span class="ms-2 visually-hidden">API</span></a>
+</li>
+</ul>
+<div class="collapse navbar-collapse order-4 order-md-1">
+<ul class="navbar-nav main-nav me-auto order-5 order-md-2"><li class=nav-item>
+<a class=nav-link href=/docs/>Docs</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/data-model/intro>Data Model</a>
+</li>
+<li class="nav-item active">
+<a class=nav-link href=/blog/>Blog</a>
+</li>
+</ul>
+<div class="break order-6 d-md-none"></div>
+<form class="navbar-form flex-grow-1 order-7 order-md-3">
+<input id=userinput class="form-control is-search" type=search placeholder="Search docs..." aria-label="Search docs..." autocomplete=off>
+<div id=suggestions class="shadow bg-white rounded"></div>
+</form>
+</div>
+</div>
+</header>
+<div class="wrap container" role=document>
+<div class=content>
+<div class="row flex-xl-nowrap">
+<div class="col-lg-5 col-xl-4 docs-sidebar">
+<nav class=docs-links aria-label="Main navigation">
+<ul>
+<h3>Blog Topics</h3>
+<li><a href=/tags/ethereum>ethereum</a> (29)</li>
+<li><a href=/tags/trueblocks>trueblocks</a> (15)</li>
+<li><a href=/tags/recipes>recipes</a> (3)</li>
+<li><a href=/tags/explainers>explainers</a> (1)</li>
+</ul>
+</nav>
+</div>
+<nav class="docs-toc d-none d-xl-block col-xl-3" aria-label="Secondary navigation">
+<div class=page-links>
+<h3>On this page</h3>
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</nav>
+<main class="docs-content col-lg-11 col-xl-9 mx-xl-auto">
+<h1>Reading Byzantium’s Tea Leaves</h1>
+<p class=lead>Louis Rukeyser looks at the blockchain</p>
+<p>I used to watch a television show called “Wall Street Week with Louis Rukeyser.” The host would frequently laugh at the way Alan Greenspan, the Chairman of the Federal Reserve, would testify in front of Congress. Rukeyser found it comical that we all had to “read the tea leaves” after Greenspan spoke.</p>
+<blockquote>
+<p>“<em>I should warn you, if I turn out to be clear, you’ve probably misunderstood me.” ~Alan Greenspan</em></p>
+</blockquote>
+<p>Why did Mr. Greenspan speak in such obscure and difficult to understand language? Why did he force people to “read the tea leaves”? Because he knew that a single wrong word had the power to send shockwaves through the markets. “We’re going to do exactly this…” Crash goes the market.</p>
+<p>I was thinking about this recently as I followed the increasingly interesting discussions about Ethereum’s impending Byzantium hard fork (<a href=https://github.com/ethereum/EIPs/issues/186>EIP86</a> and <a href=https://www.reddit.com/r/ethtrader/comments/6rqzmr/possible_reduction_in_block_rewards_to_3_eth_per/>Reddit discussion</a>).</p>
+<p>If there is one distinguishing characteristic about this discussion, it is that there are no tea leaves. There is simply an unambiguous statement from the core developers that the per-block reward is going to be lowered from the current five ether per block to three ether per block.</p>
+<p>Okay, maybe there is some tea, but actually we care about source code&mldr;</p>
+<p><img src=/blog/img/019-Reading-Byzantiums-Tea-Leaves-001.png alt></p>
+<p>The above two lines (and a few related lines elsewhere) implement the per-block change in the mining reward. That’s pretty unambiguous.</p>
+<h4 id=a-fully-manufactured-conversation>A Fully Manufactured Conversation<a href=#a-fully-manufactured-conversation class=anchor aria-hidden=true>#</a> </h4>
+<p>The following conversation between the core developers and miners was completely manufactured in my own mind:</p>
+<blockquote>
+<p><strong>Developers:</strong> “We’re going to make a change as part of the Byzantium hard fork to lower the per-block reward from five to three…”</p>
+</blockquote>
+<blockquote>
+<p><strong>Miners:</strong> “Wait. Why are you doing that? That will cost us a lot of money…”</p>
+</blockquote>
+<blockquote>
+<p><strong>Developers:</strong> “You knew the code worked this way…the difficulty bomb has been in the code since the beginning…”</p>
+</blockquote>
+<blockquote>
+<p><strong>Miners:</strong> Changing the block reward has nothing to do with diffusing the difficulty time bomb… [the miners have a point here].</p>
+</blockquote>
+<blockquote>
+<p><strong>Developers:</strong> Block production on a per-day basis has been decreasing for months. After the fork, the per-day reward will bounce back. In fact, it will be higher. Three ether every 14 seconds is more than five ether every 25 seconds.[The developers have a point here.]</p>
+</blockquote>
+<p><img src=/blog/img/019-Reading-Byzantiums-Tea-Leaves-002.png alt></p>
+<blockquote>
+<p><strong>Miners:</strong> …but…but…that’s different…okay…there’s nothing we can do…</p>
+</blockquote>
+<h4 id=reading-the-tealeaves>Reading the Tea Leaves<a href=#reading-the-tealeaves class=anchor aria-hidden=true>#</a> </h4>
+<p>I think the developers are doing the right thing by lowering the block reward (I have a feeling the ecosystem is paying too much for security — we will explore this in <a href=https://medium.com/series/byzantium-thoughts-6a5f6b43e86f/edit>the next issue of our series</a>), but their arguments are a bit disingenuous. They’ve conflated the two issues of <em>block reward</em> and <em>difficulty calculation.</em></p>
+<p>Let’s look at some tea leaves (so it’s math, so but let’s pretend it’s tea):</p>
+<p><img src=/blog/img/019-Reading-Byzantiums-Tea-Leaves-003.png alt></p>
+<p>Above is a description of how the difficulty is calculated at each block in the current code (pre-fork). You’ll notice there is no mention of the block reward. That’s because the block reward is in a different part of the code. <a href=https://medium.com/p/8326143c92e8/edit>Learn more about the reasoning behind this calculation here.</a></p>
+<p>Let’s look at what’s changed between Homestead and Byzantium. The following image is a visual difference between the pre- and post-fork code. (I simplified it for clarity.)</p>
+<p><img src=/blog/img/019-Reading-Byzantiums-Tea-Leaves-004.png alt></p>
+<p>There are only two changes to the post-fork code. First, there is a small change in <code>section A</code> that makes mining uncles less likely — (see <a href=https://bitslog.wordpress.com/2016/04/28/uncle-mining-an-ethereum-consensus-protocol-flaw/>this article</a> and this <a href=https://github.com/ethereum/EIPs/issues/100>EIP 100</a>) and, second, there is the resetting of the difficulty time bomb at <code>section B</code>.</p>
+<p>In order to reset the time bomb, the calculation subtracts 2,999,999 from the parent’s block number (as opposed to adding one as it did before). Assuming the Byzantium fork happens at block 4,370,000, this change acts like a time machine throwing the calculation back 529 days to block 1,370,001 (April 20, 2016 at 7:40:59 UTC). Using the same time machine to project forward, the system will return this amount of time-bombyness by March 14, 2019. Note that the remainder of the calculation remains unchanged.</p>
+<h4 id=how-will-this-change-affect-the-ecosystem>How Will this Change Affect the Ecosystem?<a href=#how-will-this-change-affect-the-ecosystem class=anchor aria-hidden=true>#</a> </h4>
+<p>One of the things Rukeyser constantly noted was that the market, knowing what it knows, discounts the future. In other words, the market builds all conceivable futures into its current price. <em>Buy on the rumor, sell on the news.</em></p>
+<p>The change in the difficulty calculation at the Byzantium hard fork is well anticipated. Presumably, current prices already reflect it. However, (and I think Alan Greenspan might understand what I’m saying here), the change in the calculation is a step function and is definitely not obscure. I think that’s ultimately a good thing.</p>
+<p><a href=https://medium.com/@tjayrush/ethereum-block-production-continues-to-slide-1b74a2123e3f>In previous writings</a>, I’ve noted that the number of transactions per day has been increasing despite decreasing per-day block production. What will it mean to the ecosystem when there’s a sudden jump in the number of blocks per day? Will gas prices spike? Will gas prices plummet? Will the hash rate decrease or increase? Will the fiat price of ether rise or fall?</p>
+<p>In the next installment of this series, we will explore these questions and others. In particular, we hope to explore these questions under the light of a fiat-powered spotlight—do these issues become more or less clear in the light a fait-based analysis? Stay tuned, we’ll let you know.</p>
+<p><strong>Late Breaking News:</strong> After publishing this article, I found this post <a href=http://www.cahf.co/>http://www.cahf.co/</a>. It seems maybe the Byzantium hard fork is a bit more contentious that I thought it might be.</p>
+<p>We’re interested in your thoughts. Please clap for us and then post your comments below. If you enjoy our work, consider supporting us by sending a tip to 0xf503017d7baf7fbc0fff7492b751025c6a78179b.</p>
+<p>Join our <a href=https://discord.gg/RAz6DJ6xkf>discord channel</a> There’s not a lot of members just yet, but we’re working on it.</p>
+<p><strong>Thomas Jay Rush</strong> owns the software company TrueBlocks whose primary project is also called TrueBlocks, a collection of software libraries and applications enabling real-time, per-block smart contract monitoring and analytics to the Ethereum blockchain. Contact him through <a href=http://trueblocks.io>the website</a>.</p>
+<div class="docs-navigation d-flex justify-content-between">
+<a href=/blog/announcing-trueblocks/>
+<div class="card my-1">
+<div class="card-body py-2">
+&larr; Announcing TrueBlocks®
+</div>
+</div>
+</a>
+<a class=ms-auto href=/blog/short-thoughts-on-difficulty-calc/>
+<div class="card my-1">
+<div class="card-body py-2">
+Short Thoughts on Difficulty Calc &rarr;
+</div>
+</div>
+</a>
+</div>
+</main>
+</div>
+</div>
+</div>
+<footer class="footer text-muted">
+<div class=container>
+<div class=row>
+<div class="col-lg-8 order-last order-lg-first">
+<ul class=list-inline>
+<li class=list-inline-item>Powered by <a href=https://gohugo.io/>Hugo</a>, and <a href=https://getdoks.org/>Doks</a></li>
+</ul>
+</div>
+<div class="col-lg-8 order-first order-lg-last text-lg-end">
+<ul class=list-inline>
+<li class=list-inline-item><a href=https://github.com/TrueBlocks/trueblocks-docs>Improve these Docs</a></li>
+<li class=list-inline-item><a href=/privacy-policy/>Privacy</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+<script src=/js/highlight.min.ec942a9dc705691c6545c0ea48b4a76dd7a730be9478c31c9139089f95e82ccfccaee7fd8b5823a0fe005ac3dec10b8f825d9ace55908f4b6e6da407af3df293.js integrity="sha512-7JQqnccFaRxlRcDqSLSnbdenML6UeMMckTkIn5XoLM/Mruf9i1gjoP4AWsPewQuPgl2azlWQj0tubaQHrz3ykw==" crossorigin=anonymous defer></script>
+<script src=/main.min.9e62c9b0c5dc8279689cc9cb693a32c8ea1d19032f574f98c782ff59a0417d3662ff94b1a7755ab72a7a1862644bf00a58492c65aa0adabbc58080f4018c61bc.js integrity="sha512-nmLJsMXcgnlonMnLaToyyOodGQMvV0+Yx4L/WaBBfTZi/5Sxp3Vatyp6GGJkS/AKWEksZaoK2rvFgID0AYxhvA==" crossorigin=anonymous defer></script>
+<script src=/index.min.2920392d3bee72ff57da922db3d93f87bbdbae7d85d9bdfd6bac93a24c8ad220ebd77bacb49367cdadc381a7f57b96fa16cbee3821c085548638d591f04eb7cf.js integrity="sha512-KSA5LTvucv9X2pIts9k/h7vbrn2F2b39a6yTokyK0iDr13ustJNnza3Dgaf1e5b6FsvuOCHAhVSGONWR8E63zw==" crossorigin=anonymous defer></script>
+</body>
+</html>

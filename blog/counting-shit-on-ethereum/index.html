@@ -1,0 +1,231 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="ie=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<link rel=preload as=font href=/fonts/vendor/jost/jost-v4-latin-regular.woff2 type=font/woff2 crossorigin>
+<link rel=preload as=font href=/fonts/vendor/jost/jost-v4-latin-700.woff2 type=font/woff2 crossorigin>
+<link rel=stylesheet href=/main.b97465d3e9dbb04b0919a61f5c5766b97ddb3b30835a2bf75ec252e8c570f518d52f1e59944be75f9c92a4c5bc6f1bbe84962010976216b41d653fb6802056b7.css integrity="sha512-uXRl0+nbsEsJGaYfXFdmuX3bOzCDWiv3XsJS6MVw9RjVLx5ZlEvnX5ySpMW8bxu+hJYgEJdiFrQdZT+2gCBWtw==" crossorigin=anonymous>
+<noscript><style>img.lazyload{display:none}</style></noscript>
+<meta name=robots content="index, follow">
+<meta name=googlebot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name=bingbot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<title>Counting Shit on Ethereum - TrueBlocks</title>
+<meta name=description content="Ethereum as it was meant to be: local-first, P2P, and accurate queries to all the data you’ll ever need.">
+<link rel=canonical href=/blog/counting-shit-on-ethereum/>
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="/trueblocks.png">
+<meta name=twitter:title content="Counting Shit on Ethereum">
+<meta name=twitter:description content="I like to count shit. I’ll count anything I can find. Cracks in the sidewalk. Pennies in a cup.
+I also like to make lists. In fact, at one point in my life, combining my two passions, I was maintaining a list of over 350 rules related to how to pick up pennies without incurring bad luck.
+Yes. I suffer a bit from OCD (but happily).
+Recently, Pedro Gomes made a tweet asking if anyone had a list of the most frequently called function signatures on the Ethereum blockchain.">
+<meta name=twitter:site content="@TrueBlocks">
+<meta name=twitter:creator content="@TrueBlocks">
+<meta property="og:title" content="Counting Shit on Ethereum">
+<meta property="og:description" content="I like to count shit. I’ll count anything I can find. Cracks in the sidewalk. Pennies in a cup.
+I also like to make lists. In fact, at one point in my life, combining my two passions, I was maintaining a list of over 350 rules related to how to pick up pennies without incurring bad luck.
+Yes. I suffer a bit from OCD (but happily).
+Recently, Pedro Gomes made a tweet asking if anyone had a list of the most frequently called function signatures on the Ethereum blockchain.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/blog/counting-shit-on-ethereum/">
+<meta property="og:image" content="/trueblocks.png">
+<meta property="article:published_time" content="2019-06-10T01:50:36+00:00">
+<meta property="article:modified_time" content="2021-09-03T16:57:17-03:00">
+<meta property="og:site_name" content="TrueBlocks">
+<meta property="article:publisher" content="https://www.facebook.com/">
+<meta property="article:author" content="https://www.facebook.com/">
+<meta property="og:locale" content="en_US">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"\/blog\/counting-shit-on-ethereum\/"},"headline":"Counting Shit on Ethereum","image":[],"datePublished":"2019-06-10T01:50:36CET","dateModified":"2021-09-03T16:57:17CET","author":{"@type":"Organization","name":"TrueBlocks"},"publisher":{"@type":"Organization","name":"TrueBlocks","logo":{"@type":"ImageObject","url":"\/logo-doks.png"}},"description":""}</script>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"\/"},{"@type":"ListItem","position":2,"name":"Blogcounting Shit on Ethereum","item":"\/blogcounting-shit-on-ethereum\/"}]}</script>
+<meta name=theme-color content="#fff">
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/site.webmanifest>
+</head>
+<body class="blog single">
+<div class="header-bar fixed-top"></div>
+<script>(localStorage.getItem('theme')==='dark'||localStorage.getItem('theme')===null)&&document.body.classList.add('dark')</script>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+<div class=container>
+<input class="menu-btn order-0" type=checkbox id=menu-btn>
+<label class="menu-icon d-md-none" for=menu-btn><span class=navicon></span></label>
+<a class="navbar-brand order-1 order-md-0 me-auto" href=/>TrueBlocks</a>
+<button id=mode class="btn btn-link order-2 order-md-4" type=button aria-label="Toggle mode">
+<span class=toggle-dark><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span>
+<span class=toggle-light><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+</button>
+<ul class="navbar-nav social-nav order-3 order-md-5">
+<li class=nav-item>
+<a class=nav-link href=https://twitter.com/trueblocks><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9.0 01-3.14 1.53 4.48 4.48.0 00-7.86 3v1A10.66 10.66.0 013 4s-4 9 5 13a11.64 11.64.0 01-7 2c9 5 20 0 20-11.5a4.5 4.5.0 00-.08-.83A7.72 7.72.0 0023 3z"/></svg><span class="ms-2 visually-hidden">Twitter</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://discord.com/invite/kAFcZH2x7K><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="simple icon-discord"><path d="M20.317 4.3698a19.7913 19.7913.0 00-4.8851-1.5152.0741.0741.0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868.0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077.0 00-.0785-.037 19.7363 19.7363.0 00-4.8852 1.515.0699.0699.0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824.0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777.0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076.0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077.0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743.0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614.0a.0739.0739.0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077.0 01-.0066.1276 12.2986 12.2986.0 01-1.873.8914.0766.0766.0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076.0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077.0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061.0 00-.0312-.0286zM8.02 15.3312c-1.1825.0-2.1569-1.0857-2.1569-2.419.0-1.3332.9555-2.4189 2.157-2.4189 1.2108.0 2.1757 1.0952 2.1568 2.419.0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748.0c-1.1825.0-2.1569-1.0857-2.1569-2.419.0-1.3332.9554-2.4189 2.1569-2.4189 1.2108.0 2.1757 1.0952 2.1568 2.419.0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg><span class="ms-2 visually-hidden">Discord</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://github.com/trueblocks/trueblocks-core><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/api>API Reference<span class="ms-2 visually-hidden">API</span></a>
+</li>
+</ul>
+<div class="collapse navbar-collapse order-4 order-md-1">
+<ul class="navbar-nav main-nav me-auto order-5 order-md-2"><li class=nav-item>
+<a class=nav-link href=/docs/>Docs</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/data-model/intro>Data Model</a>
+</li>
+<li class="nav-item active">
+<a class=nav-link href=/blog/>Blog</a>
+</li>
+</ul>
+<div class="break order-6 d-md-none"></div>
+<form class="navbar-form flex-grow-1 order-7 order-md-3">
+<input id=userinput class="form-control is-search" type=search placeholder="Search docs..." aria-label="Search docs..." autocomplete=off>
+<div id=suggestions class="shadow bg-white rounded"></div>
+</form>
+</div>
+</div>
+</header>
+<div class="wrap container" role=document>
+<div class=content>
+<div class="row flex-xl-nowrap">
+<div class="col-lg-5 col-xl-4 docs-sidebar">
+<nav class=docs-links aria-label="Main navigation">
+<ul>
+<h3>Blog Topics</h3>
+<li><a href=/tags/ethereum>ethereum</a> (29)</li>
+<li><a href=/tags/trueblocks>trueblocks</a> (15)</li>
+<li><a href=/tags/recipes>recipes</a> (3)</li>
+<li><a href=/tags/explainers>explainers</a> (1)</li>
+</ul>
+</nav>
+</div>
+<nav class="docs-toc d-none d-xl-block col-xl-3" aria-label="Secondary navigation">
+<div class=page-links>
+<h3>On this page</h3>
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</nav>
+<main class="docs-content col-lg-11 col-xl-9 mx-xl-auto">
+<h1>Counting Shit on Ethereum</h1>
+<p class=lead>Fun with blocks, transactions, and counters</p>
+<p>I like to count shit. I’ll count anything I can find. Cracks in the sidewalk. Pennies in a cup.</p>
+<p>I also like to make lists. In fact, at one point in my life, combining my two passions, I was maintaining a list of over 350 rules related to how to pick up pennies without incurring bad luck.</p>
+<p><em>Yes. I suffer a bit from OCD (but happily).</em></p>
+<p>Recently, <a href=https://medium.com/u/a9b602b091af>Pedro Gomes</a> made a tweet asking if anyone had a list of the most <a href=https://twitter.com/pedrouid/status/1101194526524362752>frequently called function signatures on the Ethereum blockchain</a>.</p>
+<p>I thought to myself. <em>Oh cool. A list. I like lists. Plus, there’s counting involved. I like counting. I can do this.</em></p>
+<p>To me, “I can do this”, usually translates into “I can write some code”, so here’s some pseudo code for answering Pedro’s question:</p>
+<p>map&lt;signature, count> counts</p>
+<p>for (every block in blockchain)<br>
+for (every tx in block)<br>
+if (tx.input is at least four bytes long)<br>
+counts[tx.signature]++</p>
+<p>sort the map reverse by second<br>
+print the first twenty entries in the map</p>
+<p>In other words, count some shit.</p>
+<p>I work on a project called TrueBlocks, so I’ll use that to carry out the above simple process. Here’s what you would need to do to duplicate my effort:</p>
+<ol>
+<li>Download, install, and run an Ethereum node*</li>
+<li>Download, install, and build TrueBlocks</li>
+</ol>
+<p>* — wait for a long time while the node syncs.</p>
+<p>For more information on running node, you’ll have to look online (or checkout <a href=https://medium.com/u/8d628dbdf3c2>DAppNode</a>, which makes running Ethereum nodes very easy). Instructions for downloading and running TrueBlocks is <a href=https://github.com/TrueBlocks/trueblocks-core/blob/develop/src/other/install/INSTALL.md>here</a>.</p>
+<h4 id=building-the-samplecode>Building the Sample Code<a href=#building-the-samplecode class=anchor aria-hidden=true>#</a> </h4>
+<p>Before we write the code to do the counting, we want to make sure you can build the sample project. Instructions for that are <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/examples>here</a>, but the short version is:</p>
+<p># Download TrueBlocks<br>
+git clone \<br>
+-b develop <a href=https://github.com/TrueBlocks/trueblocks-core>https://github.com/TrueBlocks/trueblocks-core</a><br>
+cd trueblocks-core<br>
+mkdir build<br>
+cd build<br>
+cmake ../src<br>
+make</p>
+<p># Run Parity with &ndash;tracing on</p>
+<p># From ./build, run the following command:<br>
+../bin/getBlock 12</p>
+<p># If the above command returns non-empty block data, you&rsquo;re set.</p>
+<p>Now we can start writing the counting program. We start by making a copy of one of the sample programs and making sure the copy builds:</p>
+<p>cd ../src/examples<br>
+cp -pR simple count_shit<br>
+cd count_shit<br>
+make<br>
+./bin/simple</p>
+<p>You should get some data for block 3,500,000 (assuming your node is synced that far). <strong>Note:</strong> if you don’t want to run your own node, you can edit a file called <code>$CONFIG/trueblocks.toml</code> and set the <code>rpcProvider</code> option to a remote node such as Infura. Be warned, though, if you do you will probably get locked out due to hitting their servers too hard — this is one of the benefits of running your own node — no rate limiting.</p>
+<h4 id=a-quick-review-of-the-samplecode>A Quick Review of the Sample Code<a href=#a-quick-review-of-the-samplecode class=anchor aria-hidden=true>#</a> </h4>
+<p>Open the file<code>./samples/count_shit/simple.cpp</code> with your editor. It will look something like this:</p>
+<p><img src=/blog/img/029-Counting-Shit-on-Ethereum-001.png alt></p>
+<p>A few things to notice:</p>
+<p>First, you need to <code>#include "etherlib.h"</code>. This allows you to build programs with TrueBlocks.</p>
+<p>Second, initialize the library with <code>etherlib_init()</code>.</p>
+<p>The real code starts at line 14. Here we create a storage location for the block data with <code>CBlock block</code> . The next line calls into the library (which in turn calls into the node) to get the block data for block 3,500,000. Line 18 sends the block data to the screen. Very simple.</p>
+<h4 id=writing-the-actualcode>Writing the Actual Code<a href=#writing-the-actualcode class=anchor aria-hidden=true>#</a> </h4>
+<p>Now we want to write the code to count function signatures. With little fanfare, here’s the code with short descriptions for each section.</p>
+<p>The first section includes the <code>etherlib.h</code> header file and defines a few types that we will use to store the function signatures and then sort and report on what we find. Put this at the top of your file.</p>
+<p><img src=/blog/img/029-Counting-Shit-on-Ethereum-002.png alt></p>
+<p>The next section is the <code>main</code> routine. Put this at the very bottom of your file. We will be inserting two functions between the declarations at the top of the file and the main function. In this way, we won’t have to forward declare the functions we need.</p>
+<p><img src=/blog/img/029-Counting-Shit-on-Ethereum-003.png alt></p>
+<p>The <code>main</code> function, at line 35, declares a signature map to store the signatures, and line 36 calls the function <code>forEveryBlock</code> with the function <code>visitBlock</code> and a pointer to that map. <code>forEveryBlock</code> visits every block and calls the passed-in function on each block between the first block with a transaction <code>(frstTransactionBlock)</code> and the last available block on the chain. (We’ll look at <code>visitBlock</code> in a second.) <code>visitBlock</code> does the counting. Starting at line 38, we simply sort the gathered counts and present the top twenty results.</p>
+<p>The remaining functions do the real work. The first, <code>visitBlock</code> gets called…</p>
+<p><img src=/blog/img/029-Counting-Shit-on-Ethereum-004.png alt></p>
+<p>…simply passing on the data pointer to every transaction in the block.</p>
+<p>The final function, and the one that does all the work, is called <code>visitTransaction</code>.</p>
+<p><img src=/blog/img/029-Counting-Shit-on-Ethereum-005.png alt></p>
+<p>The first thing this function does is cast the data pointer back to a signature map. Some of the younger programmers who are reading this might look askance at this sort of type-safety violation, but at least one of our engineers (alright — it’s me) has been programming since 1981, so this is how we roll. It may be slightly unsafe, but it’s fast as shit.</p>
+<p>The <code>visitTransaction</code> function checks if the <code>input</code> data of the transaction is at least four bytes long (eight characters — four nibbles) and then increments the counter at that location in the map. The remainder of the code (from line 18–21) simply reports our progress to the screen.</p>
+<p>And that’s it. You’ve counted the frequency of function calls in the Ethereum database. One word of caution: this is slow, slow, slow, slow, slow. The RPC commands are not exactly “speed burners”.</p>
+<p>One of the things TrueBlocks does is cache the blocks (if you want it to), so the second time you would run this code, it would be very much faster. That would come at the expense of hard drive space.</p>
+<h4 id=conclusion>Conclusion<a href=#conclusion class=anchor aria-hidden=true>#</a> </h4>
+<p>This is a purposefully simple example of the type of things you can do with TrueBlocks. Spend some time reading the code. Download and build the examples. We should all be learning how to access the Ethereum blockchain data on our own. I think having access to the chain data for oneself is an undervalued aspect of the blockchain.</p>
+<div class="docs-navigation d-flex justify-content-between">
+<a href=/blog/mother-may-i/>
+<div class="card my-1">
+<div class="card-body py-2">
+&larr; Mother May I?
+</div>
+</div>
+</a>
+<a class=ms-auto href=/blog/trueblarks/>
+<div class="card my-1">
+<div class="card-body py-2">
+TrueBlarks &rarr;
+</div>
+</div>
+</a>
+</div>
+</main>
+</div>
+</div>
+</div>
+<footer class="footer text-muted">
+<div class=container>
+<div class=row>
+<div class="col-lg-8 order-last order-lg-first">
+<ul class=list-inline>
+<li class=list-inline-item>Powered by <a href=https://gohugo.io/>Hugo</a>, and <a href=https://getdoks.org/>Doks</a></li>
+</ul>
+</div>
+<div class="col-lg-8 order-first order-lg-last text-lg-end">
+<ul class=list-inline>
+<li class=list-inline-item><a href=https://github.com/TrueBlocks/trueblocks-docs>Improve these Docs</a></li>
+<li class=list-inline-item><a href=/privacy-policy/>Privacy</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+<script src=/js/highlight.min.ec942a9dc705691c6545c0ea48b4a76dd7a730be9478c31c9139089f95e82ccfccaee7fd8b5823a0fe005ac3dec10b8f825d9ace55908f4b6e6da407af3df293.js integrity="sha512-7JQqnccFaRxlRcDqSLSnbdenML6UeMMckTkIn5XoLM/Mruf9i1gjoP4AWsPewQuPgl2azlWQj0tubaQHrz3ykw==" crossorigin=anonymous defer></script>
+<script src=/main.min.9e62c9b0c5dc8279689cc9cb693a32c8ea1d19032f574f98c782ff59a0417d3662ff94b1a7755ab72a7a1862644bf00a58492c65aa0adabbc58080f4018c61bc.js integrity="sha512-nmLJsMXcgnlonMnLaToyyOodGQMvV0+Yx4L/WaBBfTZi/5Sxp3Vatyp6GGJkS/AKWEksZaoK2rvFgID0AYxhvA==" crossorigin=anonymous defer></script>
+<script src=/index.min.2920392d3bee72ff57da922db3d93f87bbdbae7d85d9bdfd6bac93a24c8ad220ebd77bacb49367cdadc381a7f57b96fa16cbee3821c085548638d591f04eb7cf.js integrity="sha512-KSA5LTvucv9X2pIts9k/h7vbrn2F2b39a6yTokyK0iDr13ustJNnza3Dgaf1e5b6FsvuOCHAhVSGONWR8E63zw==" crossorigin=anonymous defer></script>
+</body>
+</html>

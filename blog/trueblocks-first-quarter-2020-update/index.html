@@ -1,0 +1,197 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="ie=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<link rel=preload as=font href=/fonts/vendor/jost/jost-v4-latin-regular.woff2 type=font/woff2 crossorigin>
+<link rel=preload as=font href=/fonts/vendor/jost/jost-v4-latin-700.woff2 type=font/woff2 crossorigin>
+<link rel=stylesheet href=/main.b97465d3e9dbb04b0919a61f5c5766b97ddb3b30835a2bf75ec252e8c570f518d52f1e59944be75f9c92a4c5bc6f1bbe84962010976216b41d653fb6802056b7.css integrity="sha512-uXRl0+nbsEsJGaYfXFdmuX3bOzCDWiv3XsJS6MVw9RjVLx5ZlEvnX5ySpMW8bxu+hJYgEJdiFrQdZT+2gCBWtw==" crossorigin=anonymous>
+<noscript><style>img.lazyload{display:none}</style></noscript>
+<meta name=robots content="index, follow">
+<meta name=googlebot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name=bingbot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<title>TrueBlocks: First Quarter 2020 Update - TrueBlocks</title>
+<meta name=description content="Ethereum as it was meant to be: local-first, P2P, and accurate queries to all the data you’ll ever need.">
+<link rel=canonical href=/blog/trueblocks-first-quarter-2020-update/>
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="/trueblocks.png">
+<meta name=twitter:title content="TrueBlocks: First Quarter 2020 Update">
+<meta name=twitter:description content="This is short update on what we’ve been doing since receiving so many wonderful grants during the GitCoin CLR matching fandango. This money goes a long way. It allows one of us (Rush) to make a trip to EthDenver, where he will be judging some hacks. It has also paid for some much needed help developing the React frontend. If you donated (or even if you didn’t), and you’re in Denver this week, seek me out.">
+<meta name=twitter:site content="@TrueBlocks">
+<meta name=twitter:creator content="@TrueBlocks">
+<meta property="og:title" content="TrueBlocks: First Quarter 2020 Update">
+<meta property="og:description" content="This is short update on what we’ve been doing since receiving so many wonderful grants during the GitCoin CLR matching fandango. This money goes a long way. It allows one of us (Rush) to make a trip to EthDenver, where he will be judging some hacks. It has also paid for some much needed help developing the React frontend. If you donated (or even if you didn’t), and you’re in Denver this week, seek me out.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/blog/trueblocks-first-quarter-2020-update/">
+<meta property="og:image" content="/trueblocks.png">
+<meta property="article:published_time" content="2020-02-11T17:08:44+00:00">
+<meta property="article:modified_time" content="2021-06-14T16:57:34-03:00">
+<meta property="og:site_name" content="TrueBlocks">
+<meta property="article:publisher" content="https://www.facebook.com/">
+<meta property="article:author" content="https://www.facebook.com/">
+<meta property="og:locale" content="en_US">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"\/blog\/trueblocks-first-quarter-2020-update\/"},"headline":"TrueBlocks: First Quarter 2020 Update","image":[],"datePublished":"2020-02-11T17:08:44CET","dateModified":"2021-06-14T16:57:34CET","author":{"@type":"Organization","name":"TrueBlocks"},"publisher":{"@type":"Organization","name":"TrueBlocks","logo":{"@type":"ImageObject","url":"\/logo-doks.png"}},"description":""}</script>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"\/"},{"@type":"ListItem","position":2,"name":"Blogtrueblocks First Quarter 2020 Update","item":"\/blogtrueblocks-first-quarter-2020-update\/"}]}</script>
+<meta name=theme-color content="#fff">
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/site.webmanifest>
+</head>
+<body class="blog single">
+<div class="header-bar fixed-top"></div>
+<script>(localStorage.getItem('theme')==='dark'||localStorage.getItem('theme')===null)&&document.body.classList.add('dark')</script>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+<div class=container>
+<input class="menu-btn order-0" type=checkbox id=menu-btn>
+<label class="menu-icon d-md-none" for=menu-btn><span class=navicon></span></label>
+<a class="navbar-brand order-1 order-md-0 me-auto" href=/>TrueBlocks</a>
+<button id=mode class="btn btn-link order-2 order-md-4" type=button aria-label="Toggle mode">
+<span class=toggle-dark><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span>
+<span class=toggle-light><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+</button>
+<ul class="navbar-nav social-nav order-3 order-md-5">
+<li class=nav-item>
+<a class=nav-link href=https://twitter.com/trueblocks><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9.0 01-3.14 1.53 4.48 4.48.0 00-7.86 3v1A10.66 10.66.0 013 4s-4 9 5 13a11.64 11.64.0 01-7 2c9 5 20 0 20-11.5a4.5 4.5.0 00-.08-.83A7.72 7.72.0 0023 3z"/></svg><span class="ms-2 visually-hidden">Twitter</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://discord.com/invite/kAFcZH2x7K><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="simple icon-discord"><path d="M20.317 4.3698a19.7913 19.7913.0 00-4.8851-1.5152.0741.0741.0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868.0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077.0 00-.0785-.037 19.7363 19.7363.0 00-4.8852 1.515.0699.0699.0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824.0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777.0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076.0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077.0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743.0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614.0a.0739.0739.0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077.0 01-.0066.1276 12.2986 12.2986.0 01-1.873.8914.0766.0766.0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076.0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077.0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061.0 00-.0312-.0286zM8.02 15.3312c-1.1825.0-2.1569-1.0857-2.1569-2.419.0-1.3332.9555-2.4189 2.157-2.4189 1.2108.0 2.1757 1.0952 2.1568 2.419.0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748.0c-1.1825.0-2.1569-1.0857-2.1569-2.419.0-1.3332.9554-2.4189 2.1569-2.4189 1.2108.0 2.1757 1.0952 2.1568 2.419.0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg><span class="ms-2 visually-hidden">Discord</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://github.com/trueblocks/trueblocks-core><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/api>API Reference<span class="ms-2 visually-hidden">API</span></a>
+</li>
+</ul>
+<div class="collapse navbar-collapse order-4 order-md-1">
+<ul class="navbar-nav main-nav me-auto order-5 order-md-2"><li class=nav-item>
+<a class=nav-link href=/docs/>Docs</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/data-model/intro>Data Model</a>
+</li>
+<li class="nav-item active">
+<a class=nav-link href=/blog/>Blog</a>
+</li>
+</ul>
+<div class="break order-6 d-md-none"></div>
+<form class="navbar-form flex-grow-1 order-7 order-md-3">
+<input id=userinput class="form-control is-search" type=search placeholder="Search docs..." aria-label="Search docs..." autocomplete=off>
+<div id=suggestions class="shadow bg-white rounded"></div>
+</form>
+</div>
+</div>
+</header>
+<div class="wrap container" role=document>
+<div class=content>
+<div class="row flex-xl-nowrap">
+<div class="col-lg-5 col-xl-4 docs-sidebar">
+<nav class=docs-links aria-label="Main navigation">
+<ul>
+<h3>Blog Topics</h3>
+<li><a href=/tags/ethereum>ethereum</a> (29)</li>
+<li><a href=/tags/trueblocks>trueblocks</a> (15)</li>
+<li><a href=/tags/recipes>recipes</a> (3)</li>
+<li><a href=/tags/explainers>explainers</a> (1)</li>
+</ul>
+</nav>
+</div>
+<nav class="docs-toc d-none d-xl-block col-xl-3" aria-label="Secondary navigation">
+<div class=page-links>
+<h3>On this page</h3>
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li></li>
+<li><a href=#conclusion>Conclusion</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</nav>
+<main class="docs-content col-lg-11 col-xl-9 mx-xl-auto">
+<h1>TrueBlocks: First Quarter 2020 Update</h1>
+<p class=lead>What have we been up to in 2020</p>
+<p>This is short update on what we’ve been doing since receiving so many wonderful grants during the GitCoin CLR matching fandango. This money goes a long way. It allows one of us (Rush) to make a trip to EthDenver, where he will be judging some hacks. It has also paid for some much needed help developing the React frontend. If you donated (or even if you didn’t), and you’re in Denver this week, seek me out. I’ll be happy to share our latest work.</p>
+<p>We’ve accomplished three primary things so far this year: (1) nearly finished <a href=https://github.com/TrueBlocks/trueblocks-core>trueblocks-core</a> (our backend), (2) made significant progress on the frontend (<a href=https://github.com/TrueBlocks/trueblocks-docker>trueblocks-docker</a>), and (3) invented the idea of user-centered blockchain exploring.</p>
+<h4 id=progress-on-thebackend>Progress on the Backend<a href=#progress-on-thebackend class=anchor aria-hidden=true>#</a> </h4>
+<p>In the fall of 2018, we received an <a href=https://bitcoinist.com/trueblocks-ethereum-foundation-grant/>Ethereum Foundation grant</a> intended to help us complete the TrueBlocks backend, which is not yet done, but it’s pretty close. Our backend is thoroughly covered by about 1,500 test cases, so it’s easy to extend and change at this point.</p>
+<p>There are two primary things yet to complete: (a) user onboarding, and (b) documentation. We’ve delayed these two things because we feel that building the frontend will help us understand better how onboarding should work. When one is building local-first, fully-distributed apps, it’s not at all clear how things work until you get them to work…</p>
+<h4 id=progress-on-thefrontend>Progress on the FrontEnd<a href=#progress-on-thefrontend class=anchor aria-hidden=true>#</a> </h4>
+<p>We’ve made excellent progress on our frontend. We started by building a Javascript / React / Redux application, but we plan to port it to Typescript / Electron soon. (Eventually — when the world catches up — we’ll throw away both versions and the entire web-centric stack and write a truly native distributed app.)</p>
+<p>The current version is partially documented (we’re documenting as we go) and has testing built in from the start. Improvements on both fronts.</p>
+<p>One thing has become very clear: the more we build, the more excited we get. Local-first, distributed-to-the-edge software is very different than the web-based old-fashioned mess of the current stack.</p>
+<p>Here’s a nice picture of our current app, which we’ve taken to calling the <strong>TrueBlocks Account Explorer</strong>:</p>
+<p><img src=/blog/img/036-TrueBlocks-First-Quarter-2020-Update-001.png alt></p>
+<p>This is a screen shot of the ‘Digests’ page which gives the user insight into the ‘chunks of the index of appearances.’ We’ve written about this <a href=https://medium.com/@tjayrush/indexing-addresses-on-the-ethereum-blockchain-5c0806161eb9>elsewhere</a> and <a href=https://medium.com/@tjayrush>thelsewhere</a> (sic).</p>
+<p>We’ve learned a lot of unexpected things while building this app out (some of them may seem obvious):</p>
+<ol>
+<li><strong>Local-first software has a single user.</strong> Unlike old-fashioned web-based software, local-first software does not need to serve 100,000 of users. This means it doesn’t really have to scale. There’s a single user! The node software will have to scale, but that doesn’t mean the local-first, single-user piece of software has to scale. Your app serves a single user. There are things you can’t give them (historical views into huge smart contracts, for example), but the things they want (insight into their own interaction with the chain) is easily delivered.</li>
+<li><strong>The node can easily deliver data, but it doesn’t have an index.</strong> If you know what you’re asking for, the node is a pretty good data delivery system. The trouble with the way the node software currently works is that it doesn’t have an index of address appearances, so it’s impossible (actually, possible but very slow) to get a historical list of transactions. This is what TrueBlocks solves. It allows you app to quickly get access to exactly the transactions your user is interested in.</li>
+<li><strong>Immutable data and indexed databases do not work and play well together.</strong> Every time you add a record to a database, it sorts the index (that’s indelibly embedded in what an index is). This means the ‘contents’ of the index file changes. This means the content-addressable hash of the index file changes. This means you can store your index on an immutable data store. Solution: chunk the index. After a certain amount of accumulated data, stop adding to that chunk, write it an immutable store, and move on to the next chunk. This means slower searching, but it means you can share the data, and once you do, you can’t take it back — that is — you can’t capture it. This compromise between immutability and speedy searching promotes decentralization.</li>
+<li><strong>Modern SSD hard drives are tremendously more capable than they need to be <em>for a single user</em>.</strong> You can eliminate the database entirely which makes maintaining the immutability of the data and sharing it profoundly easier (with IPFS, for example). Databases, which seem to <em>want to index the shit out of everything</em>, don’t work well with immutable data stores. Luckily, with local-first software, you can eliminate the database (if you choose to). You can write your data and read it directly from disc. Think about — MS Word doesn’t use a database. MS Excel doesn’t use a database. There’s a reason for this — there’s no database because there’s no need for a database.</li>
+<li><strong>The distinction between trusted data and untrusted data becomes very clear.</strong> Trusted data is anything from the node (or anything derived deterministically from the node). Untrusted data is everything else.</li>
+<li><strong>Trusted data has three different manifestations</strong>— data retrieved directly from the chain (such as block data), data derived deterministically from data retrieved directly from the chain (such as average daily gas usage), and data deterministically derivable from its input (the four-byte function signatures of an ABI definitions, for example). The “<strong>True”</strong> part of the word <strong>TrueBlocks</strong> refers to the second and third types of data.</li>
+<li><strong>Untrusted data is any data from the outside world.</strong> This type of data includes data produced by the end user (such as names associated with an address — for example your user names address 0x12345 as “Main Wallet” — this type of data should remain private unless the user chooses to share it), and data produced by a third party (price data, insight from blockchain analytics engines, blockchain APIs such as Amber Data or Aleth.io )— this data is very undesirable because of the possibility of manipulation, incorrect calculation, malicious alteration and eventually user capture). We try to do everything we can without this type of third-party data.</li>
+<li><strong>A million other insights.</strong> Many of the things we’ve realized are are only obvious once one ventures away from the database-centric, old-fashioned, slow, costly-to-scale web stack shit storm that is the current world of software engineering. For example, why does my front end have 43,102 dependent files? Who wrote them? How safe are they?</li>
+</ol>
+<h4 id=user-centered-blockchain-exploring>User Centered Blockchain Exploring<a href=#user-centered-blockchain-exploring class=anchor aria-hidden=true>#</a> </h4>
+<p>We claimed above we invented the idea of user-centered blockchain exploring — maybe, maybe not, but I do think we’re the first team to have actually implemented it. Here’s another fine screen shot:</p>
+<p><img src=/blog/img/036-TrueBlocks-First-Quarter-2020-Update-002.png alt></p>
+<p>This is the ‘skinned’ Monitors page of the <strong>TrueBlocks Accounts Explorer</strong> (TrueBlocks frontend allows you to change your skin!) Here, we’re showing a list of addresses that are being actively monitored. From this page, one can access the Explore page which allows you to scroll through the history of the account(s), seeing ‘everything that ever happened to the account.’ (That last sentence is what we’ve been working on for four years.)</p>
+<p>Unlike web-based explorers, where the data has been extracted prior to the user interacting with it, out application actively scrapes the data from the chain as being displayed. (The data is subsequently cached to improve performance — caching immutable data is very straight forward).</p>
+<p>Because we want to run on small machines (laptops, desktops), we don’t have the luxury of extracting the entire Ethereum data structure into a fast database prior to the user telling us what she’s interested in. Instead, we extract only the index, delaying further extraction until the user tells us what she wants.</p>
+<p>When the user asks us to monitor an address, then and only then, do we extract the history of <em>only this single address</em>. This keeps non-database database small (MBs instead of 10s of TBs needed to extract prior to user instruction). This is why our system works on a laptop. The index gives us the ability to extract exactly what the user wants—her transactions and no other.</p>
+<p>This is what we mean by User-Centric Blockchain Browsing™. If we didn’t invent the idea, we definitely invented those words.</p>
+<h4 id=ethdenver-andbeyond>EthDenver and Beyond<a href=#ethdenver-andbeyond class=anchor aria-hidden=true>#</a> </h4>
+<p>We’re going to be in Denver this week, and we would be very pleased to share more of our work with you. Hit me up at my twitter account (<a href=http://twitter.com/@trueblocks>@trueblocks</a>) or by email (see our website <a href=http://trueblocks.io>http://trueblocks.io</a>). We’ll also be attending EthBerlin and Berlin Blockchain Week this year. Maybe we’ll have a chance to speak there.</p>
+<h3 id=conclusion>Conclusion<a href=#conclusion class=anchor aria-hidden=true>#</a> </h3>
+<p>When your application has but a single user, everything get simpler. You don’t have to worry about your app staying in memory to stay snappy — spawning processes and reading no-parse binary files every time the user clicks works perfectly. You don’t need a database — you don’t have to protect against concurrent writes, you don’t have to lock files, you don’t have to parse strings, you don’t have to do anything — just load the data directly into memory, cast a data structure on top of it, and you’re off to the races.</p>
+<p>Help us with out work. Visit our GitCoin grant page here: <a href=https://gitcoin.co/grants/184/trueblocks>https://gitcoin.co/grants/184/trueblocks</a>, and donate today.</p>
+<p>If you’d rather not expose yourself to scrutiny, and you’d still like to donate, send ETH to 0xf503017d7baf7fbc0fff7492b751025c6a78179b.</p>
+<p>Thanks for reading.</p>
+<div class="docs-navigation d-flex justify-content-between">
+<a href=/blog/links-about-clr-/-radical-markets-/-gitcoin/>
+<div class="card my-1">
+<div class="card-body py-2">
+&larr; Links About CLR / Radical Markets / GitCoin
+</div>
+</div>
+</a>
+<a class=ms-auto href=/blog/simple-undeniable-facts/>
+<div class="card my-1">
+<div class="card-body py-2">
+Simple Undeniable Facts &rarr;
+</div>
+</div>
+</a>
+</div>
+</main>
+</div>
+</div>
+</div>
+<footer class="footer text-muted">
+<div class=container>
+<div class=row>
+<div class="col-lg-8 order-last order-lg-first">
+<ul class=list-inline>
+<li class=list-inline-item>Powered by <a href=https://gohugo.io/>Hugo</a>, and <a href=https://getdoks.org/>Doks</a></li>
+</ul>
+</div>
+<div class="col-lg-8 order-first order-lg-last text-lg-end">
+<ul class=list-inline>
+<li class=list-inline-item><a href=https://github.com/TrueBlocks/trueblocks-docs>Improve these Docs</a></li>
+<li class=list-inline-item><a href=/privacy-policy/>Privacy</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+<script src=/js/highlight.min.ec942a9dc705691c6545c0ea48b4a76dd7a730be9478c31c9139089f95e82ccfccaee7fd8b5823a0fe005ac3dec10b8f825d9ace55908f4b6e6da407af3df293.js integrity="sha512-7JQqnccFaRxlRcDqSLSnbdenML6UeMMckTkIn5XoLM/Mruf9i1gjoP4AWsPewQuPgl2azlWQj0tubaQHrz3ykw==" crossorigin=anonymous defer></script>
+<script src=/main.min.9e62c9b0c5dc8279689cc9cb693a32c8ea1d19032f574f98c782ff59a0417d3662ff94b1a7755ab72a7a1862644bf00a58492c65aa0adabbc58080f4018c61bc.js integrity="sha512-nmLJsMXcgnlonMnLaToyyOodGQMvV0+Yx4L/WaBBfTZi/5Sxp3Vatyp6GGJkS/AKWEksZaoK2rvFgID0AYxhvA==" crossorigin=anonymous defer></script>
+<script src=/index.min.2920392d3bee72ff57da922db3d93f87bbdbae7d85d9bdfd6bac93a24c8ad220ebd77bacb49367cdadc381a7f57b96fa16cbee3821c085548638d591f04eb7cf.js integrity="sha512-KSA5LTvucv9X2pIts9k/h7vbrn2F2b39a6yTokyK0iDr13ustJNnza3Dgaf1e5b6FsvuOCHAhVSGONWR8E63zw==" crossorigin=anonymous defer></script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="ie=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<link rel=preload as=font href=/fonts/vendor/jost/jost-v4-latin-regular.woff2 type=font/woff2 crossorigin>
+<link rel=preload as=font href=/fonts/vendor/jost/jost-v4-latin-700.woff2 type=font/woff2 crossorigin>
+<link rel=stylesheet href=/main.b97465d3e9dbb04b0919a61f5c5766b97ddb3b30835a2bf75ec252e8c570f518d52f1e59944be75f9c92a4c5bc6f1bbe84962010976216b41d653fb6802056b7.css integrity="sha512-uXRl0+nbsEsJGaYfXFdmuX3bOzCDWiv3XsJS6MVw9RjVLx5ZlEvnX5ySpMW8bxu+hJYgEJdiFrQdZT+2gCBWtw==" crossorigin=anonymous>
+<noscript><style>img.lazyload{display:none}</style></noscript>
+<meta name=robots content="index, follow">
+<meta name=googlebot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name=bingbot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<title>A Eulogy for The DAO — Part II - TrueBlocks</title>
+<meta name=description content="Ethereum as it was meant to be: local-first, P2P, and accurate queries to all the data you’ll ever need.">
+<link rel=canonical href=/blog/a-eulogy-for-the-dao-part-ii/>
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="/trueblocks.png">
+<meta name=twitter:title content="A Eulogy for The DAO — Part II">
+<meta name=twitter:description content="Introduction In this second installment of a multi-part series of articles analyzing the nearly 170,000 interactions with “The DAO” smart contract, we discuss the contract’s “Creation Period.” Previously, we presented an overview of The DAO’s lifespan. In that overview, we identified four distinct timeframes: the Creation Period, the Operational Period, the Post-Hack Period, and the Recovery Period. In this installment, we focus our attention on the Creation Period. Future installments will analyze each of the remaining three periods separately.">
+<meta name=twitter:site content="@TrueBlocks">
+<meta name=twitter:creator content="@TrueBlocks">
+<meta property="og:title" content="A Eulogy for The DAO — Part II">
+<meta property="og:description" content="Introduction In this second installment of a multi-part series of articles analyzing the nearly 170,000 interactions with “The DAO” smart contract, we discuss the contract’s “Creation Period.” Previously, we presented an overview of The DAO’s lifespan. In that overview, we identified four distinct timeframes: the Creation Period, the Operational Period, the Post-Hack Period, and the Recovery Period. In this installment, we focus our attention on the Creation Period. Future installments will analyze each of the remaining three periods separately.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/blog/a-eulogy-for-the-dao-part-ii/">
+<meta property="og:image" content="/trueblocks.png">
+<meta property="article:published_time" content="2016-09-29T14:26:27+00:00">
+<meta property="article:modified_time" content="2021-09-03T16:57:17-03:00">
+<meta property="og:site_name" content="TrueBlocks">
+<meta property="article:publisher" content="https://www.facebook.com/">
+<meta property="article:author" content="https://www.facebook.com/">
+<meta property="og:locale" content="en_US">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"\/blog\/a-eulogy-for-the-dao-part-ii\/"},"headline":"A Eulogy for The DAO — Part II","image":[],"datePublished":"2016-09-29T14:26:27CET","dateModified":"2021-09-03T16:57:17CET","author":{"@type":"Organization","name":"TrueBlocks"},"publisher":{"@type":"Organization","name":"TrueBlocks","logo":{"@type":"ImageObject","url":"\/logo-doks.png"}},"description":""}</script>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"\/"},{"@type":"ListItem","position":2,"name":"Bloga Eulogy for the Dao Part Ii","item":"\/bloga-eulogy-for-the-dao-part-ii\/"}]}</script>
+<meta name=theme-color content="#fff">
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/site.webmanifest>
+</head>
+<body class="blog single">
+<div class="header-bar fixed-top"></div>
+<script>(localStorage.getItem('theme')==='dark'||localStorage.getItem('theme')===null)&&document.body.classList.add('dark')</script>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+<div class=container>
+<input class="menu-btn order-0" type=checkbox id=menu-btn>
+<label class="menu-icon d-md-none" for=menu-btn><span class=navicon></span></label>
+<a class="navbar-brand order-1 order-md-0 me-auto" href=/>TrueBlocks</a>
+<button id=mode class="btn btn-link order-2 order-md-4" type=button aria-label="Toggle mode">
+<span class=toggle-dark><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span>
+<span class=toggle-light><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+</button>
+<ul class="navbar-nav social-nav order-3 order-md-5">
+<li class=nav-item>
+<a class=nav-link href=https://twitter.com/trueblocks><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9.0 01-3.14 1.53 4.48 4.48.0 00-7.86 3v1A10.66 10.66.0 013 4s-4 9 5 13a11.64 11.64.0 01-7 2c9 5 20 0 20-11.5a4.5 4.5.0 00-.08-.83A7.72 7.72.0 0023 3z"/></svg><span class="ms-2 visually-hidden">Twitter</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://discord.com/invite/kAFcZH2x7K><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="simple icon-discord"><path d="M20.317 4.3698a19.7913 19.7913.0 00-4.8851-1.5152.0741.0741.0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868.0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077.0 00-.0785-.037 19.7363 19.7363.0 00-4.8852 1.515.0699.0699.0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824.0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777.0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076.0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077.0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743.0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614.0a.0739.0739.0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077.0 01-.0066.1276 12.2986 12.2986.0 01-1.873.8914.0766.0766.0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076.0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077.0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061.0 00-.0312-.0286zM8.02 15.3312c-1.1825.0-2.1569-1.0857-2.1569-2.419.0-1.3332.9555-2.4189 2.157-2.4189 1.2108.0 2.1757 1.0952 2.1568 2.419.0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748.0c-1.1825.0-2.1569-1.0857-2.1569-2.419.0-1.3332.9554-2.4189 2.1569-2.4189 1.2108.0 2.1757 1.0952 2.1568 2.419.0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg><span class="ms-2 visually-hidden">Discord</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://github.com/trueblocks/trueblocks-core><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/api>API Reference<span class="ms-2 visually-hidden">API</span></a>
+</li>
+</ul>
+<div class="collapse navbar-collapse order-4 order-md-1">
+<ul class="navbar-nav main-nav me-auto order-5 order-md-2"><li class=nav-item>
+<a class=nav-link href=/docs/>Docs</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/data-model/intro>Data Model</a>
+</li>
+<li class="nav-item active">
+<a class=nav-link href=/blog/>Blog</a>
+</li>
+</ul>
+<div class="break order-6 d-md-none"></div>
+<form class="navbar-form flex-grow-1 order-7 order-md-3">
+<input id=userinput class="form-control is-search" type=search placeholder="Search docs..." aria-label="Search docs..." autocomplete=off>
+<div id=suggestions class="shadow bg-white rounded"></div>
+</form>
+</div>
+</div>
+</header>
+<div class="wrap container" role=document>
+<div class=content>
+<div class="row flex-xl-nowrap">
+<div class="col-lg-5 col-xl-4 docs-sidebar">
+<nav class=docs-links aria-label="Main navigation">
+<ul>
+<h3>Blog Topics</h3>
+<li><a href=/tags/ethereum>ethereum</a> (29)</li>
+<li><a href=/tags/trueblocks>trueblocks</a> (15)</li>
+<li><a href=/tags/recipes>recipes</a> (3)</li>
+<li><a href=/tags/explainers>explainers</a> (1)</li>
+</ul>
+</nav>
+</div>
+<nav class="docs-toc d-none d-xl-block col-xl-3" aria-label="Secondary navigation">
+<div class=page-links>
+<h3>On this page</h3>
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#introduction>Introduction</a></li>
+<li><a href=#creation-period>Creation Period</a></li>
+<li><a href=#conclusion>Conclusion</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</nav>
+<main class="docs-content col-lg-11 col-xl-9 mx-xl-auto">
+<h1>A Eulogy for The DAO — Part II</h1>
+<p class=lead>Second in a series</p>
+<h3 id=introduction>Introduction<a href=#introduction class=anchor aria-hidden=true>#</a> </h3>
+<p>In this second installment of a multi-part series of articles analyzing the nearly 170,000 interactions with “The DAO” smart contract, we discuss the contract’s “Creation Period.” Previously, we presented an <a href=https://medium.com/@tjayrush/a-eulogy-for-the-dao-74a55b9afd92#.jesmg0h1u>overview of The DAO’s lifespan</a>. In that overview, we identified four distinct timeframes: the Creation Period, the Operational Period, the Post-Hack Period, and the Recovery Period. In this installment, we focus our attention on the Creation Period. Future installments will analyze each of the remaining three periods separately.</p>
+<h3 id=creation-period>Creation Period<a href=#creation-period class=anchor aria-hidden=true>#</a> </h3>
+<p>The DAO’s creation period lasted for 28 days from April 30, 2016 01:42:58 AM (block 1428757) when it was deployed to May 28, 2016, 09:00 (block 1599205). According to the <a href=https://etherscan.io/token/TheDAO>EtherScan</a> website, more than one billion DAO tokens were created.</p>
+<p>Because much of the smart contract’s functionality was disabled during creation, three functions dominate the logs during the period: <strong>function(), createTokenProxy()</strong>, and <strong>approve()</strong>.</p>
+<p><img src=/blog/img/009-A-Eulogy-for-The-DAO-Part-II-001.png alt></p>
+<p>We find that nearly two-thirds (66.35%) of the 62,873 interactions during the Creation period were calls to the default function. A call to the default function, <strong>function()</strong>, occurs when a contract is sent ether directly. The <a href=https://github.com/slockit/DAO/blob/develop/DAO.sol#L392>code</a> of the default function is quite simple: either it creates tokens by calling <strong>createTokenProxy()</strong>, or, if called after closingDate but before the end of the grace period, it sends the ether back to the caller, or, if called after the end of the grace period, it keeps the ether. Together, the two functions <strong>createTokenProxy()</strong> and <strong>function()</strong> account for 91.86% of all interactions during creation. 8.12% of the remaining interactions were <strong>approve()</strong> calls, which are discussed below. 0.02% of interactions were with other, infrequently used functions.</p>
+<h4 id=token-creation>Token Creation<a href=#token-creation class=anchor aria-hidden=true>#</a> </h4>
+<p>In the bar chart below, we present the number of times each of the three functions was called each day. The initial flurry of activity on the first day, followed by a lessening, followed by a spike near the midpoint of the period, then another lessening, leading, finally, to a period of growing interest, is easily explained, as is the change in the usage of the <strong>createTokenProxy()</strong> call relative to direct sends of ether.</p>
+<p><img src=/blog/img/009-A-Eulogy-for-The-DAO-Part-II-002.png alt></p>
+<p>Many initial purchasers of the DAO tokens had clearly been anticipating its arrival and were ready to act on the first day. These users, one presumes, were more technically adept, which is hinted at by the significantly higher frequency of direct sends (orange bars) compared to <strong>createTokenProxy()</strong> (black bars) during the first few days of operation.</p>
+<p>One might notice that as more purchasers appeared, the difference between the number <strong>function()</strong> calls relative to <strong>createTokenProxy()</strong> calls lessens. We believe this is due to the use of tutorials explaining how to purchase tokens. Many tutorials instructed users to use the Mist browser (as opposed to say the ‘geth’ command line interface) and from there to call into the <strong>createTokenProxy()</strong> interface. Of course, this is only conjecture, but it helps explain the growing relative use of <strong>createTokenProxy()</strong>.</p>
+<h4 id=a-simple-mistake-leads-to-user-confusion>A Simple Mistake Leads to User Confusion<a href=#a-simple-mistake-leads-to-user-confusion class=anchor aria-hidden=true>#</a> </h4>
+<p>At the start of the creation period a single ether purchased 100 DAO tokens. Midway through the period, that ratio began a steady ten-day decrease until finally reaching 100 DAO tokens per 1.5 ether, where it remained for the last four days of the period. This behavior is explained well <a href=https://github.com/slockit/DAO/wiki/Understanding-the-DAO-accounting>in this blog post</a> and is further illustrated in the table below:</p>
+<p><img src=/blog/img/009-A-Eulogy-for-The-DAO-Part-II-003.png alt></p>
+<p>This table was generated by analyzing the following code. In the code, <strong>createTokenProxy()</strong> calls into a function called <strong>divisor()</strong>, the result of which, when multiplied by 20, gives the token/wei ratio. This factor is then multiplied by the amount of ether sent to the function (<em>msg.value</em>) to arrive at the number of tokens to award to the caller.</p>
+<p>function createTokenProxy(address _tokenHolder) {<br>
+&mldr;<br>
+uint token = (msg.value * 20) / divisor();<br>
+extraBalance.call.value(msg.value — token)();<br>
+balances[_tokenHolder] += token;<br>
+&mldr;<br>
+}</p>
+<p>The <strong>divisor()</strong> code looks like this:</p>
+<p><em>// Return the divisor used to calculate the token creation<br>
+// rate during the creation phase.</em> <strong>_The number of tokens per<br>
+_</strong><em>//</em> <strong><em>wei is calculated as msg.value * 20 / divisor</em></strong></p>
+<p>function divisor() constant returns (uint divisor) {</p>
+<pre><code>if (closingTime — 2 weeks &gt; now) {  
+</code></pre>
+<p><em>// The fueling period starts with a 1:1 ratio</em><br>
+return 20;</p>
+<pre><code>} else if (closingTime — 4 days &gt; now) {  
+</code></pre>
+<p><em>// Followed by 10 days with a daily creation rate<br>
+// increase of 5%</em> return (20 + (now — (closingTime — 2 weeks)) / (1 days));</p>
+<pre><code>} else {  
+</code></pre>
+<p><em>// The last 4 days there is a constant creation rate<br>
+// ratio of 1:1.5</em><br>
+return 30;<br>
+}<br>
+}</p>
+<p>Looking back at the bar chart above, one may notice the users’ behavior approaching May 15th, the first day of the price increase. As expected, activity increases as the price rise approaches. Notice, however, that the greatest activity occurs on May 14th, a full day before the price increase. (Each bar represents the activity between 9:00 am the previous day and 9:00 am on the current day, so the bar labeled May 14th ends at 9:00 am, May 14th — 24 hours before the first price rise).</p>
+<p>The green-enclosed box in the table above helps explain this unexpected behavior, which is due primarily, we think, to an error on the DAO Hub website (see <a href=https://forum.daohub.org/t/the-dao-price-increase-explanation/2018>this DAOHub discussion</a> and this <a href=https://m.reddit.com/r/TheDao/comments/4jap6d/the_dao_creation_period_price_schedule_there_is>reddit post</a>). It seems the maintainers of the DAOHub website read the code wrong and made a miscalculation as to the first date of the price change.</p>
+<p>Alternatively, one might say that the software code itself is in error. The somewhat confusing code of <strong>divisor()</strong> passes through a different path on May 14th (i.e. closingTime - 2weeks). However, oddly, it arrives at the same result (20). It is easy to see why the error on the website was made.</p>
+<h4 id=the-extrabalance-account>The extraBalance Account<a href=#the-extrabalance-account class=anchor aria-hidden=true>#</a> </h4>
+<p>Referring back to the source code above, notice the second line of the <strong>createTokenProxy</strong> code where the <strong>extraBalance</strong> account is funded with the amount over the 1:100 refundable tokens of the early adopters. This account was initially intended to hold the ‘profits’ of The DAO, which were later to be distributed pro-rata by token share; however, a decision was taken at some point to refund the original late purchasers with the exact amount of ether they sent. It is not clear, exactly, how that decision was made. It certainly was not voted on by token-holders as some people think it should have been.</p>
+<h4 id=approve-calls>Approve Calls<a href=#approve-calls class=anchor aria-hidden=true>#</a> </h4>
+<p>The undulating green area mentioned above represents calls to the <strong>approve</strong> function, one of the few functions that were not disabled during the Creation Period. We do see something a bit surprising here.</p>
+<p>First, the existence of <strong>approve</strong> calls itself prior to the ability to actually make any transfers is unexpected, at least to this writer.</p>
+<p>Secondly, and more surprisingly, is the regularity of these function calls and the fact that they came almost entirely from four addresses. It is our belief these calls were most likely exchanges practicing or testing their software prior to the start of the Operational period.</p>
+<p><img src=/blog/img/009-A-Eulogy-for-The-DAO-Part-II-004.png alt></p>
+<p>For most of the month, on a day when the <strong>approve</strong> function was called at all, it was called an even multiple of 100 times. For one account, the <strong>approve</strong> function is called 310 times, then 100 times, then 200, then 300, 200, 500, 200, and 200 times every few days. This pattern is revealed in the consistent heights of the green-shaded area above. These ‘100-transaction’ sets were clearly generated by software. This becomes obvious in the table above which is presented without further comment. We shall see in the next installment of our series what these exchanges were preparing for.</p>
+<h3 id=conclusion>Conclusion<a href=#conclusion class=anchor aria-hidden=true>#</a> </h3>
+<p>Obviously, having raised nearly $150,000,000 US in 30 days, and being the largest crowd sale in history, the DAO’s creation period was a wild success. Ignoring that huge amount of money for a second, we find nothing really surprising in the interaction patterns we see in the data.</p>
+<p>The mistake made by the DAOHub website, causing people to buy tokens a day early, is revealed by the data. A lesson to be learned here is to be very careful when reporting on what you think a certain piece of seemingly easy code does.</p>
+<p>The effect of disabling many of the functions of the contract until after the creation period is revealed as well.</p>
+<p>Overall, though, nothing surprising happens during this first of the four periods of The DAO’s lifespan. Early adopters bought in early, many people waited until the last moment before the price rise to buy in, and many people joined the circus near the end in a clear case of FOMO. As we move into the next three periods with further installments of this series, we think you will agree that the ride gets a bit more bumpy. Stay tuned…</p>
+<p><strong>Support our work:</strong> Do you enjoy reading our work? If yes, please consider supporting us with a small donation to our <a href=http://www.ethslurp.com/donate.html>tip jar</a>. Also, check out our new website with interactive charts supporting this post at <a href=http://trueblocks.io>http://trueblocks.io</a>. Thanks for your interest. See you next time.</p>
+<p><strong><em>Notes on the Analysis:</em></strong> <em>Missing from this analysis is the daily value of ether and DAO tokens accumulated. While this information is available, we hope eventually to expand our system to make the extraction of this type of information automatic, particularly given the emerging</em> <a href=https://github.com/ethereum/EIPs/issues/20><em>ERC 20 Token Standard</em></a><em>. In the future, we hope to automate the analysis of</em> <strong><em>any and all</em></strong> <em>ERC 20 token-based smart contracts. We therefore did not include the information here, as it would have required hand-generated data. Also missing from the analysis is an accounting for ‘internal transactions.’ Again, we are working on automating this data collection. We believe this omission is not material. According to one analysis, less than 1% of interactions during the period were initiated by smart contracts (that is, less than 1% of the interactions were internal transactions). We do not have the data to support this claim, but we believe it to be true.</em></p>
+<div class="docs-navigation d-flex justify-content-between">
+<a href=/blog/dao-token-holders-response-in-charts/>
+<div class="card my-1">
+<div class="card-body py-2">
+&larr; DAO Token Holders’ Response (in Charts)
+</div>
+</div>
+</a>
+<a class=ms-auto href=/blog/a-eulogy-for-the-dao/>
+<div class="card my-1">
+<div class="card-body py-2">
+A Eulogy for The DAO &rarr;
+</div>
+</div>
+</a>
+</div>
+</main>
+</div>
+</div>
+</div>
+<footer class="footer text-muted">
+<div class=container>
+<div class=row>
+<div class="col-lg-8 order-last order-lg-first">
+<ul class=list-inline>
+<li class=list-inline-item>Powered by <a href=https://gohugo.io/>Hugo</a>, and <a href=https://getdoks.org/>Doks</a></li>
+</ul>
+</div>
+<div class="col-lg-8 order-first order-lg-last text-lg-end">
+<ul class=list-inline>
+<li class=list-inline-item><a href=https://github.com/TrueBlocks/trueblocks-docs>Improve these Docs</a></li>
+<li class=list-inline-item><a href=/privacy-policy/>Privacy</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+<script src=/js/highlight.min.ec942a9dc705691c6545c0ea48b4a76dd7a730be9478c31c9139089f95e82ccfccaee7fd8b5823a0fe005ac3dec10b8f825d9ace55908f4b6e6da407af3df293.js integrity="sha512-7JQqnccFaRxlRcDqSLSnbdenML6UeMMckTkIn5XoLM/Mruf9i1gjoP4AWsPewQuPgl2azlWQj0tubaQHrz3ykw==" crossorigin=anonymous defer></script>
+<script src=/main.min.9e62c9b0c5dc8279689cc9cb693a32c8ea1d19032f574f98c782ff59a0417d3662ff94b1a7755ab72a7a1862644bf00a58492c65aa0adabbc58080f4018c61bc.js integrity="sha512-nmLJsMXcgnlonMnLaToyyOodGQMvV0+Yx4L/WaBBfTZi/5Sxp3Vatyp6GGJkS/AKWEksZaoK2rvFgID0AYxhvA==" crossorigin=anonymous defer></script>
+<script src=/index.min.2920392d3bee72ff57da922db3d93f87bbdbae7d85d9bdfd6bac93a24c8ad220ebd77bacb49367cdadc381a7f57b96fa16cbee3821c085548638d591f04eb7cf.js integrity="sha512-KSA5LTvucv9X2pIts9k/h7vbrn2F2b39a6yTokyK0iDr13ustJNnza3Dgaf1e5b6FsvuOCHAhVSGONWR8E63zw==" crossorigin=anonymous defer></script>
+</body>
+</html>

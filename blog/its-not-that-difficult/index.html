@@ -1,0 +1,244 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="ie=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<link rel=preload as=font href=/fonts/vendor/jost/jost-v4-latin-regular.woff2 type=font/woff2 crossorigin>
+<link rel=preload as=font href=/fonts/vendor/jost/jost-v4-latin-700.woff2 type=font/woff2 crossorigin>
+<link rel=stylesheet href=/main.b97465d3e9dbb04b0919a61f5c5766b97ddb3b30835a2bf75ec252e8c570f518d52f1e59944be75f9c92a4c5bc6f1bbe84962010976216b41d653fb6802056b7.css integrity="sha512-uXRl0+nbsEsJGaYfXFdmuX3bOzCDWiv3XsJS6MVw9RjVLx5ZlEvnX5ySpMW8bxu+hJYgEJdiFrQdZT+2gCBWtw==" crossorigin=anonymous>
+<noscript><style>img.lazyload{display:none}</style></noscript>
+<meta name=robots content="index, follow">
+<meta name=googlebot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name=bingbot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<title>It’s Not That Difficult - TrueBlocks</title>
+<meta name=description content="Ethereum as it was meant to be: local-first, P2P, and accurate queries to all the data you’ll ever need.">
+<link rel=canonical href=/blog/its-not-that-difficult/>
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="/trueblocks.png">
+<meta name=twitter:title content="It’s Not That Difficult">
+<meta name=twitter:description content="All about the Ethereum Difficulty Calculation
+Special thanks to a first-rate Tuftian and data scientist, Ed Mazurek, for early versions of the R code used in this article.
+Each time the Ethereum time bomb goes off, two related questions arise. The first question (and arguably the more important) is, “When will blocks get so slow, they will be intolerable”. The second question is, “How long should we delay the bomb this time?">
+<meta name=twitter:site content="@TrueBlocks">
+<meta name=twitter:creator content="@TrueBlocks">
+<meta property="og:title" content="It’s Not That Difficult">
+<meta property="og:description" content="All about the Ethereum Difficulty Calculation
+Special thanks to a first-rate Tuftian and data scientist, Ed Mazurek, for early versions of the R code used in this article.
+Each time the Ethereum time bomb goes off, two related questions arise. The first question (and arguably the more important) is, “When will blocks get so slow, they will be intolerable”. The second question is, “How long should we delay the bomb this time?">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/blog/its-not-that-difficult/">
+<meta property="og:image" content="/trueblocks.png">
+<meta property="article:published_time" content="2019-11-24T07:10:44+00:00">
+<meta property="article:modified_time" content="2021-09-03T16:57:17-03:00">
+<meta property="og:site_name" content="TrueBlocks">
+<meta property="article:publisher" content="https://www.facebook.com/">
+<meta property="article:author" content="https://www.facebook.com/">
+<meta property="og:locale" content="en_US">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"\/blog\/its-not-that-difficult\/"},"headline":"It’s Not That Difficult","image":[],"datePublished":"2019-11-24T07:10:44CET","dateModified":"2021-09-03T16:57:17CET","author":{"@type":"Organization","name":"TrueBlocks"},"publisher":{"@type":"Organization","name":"TrueBlocks","logo":{"@type":"ImageObject","url":"\/logo-doks.png"}},"description":""}</script>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"\/"},{"@type":"ListItem","position":2,"name":"Blogits Not That Difficult","item":"\/blogits-not-that-difficult\/"}]}</script>
+<meta name=theme-color content="#fff">
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/site.webmanifest>
+</head>
+<body class="blog single">
+<div class="header-bar fixed-top"></div>
+<script>(localStorage.getItem('theme')==='dark'||localStorage.getItem('theme')===null)&&document.body.classList.add('dark')</script>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+<div class=container>
+<input class="menu-btn order-0" type=checkbox id=menu-btn>
+<label class="menu-icon d-md-none" for=menu-btn><span class=navicon></span></label>
+<a class="navbar-brand order-1 order-md-0 me-auto" href=/>TrueBlocks</a>
+<button id=mode class="btn btn-link order-2 order-md-4" type=button aria-label="Toggle mode">
+<span class=toggle-dark><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span>
+<span class=toggle-light><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+</button>
+<ul class="navbar-nav social-nav order-3 order-md-5">
+<li class=nav-item>
+<a class=nav-link href=https://twitter.com/trueblocks><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9.0 01-3.14 1.53 4.48 4.48.0 00-7.86 3v1A10.66 10.66.0 013 4s-4 9 5 13a11.64 11.64.0 01-7 2c9 5 20 0 20-11.5a4.5 4.5.0 00-.08-.83A7.72 7.72.0 0023 3z"/></svg><span class="ms-2 visually-hidden">Twitter</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://discord.com/invite/kAFcZH2x7K><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="simple icon-discord"><path d="M20.317 4.3698a19.7913 19.7913.0 00-4.8851-1.5152.0741.0741.0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868.0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077.0 00-.0785-.037 19.7363 19.7363.0 00-4.8852 1.515.0699.0699.0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824.0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777.0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076.0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077.0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743.0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614.0a.0739.0739.0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077.0 01-.0066.1276 12.2986 12.2986.0 01-1.873.8914.0766.0766.0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076.0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077.0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061.0 00-.0312-.0286zM8.02 15.3312c-1.1825.0-2.1569-1.0857-2.1569-2.419.0-1.3332.9555-2.4189 2.157-2.4189 1.2108.0 2.1757 1.0952 2.1568 2.419.0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748.0c-1.1825.0-2.1569-1.0857-2.1569-2.419.0-1.3332.9554-2.4189 2.1569-2.4189 1.2108.0 2.1757 1.0952 2.1568 2.419.0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg><span class="ms-2 visually-hidden">Discord</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://github.com/trueblocks/trueblocks-core><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/api>API Reference<span class="ms-2 visually-hidden">API</span></a>
+</li>
+</ul>
+<div class="collapse navbar-collapse order-4 order-md-1">
+<ul class="navbar-nav main-nav me-auto order-5 order-md-2"><li class=nav-item>
+<a class=nav-link href=/docs/>Docs</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/data-model/intro>Data Model</a>
+</li>
+<li class="nav-item active">
+<a class=nav-link href=/blog/>Blog</a>
+</li>
+</ul>
+<div class="break order-6 d-md-none"></div>
+<form class="navbar-form flex-grow-1 order-7 order-md-3">
+<input id=userinput class="form-control is-search" type=search placeholder="Search docs..." aria-label="Search docs..." autocomplete=off>
+<div id=suggestions class="shadow bg-white rounded"></div>
+</form>
+</div>
+</div>
+</header>
+<div class="wrap container" role=document>
+<div class=content>
+<div class="row flex-xl-nowrap">
+<div class="col-lg-5 col-xl-4 docs-sidebar">
+<nav class=docs-links aria-label="Main navigation">
+<ul>
+<h3>Blog Topics</h3>
+<li><a href=/tags/ethereum>ethereum</a> (29)</li>
+<li><a href=/tags/trueblocks>trueblocks</a> (15)</li>
+<li><a href=/tags/recipes>recipes</a> (3)</li>
+<li><a href=/tags/explainers>explainers</a> (1)</li>
+</ul>
+</nav>
+</div>
+<nav class="docs-toc d-none d-xl-block col-xl-3" aria-label="Secondary navigation">
+<div class=page-links>
+<h3>On this page</h3>
+<nav id=TableOfContents></nav>
+</div>
+</nav>
+<main class="docs-content col-lg-11 col-xl-9 mx-xl-auto">
+<h1>It’s Not That Difficult</h1>
+<p class=lead>All about the Ethereum difficulty calculation</p>
+<p><strong>All about the Ethereum Difficulty Calculation</strong></p>
+<p><em>Special thanks to a first-rate Tuftian and data scientist, Ed Mazurek, for early versions of the R code used in this article.</em></p>
+<p>Each time the Ethereum time bomb goes off, two related questions arise. The first question (and arguably the more important) is, “When will blocks get so slow, they will be intolerable”. The second question is, “How long should we delay the bomb this time?”</p>
+<p>In this short article, I present a very simple — almost trivial — solution to the second of these two questions. My proposal for how long we should delay the time bomb is <em>“given a hard fork at block N, delay the difficulty bomb for N blocks (or a few less for added safety).”</em></p>
+<p>I won’t explain the difficulty calculation in this article (<a href=https://medium.com/@tjayrush/byzantiums-difficulty-calculation-2cdef46f79d3>see my previous article</a>). This image, which shows the calculation, appears in that article:</p>
+<p><img src=/blog/img/033-Its-Not-That-Difficult-001.png alt></p>
+<p>Looking closely at this equation, notice that it is composed of two parts.</p>
+<p>The first part I will call the “adjustment” (or <code>part A</code>). This portion adjusts the current block’s difficult to account for the timing of the previous block. This adjustment either lowers the difficulty or raises it depending how long the previous block took to appear. This component is highlighted by the first bracket above. Spend some time figuring out how it works. The effect of <code>part A</code>, which works exactly as it’s designed, is to squelch changes in the hash rate. The charts below make clear that this section of the calculation is working correctly.</p>
+<p>Because <code>part A</code> works as designed — eliminating effect of hash rate — I will argue that worrying about hash rate when reasoning about delaying the time bomb is unnecessary. To say this another way — a too-low hash rate cannot make the bomb any worse than it is, and too-high hash rate mitigates the effect of the bomb. This leads me to conclude that <code>part A</code> of the equation is unrelated to slowing block times. The second part of the equation (<code>part B</code> for bomb) causes all the trouble.</p>
+<p>It’s possible, as I do below, to separate these two components. This makes it much easier to see that <code>part A</code> has no effect on block production while <code>part B</code>—the bomb — dominates when it manifests itself. Additionally, I will show that diffusing the bomb is easy. One simply needs to set the <code>period</code> back to zero each time one forks the chain to diffuse the bomb.</p>
+<p><strong>Generating and Formatting the Data</strong></p>
+<p>As is usually true when dealing with data, we start by acquiring data. We used our own software library, TrueBlocks, to write the following code:</p>
+<h1 id=include-etherlibh>include “etherlib.h”</h1>
+<p>int main(int argc, char *argv[]) {<br>
+init_etherlib();<br>
+for (int i = 0 ; i &lt; getLatestBlock() ; i++) {<br>
+CBlock block;<br>
+getBlock(block, i);<br>
+cout &#171; block.blockNumber &#171; “,”;<br>
+cout &#171; block.timestamp &#171; “,”;<br>
+cout &#171; block.difficulty &#171; end;<br>
+}<br>
+}</p>
+<p>…which generates a very simple <em>.csv</em> data file of this format…</p>
+<p>blocknumber, timestamp, difficulty<br>
+0, 1438269960, 17179869184<br>
+1, 1438269988, 17171480576<br>
+2, 1438270017, 17163096064<br>
+…<br>
+8981997, 1574448913, 2432407853358678<br>
+8981998, 1574448935, 2432545292312150<br>
+8981999, 1574448985, 2427931666241578<br>
+8982000, 1574449029, 2424512564668329</p>
+<p>Along with a list of daily hash rates that we got from EtherScan, this is enough to understand Ethereum’s difficulty calculation. We use <a href=https://rstudio.com/><em>RStudio</em></a> and a data programming language called “R” to build the following charts. If you’re not familiar with “R”, you should check it out. It’s fantastic.</p>
+<p>We’ll start by looking at the Ethereum hash rate.</p>
+<p><strong>Daily Average Hash Rate</strong></p>
+<p>The data in the first chart comes from EtherScan. It shows <em>Daily Average Hash Rate</em> for the Ethereum mainnet. I cannot vouch for this data, as I don’t know how it was created, but I assume it’s okay. Here’s a <a href=https://etherscan.io/chart/hashrate>link the data</a>.</p>
+<p><img src=/blog/img/033-Its-Not-That-Difficult-002.png alt></p>
+<p><em>Discussion:</em></p>
+<p>Apparently, Ethereum’s hash rate follows Ethereum’s price. This chart reminds me of an Ethereum price chart. The rate of growth of the hash rate skyrockets during the summer of 2017 and peaks during the first quarter of 2018 (just like price). The bump in October of 2016 is the infamous 2016 DDos attack, and the two vertical grey lines are the Byzantium hard fork (Oct. 2017) and the Constantinople hard fork (Jan. 2019). There’s not a lot to say about this chart, but we will refer to it as we discuss the chain’s difficulty data, below.</p>
+<p><strong>Raw Difficulty Data</strong></p>
+<p>The first chart based on difficulty data shows data returned from Parity’s RPC call <em>get_Block</em>. First, some standard statistical information:</p>
+<p><code>**Summary Statistics for Ethereum’s Difficulty **0,016,970,000,000,000 — Minimum 0,111,700,000,000,000 — 1st Quartile 1,926,000,000,000,000 — Median 1,649,000,000,000,000 — Mean 2,687,000,000,000,000 — 3rd Quartile 3,702,000,000,000,000 — Maximum</code></p>
+<p>Our first chart is pretty straight forward:</p>
+<p><img src=/blog/img/033-Its-Not-That-Difficult-003.png alt></p>
+<p><em>Discussion:</em> The data was produced at block 8,920,000, and while “R” can pretty easily handle that many records, given the iterative nature of data exploration, we choose to sample one record out of every 100. This give us around 9,000 records which are presented in the above chart. The same grey vertical bars showing the hard forks in this chart as well.</p>
+<p>The height of the red line, <code>y(x) = difficulty at block.x</code> represents the difficulty at the time of the given block. It’s easy to see the effect of diffusing the difficulty time bomb at each fork. The DDos attacks in the Fall of 2016, and, referring back to the hash rate, you may also see a relationship between difficulty and hash rate.</p>
+<p>Pretend the time bomb had not been diffused— in effect push the red line up as far as the bomb diffusion pushed it down — do this for both hard forks and you can almost see the same shape as the hash rate chart. In other words, hash rate and difficulty are tied together. This makes perfect sense. This is exactly what <code>part A</code> of the difficulty calculation is designed to do. It’s designed to adjust the difficulty in direct response to varying hash rates.</p>
+<p>The behavior of miners probably doesn’t change because of a difficult bomb diffusion. Their mining rigs continue to run identically before the diffusions as after them. The only thing that changes is the time between blocks, on average, lowers.</p>
+<p>Before we leave this chart, notice something else. Look carefully just prior to the Byzantium hard fork. You’ll see four or five single-line, vertical <em>jumps</em> in difficulty level. In fact, the jumps are twice as large each time they appear as the previous time they appeared. These <code>jumps</code> are the time bombs. Let’s focus more on that area of the chart:</p>
+<p><img src=/blog/img/033-Its-Not-That-Difficult-004.png alt></p>
+<p><em>Discussion:</em> We’ve inserted vertical lines at each 100,000-block boundary. Notice, just prior to the hard fork, the jumps in difficulty land exactly on the markers. In between the markers, the difficulty continues to go up, but nowhere near the speed as on the markers. The inter-explosion increases are consistent with the fact that the overall hash rate was raising very quickly at this time in 2017.</p>
+<p>You may also noice that each successive ‘bump’ — each time the bomb explodes — it explodes twice as high as it did the previous time. The periodic nature of these jumps, it turns out, become important in understanding what’s going on.</p>
+<p>In the remaining charts in this article, our goal will be to separate the first part of the difficulty calculation (<code>part A</code> or the “adjustment”) and the second part of the calculation (<code>part B</code> or the bomb). This will help us understand how to handle the bomb in the future.</p>
+<p><strong>Per-Block Changes in Difficulty</strong></p>
+<p>In the next chart, we look at the change in the difficulty between each successive block. That is <code>y(x) = diff_block_x — diff_block_x_minus_1.</code></p>
+<p><img src=/blog/img/033-Its-Not-That-Difficult-005.png alt></p>
+<p><em>Discussion:</em> As we mentioned above, <code>part A</code> of the calculation ‘hovers’ around a difficulty level geared towards ensuring 14 second blocks. This ‘hovering’ is revealed in the above chart by the red-blue nature of the data. The ‘grow’ part of the chart (red) represent positive changes in difficulty (i.e. difficulty gets higher, block production gets lower, and block times get slower). The ‘shrink’ values (blue) are negative (lower difficulty, faster blocks and more of them). The ‘adjustment’ hovers around zero. In other words, the calculation is trying to maintain ‘no change’ in block times. The <code>part A</code> calculation hones in on a value — 14 second block times.</p>
+<p>On this chart, you may also, for the first time, clearly see the bomb exploding. And it’s arguably obvious that they are exploding twice as large each time they explode.</p>
+<p>But I don’t think this chart is clear enough. Why, for example, does the same pattern not show up clearly during the Constantinople time period? It turns out the reason for this is because of the greatly increased hash rate. The calculation is able to maintain the 14 second blocks times, but the system is swinging back and forth more vigorously. The reason we can’t discern the same bomb activity near the Constantinople fork is because it’s being obscured by the wider fluctuations.</p>
+<p>Is there anything else we can do to see more clearly? Yes, as a matter of fact there is, and we’ll show that in the next chart.</p>
+<p><strong>Relative Change in Difficulty</strong></p>
+<p>Our final chart in this part of the paper is a chart showing the change in difficulty relative to the total difficulty in the block. That is <code>y(x) = (difficuly_x — difficulty_x_mius_1) / difficulty_x_minus_1</code>. The previous chart shows the raw change in difficulty. This chart show a normalized change. This removes the growth in hash rate. It will allow us to clearly see the two different parts of the calculation, <code>part A</code> and <code>part B</code>.</p>
+<p>Here’s the chart of per-block changes in difficulty over total difficulty:</p>
+<p><img src=/blog/img/033-Its-Not-That-Difficult-006.png alt></p>
+<p><em>Discussion:</em> And now we can actually see why I said above that worrying about hash rate is counter-productive to a discussion of the difficulty bomb. You can see very clearly that until the time bomb ‘rears it’s head’ block production is not affected by increased (or lowered) hash rate. <code>Part A</code> of the equation maintains a steady state relative to block speed and production. Difficulty (on average and relative to itself) remains nearly unchanged up until the time bomb starts exploding.</p>
+<p>Two interesting things to notice: (1) You can see the bomb starting to ‘rear its head’ at the right-most edge of the chart even though the distance between the appearances are much shorter than between Byzantium and Constantinople — I explain this below; (2) the striations at the bottom of the chart are an artifact from the integer division by 10 in <code>part A</code> of the calculation; (3) the higher hash rate appears to delay the ‘head-rearing’ as Lane Rettig noticed prior to Constantinople and we wrote about in the above mentioned article.</p>
+<p>There’s a lot more I could talk about on this chart, and maybe some day I’ll come back to it, but I do want to make the case for a better way to diffuse the bomb in the future.</p>
+<p><strong>A Better Way to Diffuse the Bomb</strong></p>
+<p>First, I want to make the point that worrying about the hash rate while worrying about the time bomb is counter-productive. The effects of increase (or decreases) in the hash rate are removed by <code>part A</code> of the calculation. That’s what <code>part A</code> is for. And, it’s working nearly perfectly as is evidenced by the near-perfect flatness of the difficulty deltas (relative to its current height) is stable. Hash rate apparently has no effect on block time — but this is what we already know — this is what the difficulty calculation is designed to do.</p>
+<p>The bomb is defined in the above equation as an additional value added to the end of the calculation as</p>
+<p>2 ** (floor(current_block_no / 100,000) - 2)</p>
+<p>That is, two raised to a power. We can re-write this as <code>2 ** p</code> allowing <code>p = floor(current_block_no / 100,000)</code>. (We can ignore the -2 as it simply shifts the calculation to the left.) We’re left with a step function in <code>p</code> or <code>period</code>.</p>
+<p><img src=/blog/img/033-Its-Not-That-Difficult-007.png alt></p>
+<p>Remember though, that the core developers have twice reset the bomb — this means, quite literally, that they reset the <code>period</code>. The <code>go</code> code works by creating a <code>fake block</code> to be used in the calculation. The <code>fake block</code> appears to be in the past, which resets the effect of the bomb. Here’s a corrected chart showing what’s really going on with the <code>period</code>:</p>
+<p><img src=/blog/img/033-Its-Not-That-Difficult-008.png alt></p>
+<p>The true block number appears in red above and ranges from zero to 8,920,000. The <code>fake block</code> number (in green) tracks the real block number until Byzantium when it was reset 3,000,000 blocks to the past. It then runs parallel to the real block number until it gets reset again (this time by 5,000,000 blocks) at the Constantinople fork.</p>
+<p>Here’s a table recounting the resets. Do you see anything odd?</p>
+<p><img src=/blog/img/033-Its-Not-That-Difficult-009.png alt></p>
+<p>The <code>fake block</code> after the Byzantium fork was 1,370,000 which, when integer divided by 100,000 gives a <code>period</code> of 13. That is, at each block an additional difficulty of <code>2**13</code> was added <em>after</em> the hash rate adjustment. By the time of the Constantinople hard fork, the <code>period</code> was reset to 2,280,000 which translates to <code>period</code> of 22, an additional difficulty of <code>2**22</code>. This, I think, is why the time bomb is going off earlier than we anticipated. We didn’t reset it back far enough the last time.</p>
+<p>The suggested value of resetting the time bomb this time is back to block 69,000 which translates to <code>period</code> zero. This is exactly the right amount to reset to.</p>
+<p><strong>How to Better Reset the Difficulty Time Bomb</strong></p>
+<p>There’s a very easy way to reset the time bomb to the right value each time we have to reset it. This will make most of the problems related to the difficulty bomb disappear. Simply set the time bomb back the same number of blocks as the FORK_BLOCK_NUMBER of the fork (with a little bit of play). In this way, the <code>fake block</code> gets set near zero and the <code>period</code> will be zero.</p>
+<p>Because the time bomb dominates the slowing down of block production this will have effect of making the ‘head raising’ totally predicable. The calculation for <code>part B</code> is dependent only on the <code>fake block</code> number. If we had done that for the Constantinople fork, the time bomb would not be going off so soon.</p>
+<p><img src=/blog/img/033-Its-Not-That-Difficult-010.png alt></p>
+<p><strong>Conclusion</strong></p>
+<p>Thanks for reading this far if you got this far. I hope this document finds interested ears. I see a lot of confusion related to the difficulty calc issue (not only in the public, but in the core devs channel and the Ethereum Magicians). I feel people are making this much more difficult than it actually is.</p>
+<p>A few simple takeaways: (1) because of its exponential nature, only <code>part B</code> matters as far as the block production is concerned; (2) <code>part A</code> of the calculation can have no detrimental effect on block production and it may actually have a positive effect; and (3) resetting the <code>period</code> or <code>fake block</code> to zero has two benefits: (a) it grants the maximum amount of time in delaying the time bomb, and (b) it makes the re-appearance of the bomb very predicable.</p>
+<p>Please let me know what you think of this paper. I hope I’ve helped explain something that I know about pretty well.</p>
+<p><strong>Thomas Jay Rush</strong> owns the software company TrueBlocks, LLC whose primary project is also called TrueBlocks, a collection of software libraries and applications enabling real-time, per-block smart contract monitoring and analytics to the Ethereum blockchain. Contact Rush through <a href=http://trueblocks.io/>the website</a>. Send donations to <code>0xf503017D7baF7FBC0fff7492b751025c6A78179b</code>.</p>
+<div class="docs-navigation d-flex justify-content-between">
+<a href=/blog/a-method-to-diffuse-the-ethereum-difficulty-bomb/>
+<div class="card my-1">
+<div class="card-body py-2">
+&larr; A Method to Diffuse the Ethereum Difficulty Bomb
+</div>
+</div>
+</a>
+<a class=ms-auto href=/blog/a-time-ordered-index-of-time-ordered-immutable-data/>
+<div class="card my-1">
+<div class="card-body py-2">
+A Time Ordered Index of Time Ordered Immutable Data &rarr;
+</div>
+</div>
+</a>
+</div>
+</main>
+</div>
+</div>
+</div>
+<footer class="footer text-muted">
+<div class=container>
+<div class=row>
+<div class="col-lg-8 order-last order-lg-first">
+<ul class=list-inline>
+<li class=list-inline-item>Powered by <a href=https://gohugo.io/>Hugo</a>, and <a href=https://getdoks.org/>Doks</a></li>
+</ul>
+</div>
+<div class="col-lg-8 order-first order-lg-last text-lg-end">
+<ul class=list-inline>
+<li class=list-inline-item><a href=https://github.com/TrueBlocks/trueblocks-docs>Improve these Docs</a></li>
+<li class=list-inline-item><a href=/privacy-policy/>Privacy</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+<script src=/js/highlight.min.ec942a9dc705691c6545c0ea48b4a76dd7a730be9478c31c9139089f95e82ccfccaee7fd8b5823a0fe005ac3dec10b8f825d9ace55908f4b6e6da407af3df293.js integrity="sha512-7JQqnccFaRxlRcDqSLSnbdenML6UeMMckTkIn5XoLM/Mruf9i1gjoP4AWsPewQuPgl2azlWQj0tubaQHrz3ykw==" crossorigin=anonymous defer></script>
+<script src=/main.min.9e62c9b0c5dc8279689cc9cb693a32c8ea1d19032f574f98c782ff59a0417d3662ff94b1a7755ab72a7a1862644bf00a58492c65aa0adabbc58080f4018c61bc.js integrity="sha512-nmLJsMXcgnlonMnLaToyyOodGQMvV0+Yx4L/WaBBfTZi/5Sxp3Vatyp6GGJkS/AKWEksZaoK2rvFgID0AYxhvA==" crossorigin=anonymous defer></script>
+<script src=/index.min.2920392d3bee72ff57da922db3d93f87bbdbae7d85d9bdfd6bac93a24c8ad220ebd77bacb49367cdadc381a7f57b96fa16cbee3821c085548638d591f04eb7cf.js integrity="sha512-KSA5LTvucv9X2pIts9k/h7vbrn2F2b39a6yTokyK0iDr13ustJNnza3Dgaf1e5b6FsvuOCHAhVSGONWR8E63zw==" crossorigin=anonymous defer></script>
+</body>
+</html>

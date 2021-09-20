@@ -1,0 +1,803 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="ie=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<link rel=preload as=font href=/fonts/vendor/jost/jost-v4-latin-regular.woff2 type=font/woff2 crossorigin>
+<link rel=preload as=font href=/fonts/vendor/jost/jost-v4-latin-700.woff2 type=font/woff2 crossorigin>
+<link rel=stylesheet href=/main.b97465d3e9dbb04b0919a61f5c5766b97ddb3b30835a2bf75ec252e8c570f518d52f1e59944be75f9c92a4c5bc6f1bbe84962010976216b41d653fb6802056b7.css integrity="sha512-uXRl0+nbsEsJGaYfXFdmuX3bOzCDWiv3XsJS6MVw9RjVLx5ZlEvnX5ySpMW8bxu+hJYgEJdiFrQdZT+2gCBWtw==" crossorigin=anonymous>
+<noscript><style>img.lazyload{display:none}</style></noscript>
+<meta name=robots content="index, follow">
+<meta name=googlebot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name=bingbot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<title>Accounts - TrueBlocks</title>
+<meta name=description content="Ethereum as it was meant to be: local-first, P2P, and accurate queries to all the data you’ll ever need.">
+<link rel=canonical href=/data-model/accounts/>
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="/trueblocks.png">
+<meta name=twitter:title content="Accounts">
+<meta name=twitter:description content="The primary purpose of TrueBlocks is to extract, directly from the blockchain, the entire transactional history for one or more addresses and present that information for use outside the blockchain. The results of this extraction are stored in a data structure called a Monitor.
+Monitors collect together Appearances (blknum.tx_id pairs) along with additional information such as Reconciliations (18-decimal place accurate accounting for each asset transfer), Names (associations of human-readable names with addresses), and Abis which track the &ldquo;meaning&rdquo; of each transaction through its Functions and Parameters.">
+<meta name=twitter:site content="@TrueBlocks">
+<meta name=twitter:creator content="@TrueBlocks">
+<meta property="og:title" content="Accounts">
+<meta property="og:description" content="The primary purpose of TrueBlocks is to extract, directly from the blockchain, the entire transactional history for one or more addresses and present that information for use outside the blockchain. The results of this extraction are stored in a data structure called a Monitor.
+Monitors collect together Appearances (blknum.tx_id pairs) along with additional information such as Reconciliations (18-decimal place accurate accounting for each asset transfer), Names (associations of human-readable names with addresses), and Abis which track the &ldquo;meaning&rdquo; of each transaction through its Functions and Parameters.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/data-model/accounts/">
+<meta property="og:image" content="/trueblocks.png">
+<meta property="article:published_time" content="2021-09-18T14:53:50+00:00">
+<meta property="article:modified_time" content="2021-09-19T01:49:55-04:00">
+<meta property="og:site_name" content="TrueBlocks">
+<meta property="article:publisher" content="https://www.facebook.com/">
+<meta property="article:author" content="https://www.facebook.com/">
+<meta property="og:locale" content="en_US">
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"\/"},{"@type":"ListItem","position":2,"name":"Data Modelaccounts","item":"\/data-modelaccounts\/"}]}</script>
+<meta name=theme-color content="#fff">
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/site.webmanifest>
+</head>
+<body class="data-model single">
+<div class="header-bar fixed-top"></div>
+<script>(localStorage.getItem('theme')==='dark'||localStorage.getItem('theme')===null)&&document.body.classList.add('dark')</script>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+<div class=container>
+<input class="menu-btn order-0" type=checkbox id=menu-btn>
+<label class="menu-icon d-md-none" for=menu-btn><span class=navicon></span></label>
+<a class="navbar-brand order-1 order-md-0 me-auto" href=/>TrueBlocks</a>
+<button id=mode class="btn btn-link order-2 order-md-4" type=button aria-label="Toggle mode">
+<span class=toggle-dark><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span>
+<span class=toggle-light><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+</button>
+<ul class="navbar-nav social-nav order-3 order-md-5">
+<li class=nav-item>
+<a class=nav-link href=https://twitter.com/trueblocks><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9.0 01-3.14 1.53 4.48 4.48.0 00-7.86 3v1A10.66 10.66.0 013 4s-4 9 5 13a11.64 11.64.0 01-7 2c9 5 20 0 20-11.5a4.5 4.5.0 00-.08-.83A7.72 7.72.0 0023 3z"/></svg><span class="ms-2 visually-hidden">Twitter</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://discord.com/invite/kAFcZH2x7K><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="simple icon-discord"><path d="M20.317 4.3698a19.7913 19.7913.0 00-4.8851-1.5152.0741.0741.0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868.0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077.0 00-.0785-.037 19.7363 19.7363.0 00-4.8852 1.515.0699.0699.0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824.0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777.0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076.0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077.0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743.0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614.0a.0739.0739.0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077.0 01-.0066.1276 12.2986 12.2986.0 01-1.873.8914.0766.0766.0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076.0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077.0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061.0 00-.0312-.0286zM8.02 15.3312c-1.1825.0-2.1569-1.0857-2.1569-2.419.0-1.3332.9555-2.4189 2.157-2.4189 1.2108.0 2.1757 1.0952 2.1568 2.419.0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748.0c-1.1825.0-2.1569-1.0857-2.1569-2.419.0-1.3332.9554-2.4189 2.1569-2.4189 1.2108.0 2.1757 1.0952 2.1568 2.419.0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg><span class="ms-2 visually-hidden">Discord</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://github.com/trueblocks/trueblocks-core><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/api>API Reference<span class="ms-2 visually-hidden">API</span></a>
+</li>
+</ul>
+<div class="collapse navbar-collapse order-4 order-md-1">
+<ul class="navbar-nav main-nav me-auto order-5 order-md-2"><li class=nav-item>
+<a class=nav-link href=/docs/>Docs</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/data-model/intro>Data Model</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/blog/>Blog</a>
+</li>
+</ul>
+<div class="break order-6 d-md-none"></div>
+<form class="navbar-form flex-grow-1 order-7 order-md-3">
+<input id=userinput class="form-control is-search" type=search placeholder="Search docs..." aria-label="Search docs..." autocomplete=off>
+<div id=suggestions class="shadow bg-white rounded"></div>
+</form>
+</div>
+</div>
+</header>
+<div class="wrap container" role=document>
+<div class=content>
+<div class="row flex-xl-nowrap">
+<div class="col-lg-5 col-xl-4 docs-sidebar">
+<nav class=docs-links aria-label="Main navigation">
+<h3>The Data Model</h3>
+<ul class=list-unstyled>
+<li><a class=docs-link href=/data-model/intro/>Enhanced Ethereum Data</a></li>
+<li><a class=docs-link href=/data-model/the-index/>The Index</a></li>
+</ul>
+<h3>Reference of Data fields</h3>
+<ul class=list-unstyled>
+<li><a class="docs-link active" href=/data-model/accounts/>Accounts</a></li>
+<li><a class=docs-link href=/data-model/chaindata/>Chain Data</a></li>
+<li><a class=docs-link href=/data-model/chainstate/>Chain State</a></li>
+<li><a class=docs-link href=/data-model/admin/>Admin</a></li>
+<li><a class=docs-link href=/data-model/other/>Other</a></li>
+</ul>
+</nav>
+</div>
+<nav class="docs-toc d-none d-xl-block col-xl-3" aria-label="Secondary navigation">
+<div class=page-links>
+<h3>On this page</h3>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#monitor>Monitor</a></li>
+<li><a href=#appearance>Appearance</a></li>
+<li><a href=#reconciliation>Reconciliation</a></li>
+<li><a href=#name>Name</a></li>
+<li><a href=#abi>Abi</a></li>
+<li><a href=#function>Function</a></li>
+<li><a href=#parameter>Parameter</a></li>
+<li><a href=#base-types>Base types</a></li>
+</ul>
+</nav>
+</div>
+</nav>
+<main class="docs-content col-lg-11 col-xl-9">
+<h1>Accounts</h1>
+<p class=lead></p>
+<p>The primary purpose of TrueBlocks is to extract, directly from the blockchain, the entire transactional history for one or more addresses and present that information for use outside the blockchain. The results of this extraction are stored in a data structure called a <a href=/data-model/accounts/#monitor>Monitor</a>.</p>
+<p>Monitors collect together <a href=/data-model/accounts/#appearance>Appearances</a> (<code>blknum.tx_id</code> pairs) along with additional information such as <a href=/data-model/accounts/#reconciliation>Reconciliations</a> (18-decimal place accurate accounting for each asset transfer), <a href=/data-model/accounts/#names>Names</a> (associations of human-readable names with addresses), and <a href=/data-model/accounts/#abis>Abis</a> which track the &ldquo;meaning&rdquo; of each transaction through its <a href=/data-model/accounts/#function>Functions</a> and <a href=/data-model/accounts/#parameters>Parameters</a>.</p>
+<p><em>Each data structure is created by one or more tools which are detailed below</em></p>
+<h2 id=monitor>Monitor<a href=#monitor class=anchor aria-hidden=true>#</a> </h2>
+<p>A Monitor is a list of <a href=/data-model/accounts/#appearance>Appearances</a> associated with a given address along with various details about those appearances. A monitor is created when a user expresses interest in an address by calling either <a href=/docs/chifra/accounts/#chifra-list>chifra list</a> or <a href=/docs/chifra/accounts/#chifra-export>chifra export</a> tool (or querying thier associated APIs).</p>
+<p>Once created, a monitor may be periodically <em>freshened</em> by calling either <code>chifra list</code> or <code>chifra export</code>, however, it is also possible to freshen a monitor continually with <a href=/docs/chifra/admin/#chifra-scrape>chifra scrape &ndash;monitors</a>. This tool watches the front of the chain and repeatedly calls <code>chifra list</code>.</p>
+<p>Below is a list of the data fields for monitors. Following that are the commands that produce or manage monitors.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nApps</td>
+<td>the number of appearances for this monitor</td>
+<td>blknum</td>
+</tr>
+<tr>
+<td>firstApp</td>
+<td>the first block at which this address appears</td>
+<td>blknum</td>
+</tr>
+<tr>
+<td>latestApp</td>
+<td>the latest block at which this address appears</td>
+<td>blknum</td>
+</tr>
+<tr>
+<td>sizeInBytes</td>
+<td>the size of this monitor on disc</td>
+<td>uint64</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>the tag given to this address</td>
+<td>string</td>
+</tr>
+<tr>
+<td>address</td>
+<td>the address being monitored</td>
+<td>address</td>
+</tr>
+<tr>
+<td>is_custom</td>
+<td><code>true</code> if this address is customized</td>
+<td>bool</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Tools</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href=/docs/chifra/admin/#chifra-status>chifra status monitors</a></td>
+<td>report on the status of the TrueBlocks system</td>
+</tr>
+<tr>
+<td><a href=/docs/chifra/accounts/#chifra-list>chifra list</a></td>
+<td>list appearances for one or more addresses</td>
+</tr>
+<tr>
+<td><a href=/docs/chifra/accounts/#chifra-export>chifra export</a></td>
+<td>export full detail of transactions for one or more addresses</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id=appearance>Appearance<a href=#appearance class=anchor aria-hidden=true>#</a> </h2>
+<p>An appearance is a pointer (<code>blknum, tx_id</code> pair) into the blockchain indicating where a particular address appears. This includes obvioius locations such as <code>to</code> or <code>from</code> as well as esoteric locations such as deep inside a tenth-level trace or as the miner of an uncle block. The primary goal of TrueBlocks is to indentify every appearance for any address on the chain.</p>
+<p>The TrueBlocks <a href=/data-model/the-index/>index of appearances</a> (created by <a href=/docs/chifra/admin/#chifra-scrape>chifra scrape</a>) makes the production of such a list possible. Appearances are stored in <a href=http://localhost:1313/data-model/accounts/#monitor>Monitors</a>.</p>
+<p>Below is a list of the data fields for appearances. Following that are the commands that produce or manage appearances.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>blockNumber</td>
+<td>the number of the block</td>
+<td>blknum</td>
+</tr>
+<tr>
+<td>transactionIndex</td>
+<td>the zero-indexed position of the transaction in the block</td>
+<td>blknum</td>
+</tr>
+<tr>
+<td>address</td>
+<td>the address of the appearance</td>
+<td>address</td>
+</tr>
+<tr>
+<td>name</td>
+<td>the name of the address, if found</td>
+<td>string</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>the timestamp for this appearance</td>
+<td>timestamp</td>
+</tr>
+<tr>
+<td>date</td>
+<td>the date represented by the timestamp</td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Tools</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href=/docs/chifra/accounts/#chifra-list>chifra list</a></td>
+<td>list appearances for one or more addresses</td>
+</tr>
+<tr>
+<td><a href=/docs/chifra/accounts/#chifra-export>chifra export</a></td>
+<td>export full detail of transactions for one or more addresses</td>
+</tr>
+<tr>
+<td><a href=/docs/chifra/accounts/#chifra-monitors>chifra monitors</a></td>
+<td>delete, undelete, and remove previously created monitors</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id=reconciliation>Reconciliation<a href=#reconciliation class=anchor aria-hidden=true>#</a> </h2>
+<p>When exported with the <code>--accounting</code> option from <code>chifra export</code>, each transaction will have field called <code>statements</code>. Statements are an array for reconciliations. All such exported transactions will have at least one reconcilation (for ETH), however, many will have additional reconciliations for other assets (such as ERC20 and ERC721 tokens).</p>
+<p>Because DeFi is essentially swaps and trades around ERC20s, and because and &lsquo;programmable money&rsquo; allows for unlimited actions to happen under a single transaction,many times a transaction has four or five reconciliations.</p>
+<p>Reconciliations are relative to an <code>accountedFor</code> address. For this reason, the same transaction will probably have different reconciliations depending on the <code>accountedFor</code> address. Consider a simple transfer of ETH from one address to another. Obviously, the sender&rsquo;s and the recipient&rsquo;s reconciliations will differ (in opposite proportion to each other). The <code>accountedFor</code> address is always present as the <code>assetAddress</code> in the first reconciliation of the statements array.</p>
+<p>Below is a list of the data fields for reconciliations. Following that are the commands that produce or manage reconciliations.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>blockNumber</td>
+<td>the number of the block</td>
+<td>blknum</td>
+</tr>
+<tr>
+<td>transactionIndex</td>
+<td>the zero-indexed position of the transaction in the block</td>
+<td>blknum</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>the unix timestamp of the object</td>
+<td>timestamp</td>
+</tr>
+<tr>
+<td>assetAddr</td>
+<td>the accountedFor address for ETH recons, the token address itself otherwise</td>
+<td>address</td>
+</tr>
+<tr>
+<td>assetSymbol</td>
+<td>either ETH, WEI or the symbol of the asset being reconciled as extracted from the chain</td>
+<td>string</td>
+</tr>
+<tr>
+<td>decimals</td>
+<td>Equivilent to the extracted value of getSymbol from ERC20 or, if ETH or WEI then 18</td>
+<td>uint64</td>
+</tr>
+<tr>
+<td>prevBlk</td>
+<td>the block number of the previous reconciliation</td>
+<td>blknum</td>
+</tr>
+<tr>
+<td>prevBlkBal</td>
+<td>the account balance for the given asset for the previous reconciliation</td>
+<td>int256</td>
+</tr>
+<tr>
+<td>begBal</td>
+<td>the begining balance of the asset at the blockNumber</td>
+<td>int256</td>
+</tr>
+<tr>
+<td>begBalDiff</td>
+<td>the difference between the expected beginning balance (prevBlkBal) and the queried balance from the chain</td>
+<td>int256</td>
+</tr>
+<tr>
+<td>amountIn</td>
+<td>the top-level value of the incoming transfer for the accountedFor address</td>
+<td>int256</td>
+</tr>
+<tr>
+<td>amountOut</td>
+<td>the amount (in terms of the asset) of regular outflow during this bigint</td>
+<td>int256</td>
+</tr>
+<tr>
+<td>internalIn</td>
+<td>the internal value of the incoming transfer for the accountedFor address</td>
+<td>int256</td>
+</tr>
+<tr>
+<td>internalOut</td>
+<td>the value of any internal value transfers out of the accountedFor account</td>
+<td>int256</td>
+</tr>
+<tr>
+<td>selfDestructIn</td>
+<td>the incoming value of a self-destruct if recipient is the accountedFor address</td>
+<td>int256</td>
+</tr>
+<tr>
+<td>selfDestructOut</td>
+<td>the value of the self-destructed value out if the accountedFor address was self-destructed</td>
+<td>int256</td>
+</tr>
+<tr>
+<td>minerBaseRewardIn</td>
+<td>the base fee reward if the miner is the accountedFor address</td>
+<td>int256</td>
+</tr>
+<tr>
+<td>minerNephewRewardIn</td>
+<td>the netphew reward if the miner is the accountedFor address</td>
+<td>int256</td>
+</tr>
+<tr>
+<td>minerTxFeeIn</td>
+<td>the transaction fee reward if the miner is the accountedFor address</td>
+<td>int256</td>
+</tr>
+<tr>
+<td>minerUncleRewardIn</td>
+<td>the uncle reward if the miner who won the uncle block is the accountedFor address</td>
+<td>int256</td>
+</tr>
+<tr>
+<td>prefundIn</td>
+<td>at block zero (0) only, the amount of genesis income for the accountedFor address</td>
+<td>int256</td>
+</tr>
+<tr>
+<td>spotPrice</td>
+<td>The on-chain price in USD (or if a token in ETH, or zero) at the time of the transaction</td>
+<td>double</td>
+</tr>
+<tr>
+<td>priceSource</td>
+<td>The on-chain source from which the spot price was taken</td>
+<td>string</td>
+</tr>
+<tr>
+<td>gasCostOut</td>
+<td>if the transactions original sender is the accountedFor address, the amount of gas expended denominated in WEI.</td>
+<td>int256</td>
+</tr>
+<tr>
+<td>endBal</td>
+<td>the on-chain balance of the asset (see notes above about intra-block reconciliations)</td>
+<td>int256</td>
+</tr>
+<tr>
+<td>totalIn</td>
+<td>a calculated field &ndash; the sum of all In fields</td>
+<td>int256</td>
+</tr>
+<tr>
+<td>totalOut</td>
+<td>a calculated field &ndash; the sum of all Out fields</td>
+<td>int256</td>
+</tr>
+<tr>
+<td>totalOutLessGas</td>
+<td></td>
+<td>int256</td>
+</tr>
+<tr>
+<td>amountNet</td>
+<td>a calculated field &ndash; totalIn - totalOut</td>
+<td>int256</td>
+</tr>
+<tr>
+<td>endBalCalc</td>
+<td>a calculated field &ndash; begBal + amountNet</td>
+<td>int256</td>
+</tr>
+<tr>
+<td>reconciliationType</td>
+<td>One of regular, traces, prevdiff-partial, partial-nextdiff, or <code>partial-partial</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td>endBalDiff</td>
+<td>a calculated field &ndash; endBal - endBalCalc, if non-zero, the reconciliation failed</td>
+<td>int256</td>
+</tr>
+<tr>
+<td>reconciled</td>
+<td>a calculated field &ndash; true if <code>endBal === endBalCalc</code> and <code>begBal === prevBlkBal</code>. <code>false</code> otherwise.</td>
+<td>bool</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notes</strong></p>
+<p><strong>Intra-block transactions</strong>: In many cases two or more transactions requiring a reconciliation may occur in a single block. Becuase the Ethereum blockchain only provides balance queries at the end of blocks, it is not possible to query for the balance of an asset at the end of transactions for which there are other following transactions in the block nor for the beginning balance for which there are transactions prior to the given transaction in the same block. In these cases, TrueBlocks simulates the beginning and ending balance as needed and adds <code>partial</code> to the <code>reconciliationType</code>.</p>
+<p><strong>Spot Price</strong>: If the <code>spotPrice</code> is available from an on-chain source (such as UniSwap), then it represents the ETH/DAI value at the time of the transaction if the reconcilation is for ETH. For other assets, the <code>spotPrice</code> represents the asset&rsquo;s value relative to <code>ETH</code>, so to price a non-ETH asset in US dollars, one would need to convert first to <code>ETH</code> then to dollars. If a price is not available on-chain, the <code>spotPrice</code> will be zero and the caller is encouraged to get the price for the asset from other sources.</p>
+<hr>
+<h2 id=name>Name<a href=#name class=anchor aria-hidden=true>#</a> </h2>
+<p>TrueBlocks allows you to associate a human-readable name with an address. This feature goes a long way towards making the blockchain data one extracts with a <a href=/data-model/accounts/#monitor>Monitor</a> much more readable.</p>
+<p>Unlike the blockchain data itself, which is globally available and impossible to censor, the association of names with address is not on chain (excepting ENS, which, while fine, is imcomplete). TrueBlocks allows you to name addresses of interest to you and either share those names (through an on-chain mechanism) or keep them private if you so desire.</p>
+<p>Over the years, we&rsquo;ve paid careful attention to the &lsquo;airwaves&rsquo; and have collected together a &lsquo;starter-set&rsquo; of named addresses which is available through the <a href=/docs/chifra/accounts/#chifra-names>chifra names</a> command line. For example, every time people say &ldquo;Show me your address, and we will airdrop some tokens&rdquo; on Twitter, we copy and paste all those addresses. We figure if you&rsquo;re going to DOX yourselves, we might as well take advantage of it. Sorry&mldr;not sorry.</p>
+<p>Below is a list of the data fields for names. Following that are the commands that produce or manage names.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tags</td>
+<td>colon separated list of tags</td>
+<td>string</td>
+</tr>
+<tr>
+<td>address</td>
+<td>the address associated with this name</td>
+<td>address</td>
+</tr>
+<tr>
+<td>name</td>
+<td>the name associated with this address (retreived from on-chain data if available)</td>
+<td>string</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>the symbol for this address (retreived from on-chain data if available)</td>
+<td>string</td>
+</tr>
+<tr>
+<td>source</td>
+<td>user supplied source of where this name was found (or on-chain if name is on-chain)</td>
+<td>string</td>
+</tr>
+<tr>
+<td>decimals</td>
+<td>number of decimals retreived from an ERC20 smart contract, defaults to 18</td>
+<td>uint64</td>
+</tr>
+<tr>
+<td>description</td>
+<td>user supplied description for the address</td>
+<td>string</td>
+</tr>
+<tr>
+<td>deleted</td>
+<td><code>true</code> if deleted, <code>false</code> otherwise</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>is_custom</td>
+<td><code>true</code> if the address is a custom address, <code>false</code> otherwise</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>is_prefund</td>
+<td><code>true</code> if the address was one of the prefund addresses, <code>false</code> otherwise</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>is_contract</td>
+<td><code>true</code> if the address is a smart contract, <code>false</code> otherwise</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>is_erc20</td>
+<td><code>true</code> if the address is an ERC20, <code>false</code> otherwise</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>is_erc721</td>
+<td><code>true</code> if the address is an ERC720, <code>false</code> otherwise</td>
+<td>bool</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Tools</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href=/docs/chifra/accounts/#chifra-names>chifra names</a></td>
+<td>query addresses or names of well known accounts</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id=abi>Abi<a href=#abi class=anchor aria-hidden=true>#</a> </h2>
+<p>An ABI describes an Application Binary Interface &ndash; in other words, the <a href>Function</a> and Event signatures for a given smart contract. Along with <a href>Names</a> the use of ABIs goes a very long way towards making your Etheruem data much more understandable.</p>
+<p>Similar to names of addresses, ABI files are not available on-chain which means they must be acquired somewhere. Unfortantely, the Ethereum community has not yet understand that EtherScan is not a good place to store this very important information. For this reason, TrueBlocks uses EtherScan to acquire ABI files and therefor one needs to get an EtherScan API key to use this function.</p>
+<p>Below is a list of the data fields for abis. Following that are the commands that produce or manage abis.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>address</td>
+<td>the smart contract that implements this abi</td>
+<td>address</td>
+</tr>
+<tr>
+<td>interfaces</td>
+<td>the list of events and functions on this abi</td>
+<td>CFunctionArray</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><strong>Tools</strong></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href=/docs/chifra/accounts/#chifra-abis>chifra abis</a></td>
+<td>fetches the ABI for a smart contract</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notes</strong></p>
+<p>See the <code>chifra abis</code> command line for information about getting an EtherScan key.</p>
+<hr>
+<h2 id=function>Function<a href=#function class=anchor aria-hidden=true>#</a> </h2>
+<p>ABI files are derived from the Solidity source code of a smart contract by extracting the canonical function and event signatures in a JSON structure. The function signatures are hashed (using keccak) into four-byte encodings for functions and 32-byte encodings for events. Because the blockchain only deals with byte data, TrueBlocks needs a way to decode the bytes back into the human-readable function and event signatures. We call this process <code>--articulate</code>. Most TrueBlocks commands provide an <code>--articulate</code> option. See the commands themselves for more information.</p>
+<p>Below is a list of the data fields for functions. Following that are the commands that produce or manage functions.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>the name of the interface</td>
+<td>string</td>
+</tr>
+<tr>
+<td>type</td>
+<td>the type of the interface, either &lsquo;event&rsquo; or &lsquo;function&rsquo;</td>
+<td>string</td>
+</tr>
+<tr>
+<td>signature</td>
+<td>the canonical signature of the interface</td>
+<td>string</td>
+</tr>
+<tr>
+<td>encoding</td>
+<td>the signature encoded with keccak</td>
+<td>string</td>
+</tr>
+<tr>
+<td>inputs</td>
+<td>the input parameters to the function, if any</td>
+<td>CParameterArray</td>
+</tr>
+<tr>
+<td>outputs</td>
+<td>the output parameters to the function, if any</td>
+<td>CParameterArray</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Tools</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href=/docs/chifra/chaindata/>chaindata commands</a></td>
+<td>various commands dealing with blockchain data</td>
+</tr>
+<tr>
+<td><a href=/docs/chifra/accounts/#chifra-export>chifra export</a></td>
+<td>export full detail of transactions for one or more addresses</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id=parameter>Parameter<a href=#parameter class=anchor aria-hidden=true>#</a> </h2>
+<p>Parameters are a constituant part of a <a href=/data-model/accounts/#function>Function or Event</a>. The parameters of a function are each individual value passed into the function. Along with the function&rsquo;s name, the parameters types (once canonicalized) are used to create a function&rsquo;s four byte signature (or an event&rsquo;s 32-byte signature). Parameters are important to TrueBlocks because we use them as part of the ABI decoding and the <code>--articulate</code> process to conver the blockchain&rsquo;s bytes into human-readable text.</p>
+<p>Below is a list of the data fields for parameters. Following that are the commands that produce or manage parameters.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>the type of this parameter</td>
+<td>string</td>
+</tr>
+<tr>
+<td>name</td>
+<td>the name of this parameter</td>
+<td>string</td>
+</tr>
+<tr>
+<td>str_default</td>
+<td>the defaul value of this parameter, if any</td>
+<td>string</td>
+</tr>
+<tr>
+<td>indexed</td>
+<td><code>true</code> if this parameter is indexed</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>internalType</td>
+<td>for composite types, the interal type of the parameter</td>
+<td>string</td>
+</tr>
+<tr>
+<td>components</td>
+<td>for composite types, the parameters making up the composite</td>
+<td>CParameterArray</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Tools</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href=/docs/chifra/accounts/#chifra-abis>chifra abis</a></td>
+<td>fetches the ABI for a smart contract</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id=base-types>Base types<a href=#base-types class=anchor aria-hidden=true>#</a> </h2>
+<p>The above documentation mentions the following basic data types.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>address</td>
+<td>a 20-byte hexidecimal string starting with &lsquo;0x&rsquo;</td>
+<td>lowercase</td>
+</tr>
+<tr>
+<td>blknum</td>
+<td>an alias for a uint64</td>
+<td></td>
+</tr>
+<tr>
+<td>bool</td>
+<td>a value either <code>true</code>, <code>false</code>, <code>1</code>, or <code>0</code></td>
+<td></td>
+</tr>
+<tr>
+<td>double</td>
+<td>a floating point number of double precision</td>
+<td></td>
+</tr>
+<tr>
+<td>int256</td>
+<td>a signed big number</td>
+<td>as a string</td>
+</tr>
+<tr>
+<td>string</td>
+<td>a normal character string</td>
+<td></td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>a 64-bit unsigned integer</td>
+<td>unix timestamp</td>
+</tr>
+<tr>
+<td>uint64</td>
+<td>a 64-bit unsigned integer</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="docs-navigation d-flex justify-content-between">
+<a class=ms-auto href=/data-model/intro/>
+<div class="card my-1">
+<div class="card-body py-2">
+Enhanced Ethereum Data &rarr;
+</div>
+</div>
+</a>
+</div>
+</main>
+</div>
+</div>
+</div>
+<footer class="footer text-muted">
+<div class=container>
+<div class=row>
+<div class="col-lg-8 order-last order-lg-first">
+<ul class=list-inline>
+<li class=list-inline-item>Powered by <a href=https://gohugo.io/>Hugo</a>, and <a href=https://getdoks.org/>Doks</a></li>
+</ul>
+</div>
+<div class="col-lg-8 order-first order-lg-last text-lg-end">
+<ul class=list-inline>
+<li class=list-inline-item><a href=https://github.com/TrueBlocks/trueblocks-docs>Improve these Docs</a></li>
+<li class=list-inline-item><a href=/privacy-policy/>Privacy</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+<script src=/js/highlight.min.ec942a9dc705691c6545c0ea48b4a76dd7a730be9478c31c9139089f95e82ccfccaee7fd8b5823a0fe005ac3dec10b8f825d9ace55908f4b6e6da407af3df293.js integrity="sha512-7JQqnccFaRxlRcDqSLSnbdenML6UeMMckTkIn5XoLM/Mruf9i1gjoP4AWsPewQuPgl2azlWQj0tubaQHrz3ykw==" crossorigin=anonymous defer></script>
+<script src=/main.min.9e62c9b0c5dc8279689cc9cb693a32c8ea1d19032f574f98c782ff59a0417d3662ff94b1a7755ab72a7a1862644bf00a58492c65aa0adabbc58080f4018c61bc.js integrity="sha512-nmLJsMXcgnlonMnLaToyyOodGQMvV0+Yx4L/WaBBfTZi/5Sxp3Vatyp6GGJkS/AKWEksZaoK2rvFgID0AYxhvA==" crossorigin=anonymous defer></script>
+<script src=/index.min.2920392d3bee72ff57da922db3d93f87bbdbae7d85d9bdfd6bac93a24c8ad220ebd77bacb49367cdadc381a7f57b96fa16cbee3821c085548638d591f04eb7cf.js integrity="sha512-KSA5LTvucv9X2pIts9k/h7vbrn2F2b39a6yTokyK0iDr13ustJNnza3Dgaf1e5b6FsvuOCHAhVSGONWR8E63zw==" crossorigin=anonymous defer></script>
+</body>
+</html>
