@@ -19,19 +19,19 @@
 <meta name=twitter:description content="_These fields describe the output of various TrueBlocks blockchain queries.
 Each data structure is created by one or more tools which are detailed below
 Block chifra blocks returns top level data specified block. You can also include an array for the blocks' transactions.
-How to get blocks  CLI:  See the command&rsquo;s documentation   API:  Calls to /blocks    Below is a list of the data fields for blocks.">
+How to get blocks  CLI:  See the command&rsquo;s documentation   API:  Calls to /blocks    Block data is made of the following data fields:">
 <meta name=twitter:site content="@TrueBlocks">
 <meta name=twitter:creator content="@TrueBlocks">
 <meta property="og:title" content="Chain Data">
 <meta property="og:description" content="_These fields describe the output of various TrueBlocks blockchain queries.
 Each data structure is created by one or more tools which are detailed below
 Block chifra blocks returns top level data specified block. You can also include an array for the blocks' transactions.
-How to get blocks  CLI:  See the command&rsquo;s documentation   API:  Calls to /blocks    Below is a list of the data fields for blocks.">
+How to get blocks  CLI:  See the command&rsquo;s documentation   API:  Calls to /blocks    Block data is made of the following data fields:">
 <meta property="og:type" content="article">
 <meta property="og:url" content="/data-model/chaindata/">
 <meta property="og:image" content="/trueblocks.png">
-<meta property="article:published_time" content="2021-09-18T09:10:08+00:00">
-<meta property="article:modified_time" content="2021-09-18T09:52:57-04:00">
+<meta property="article:published_time" content="2021-09-20T13:27:50+00:00">
+<meta property="article:modified_time" content="2021-09-20T13:41:41-04:00">
 <meta property="og:site_name" content="TrueBlocks">
 <meta property="article:publisher" content="https://www.facebook.com/">
 <meta property="article:author" content="https://www.facebook.com/">
@@ -174,7 +174,7 @@ an array for the blocks' transactions.</p>
 </ul>
 </li>
 </ul>
-<p>Below is a list of the data fields for blocks. Following that are the commands that produce or manage blocks.</p>
+<p>Block data is made of the following data fields:</p>
 <table>
 <thead>
 <tr>
@@ -236,7 +236,6 @@ an array for the blocks' transactions.</p>
 </tr>
 </tbody>
 </table>
-<hr>
 <h2 id=transaction>Transaction<a href=#transaction class=anchor aria-hidden=true>#</a> </h2>
 <p>Transactions represent eth transfers to and from other addresses.</p>
 <p>Most of the fields that TrueBlocks returns are standard to all eth transaction.
@@ -257,7 +256,7 @@ However, one field is very interesting: <code>articulatedTx</code> provides a hu
 </ul>
 </li>
 </ul>
-<p>Below is a list of the data fields for transactions. Following that are the commands that produce or manage transactions.</p>
+<p>Transaction data is made of the following data fields:</p>
 <table>
 <thead>
 <tr>
@@ -359,7 +358,6 @@ However, one field is very interesting: <code>articulatedTx</code> provides a hu
 </tr>
 </tbody>
 </table>
-<hr>
 <h2 id=receipt>Receipt<a href=#receipt class=anchor aria-hidden=true>#</a> </h2>
 <p>Receipts record the amount of gas used for a transaction among other things. If the transaction succeeded, a receipt might also have logs.</p>
 <p>If the <code>to</code> address of a transaction is <code>0x0</code>, the <code>input</code> data is considered to be the the source code (byte code) of a smart contract. In this case, if the creation of the contract succeeds, the <code>contractAddress</code> field of the receipt carries the address of the newly created contract.</p>
@@ -377,7 +375,7 @@ However, one field is very interesting: <code>articulatedTx</code> provides a hu
 </ul>
 </li>
 </ul>
-<p>Below is a list of the data fields for receipts. Following that are the commands that produce or manage receipts.</p>
+<p>Receipt data is made of the following data fields:</p>
 <table>
 <thead>
 <tr>
@@ -409,7 +407,6 @@ However, one field is very interesting: <code>articulatedTx</code> provides a hu
 </tr>
 </tbody>
 </table>
-<hr>
 <h2 id=log>Log<a href=#log class=anchor aria-hidden=true>#</a> </h2>
 <p>Logs appear in a possibly empty array in the transaction&rsquo;s receipt. They are only created if the underlying transaction suceeded. In the case where the transaction failed, no logs will appear in the receipt. Logs are only ever generated during transactions whose <code>to</code> address is a smart contract.</p>
 <h3 id=how-to-get-logs>How to get logs<a href=#how-to-get-logs class=anchor aria-hidden=true>#</a> </h3>
@@ -426,7 +423,7 @@ However, one field is very interesting: <code>articulatedTx</code> provides a hu
 </ul>
 </li>
 </ul>
-<p>Below is a list of the data fields for logs. Following that are the commands that produce or manage logs.</p>
+<p>Log data is made of the following data fields:</p>
 <table>
 <thead>
 <tr>
@@ -478,7 +475,6 @@ However, one field is very interesting: <code>articulatedTx</code> provides a hu
 </tr>
 </tbody>
 </table>
-<hr>
 <h2 id=trace>Trace<a href=#trace class=anchor aria-hidden=true>#</a> </h2>
 <p>The deepest layer of the Ethereum data is the trace. Every transaction has at least one trace which is itself a record of the transaction. If the <code>to</code> address of the transaction is a smart contract, other traces may appear, if, for example, that smart contract calls other smart contracts.</p>
 <p>Traces may be arbitrarily deep (up to the gasLimit) and ultimately represent a tree of function calls. Some transactions have 100s of traces. The format of the trace is similar to the transaction itself have a trace <code>action</code> (which contains <code>from</code>, <code>to</code>, <code>value</code> like the transaction) and the trace <code>result</code> (containing <code>gasUsed</code> like the receipt).</p>
@@ -496,7 +492,7 @@ However, one field is very interesting: <code>articulatedTx</code> provides a hu
 </ul>
 </li>
 </ul>
-<p>Below is a list of the data fields for traces. Following that are the commands that produce or manage traces.</p>
+<p>Trace data is made of the following data fields:</p>
 <table>
 <thead>
 <tr>
@@ -563,10 +559,9 @@ However, one field is very interesting: <code>articulatedTx</code> provides a hu
 </tr>
 </tbody>
 </table>
-<hr>
 <h2 id=traceaction>TraceAction<a href=#traceaction class=anchor aria-hidden=true>#</a> </h2>
 <p>Other than the first trace which is the trace of the transaction itself, traces represent calls into smart contracts. Because of this, <code>trace actions</code> closely resemble the fields of the <a href=#transactions>transaction</a>.</p>
-<p>Below is a list of the data fields for traceactions. Following that are the commands that produce or manage traceactions.</p>
+<p>Traceaction data is made of the following data fields:</p>
 <table>
 <thead>
 <tr>
@@ -608,10 +603,9 @@ However, one field is very interesting: <code>articulatedTx</code> provides a hu
 </tr>
 </tbody>
 </table>
-<hr>
 <h2 id=traceresult>TraceResult<a href=#traceresult class=anchor aria-hidden=true>#</a> </h2>
 <p>As mentioned above, other than the first trace, traces represent calls into other smart contracts. Because of this, the trace results closely resembles the fields of the <a href=#receipts>receipt</a>.</p>
-<p>Below is a list of the data fields for traceresults. Following that are the commands that produce or manage traceresults.</p>
+<p>Traceresult data is made of the following data fields:</p>
 <table>
 <thead>
 <tr>
@@ -643,7 +637,6 @@ However, one field is very interesting: <code>articulatedTx</code> provides a hu
 </tr>
 </tbody>
 </table>
-<hr>
 <h2 id=datedblock>DatedBlock<a href=#datedblock class=anchor aria-hidden=true>#</a> </h2>
 <h3 id=how-to-get-when-blocks>How to get when blocks<a href=#how-to-get-when-blocks class=anchor aria-hidden=true>#</a> </h3>
 <ul>
@@ -659,7 +652,7 @@ However, one field is very interesting: <code>articulatedTx</code> provides a hu
 </ul>
 </li>
 </ul>
-<p>Below is a list of the data fields for datedblocks. Following that are the commands that produce or manage datedblocks.</p>
+<p>Datedblock data is made of the following data fields:</p>
 <table>
 <thead>
 <tr>
@@ -686,7 +679,6 @@ However, one field is very interesting: <code>articulatedTx</code> provides a hu
 </tr>
 </tbody>
 </table>
-<hr>
 <h2 id=base-types>Base types<a href=#base-types class=anchor aria-hidden=true>#</a> </h2>
 <p>The above documentation mentions the following basic data types.</p>
 <table>

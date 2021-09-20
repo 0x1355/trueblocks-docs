@@ -26,8 +26,8 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 <meta property="og:type" content="article">
 <meta property="og:url" content="/data-model/accounts/">
 <meta property="og:image" content="/trueblocks.png">
-<meta property="article:published_time" content="2021-09-18T14:53:50+00:00">
-<meta property="article:modified_time" content="2021-09-19T01:49:55-04:00">
+<meta property="article:published_time" content="2021-09-20T13:27:50+00:00">
+<meta property="article:modified_time" content="2021-09-20T13:41:41-04:00">
 <meta property="og:site_name" content="TrueBlocks">
 <meta property="article:publisher" content="https://www.facebook.com/">
 <meta property="article:author" content="https://www.facebook.com/">
@@ -133,7 +133,30 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 <h2 id=monitor>Monitor<a href=#monitor class=anchor aria-hidden=true>#</a> </h2>
 <p>A Monitor is a list of <a href=/data-model/accounts/#appearance>Appearances</a> associated with a given address along with various details about those appearances. A monitor is created when a user expresses interest in an address by calling either <a href=/docs/chifra/accounts/#chifra-list>chifra list</a> or <a href=/docs/chifra/accounts/#chifra-export>chifra export</a> tool (or querying thier associated APIs).</p>
 <p>Once created, a monitor may be periodically <em>freshened</em> by calling either <code>chifra list</code> or <code>chifra export</code>, however, it is also possible to freshen a monitor continually with <a href=/docs/chifra/admin/#chifra-scrape>chifra scrape &ndash;monitors</a>. This tool watches the front of the chain and repeatedly calls <code>chifra list</code>.</p>
-<p>Below is a list of the data fields for monitors. Following that are the commands that produce or manage monitors.</p>
+<p>The following commands produce and manage monitors:</p>
+<table>
+<thead>
+<tr>
+<th>Tools</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href=/docs/chifra/admin/#chifra-status>chifra status monitors</a></td>
+<td>report on the status of the TrueBlocks system</td>
+</tr>
+<tr>
+<td><a href=/docs/chifra/accounts/#chifra-list>chifra list</a></td>
+<td>list appearances for one or more addresses</td>
+</tr>
+<tr>
+<td><a href=/docs/chifra/accounts/#chifra-export>chifra export</a></td>
+<td>export full detail of transactions for one or more addresses</td>
+</tr>
+</tbody>
+</table>
+<p>Monitor data is made of the following data fields:</p>
 <table>
 <thead>
 <tr>
@@ -180,6 +203,10 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 </tr>
 </tbody>
 </table>
+<h2 id=appearance>Appearance<a href=#appearance class=anchor aria-hidden=true>#</a> </h2>
+<p>An appearance is a pointer (<code>blknum, tx_id</code> pair) into the blockchain indicating where a particular address appears. This includes obvioius locations such as <code>to</code> or <code>from</code> as well as esoteric locations such as deep inside a tenth-level trace or as the miner of an uncle block. The primary goal of TrueBlocks is to indentify every appearance for any address on the chain.</p>
+<p>The TrueBlocks <a href=/data-model/the-index/>index of appearances</a> (created by <a href=/docs/chifra/admin/#chifra-scrape>chifra scrape</a>) makes the production of such a list possible. Appearances are stored in <a href=http://localhost:1313/data-model/accounts/#monitor>Monitors</a>.</p>
+<p>The following commands produce and manage appearances:</p>
 <table>
 <thead>
 <tr>
@@ -189,10 +216,6 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 </thead>
 <tbody>
 <tr>
-<td><a href=/docs/chifra/admin/#chifra-status>chifra status monitors</a></td>
-<td>report on the status of the TrueBlocks system</td>
-</tr>
-<tr>
 <td><a href=/docs/chifra/accounts/#chifra-list>chifra list</a></td>
 <td>list appearances for one or more addresses</td>
 </tr>
@@ -200,13 +223,13 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 <td><a href=/docs/chifra/accounts/#chifra-export>chifra export</a></td>
 <td>export full detail of transactions for one or more addresses</td>
 </tr>
+<tr>
+<td><a href=/docs/chifra/accounts/#chifra-monitors>chifra monitors</a></td>
+<td>delete, undelete, and remove previously created monitors</td>
+</tr>
 </tbody>
 </table>
-<hr>
-<h2 id=appearance>Appearance<a href=#appearance class=anchor aria-hidden=true>#</a> </h2>
-<p>An appearance is a pointer (<code>blknum, tx_id</code> pair) into the blockchain indicating where a particular address appears. This includes obvioius locations such as <code>to</code> or <code>from</code> as well as esoteric locations such as deep inside a tenth-level trace or as the miner of an uncle block. The primary goal of TrueBlocks is to indentify every appearance for any address on the chain.</p>
-<p>The TrueBlocks <a href=/data-model/the-index/>index of appearances</a> (created by <a href=/docs/chifra/admin/#chifra-scrape>chifra scrape</a>) makes the production of such a list possible. Appearances are stored in <a href=http://localhost:1313/data-model/accounts/#monitor>Monitors</a>.</p>
-<p>Below is a list of the data fields for appearances. Following that are the commands that produce or manage appearances.</p>
+<p>Appearance data is made of the following data fields:</p>
 <table>
 <thead>
 <tr>
@@ -248,34 +271,11 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 </tr>
 </tbody>
 </table>
-<table>
-<thead>
-<tr>
-<th>Tools</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href=/docs/chifra/accounts/#chifra-list>chifra list</a></td>
-<td>list appearances for one or more addresses</td>
-</tr>
-<tr>
-<td><a href=/docs/chifra/accounts/#chifra-export>chifra export</a></td>
-<td>export full detail of transactions for one or more addresses</td>
-</tr>
-<tr>
-<td><a href=/docs/chifra/accounts/#chifra-monitors>chifra monitors</a></td>
-<td>delete, undelete, and remove previously created monitors</td>
-</tr>
-</tbody>
-</table>
-<hr>
 <h2 id=reconciliation>Reconciliation<a href=#reconciliation class=anchor aria-hidden=true>#</a> </h2>
 <p>When exported with the <code>--accounting</code> option from <code>chifra export</code>, each transaction will have field called <code>statements</code>. Statements are an array for reconciliations. All such exported transactions will have at least one reconcilation (for ETH), however, many will have additional reconciliations for other assets (such as ERC20 and ERC721 tokens).</p>
 <p>Because DeFi is essentially swaps and trades around ERC20s, and because and &lsquo;programmable money&rsquo; allows for unlimited actions to happen under a single transaction,many times a transaction has four or five reconciliations.</p>
 <p>Reconciliations are relative to an <code>accountedFor</code> address. For this reason, the same transaction will probably have different reconciliations depending on the <code>accountedFor</code> address. Consider a simple transfer of ETH from one address to another. Obviously, the sender&rsquo;s and the recipient&rsquo;s reconciliations will differ (in opposite proportion to each other). The <code>accountedFor</code> address is always present as the <code>assetAddress</code> in the first reconciliation of the statements array.</p>
-<p>Below is a list of the data fields for reconciliations. Following that are the commands that produce or manage reconciliations.</p>
+<p>Reconciliation data is made of the following data fields:</p>
 <table>
 <thead>
 <tr>
@@ -455,12 +455,26 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 <p><strong>Notes</strong></p>
 <p><strong>Intra-block transactions</strong>: In many cases two or more transactions requiring a reconciliation may occur in a single block. Becuase the Ethereum blockchain only provides balance queries at the end of blocks, it is not possible to query for the balance of an asset at the end of transactions for which there are other following transactions in the block nor for the beginning balance for which there are transactions prior to the given transaction in the same block. In these cases, TrueBlocks simulates the beginning and ending balance as needed and adds <code>partial</code> to the <code>reconciliationType</code>.</p>
 <p><strong>Spot Price</strong>: If the <code>spotPrice</code> is available from an on-chain source (such as UniSwap), then it represents the ETH/DAI value at the time of the transaction if the reconcilation is for ETH. For other assets, the <code>spotPrice</code> represents the asset&rsquo;s value relative to <code>ETH</code>, so to price a non-ETH asset in US dollars, one would need to convert first to <code>ETH</code> then to dollars. If a price is not available on-chain, the <code>spotPrice</code> will be zero and the caller is encouraged to get the price for the asset from other sources.</p>
-<hr>
 <h2 id=name>Name<a href=#name class=anchor aria-hidden=true>#</a> </h2>
 <p>TrueBlocks allows you to associate a human-readable name with an address. This feature goes a long way towards making the blockchain data one extracts with a <a href=/data-model/accounts/#monitor>Monitor</a> much more readable.</p>
 <p>Unlike the blockchain data itself, which is globally available and impossible to censor, the association of names with address is not on chain (excepting ENS, which, while fine, is imcomplete). TrueBlocks allows you to name addresses of interest to you and either share those names (through an on-chain mechanism) or keep them private if you so desire.</p>
 <p>Over the years, we&rsquo;ve paid careful attention to the &lsquo;airwaves&rsquo; and have collected together a &lsquo;starter-set&rsquo; of named addresses which is available through the <a href=/docs/chifra/accounts/#chifra-names>chifra names</a> command line. For example, every time people say &ldquo;Show me your address, and we will airdrop some tokens&rdquo; on Twitter, we copy and paste all those addresses. We figure if you&rsquo;re going to DOX yourselves, we might as well take advantage of it. Sorry&mldr;not sorry.</p>
-<p>Below is a list of the data fields for names. Following that are the commands that produce or manage names.</p>
+<p>The following commands produce and manage names:</p>
+<table>
+<thead>
+<tr>
+<th>Tools</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href=/docs/chifra/accounts/#chifra-names>chifra names</a></td>
+<td>query addresses or names of well known accounts</td>
+</tr>
+</tbody>
+</table>
+<p>Name data is made of the following data fields:</p>
 <table>
 <thead>
 <tr>
@@ -537,6 +551,10 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 </tr>
 </tbody>
 </table>
+<h2 id=abi>Abi<a href=#abi class=anchor aria-hidden=true>#</a> </h2>
+<p>An ABI describes an Application Binary Interface &ndash; in other words, the <a href>Function</a> and Event signatures for a given smart contract. Along with <a href>Names</a> the use of ABIs goes a very long way towards making your Etheruem data much more understandable.</p>
+<p>Similar to names of addresses, ABI files are not available on-chain which means they must be acquired somewhere. Unfortantely, the Ethereum community has not yet understand that EtherScan is not a good place to store this very important information. For this reason, TrueBlocks uses EtherScan to acquire ABI files and therefor one needs to get an EtherScan API key to use this function.</p>
+<p>The following commands produce and manage abis:</p>
 <table>
 <thead>
 <tr>
@@ -546,16 +564,12 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 </thead>
 <tbody>
 <tr>
-<td><a href=/docs/chifra/accounts/#chifra-names>chifra names</a></td>
-<td>query addresses or names of well known accounts</td>
+<td><a href=/docs/chifra/accounts/#chifra-abis>chifra abis</a></td>
+<td>fetches the ABI for a smart contract</td>
 </tr>
 </tbody>
 </table>
-<hr>
-<h2 id=abi>Abi<a href=#abi class=anchor aria-hidden=true>#</a> </h2>
-<p>An ABI describes an Application Binary Interface &ndash; in other words, the <a href>Function</a> and Event signatures for a given smart contract. Along with <a href>Names</a> the use of ABIs goes a very long way towards making your Etheruem data much more understandable.</p>
-<p>Similar to names of addresses, ABI files are not available on-chain which means they must be acquired somewhere. Unfortantely, the Ethereum community has not yet understand that EtherScan is not a good place to store this very important information. For this reason, TrueBlocks uses EtherScan to acquire ABI files and therefor one needs to get an EtherScan API key to use this function.</p>
-<p>Below is a list of the data fields for abis. Following that are the commands that produce or manage abis.</p>
+<p>Abi data is made of the following data fields:</p>
 <table>
 <thead>
 <tr>
@@ -577,26 +591,30 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 </tr>
 </tbody>
 </table>
+<p><strong>Notes</strong></p>
+<p>See the <code>chifra abis</code> command line for information about getting an EtherScan key.</p>
+<h2 id=function>Function<a href=#function class=anchor aria-hidden=true>#</a> </h2>
+<p>ABI files are derived from the Solidity source code of a smart contract by extracting the canonical function and event signatures in a JSON structure. The function signatures are hashed (using keccak) into four-byte encodings for functions and 32-byte encodings for events. Because the blockchain only deals with byte data, TrueBlocks needs a way to decode the bytes back into the human-readable function and event signatures. We call this process <code>--articulate</code>. Most TrueBlocks commands provide an <code>--articulate</code> option. See the commands themselves for more information.</p>
+<p>The following commands produce and manage functions:</p>
 <table>
 <thead>
 <tr>
-<th><strong>Tools</strong></th>
+<th>Tools</th>
 <th></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href=/docs/chifra/accounts/#chifra-abis>chifra abis</a></td>
-<td>fetches the ABI for a smart contract</td>
+<td><a href=/docs/chifra/chaindata/>chaindata commands</a></td>
+<td>various commands dealing with blockchain data</td>
+</tr>
+<tr>
+<td><a href=/docs/chifra/accounts/#chifra-export>chifra export</a></td>
+<td>export full detail of transactions for one or more addresses</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Notes</strong></p>
-<p>See the <code>chifra abis</code> command line for information about getting an EtherScan key.</p>
-<hr>
-<h2 id=function>Function<a href=#function class=anchor aria-hidden=true>#</a> </h2>
-<p>ABI files are derived from the Solidity source code of a smart contract by extracting the canonical function and event signatures in a JSON structure. The function signatures are hashed (using keccak) into four-byte encodings for functions and 32-byte encodings for events. Because the blockchain only deals with byte data, TrueBlocks needs a way to decode the bytes back into the human-readable function and event signatures. We call this process <code>--articulate</code>. Most TrueBlocks commands provide an <code>--articulate</code> option. See the commands themselves for more information.</p>
-<p>Below is a list of the data fields for functions. Following that are the commands that produce or manage functions.</p>
+<p>Function data is made of the following data fields:</p>
 <table>
 <thead>
 <tr>
@@ -638,6 +656,9 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 </tr>
 </tbody>
 </table>
+<h2 id=parameter>Parameter<a href=#parameter class=anchor aria-hidden=true>#</a> </h2>
+<p>Parameters are a constituant part of a <a href=/data-model/accounts/#function>Function or Event</a>. The parameters of a function are each individual value passed into the function. Along with the function&rsquo;s name, the parameters types (once canonicalized) are used to create a function&rsquo;s four byte signature (or an event&rsquo;s 32-byte signature). Parameters are important to TrueBlocks because we use them as part of the ABI decoding and the <code>--articulate</code> process to conver the blockchain&rsquo;s bytes into human-readable text.</p>
+<p>The following commands produce and manage parameters:</p>
 <table>
 <thead>
 <tr>
@@ -647,19 +668,12 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 </thead>
 <tbody>
 <tr>
-<td><a href=/docs/chifra/chaindata/>chaindata commands</a></td>
-<td>various commands dealing with blockchain data</td>
-</tr>
-<tr>
-<td><a href=/docs/chifra/accounts/#chifra-export>chifra export</a></td>
-<td>export full detail of transactions for one or more addresses</td>
+<td><a href=/docs/chifra/accounts/#chifra-abis>chifra abis</a></td>
+<td>fetches the ABI for a smart contract</td>
 </tr>
 </tbody>
 </table>
-<hr>
-<h2 id=parameter>Parameter<a href=#parameter class=anchor aria-hidden=true>#</a> </h2>
-<p>Parameters are a constituant part of a <a href=/data-model/accounts/#function>Function or Event</a>. The parameters of a function are each individual value passed into the function. Along with the function&rsquo;s name, the parameters types (once canonicalized) are used to create a function&rsquo;s four byte signature (or an event&rsquo;s 32-byte signature). Parameters are important to TrueBlocks because we use them as part of the ABI decoding and the <code>--articulate</code> process to conver the blockchain&rsquo;s bytes into human-readable text.</p>
-<p>Below is a list of the data fields for parameters. Following that are the commands that produce or manage parameters.</p>
+<p>Parameter data is made of the following data fields:</p>
 <table>
 <thead>
 <tr>
@@ -701,21 +715,6 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 </tr>
 </tbody>
 </table>
-<table>
-<thead>
-<tr>
-<th>Tools</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href=/docs/chifra/accounts/#chifra-abis>chifra abis</a></td>
-<td>fetches the ABI for a smart contract</td>
-</tr>
-</tbody>
-</table>
-<hr>
 <h2 id=base-types>Base types<a href=#base-types class=anchor aria-hidden=true>#</a> </h2>
 <p>The above documentation mentions the following basic data types.</p>
 <table>
