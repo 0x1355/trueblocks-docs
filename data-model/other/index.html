@@ -26,8 +26,8 @@
 <meta property="og:type" content="article">
 <meta property="og:url" content="/data-model/other/">
 <meta property="og:image" content="/trueblocks.png">
-<meta property="article:published_time" content="2021-09-20T18:07:02+00:00">
-<meta property="article:modified_time" content="2021-09-20T19:03:48-04:00">
+<meta property="article:published_time" content="2021-09-20T21:00:48+00:00">
+<meta property="article:modified_time" content="2021-09-20T21:11:03-04:00">
 <meta property="og:site_name" content="TrueBlocks">
 <meta property="article:publisher" content="https://www.facebook.com/">
 <meta property="article:author" content="https://www.facebook.com/">
@@ -112,11 +112,9 @@
 <h3>On this page</h3>
 <nav id=TableOfContents>
 <ul>
-<li><a href=#quote>Quote</a>
-<ul>
-<li><a href=#how-to-get-price-quotes>How to get price quotes</a></li>
-</ul>
-</li>
+<li><a href=#function>Function</a></li>
+<li><a href=#parameter>Parameter</a></li>
+<li><a href=#quote>Quote</a></li>
 <li><a href=#base-types>Base types</a></li>
 </ul>
 </nav>
@@ -137,7 +135,134 @@
 </div>
 <a href=https://docs.trueblocks.io/docs/prologue/installing-trueblocks/#3-update-the-configs-for-your-rpc-and-api-keys>Follow these instructions to add a key to your config</a></p>
 <p><em>Each data structure is created by one or more tools which are detailed below</em></p>
+<h2 id=function>Function<a href=#function class=anchor aria-hidden=true>#</a> </h2>
+<p>ABI files are derived from the Solidity source code of a smart contract by extracting the canonical function and event signatures in a JSON structure. The function signatures are hashed (using keccak) into four-byte encodings for functions and 32-byte encodings for events. Because the blockchain only deals with byte data, TrueBlocks needs a way to decode the bytes back into the human-readable function and event signatures. We call this process <code>--articulate</code>. Most TrueBlocks commands provide an <code>--articulate</code> option. See the commands themselves for more information.</p>
+<p>The following commands produce and manage functions:</p>
+<table>
+<thead>
+<tr>
+<th>Tools</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href=/docs/chifra/accounts/#chifra-export>chifra export</a></td>
+<td>export full detail of transactions for one or more addresses</td>
+</tr>
+<tr>
+<td><a href=/docs/chifra/accounts/#chifra-abis>chifra abis</a></td>
+<td>fetches the ABI for a smart contract</td>
+</tr>
+</tbody>
+</table>
+<p>Function data is made of the following data fields:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>the name of the interface</td>
+<td>string</td>
+</tr>
+<tr>
+<td>type</td>
+<td>the type of the interface, either &lsquo;event&rsquo; or &lsquo;function&rsquo;</td>
+<td>string</td>
+</tr>
+<tr>
+<td>signature</td>
+<td>the canonical signature of the interface</td>
+<td>string</td>
+</tr>
+<tr>
+<td>encoding</td>
+<td>the signature encoded with keccak</td>
+<td>string</td>
+</tr>
+<tr>
+<td>inputs</td>
+<td>the input parameters to the function, if any</td>
+<td>CParameterArray</td>
+</tr>
+<tr>
+<td>outputs</td>
+<td>the output parameters to the function, if any</td>
+<td>CParameterArray</td>
+</tr>
+</tbody>
+</table>
+<h2 id=parameter>Parameter<a href=#parameter class=anchor aria-hidden=true>#</a> </h2>
+<p>Parameters are a constituant part of a <a href=/data-model/accounts/#function>Function or Event</a>. The parameters of a function are each individual value passed into the function. Along with the function&rsquo;s name, the parameters types (once canonicalized) are used to create a function&rsquo;s four byte signature (or an event&rsquo;s 32-byte signature). Parameters are important to TrueBlocks because we use them as part of the ABI decoding and the <code>--articulate</code> process to conver the blockchain&rsquo;s bytes into human-readable text.</p>
+<p>The following commands produce and manage parameters:</p>
+<table>
+<thead>
+<tr>
+<th>Tools</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href=/docs/chifra/accounts/#chifra-export>chifra export</a></td>
+<td>export full detail of transactions for one or more addresses</td>
+</tr>
+<tr>
+<td><a href=/docs/chifra/accounts/#chifra-abis>chifra abis</a></td>
+<td>fetches the ABI for a smart contract</td>
+</tr>
+</tbody>
+</table>
+<p>Parameter data is made of the following data fields:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>the type of this parameter</td>
+<td>string</td>
+</tr>
+<tr>
+<td>name</td>
+<td>the name of this parameter</td>
+<td>string</td>
+</tr>
+<tr>
+<td>str_default</td>
+<td>the defaul value of this parameter, if any</td>
+<td>string</td>
+</tr>
+<tr>
+<td>indexed</td>
+<td><code>true</code> if this parameter is indexed</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>internalType</td>
+<td>for composite types, the interal type of the parameter</td>
+<td>string</td>
+</tr>
+<tr>
+<td>components</td>
+<td>for composite types, the parameters making up the composite</td>
+<td>CParameterArray</td>
+</tr>
+</tbody>
+</table>
 <h2 id=quote>Quote<a href=#quote class=anchor aria-hidden=true>#</a> </h2>
+<p>Prior to sources of on-chain prices such as UniSwap, TrueBlocks would pull US dollar to Ether prices from the Poloniex price API. This data structure reports on those queries. Note that this tool has been deprecated.</p>
 <p>The following commands produce and manage quotes:</p>
 <table>
 <thead>
@@ -146,22 +271,13 @@
 <th></th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td><a href=/docs/chifra/other/#chifra-quotes>chifra quotes</a></td>
+<td>Freshen and/or display Ethereum price data.<br>This tool has been deprecated</td>
+</tr>
+</tbody>
 </table>
-<h3 id=how-to-get-price-quotes>How to get price quotes<a href=#how-to-get-price-quotes class=anchor aria-hidden=true>#</a> </h3>
-<ul>
-<li><strong>CLI</strong>:
-<ul>
-<li>run <code>chifra transactions &lt;txn_id></code>.</li>
-<li>Use the <code>--articulate</code> option to turn the <code>input</code> field human readable.</li>
-<li><a href=/docs/chifra/chaindata/#chifra-transactions>See the command&rsquo;s documentation</a></li>
-</ul>
-</li>
-<li><strong>API</strong>:
-<ul>
-<li><a href=/api#operation/chaindata-transactions>Calls to <code>/transactions</code></a></li>
-</ul>
-</li>
-</ul>
 <p>Quote data is made of the following data fields:</p>
 <table>
 <thead>
@@ -205,6 +321,11 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>bool</td>
+<td>a value either <code>true</code>, <code>false</code>, <code>1</code>, or <code>0</code></td>
+<td></td>
+</tr>
 <tr>
 <td>date</td>
 <td>a JSON formatted date</td>
