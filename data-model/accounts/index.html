@@ -92,23 +92,18 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 <div class="row flex-xl-nowrap">
 <div class="col-lg-5 col-xl-4 docs-sidebar">
 <nav class=docs-links aria-label="Main navigation">
-<h3 class="h6 text-uppercase">Prologue</h3>
+<h3>The Data Model</h3>
 <ul class=list-unstyled>
-<li><a class=docs-link href=/docs/>What is this?</a></li>
-<li><a class=docs-link href=/docs/prologue/do-i-need-a-node/>Do I need a node?</a></li>
-<li><a class=docs-link href=/docs/prologue/installing-trueblocks/>Install TrueBlocks</a></li>
-<li><a class=docs-link href=/docs/prologue/how-can-i-get-the-index/>Get the Index</a></li>
-<li><a class=docs-link href=/docs/prologue/install-explorer/>Install the Explorer Browser app</a></li>
+<li><a class=docs-link href=/data-model/intro/>Enhanced Ethereum Data</a></li>
+<li><a class=docs-link href=/data-model/the-index/>The Index</a></li>
 </ul>
-<h3 class="h6 text-uppercase">Command line</h3>
+<h3>Reference of Data fields</h3>
 <ul class=list-unstyled>
-<li><a class=docs-link href=/docs/chifra/introducing-chifra/>Introducing Chifra</a></li>
-<li><a class=docs-link href=/docs/chifra/using-chifra/>Some Chifra Examples</a></li>
-<li><a class=docs-link href=/docs/chifra/accounts/>Accounts</a></li>
-<li><a class=docs-link href=/docs/chifra/chaindata/>Chain Data</a></li>
-<li><a class=docs-link href=/docs/chifra/chainstate/>Chain State</a></li>
-<li><a class=docs-link href=/docs/chifra/admin/>Admin</a></li>
-<li><a class=docs-link href=/docs/chifra/other/>Other</a></li>
+<li><a class="docs-link active" href=/data-model/accounts/>Accounts</a></li>
+<li><a class=docs-link href=/data-model/chaindata/>Chain Data</a></li>
+<li><a class=docs-link href=/data-model/chainstate/>Chain State</a></li>
+<li><a class=docs-link href=/data-model/admin/>Admin</a></li>
+<li><a class=docs-link href=/data-model/other/>Other</a></li>
 </ul>
 </nav>
 </div>
@@ -130,21 +125,6 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 <main class="docs-content col-lg-11 col-xl-9">
 <h1>Accounts</h1>
 <p class=lead></p>
-<nav class=d-xl-none aria-label="Quaternary navigation">
-<div class=page-links>
-<h3>On this page</h3>
-<nav id=TableOfContents>
-<ul>
-<li><a href=#monitor>Monitor</a></li>
-<li><a href=#appearance>Appearance</a></li>
-<li><a href=#reconciliation>Reconciliation</a></li>
-<li><a href=#name>Name</a></li>
-<li><a href=#abi>Abi</a></li>
-<li><a href=#base-types>Base types</a></li>
-</ul>
-</nav>
-</div>
-</nav>
 <p>The primary purpose of TrueBlocks is to extract, directly from the blockchain, the entire transactional history for one or more addresses and present that information for use outside the blockchain. The results of this extraction are stored in a data structure called a <a href=/data-model/accounts/#monitor>Monitor</a>.</p>
 <p>Monitors collect together <a href=/data-model/accounts/#appearance>Appearances</a> (<code>blknum.tx_id</code> pairs) along with additional information such as <a href=/data-model/accounts/#reconciliation>Reconciliations</a> (18-decimal place accurate accounting for each asset transfer), <a href=/data-model/accounts/#names>Names</a> (associations of human-readable names with addresses), and <a href=/data-model/accounts/#abis>Abis</a> which track the &ldquo;meaning&rdquo; of each transaction through its <a href=/data-model/accounts/#function>Functions</a> and <a href=/data-model/accounts/#parameters>Parameters</a>.</p>
 <p><em>Each data structure is created by one or more tools which are detailed below</em></p>
