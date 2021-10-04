@@ -17,17 +17,17 @@
 <meta name=twitter:image content="/trueblocks.png">
 <meta name=twitter:title content="Other">
 <meta name=twitter:description content="These commands call some useful miscellaneous tools:
- chifra quotes, a rudimentary pricing tool, chifra explore a quick way to open a blockchain explorer, ethslurp an older tool that lets you call data from EtherScan. (This has issues of ceentralization and data quality, see explanation in its section).  👉 Note: some of these tools, like `ethslurp`, require an EtherScan key.  Follow these instructions to add a key to your config">
+ chifra quotes, a rudimentary pricing tool, chifra explore a quick way to open a blockchain explorer, ethslurp an older tool that lets you call data from EtherScan. (This has issues of centralization and data quality, see explanation in its section).  👉 Note: some of these tools, like `ethslurp`, require an EtherScan key.  Follow these instructions to add a key to your config">
 <meta name=twitter:site content="@TrueBlocks">
 <meta name=twitter:creator content="@TrueBlocks">
 <meta property="og:title" content="Other">
 <meta property="og:description" content="These commands call some useful miscellaneous tools:
- chifra quotes, a rudimentary pricing tool, chifra explore a quick way to open a blockchain explorer, ethslurp an older tool that lets you call data from EtherScan. (This has issues of ceentralization and data quality, see explanation in its section).  👉 Note: some of these tools, like `ethslurp`, require an EtherScan key.  Follow these instructions to add a key to your config">
+ chifra quotes, a rudimentary pricing tool, chifra explore a quick way to open a blockchain explorer, ethslurp an older tool that lets you call data from EtherScan. (This has issues of centralization and data quality, see explanation in its section).  👉 Note: some of these tools, like `ethslurp`, require an EtherScan key.  Follow these instructions to add a key to your config">
 <meta property="og:type" content="article">
 <meta property="og:url" content="/docs/chifra/other/">
 <meta property="og:image" content="/trueblocks.png">
-<meta property="article:published_time" content="2021-10-01T21:28:07+00:00">
-<meta property="article:modified_time" content="2021-10-02T18:27:10-04:00">
+<meta property="article:published_time" content="2021-10-03T18:47:03+00:00">
+<meta property="article:modified_time" content="2021-10-03T21:09:53-04:00">
 <meta property="og:site_name" content="TrueBlocks">
 <meta property="article:publisher" content="https://www.facebook.com/">
 <meta property="article:author" content="https://www.facebook.com/">
@@ -117,21 +117,8 @@
 <h3>On this page</h3>
 <nav id=TableOfContents>
 <ul>
-<li><a href=#chifra-quotes>chifra quotes</a>
-<ul>
-<li><a href=#usage>usage</a></li>
-</ul>
-</li>
-<li><a href=#chifra-explore>chifra explore</a>
-<ul>
-<li><a href=#usage-1>usage</a></li>
-</ul>
-</li>
-<li><a href=#chifra-slurp>chifra slurp</a>
-<ul>
-<li><a href=#usage-2>usage</a></li>
-</ul>
-</li>
+<li><a href=#chifra-quotes>chifra quotes</a></li>
+<li><a href=#chifra-explore>chifra explore</a></li>
 </ul>
 </nav>
 </div>
@@ -143,7 +130,7 @@
 <ul>
 <li><code>chifra quotes</code>, a rudimentary pricing tool,</li>
 <li><code>chifra explore</code> a quick way to open a blockchain explorer,</li>
-<li><code>ethslurp</code> an older tool that lets you call data from EtherScan. (This has issues of ceentralization and data quality, see explanation in its section).</li>
+<li><code>ethslurp</code> an older tool that lets you call data from EtherScan. (This has issues of centralization and data quality, see explanation in its section).</li>
 </ul>
 <p><div class="alert alert-warning d-flex" role=alert>
 <div class="flex-shrink-1 alert-icon">👉</div>
@@ -152,161 +139,50 @@
 <a href=https://docs.trueblocks.io/docs/prologue/installing-trueblocks/#3-update-the-configs-for-your-rpc-and-api-keys>Follow these instructions to add a key to your config</a></p>
 <h2 id=chifra-quotes>chifra quotes<a href=#chifra-quotes class=anchor aria-hidden=true>#</a> </h2>
 <p>The <code>chifra quotes</code> tool provides USD ($) price data to other tools and to the command line. Currently, <code>chifra quotes</code> retrieves its price data from the Poloniex API. In future versions, we will add other sources and provide a mechanism for fair averaging. Ultimately, as more of this type of price data becomes available on chain, we will use those source, but this is not yet implemented.</p>
-<h3 id=usage>usage<a href=#usage class=anchor aria-hidden=true>#</a> </h3>
-<p><code>Usage:</code> chifra quotes [-f|-p|-a|-e|-v|-h]<br>
-<code>Purpose:</code> Freshen and/or display Ethereum price data. This tool has been deprecated.</p>
-<p><code>Where:</code></p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Option</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td nowrap>‐f</td>
-<td nowrap>‐‐freshen</td>
-<td nowrap>Freshen price database</td>
-</tr>
-<tr>
-<td nowrap>‐p</td>
-<td nowrap>‐‐period &lt;val></td>
-<td nowrap>increment of display, one of [5, 15, 30, 60, 120, 240,<br>1440, 10080, hourly, daily, weekly]</td>
-</tr>
-<tr>
-<td nowrap>‐a</td>
-<td nowrap>‐‐pair string</td>
-<td nowrap>which price pair to freshen or list (see Poloniex)</td>
-</tr>
-<tr>
-<td nowrap>‐e</td>
-<td nowrap>‐‐feed &lt;val></td>
-<td nowrap>the feed for the price data, one of [poloniex, maker,<br>tellor]</td>
-</tr>
-<tr>
-<td nowrap>‐x</td>
-<td nowrap>‐‐fmt &lt;val></td>
-<td nowrap>export format, one of [none, json, txt, csv, api]</td>
-</tr>
-<tr>
-<td nowrap>‐v</td>
-<td nowrap>‐‐verbose</td>
-<td nowrap>set verbose level (optional level defaults to 1)</td>
-</tr>
-<tr>
-<td nowrap>‐h</td>
-<td nowrap>‐‐help</td>
-<td nowrap>display this help screen</td>
-</tr>
-</tbody>
-</table>
-<p><code>Notes:</code></p>
-<ul>
-<li>Valid pairs include any pair from the public Poloniex&rsquo;s API here:
-https://poloniex.com/public?command=returnCurrencies.</li>
-<li>Due to restrictions from Poloniex, this tool retrieves only 30 days of data
-at a time. You must repeatedly run this command until the data is up-to-date.</li>
-</ul>
+<pre><code class=language-[plaintext]>Purpose:
+  Freshen or display Ethereum price data.
+
+Usage:
+  chifra quotes [flags]
+
+Flags:
+  -f, --freshen         Freshen price database
+  -p, --period string   increment of display
+                        One of 5, 15, 30, 60, 120, 240, 1440, 10080, hourly, daily, weekly
+  -a, --pair string     which price pair to freshen or list (see Poloniex)
+  -e, --feed string     the feed for the price data
+                        One of poloniex, maker, tellor
+
+Global Flags:
+  -x, --fmt string   export format, one of [none|json*|txt|csv|api]
+  -h, --help         display this help screen
+  -v, --verbose      enable verbose (increase detail with --log_level)
+
+Notes:
+  - Due to restrictions from Poloniex, this tool retrieves only 30 days of data at a time. You must repeatedly run this command until the data is up-to-date.
+</code></pre>
 <p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/tools/getQuotes><code>tools/getQuotes</code></a></p>
 <h2 id=chifra-explore>chifra explore<a href=#chifra-explore class=anchor aria-hidden=true>#</a> </h2>
 <p><code>chifra explore</code> opens Etherscan (and other explorers &ndash; including our own) to the block, transaction hash, or address you specify. It&rsquo;s a handy (configurable) way to open an explorer from the command line, nothing more.</p>
-<h3 id=usage-1>usage<a href=#usage-1 class=anchor aria-hidden=true>#</a> </h3>
-<p><code>Usage:</code> chifra explore [-l|-g|-h] &lt;term> [term&mldr;]<br>
-<code>Purpose:</code> Open an explorer for one or more addresses, blocks, or transactions.</p>
-<p><code>Where:</code></p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Option</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td nowrap></td>
-<td nowrap>terms</td>
-<td nowrap>one or more addresses, names, block, or transaction<br>identifiers</td>
-</tr>
-<tr>
-<td nowrap>‐l</td>
-<td nowrap>‐‐local</td>
-<td nowrap>open the local TrueBlocks explorer</td>
-</tr>
-<tr>
-<td nowrap>‐g</td>
-<td nowrap>‐‐google</td>
-<td nowrap>search google excluding popular blockchain explorers</td>
-</tr>
-<tr>
-<td nowrap>‐h</td>
-<td nowrap>‐‐help</td>
-<td nowrap>display this help screen</td>
-</tr>
-</tbody>
-</table>
+<pre><code class=language-[plaintext]>Purpose:
+  Open an explorer for a given address, block, or transaction.
+
+Usage:
+  chifra explore [flags] &lt;term&gt; [term...]
+
+Arguments:
+  terms - one or more addresses, names, block, or transaction identifiers
+
+Flags:
+  -l, --local    open the local TrueBlocks explorer
+  -g, --google   search google excluding popular blockchain explorers
+
+Global Flags:
+  -x, --fmt string   export format, one of [none|json*|txt|csv|api]
+  -h, --help         display this help screen
+  -v, --verbose      enable verbose (increase detail with --log_level)
+</code></pre>
 <p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/apps/fireStorm><code>apps/fireStorm</code></a></p>
-<h2 id=chifra-slurp>chifra slurp<a href=#chifra-slurp class=anchor aria-hidden=true>#</a> </h2>
-<p><code>chifra slurp</code> is the first tool we built in the Ethereum space. It even has its <a href=http://ethslurp.com>own website</a>.</p>
-<p>While it&rsquo;s useful, it has two shortcomings. First, it is fully centralized, pulling its data from <a href=http://etherscan.io>http://etherscan.io</a>. Second, is that it does not report every transaction for a given account. This is actually a shortcoming with EtherScan. It&rsquo;s too complicated to explain here, but see our blog.</p>
-<p>While <code>chifra slurp</code> has its shortcomings, it does provides some nice features. You may use it to pull any transaction initiated by an EOA for example or to explore mining rewards. Visit the above referenced website for more information.</p>
-<h3 id=usage-2>usage<a href=#usage-2 class=anchor aria-hidden=true>#</a> </h3>
-<p><code>Usage:</code> chifra slurp [-t|-p|-v|-h] &lt;address> [address&mldr;] [block&mldr;]<br>
-<code>Purpose:</code> Fetch data from EtherScan for any address.</p>
-<p><code>Where:</code></p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Option</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td nowrap></td>
-<td nowrap>addrs</td>
-<td nowrap>one or more addresses to slurp from Etherscan (required)</td>
-</tr>
-<tr>
-<td nowrap></td>
-<td nowrap>blocks</td>
-<td nowrap>an optional range of blocks to slurp</td>
-</tr>
-<tr>
-<td nowrap>‐t</td>
-<td nowrap>‐‐types &lt;val></td>
-<td nowrap>which types of transactions to request, one or more<br>of [ext, int, token, nfts, miner, uncles, all]</td>
-</tr>
-<tr>
-<td nowrap>‐p</td>
-<td nowrap>‐‐appearances</td>
-<td nowrap>show only the blocknumer.tx_id appearances of the exported<br>transactions</td>
-</tr>
-<tr>
-<td nowrap>‐x</td>
-<td nowrap>‐‐fmt &lt;val></td>
-<td nowrap>export format, one of [none, json, txt, csv, api]</td>
-</tr>
-<tr>
-<td nowrap>‐v</td>
-<td nowrap>‐‐verbose</td>
-<td nowrap>set verbose level (optional level defaults to 1)</td>
-</tr>
-<tr>
-<td nowrap>‐h</td>
-<td nowrap>‐‐help</td>
-<td nowrap>display this help screen</td>
-</tr>
-</tbody>
-</table>
-<p><code>Notes:</code></p>
-<ul>
-<li>Portions of this software are Powered by Etherscan.io APIs.</li>
-</ul>
-<p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/tools/ethslurp><code>tools/ethslurp</code></a></p>
 <p class=edit-page><a href=https://github.com/TrueBlocks/trueblocks-docs/blob/master/content/docs/chifra/other.md><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828.0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>Edit this page on GitHub</a></p>
 <div class="docs-navigation d-flex justify-content-between">
 <a href=/docs/chifra/admin/>
@@ -340,6 +216,6 @@ at a time. You must repeatedly run this command until the data is up-to-date.</l
 </footer>
 <script src=/js/highlight.min.ec942a9dc705691c6545c0ea48b4a76dd7a730be9478c31c9139089f95e82ccfccaee7fd8b5823a0fe005ac3dec10b8f825d9ace55908f4b6e6da407af3df293.js integrity="sha512-7JQqnccFaRxlRcDqSLSnbdenML6UeMMckTkIn5XoLM/Mruf9i1gjoP4AWsPewQuPgl2azlWQj0tubaQHrz3ykw==" crossorigin=anonymous defer></script>
 <script src=/main.min.9e62c9b0c5dc8279689cc9cb693a32c8ea1d19032f574f98c782ff59a0417d3662ff94b1a7755ab72a7a1862644bf00a58492c65aa0adabbc58080f4018c61bc.js integrity="sha512-nmLJsMXcgnlonMnLaToyyOodGQMvV0+Yx4L/WaBBfTZi/5Sxp3Vatyp6GGJkS/AKWEksZaoK2rvFgID0AYxhvA==" crossorigin=anonymous defer></script>
-<script src=/index.min.a998f909ccecebf7823d30566aecc1ad8cd1886b5b9afbcaf51355f889d7e4ab7509f9687889823c7746a6569e948eae0e038fa711d363cef35409f0fd6d2ae2.js integrity="sha512-qZj5Cczs6/eCPTBWauzBrYzRiGtbmvvK9RNV+InX5Kt1CfloeImCPHdGplaelI6uDgOPpxHTY87zVAnw/W0q4g==" crossorigin=anonymous defer></script>
+<script src=/index.min.e1a3c6f1b588b6df53588fa2e896aec26025bc837229fa04fd670fd8e207ef56624acb7ed54840ff2ac9372f244180f4dd4f168cee500a24659e6e71c551a931.js integrity="sha512-4aPG8bWItt9TWI+i6JauwmAlvINyKfoE/WcP2OIH71ZiSst+1UhA/yrJNy8kQYD03U8WjO5QCiRlnm5xxVGpMQ==" crossorigin=anonymous defer></script>
 </body>
 </html>

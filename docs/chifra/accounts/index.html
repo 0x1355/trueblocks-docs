@@ -28,8 +28,8 @@ chifra list chifra list takes one or more addresses, queries the index of appear
 <meta property="og:type" content="article">
 <meta property="og:url" content="/docs/chifra/accounts/">
 <meta property="og:image" content="/trueblocks.png">
-<meta property="article:published_time" content="2021-10-01T21:28:07+00:00">
-<meta property="article:modified_time" content="2021-10-02T18:27:10-04:00">
+<meta property="article:published_time" content="2021-10-03T19:00:08+00:00">
+<meta property="article:modified_time" content="2021-10-03T21:09:53-04:00">
 <meta property="og:site_name" content="TrueBlocks">
 <meta property="article:publisher" content="https://www.facebook.com/">
 <meta property="article:author" content="https://www.facebook.com/">
@@ -119,31 +119,11 @@ chifra list chifra list takes one or more addresses, queries the index of appear
 <h3>On this page</h3>
 <nav id=TableOfContents>
 <ul>
-<li><a href=#chifra-list>chifra list</a>
-<ul>
-<li><a href=#usage>usage</a></li>
-</ul>
-</li>
-<li><a href=#chifra-export>chifra export</a>
-<ul>
-<li><a href=#usage-1>usage</a></li>
-</ul>
-</li>
-<li><a href=#chifra-monitors>chifra monitors</a>
-<ul>
-<li><a href=#usage-2>usage</a></li>
-</ul>
-</li>
-<li><a href=#chifra-names>chifra names</a>
-<ul>
-<li><a href=#usage-3>usage</a></li>
-</ul>
-</li>
-<li><a href=#chifra-abis>chifra abis</a>
-<ul>
-<li><a href=#usage-4>usage</a></li>
-</ul>
-</li>
+<li><a href=#chifra-list>chifra list</a></li>
+<li><a href=#chifra-export>chifra export</a></li>
+<li><a href=#chifra-monitors>chifra monitors</a></li>
+<li><a href=#chifra-names>chifra names</a></li>
+<li><a href=#chifra-abis>chifra abis</a></li>
 </ul>
 </nav>
 </div>
@@ -156,330 +136,131 @@ chifra list chifra list takes one or more addresses, queries the index of appear
 This includes re-directing output to remote or local databases.</p>
 <h2 id=chifra-list>chifra list<a href=#chifra-list class=anchor aria-hidden=true>#</a> </h2>
 <p><code>chifra list</code> takes one or more addresses, queries the index of appearances, and builds TrueBlocks monitors. A TrueBlocks monitor is a file that contains blockNumber.transactionId pairs (transaction identifiers) representing the history of the address.</p>
-<p>Becuase TrueBlocks only extracts data from the Ethereum node when it&rsquo;s requested, the first time you list an address it takes about a minute. Subsequent queries are much faster because TrueBlocks caches the results.</p>
+<p>Because TrueBlocks only extracts data from the Ethereum node when it&rsquo;s requested, the first time you list an address it takes about a minute. Subsequent queries are much faster because TrueBlocks caches the results.</p>
 <p>Note that <code>chifra list</code> only queries the index, it does not extract the full transactional details. You may use <code>chifra export</code> for that.</p>
-<h3 id=usage>usage<a href=#usage class=anchor aria-hidden=true>#</a> </h3>
-<p><code>Usage:</code> chifra list &lt;address> [address&mldr;]<br>
-<code>Purpose:</code> List appearances for the given address(es).</p>
-<p><code>Where:</code></p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Option</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td>addrs</td>
-<td>one or more addresses (0x&mldr;) to export (required)</td>
-</tr>
-<tr>
-<td>‐v</td>
-<td>‐‐verbose</td>
-<td>set verbose level (optional level defaults to 1)</td>
-</tr>
-<tr>
-<td>‐h</td>
-<td>‐‐help</td>
-<td>display this help screen</td>
-</tr>
-</tbody>
-</table>
-<p><code>Notes:</code></p>
-<ul>
-<li><code>addresses</code> must start with &lsquo;0x&rsquo; and be forty two characters long.</li>
-</ul>
+<pre><code class=language-[plaintext]>Purpose:
+  List every appearance of an address anywhere on the chain.
+
+Usage:
+  chifra list [flags] &lt;address&gt; [address...]
+
+Arguments:
+  addrs - one or more addresses (0x...) to list (required)
+
+Flags:
+  -U, --count   present only the number of records
+
+Global Flags:
+  -x, --fmt string   export format, one of [none|json*|txt|csv|api]
+  -h, --help         display this help screen
+  -v, --verbose      enable verbose (increase detail with --log_level)
+</code></pre>
 <p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/apps/acctExport><code>apps/acctExport</code></a></p>
 <h2 id=chifra-export>chifra export<a href=#chifra-export class=anchor aria-hidden=true>#</a> </h2>
 <p>The <code>chifra export</code> tools provides a major part of the functionality of the TrueBlocks system. Using the index of appearances created with <code>chifra scrape</code> and the list of transaction identifiers created with <code>chifra list</code>, <code>chifra export</code> completes the actual extraction of an address&rsquo;s transactional history from the node.</p>
 <p>You may use <code>topics</code>, <code>fourbyte</code> values at the start of a transaction&rsquo;s input data, and/or a log&rsquo;s <code>source address</code> or <code>emitter</code> to filter the results.</p>
 <p>You may also choose which portions of the Ethereum data structures (<code>--transactions</code>, <code>--logs</code>, <code>--traces</code>, etc.) as you wish.</p>
 <p>By default, the results of the extraction are delivered to your console, however, you may export the results to any database (with a little bit of work). The format of the data, its content and its destination are up to you.</p>
-<h3 id=usage-1>usage<a href=#usage-1 class=anchor aria-hidden=true>#</a> </h3>
-<p><code>Usage:</code> chifra export [-p|-r|-A|-l|-t|-C|-a|-i|-R|-y|-U|-c|-e|-v|-h] &lt;address> [address&mldr;] [topics] [fourbytes]<br>
-<code>Purpose:</code> Export full detail of transactions for one or more addresses.</p>
-<p><code>Where:</code></p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Option</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td nowrap></td>
-<td nowrap>addrs</td>
-<td nowrap>one or more addresses (0x&mldr;) to export (required)</td>
-</tr>
-<tr>
-<td nowrap></td>
-<td nowrap>topics</td>
-<td nowrap>filter by one or more log topics (only for &ndash;logs option)</td>
-</tr>
-<tr>
-<td nowrap></td>
-<td nowrap>fourbytes</td>
-<td nowrap>filter by one or more fourbytes (only for transactions<br>and trace options)</td>
-</tr>
-<tr>
-<td nowrap>‐p</td>
-<td nowrap>‐‐appearances</td>
-<td nowrap>export a list of appearances</td>
-</tr>
-<tr>
-<td nowrap>‐r</td>
-<td nowrap>‐‐receipts</td>
-<td nowrap>export receipts instead of transaction list</td>
-</tr>
-<tr>
-<td nowrap>‐A</td>
-<td nowrap>‐‐statements</td>
-<td nowrap>for use with &ndash;accounting option only, export only<br>reconciliation statements</td>
-</tr>
-<tr>
-<td nowrap>‐l</td>
-<td nowrap>‐‐logs</td>
-<td nowrap>export logs instead of transaction list</td>
-</tr>
-<tr>
-<td nowrap>‐t</td>
-<td nowrap>‐‐traces</td>
-<td nowrap>export traces instead of transaction list</td>
-</tr>
-<tr>
-<td nowrap>‐C</td>
-<td nowrap>‐‐accounting</td>
-<td nowrap>export accounting records instead of transaction list</td>
-</tr>
-<tr>
-<td nowrap>‐a</td>
-<td nowrap>‐‐articulate</td>
-<td nowrap>articulate transactions, traces, logs, and outputs</td>
-</tr>
-<tr>
-<td nowrap>‐i</td>
-<td nowrap>‐‐cache_txs</td>
-<td nowrap>write transactions to the cache (see notes)</td>
-</tr>
-<tr>
-<td nowrap>‐R</td>
-<td nowrap>‐‐cache_traces</td>
-<td nowrap>write traces to the cache (see notes)</td>
-</tr>
-<tr>
-<td nowrap>‐y</td>
-<td nowrap>‐‐factory</td>
-<td nowrap>scan for contract creations from the given address(es)<br>and report address of those contracts</td>
-</tr>
-<tr>
-<td nowrap></td>
-<td nowrap>‐‐emitter</td>
-<td nowrap>for log export only, export only if one of the given<br>export addresses emitted the event</td>
-</tr>
-<tr>
-<td nowrap></td>
-<td nowrap>‐‐source string</td>
-<td nowrap>for log export only, export only one of these addresses<br>emitted the event</td>
-</tr>
-<tr>
-<td nowrap></td>
-<td nowrap>‐‐relevant</td>
-<td nowrap>for log and accounting export only, if true export<br>only logs relevant to one of the given export addresses</td>
-</tr>
-<tr>
-<td nowrap>‐U</td>
-<td nowrap>‐‐count</td>
-<td nowrap>only available for &ndash;appearances mode, if present return<br>only the number of records</td>
-</tr>
-<tr>
-<td nowrap>‐c</td>
-<td nowrap>‐‐first_record &lt;num></td>
-<td nowrap>the first record to process</td>
-</tr>
-<tr>
-<td nowrap>‐e</td>
-<td nowrap>‐‐max_records &lt;num></td>
-<td nowrap>the maximum number of records to process before reporting</td>
-</tr>
-<tr>
-<td nowrap></td>
-<td nowrap>‐‐clean</td>
-<td nowrap>clean (i.e. remove duplicate appearances) from all<br>existing monitors</td>
-</tr>
-<tr>
-<td nowrap>‐x</td>
-<td nowrap>‐‐fmt &lt;val></td>
-<td nowrap>export format, one of [none, json, txt, csv, api]</td>
-</tr>
-<tr>
-<td nowrap>‐v</td>
-<td nowrap>‐‐verbose</td>
-<td nowrap>set verbose level (optional level defaults to 1)</td>
-</tr>
-<tr>
-<td nowrap>‐h</td>
-<td nowrap>‐‐help</td>
-<td nowrap>display this help screen</td>
-</tr>
-</tbody>
-</table>
-<p><code>Notes:</code></p>
-<ul>
-<li>An <code>address</code> must start with &lsquo;0x&rsquo; and be forty-two characters long.</li>
-</ul>
-<p><code>Configurable Items:</code></p>
-<ul>
-<li><code>cache_txs</code>: write transactions to the cache (see notes).</li>
-<li><code>cache_traces</code>: write traces to the cache (see notes).</li>
-<li><code>skip_ddos</code>: toggle skipping over 2016 dDos transactions (&lsquo;on&rsquo; by default).</li>
-<li><code>max_traces</code>: if &ndash;skip_ddos is on, this many traces defines what a ddos transaction
-is (default = 250).</li>
-</ul>
+<pre><code class=language-[plaintext]>Purpose:
+  Export full detail of transactions for one or more addresses.
+
+Usage:
+  chifra export [flags] &lt;address&gt; [address...] [topics...] [fourbytes...]
+
+Arguments:
+  addrs - one or more addresses (0x...) to export (required)
+  topics - filter by one or more log topics (only for --logs option)
+  fourbytes - filter by one or more fourbytes (only for transactions and trace options)
+
+Flags:
+  -p, --appearances         export a list of appearances
+  -r, --receipts            export receipts instead of transaction list
+  -A, --statements          for use with --accounting option only, export only reconciliation statements
+  -l, --logs                export logs instead of transaction list
+  -t, --traces              export traces instead of transaction list
+  -C, --accounting          export accounting records instead of transaction list
+  -a, --articulate          articulate transactions, traces, logs, and outputs
+  -i, --cache_txs           write transactions to the cache (see notes)
+  -R, --cache_traces        write traces to the cache (see notes)
+  -y, --factory             scan for contract creations from the given address(es) and report address of those contracts
+      --emitter             for log export only, export only if one of the given export addresses emitted the event
+      --source strings      for log export only, export only one of these addresses emitted the event
+      --relevant            for log and accounting export only, if true export only logs relevant to one of the given export addresses
+  -U, --count               only available for --appearances mode, if present, return only the number of records
+  -c, --first_record uint   the first record to process
+  -e, --max_records uint    the maximum number of records to process before reporting (default 250)
+      --clean               clean (i.e. remove duplicate appearances) from all existing monitors
+
+Global Flags:
+  -x, --fmt string   export format, one of [none|json*|txt|csv|api]
+  -h, --help         display this help screen
+  -v, --verbose      enable verbose (increase detail with --log_level)
+
+Notes:
+  - An address must start with '0x' and be forty-two characters long.
+</code></pre>
 <p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/apps/acctExport><code>apps/acctExport</code></a></p>
 <h2 id=chifra-monitors>chifra monitors<a href=#chifra-monitors class=anchor aria-hidden=true>#</a> </h2>
-<p>A TrueBlock monitor is simply a file on your computer that represents the transactional history of a given Ethereum address. Monitors do not exist until you indicate your interest in a certain address. (See <code>chifra list</code>.)</p>
+<p>A TrueBlocks monitor is simply a file on your computer that represents the transactional history of a given Ethereum address. Monitors do not exist until you indicate your interest in a certain address. (See <code>chifra list</code>.)</p>
 <p>You may use the <code>--delete</code> command to delete (or undelete if already deleted) an address. The monitor is not removed from your computer if you delete it. It is just marked as deleted making it invisible to the TrueBlocks explorer.</p>
-<p>Use the <code>--remove</code> command to permanently remove a monitor from your computer. This is an irreversable operation.</p>
-<h3 id=usage-2>usage<a href=#usage-2 class=anchor aria-hidden=true>#</a> </h3>
-<p><code>Usage:</code> chifra monitors [-d|-r|-v|-h] &lt;address> [address&mldr;]<br>
-<code>Purpose:</code> Delete, undelete, and remove previously created monitors.</p>
-<p><code>Where:</code></p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Option</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td>addrs</td>
-<td>one or more addresses (0x&mldr;) to export (required)</td>
-</tr>
-<tr>
-<td></td>
-<td>‐‐delete</td>
-<td>delete a previously created monitor (or undelete if already deleted)</td>
-</tr>
-<tr>
-<td></td>
-<td>‐‐remove</td>
-<td>remove a previously deleted monitor</td>
-</tr>
-<tr>
-<td>‐v</td>
-<td>‐‐verbose</td>
-<td>set verbose level (optional level defaults to 1)</td>
-</tr>
-<tr>
-<td>‐h</td>
-<td>‐‐-help</td>
-<td>display this help screen</td>
-</tr>
-</tbody>
-</table>
-<p><code>Notes:</code></p>
-<ul>
-<li><code>addresses</code> must start with &lsquo;0x&rsquo; and be forty two characters long.</li>
-</ul>
+<p>Use the <code>--remove</code> command to permanently remove a monitor from your computer. This is an irreversible operation.</p>
+<pre><code class=language-[plaintext]>Purpose:
+  Add, remove, clean, and list address monitors.
+
+Usage:
+  chifra monitors [flags] &lt;address&gt; [address...]
+
+Arguments:
+  addrs - one or more addresses (0x...) to process (required)
+
+Flags:
+  -p, --appearances   export a list of appearances
+  -U, --count         present only the number of records
+      --clean         clean (i.e. remove duplicate appearances) from all existing monitors
+
+Global Flags:
+  -x, --fmt string   export format, one of [none|json*|txt|csv|api]
+  -h, --help         display this help screen
+  -v, --verbose      enable verbose (increase detail with --log_level)
+
+Notes:
+  - An address must start with '0x' and be forty-two characters long.
+</code></pre>
 <p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/apps/acctExport><code>apps/acctExport</code></a></p>
 <h2 id=chifra-names>chifra names<a href=#chifra-names class=anchor aria-hidden=true>#</a> </h2>
 <p><code>chifra names</code> is a surprisingly useful tool. It allows one to associate textual names with Ethereum addresses. One may ask why this is necessary given that ENS exists. The answer is a single word: &ldquo;privacy&rdquo;. ENS names are public. In many cases, users desire to keep personal addresses private. Try to do this on a website.</p>
-<p>Like <code>chifra abis</code>, this tool is useful from the command line but is primarily used in support of other tools, especially <code>chifra export</code> where naming addresses becomes the single best way to turn unintellagable blockchain data into understandable information.</p>
+<p>Like <code>chifra abis</code>, this tool is useful from the command line but is primarily used in support of other tools, especially <code>chifra export</code> where naming addresses becomes the single best way to turn unintelligible blockchain data into understandable information.</p>
 <p>The various options allow you to search and filter the results. The <code>collections</code> and <code>tags</code> options are used primarily by the TrueBlocks explorer.</p>
 <p>You may use the TrueBlocks explorer to manage (add, edit, delete) address-name associations.</p>
-<h3 id=usage-3>usage<a href=#usage-3 class=anchor aria-hidden=true>#</a> </h3>
-<p><code>Usage:</code> chifra names [-e|-m|-l|-c|-p|-n|-a|-s|-g|-v|-h] &lt;term> [term&mldr;]<br>
-<code>Purpose:</code> Query addresses or names of well known accounts.</p>
-<p><code>Where:</code></p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Option</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td nowrap></td>
-<td nowrap>terms</td>
-<td nowrap>a space separated list of one or more search terms<br>(required)</td>
-</tr>
-<tr>
-<td nowrap>‐e</td>
-<td nowrap>‐‐expand</td>
-<td nowrap>expand search to include all fields (search name, address,<br>and symbol otherwise)</td>
-</tr>
-<tr>
-<td nowrap>‐m</td>
-<td nowrap>‐‐match_case</td>
-<td nowrap>do case-sensitive search</td>
-</tr>
-<tr>
-<td nowrap>‐l</td>
-<td nowrap>‐‐all</td>
-<td nowrap>include all accounts in the search</td>
-</tr>
-<tr>
-<td nowrap>‐c</td>
-<td nowrap>‐‐custom</td>
-<td nowrap>include your custom named accounts</td>
-</tr>
-<tr>
-<td nowrap>‐p</td>
-<td nowrap>‐‐prefund</td>
-<td nowrap>include prefund accounts</td>
-</tr>
-<tr>
-<td nowrap>‐n</td>
-<td nowrap>‐‐named</td>
-<td nowrap>include well know token and airdrop addresses in the<br>search</td>
-</tr>
-<tr>
-<td nowrap>‐a</td>
-<td nowrap>‐‐addr</td>
-<td nowrap>display only addresses in the results (useful for scripting)</td>
-</tr>
-<tr>
-<td nowrap>‐s</td>
-<td nowrap>‐‐collections</td>
-<td nowrap>display collections data</td>
-</tr>
-<tr>
-<td nowrap>‐g</td>
-<td nowrap>‐‐tags</td>
-<td nowrap>export the list of tags and subtags only</td>
-</tr>
-<tr>
-<td nowrap>‐x</td>
-<td nowrap>‐‐fmt &lt;val></td>
-<td nowrap>export format, one of [none, json, txt, csv, api]</td>
-</tr>
-<tr>
-<td nowrap>‐v</td>
-<td nowrap>‐‐verbose</td>
-<td nowrap>set verbose level (optional level defaults to 1)</td>
-</tr>
-<tr>
-<td nowrap>‐h</td>
-<td nowrap>‐‐help</td>
-<td nowrap>display this help screen</td>
-</tr>
-</tbody>
-</table>
-<p><code>Notes:</code></p>
-<ul>
-<li>The tool will accept up to three terms, each of which must match against any field in the database.</li>
-<li>The <code>--match_case</code> option enables case sensitive matching.</li>
-</ul>
+<pre><code class=language-[plaintext]>Purpose:
+  Query addresses or names of well known accounts.
+
+Usage:
+  chifra names [flags] &lt;term&gt; [term...]
+
+Arguments:
+  terms - a space separated list of one or more search terms (required)
+
+Flags:
+  -e, --expand        expand search to include all fields (search name, address, and symbol otherwise)
+  -m, --match_case    do case-sensitive search
+  -l, --all           include all accounts in the search
+  -c, --custom        include your custom named accounts
+  -p, --prefund       include prefund accounts
+  -n, --named         include well know token and airdrop addresses in the search
+  -a, --addr          display only addresses in the results (useful for scripting)
+  -s, --collections   display collections data
+  -g, --tags          export the list of tags and subtags only
+
+Global Flags:
+  -x, --fmt string   export format, one of [none|json*|txt|csv|api]
+  -h, --help         display this help screen
+  -v, --verbose      enable verbose (increase detail with --log_level)
+
+Notes:
+  - The tool will accept up to three terms, each of which must match against any field in the database.
+  - The --match_case option enables case sensitive matching.
+</code></pre>
 <p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/tools/ethNames><code>tools/ethNames</code></a></p>
 <h2 id=chifra-abis>chifra abis<a href=#chifra-abis class=anchor aria-hidden=true>#</a> </h2>
 <p><code>chifra abis</code> retrieves a smart contract&rsquo;s ABI file either from the current local folder, from the TrueBlocks cache, from <a href=http://etherscan.io>Etherscan</a>, or (in the future) from ENS and Sourcify.</p>
@@ -487,60 +268,28 @@ is (default = 250).</li>
 <p>The <code>--known</code> option prints a list of standard and semi-standard function signatures such as the ERC20 standard, various OpenZeppelin functions, the base and pair Uniswap functions, etc.</p>
 <p>The <code>--find</code> option is experimental. It scans a cross of approx. 100,000 function names with approx. 700 function signatures, generating at each cross a four byte signature and looking for a match to the provided fourbyte. Very infrequently, this tool will find a match for an otherwise unknown fourbyte string.</p>
 <p>The <code>--sol</code> option will convert a single Solidity file found in the current folder into an ABI.</p>
-<h3 id=usage-4>usage<a href=#usage-4 class=anchor aria-hidden=true>#</a> </h3>
-<p><code>Usage:</code> chifra abis [-k|-s|-f|-v|-h] &lt;address> [address&mldr;]<br>
-<code>Purpose:</code> Fetches the ABI for a smart contract.</p>
-<p><code>Where:</code></p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Option</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td nowrap></td>
-<td nowrap>addrs</td>
-<td nowrap>a list of one or more smart contracts whose ABIs to<br>display (required)</td>
-</tr>
-<tr>
-<td nowrap>‐k</td>
-<td nowrap>‐‐known</td>
-<td nowrap>load common &lsquo;known&rsquo; ABIs from cache</td>
-</tr>
-<tr>
-<td nowrap>‐s</td>
-<td nowrap>‐‐sol string</td>
-<td nowrap>file name of .sol file from which to create a new known<br>abi (without .sol)</td>
-</tr>
-<tr>
-<td nowrap>‐f</td>
-<td nowrap>‐‐find list&lt;str></td>
-<td nowrap>try to search for a function declaration given a four<br>byte code</td>
-</tr>
-<tr>
-<td nowrap>‐x</td>
-<td nowrap>‐‐fmt &lt;val></td>
-<td nowrap>export format, one of [none, json, txt, csv, api]</td>
-</tr>
-<tr>
-<td nowrap>‐v</td>
-<td nowrap>‐‐verbose</td>
-<td nowrap>set verbose level (optional level defaults to 1)</td>
-</tr>
-<tr>
-<td nowrap>‐h</td>
-<td nowrap>‐‐help</td>
-<td nowrap>display this help screen</td>
-</tr>
-</tbody>
-</table>
-<p><code>Notes:</code></p>
-<ul>
-<li>Solidity files found in the local folder with the name &lsquo;<address>.sol&rsquo; are converted to an ABI prior to processing (and then removed).</li>
-</ul>
+<pre><code class=language-[plaintext]>Purpose:
+  Fetches the ABI for a smart contract.
+
+Usage:
+  chifra abis [flags] &lt;address&gt; [address...]
+
+Arguments:
+  addrs - a list of one or more smart contracts whose ABIs to display (required)
+
+Flags:
+  -k, --known          load common 'known' ABIs from cache
+  -s, --sol string     file name of .sol file from which to create a new known abi (without .sol)
+  -f, --find strings   try to search for a function declaration given a four byte code
+
+Global Flags:
+  -x, --fmt string   export format, one of [none|json*|txt|csv|api]
+  -h, --help         display this help screen
+  -v, --verbose      enable verbose (increase detail with --log_level)
+
+Notes:
+  - Solidity files found in the local folder with the name '&lt;address&gt;.sol' are converted to an ABI prior to processing (and then removed).
+</code></pre>
 <p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/tools/grabABI><code>tools/grabABI</code></a></p>
 <p class=edit-page><a href=https://github.com/TrueBlocks/trueblocks-docs/blob/master/content/docs/chifra/accounts.md><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828.0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>Edit this page on GitHub</a></p>
 <div class="docs-navigation d-flex justify-content-between">
@@ -582,6 +331,6 @@ Chain Data &rarr;
 </footer>
 <script src=/js/highlight.min.ec942a9dc705691c6545c0ea48b4a76dd7a730be9478c31c9139089f95e82ccfccaee7fd8b5823a0fe005ac3dec10b8f825d9ace55908f4b6e6da407af3df293.js integrity="sha512-7JQqnccFaRxlRcDqSLSnbdenML6UeMMckTkIn5XoLM/Mruf9i1gjoP4AWsPewQuPgl2azlWQj0tubaQHrz3ykw==" crossorigin=anonymous defer></script>
 <script src=/main.min.9e62c9b0c5dc8279689cc9cb693a32c8ea1d19032f574f98c782ff59a0417d3662ff94b1a7755ab72a7a1862644bf00a58492c65aa0adabbc58080f4018c61bc.js integrity="sha512-nmLJsMXcgnlonMnLaToyyOodGQMvV0+Yx4L/WaBBfTZi/5Sxp3Vatyp6GGJkS/AKWEksZaoK2rvFgID0AYxhvA==" crossorigin=anonymous defer></script>
-<script src=/index.min.a998f909ccecebf7823d30566aecc1ad8cd1886b5b9afbcaf51355f889d7e4ab7509f9687889823c7746a6569e948eae0e038fa711d363cef35409f0fd6d2ae2.js integrity="sha512-qZj5Cczs6/eCPTBWauzBrYzRiGtbmvvK9RNV+InX5Kt1CfloeImCPHdGplaelI6uDgOPpxHTY87zVAnw/W0q4g==" crossorigin=anonymous defer></script>
+<script src=/index.min.e1a3c6f1b588b6df53588fa2e896aec26025bc837229fa04fd670fd8e207ef56624acb7ed54840ff2ac9372f244180f4dd4f168cee500a24659e6e71c551a931.js integrity="sha512-4aPG8bWItt9TWI+i6JauwmAlvINyKfoE/WcP2OIH71ZiSst+1UhA/yrJNy8kQYD03U8WjO5QCiRlnm5xxVGpMQ==" crossorigin=anonymous defer></script>
 </body>
 </html>

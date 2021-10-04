@@ -26,8 +26,8 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 <meta property="og:type" content="article">
 <meta property="og:url" content="/data-model/accounts/">
 <meta property="og:image" content="/trueblocks.png">
-<meta property="article:published_time" content="2021-09-20T20:00:14+00:00">
-<meta property="article:modified_time" content="2021-09-20T21:11:03-04:00">
+<meta property="article:published_time" content="2021-10-03T19:59:18+00:00">
+<meta property="article:modified_time" content="2021-10-03T21:09:53-04:00">
 <meta property="og:site_name" content="TrueBlocks">
 <meta property="article:publisher" content="https://www.facebook.com/">
 <meta property="article:author" content="https://www.facebook.com/">
@@ -206,7 +206,7 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 </tbody>
 </table>
 <h2 id=appearance>Appearance<a href=#appearance class=anchor aria-hidden=true>#</a> </h2>
-<p>An appearance is a pointer (<code>blknum, tx_id</code> pair) into the blockchain indicating where a particular address appears. This includes obvioius locations such as <code>to</code> or <code>from</code> as well as esoteric locations such as deep inside a tenth-level trace or as the miner of an uncle block. The primary goal of TrueBlocks is to indentify every appearance for any address on the chain.</p>
+<p>An appearance is a pointer (<code>blknum, tx_id</code> pair) into the blockchain indicating where a particular address appears. This includes obvious locations such as <code>to</code> or <code>from</code> as well as esoteric locations such as deep inside a tenth-level trace or as the miner of an uncle block. The primary goal of TrueBlocks is to identify every appearance for any address on the chain.</p>
 <p>The TrueBlocks <a href=/data-model/the-index/>index of appearances</a> (created by <a href=/docs/chifra/admin/#chifra-scrape>chifra scrape</a>) makes the production of such a list possible. Appearances are stored in <a href=http://localhost:1313/data-model/accounts/#monitor>Monitors</a>.</p>
 <p>The following commands produce and manage appearances:</p>
 <table>
@@ -270,8 +270,8 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 </tbody>
 </table>
 <h2 id=reconciliation>Reconciliation<a href=#reconciliation class=anchor aria-hidden=true>#</a> </h2>
-<p>When exported with the <code>--accounting</code> option from <code>chifra export</code>, each transaction will have field called <code>statements</code>. Statements are an array for reconciliations. All such exported transactions will have at least one reconcilation (for ETH), however, many will have additional reconciliations for other assets (such as ERC20 and ERC721 tokens).</p>
-<p>Because DeFi is essentially swaps and trades around ERC20s, and because and &lsquo;programmable money&rsquo; allows for unlimited actions to happen under a single transaction,many times a transaction has four or five reconciliations.</p>
+<p>When exported with the <code>--accounting</code> option from <code>chifra export</code>, each transaction will have field called <code>statements</code>. Statements are an array for reconciliations. All such exported transactions will have at least one reconciliation (for ETH), however, many will have additional reconciliations for other assets (such as ERC20 and ERC721 tokens).</p>
+<p>Because DeFi is essentially swaps and trades around ERC20s, and because and &lsquo;programmable money&rsquo; allows for unlimited actions to happen under a single transaction, many times a transaction has four or five reconciliations.</p>
 <p>Reconciliations are relative to an <code>accountedFor</code> address. For this reason, the same transaction will probably have different reconciliations depending on the <code>accountedFor</code> address. Consider a simple transfer of ETH from one address to another. Obviously, the sender&rsquo;s and the recipient&rsquo;s reconciliations will differ (in opposite proportion to each other). The <code>accountedFor</code> address is always present as the <code>assetAddress</code> in the first reconciliation of the statements array.</p>
 <p>The following commands produce and manage reconciliations:</p>
 <table>
@@ -304,7 +304,7 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 </tr>
 <tr>
 <td>timestamp</td>
-<td>the unix timestamp of the object</td>
+<td>the Unix timestamp of the object</td>
 <td>timestamp</td>
 </tr>
 <tr>
@@ -319,7 +319,7 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 </tr>
 <tr>
 <td>decimals</td>
-<td>Equivilent to the extracted value of getSymbol from ERC20 or, if ETH or WEI then 18</td>
+<td>Equivalent to the extracted value of getSymbol from ERC20 or, if ETH or WEI then 18</td>
 <td>uint64</td>
 </tr>
 <tr>
@@ -334,7 +334,7 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 </tr>
 <tr>
 <td>begBal</td>
-<td>the begining balance of the asset at the blockNumber</td>
+<td>the beginning balance of the asset at the blockNumber</td>
 <td>int256</td>
 </tr>
 <tr>
@@ -379,7 +379,7 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 </tr>
 <tr>
 <td>minerNephewRewardIn</td>
-<td>the netphew reward if the miner is the accountedFor address</td>
+<td>the nephew reward if the miner is the accountedFor address</td>
 <td>int256</td>
 </tr>
 <tr>
@@ -460,11 +460,11 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 </tbody>
 </table>
 <p><strong>Notes</strong></p>
-<p><strong>Intra-block transactions</strong>: In many cases two or more transactions requiring a reconciliation may occur in a single block. Becuase the Ethereum blockchain only provides balance queries at the end of blocks, it is not possible to query for the balance of an asset at the end of transactions for which there are other following transactions in the block nor for the beginning balance for which there are transactions prior to the given transaction in the same block. In these cases, TrueBlocks simulates the beginning and ending balance as needed and adds <code>partial</code> to the <code>reconciliationType</code>.</p>
-<p><strong>Spot Price</strong>: If the <code>spotPrice</code> is available from an on-chain source (such as UniSwap), then it represents the ETH/DAI value at the time of the transaction if the reconcilation is for ETH. For other assets, the <code>spotPrice</code> represents the asset&rsquo;s value relative to <code>ETH</code>, so to price a non-ETH asset in US dollars, one would need to convert first to <code>ETH</code> then to dollars. If a price is not available on-chain, the <code>spotPrice</code> will be zero and the caller is encouraged to get the price for the asset from other sources.</p>
+<p><strong>Intra-block transactions</strong>: In many cases two or more transactions requiring a reconciliation may occur in a single block. Because the Ethereum blockchain only provides balance queries at the end of blocks, it is not possible to query for the balance of an asset at the end of transactions for which there are other following transactions in the block nor for the beginning balance for which there are transactions prior to the given transaction in the same block. In these cases, TrueBlocks simulates the beginning and ending balance as needed and adds <code>partial</code> to the <code>reconciliationType</code>.</p>
+<p><strong>Spot Price</strong>: If the <code>spotPrice</code> is available from an on-chain source (such as UniSwap), then it represents the ETH/DAI value at the time of the transaction if the reconciliation is for ETH. For other assets, the <code>spotPrice</code> represents the asset&rsquo;s value relative to <code>ETH</code>, so to price a non-ETH asset in US dollars, one would need to convert first to <code>ETH</code> then to dollars. If a price is not available on-chain, the <code>spotPrice</code> will be zero and the caller is encouraged to get the price for the asset from other sources.</p>
 <h2 id=name>Name<a href=#name class=anchor aria-hidden=true>#</a> </h2>
 <p>TrueBlocks allows you to associate a human-readable name with an address. This feature goes a long way towards making the blockchain data one extracts with a <a href=/data-model/accounts/#monitor>Monitor</a> much more readable.</p>
-<p>Unlike the blockchain data itself, which is globally available and impossible to censor, the association of names with address is not on chain (excepting ENS, which, while fine, is imcomplete). TrueBlocks allows you to name addresses of interest to you and either share those names (through an on-chain mechanism) or keep them private if you so desire.</p>
+<p>Unlike the blockchain data itself, which is globally available and impossible to censor, the association of names with address is not on chain (excepting ENS, which, while fine, is incomplete). TrueBlocks allows you to name addresses of interest to you and either share those names (through an on-chain mechanism) or keep them private if you so desire.</p>
 <p>Over the years, we&rsquo;ve paid careful attention to the &lsquo;airwaves&rsquo; and have collected together a &lsquo;starter-set&rsquo; of named addresses which is available through the <a href=/docs/chifra/accounts/#chifra-names>chifra names</a> command line. For example, every time people say &ldquo;Show me your address, and we will airdrop some tokens&rdquo; on Twitter, we copy and paste all those addresses. We figure if you&rsquo;re going to DOX yourselves, we might as well take advantage of it. Sorry&mldr;not sorry.</p>
 <p>The following commands produce and manage names:</p>
 <table>
@@ -503,12 +503,12 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 </tr>
 <tr>
 <td>name</td>
-<td>the name associated with this address (retreived from on-chain data if available)</td>
+<td>the name associated with this address (retrieved from on-chain data if available)</td>
 <td>string</td>
 </tr>
 <tr>
 <td>symbol</td>
-<td>the symbol for this address (retreived from on-chain data if available)</td>
+<td>the symbol for this address (retrieved from on-chain data if available)</td>
 <td>string</td>
 </tr>
 <tr>
@@ -518,7 +518,7 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 </tr>
 <tr>
 <td>decimals</td>
-<td>number of decimals retreived from an ERC20 smart contract, defaults to 18</td>
+<td>number of decimals retrieved from an ERC20 smart contract, defaults to 18</td>
 <td>uint64</td>
 </tr>
 <tr>
@@ -559,8 +559,8 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 </tbody>
 </table>
 <h2 id=abi>Abi<a href=#abi class=anchor aria-hidden=true>#</a> </h2>
-<p>An ABI describes an Application Binary Interface &ndash; in other words, the <a href=/data-model/other/#function>Function</a> and Event signatures for a given smart contract. Along with <a href=/data-model/accounts/#names>Names</a> the use of ABIs goes a very long way towards making your Etheruem data much more understandable.</p>
-<p>Similar to names of addresses, ABI files are not available on-chain which means they must be acquired somewhere. Unfortantely, the Ethereum community has not yet understand that EtherScan is not a good place to store this very important information. For this reason, TrueBlocks uses EtherScan to acquire ABI files and therefor one needs to get an EtherScan API key to use this function.</p>
+<p>An ABI describes an Application Binary Interface &ndash; in other words, the <a href=/data-model/other/#function>Function</a> and Event signatures for a given smart contract. Along with <a href=/data-model/accounts/#names>Names</a> the use of ABIs goes a very long way towards making your Ethereum data much more understandable.</p>
+<p>Similar to names of addresses, ABI files are not available on-chain which means they must be acquired somewhere. Unfortunately, the Ethereum community has not yet understand that EtherScan is not a good place to store this very important information. For this reason, TrueBlocks uses EtherScan to acquire ABI files and therefor one needs to get an EtherScan API key to use this function.</p>
 <p>The following commands produce and manage abis:</p>
 <table>
 <thead>
@@ -613,7 +613,7 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 <tbody>
 <tr>
 <td>address</td>
-<td>a 20-byte hexidecimal string starting with &lsquo;0x&rsquo;</td>
+<td>a 20-byte hexadecimal string starting with &lsquo;0x&rsquo;</td>
 <td>lowercase</td>
 </tr>
 <tr>
@@ -644,7 +644,7 @@ Monitors collect together Appearances (blknum.tx_id pairs) along with additional
 <tr>
 <td>timestamp</td>
 <td>a 64-bit unsigned integer</td>
-<td>unix timestamp</td>
+<td>Unix timestamp</td>
 </tr>
 <tr>
 <td>uint64</td>
@@ -686,6 +686,6 @@ Enhanced Ethereum Data &rarr;
 </footer>
 <script src=/js/highlight.min.ec942a9dc705691c6545c0ea48b4a76dd7a730be9478c31c9139089f95e82ccfccaee7fd8b5823a0fe005ac3dec10b8f825d9ace55908f4b6e6da407af3df293.js integrity="sha512-7JQqnccFaRxlRcDqSLSnbdenML6UeMMckTkIn5XoLM/Mruf9i1gjoP4AWsPewQuPgl2azlWQj0tubaQHrz3ykw==" crossorigin=anonymous defer></script>
 <script src=/main.min.9e62c9b0c5dc8279689cc9cb693a32c8ea1d19032f574f98c782ff59a0417d3662ff94b1a7755ab72a7a1862644bf00a58492c65aa0adabbc58080f4018c61bc.js integrity="sha512-nmLJsMXcgnlonMnLaToyyOodGQMvV0+Yx4L/WaBBfTZi/5Sxp3Vatyp6GGJkS/AKWEksZaoK2rvFgID0AYxhvA==" crossorigin=anonymous defer></script>
-<script src=/index.min.a998f909ccecebf7823d30566aecc1ad8cd1886b5b9afbcaf51355f889d7e4ab7509f9687889823c7746a6569e948eae0e038fa711d363cef35409f0fd6d2ae2.js integrity="sha512-qZj5Cczs6/eCPTBWauzBrYzRiGtbmvvK9RNV+InX5Kt1CfloeImCPHdGplaelI6uDgOPpxHTY87zVAnw/W0q4g==" crossorigin=anonymous defer></script>
+<script src=/index.min.e1a3c6f1b588b6df53588fa2e896aec26025bc837229fa04fd670fd8e207ef56624acb7ed54840ff2ac9372f244180f4dd4f168cee500a24659e6e71c551a931.js integrity="sha512-4aPG8bWItt9TWI+i6JauwmAlvINyKfoE/WcP2OIH71ZiSst+1UhA/yrJNy8kQYD03U8WjO5QCiRlnm5xxVGpMQ==" crossorigin=anonymous defer></script>
 </body>
 </html>

@@ -17,17 +17,17 @@
 <meta name=twitter:image content="/trueblocks.png">
 <meta name=twitter:title content="Admin">
 <meta name=twitter:description content="The Admin component allows you to query the status of the TrueBlocks system. You may query the status; query for information about TrueBlocks caches; control the creation, sharing, and pinning of the TrueBlocks index of appearances; and even serve the data through an API. See our API documentation for more information.
-chifra status The chifra status program allows you to manage the various TrueBlock caches. You may list all of the caches, some of the cache, or even individual caches either in terse or full detail.">
+chifra serve chifra serve delivers a JSON API for each of the chifra commands along with each of its options.">
 <meta name=twitter:site content="@TrueBlocks">
 <meta name=twitter:creator content="@TrueBlocks">
 <meta property="og:title" content="Admin">
 <meta property="og:description" content="The Admin component allows you to query the status of the TrueBlocks system. You may query the status; query for information about TrueBlocks caches; control the creation, sharing, and pinning of the TrueBlocks index of appearances; and even serve the data through an API. See our API documentation for more information.
-chifra status The chifra status program allows you to manage the various TrueBlock caches. You may list all of the caches, some of the cache, or even individual caches either in terse or full detail.">
+chifra serve chifra serve delivers a JSON API for each of the chifra commands along with each of its options.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="/docs/chifra/admin/">
 <meta property="og:image" content="/trueblocks.png">
-<meta property="article:published_time" content="2021-10-01T22:16:04+00:00">
-<meta property="article:modified_time" content="2021-10-02T18:27:10-04:00">
+<meta property="article:published_time" content="2021-10-03T19:59:18+00:00">
+<meta property="article:modified_time" content="2021-10-03T21:09:53-04:00">
 <meta property="og:site_name" content="TrueBlocks">
 <meta property="article:publisher" content="https://www.facebook.com/">
 <meta property="article:author" content="https://www.facebook.com/">
@@ -117,33 +117,15 @@ chifra status The chifra status program allows you to manage the various TrueBlo
 <h3>On this page</h3>
 <nav id=TableOfContents>
 <ul>
-<li><a href=#chifra-status>chifra status</a>
-<ul>
-<li><a href=#usage>usage</a></li>
-</ul>
-</li>
-<li><a href=#chifra-serve>chifra serve</a>
-<ul>
-<li><a href=#usage-1>usage</a></li>
-</ul>
-</li>
+<li><a href=#chifra-serve>chifra serve</a></li>
 <li><a href=#chifra-scrape>chifra scrape</a>
 <ul>
-<li><a href=#usage-2>usage</a></li>
 <li><a href=#explainer>explainer</a></li>
 <li><a href=#prerequisites>prerequisites</a></li>
 </ul>
 </li>
-<li><a href=#chifra-init>chifra init</a>
-<ul>
-<li><a href=#usage-3>usage</a></li>
-</ul>
-</li>
-<li><a href=#chifra-pins>chifra pins</a>
-<ul>
-<li><a href=#usage-4>usage</a></li>
-</ul>
-</li>
+<li><a href=#chifra-init>chifra init</a></li>
+<li><a href=#chifra-pins>chifra pins</a></li>
 </ul>
 </nav>
 </div>
@@ -152,146 +134,54 @@ chifra status The chifra status program allows you to manage the various TrueBlo
 <h1>Admin</h1>
 <p class=lead></p>
 <p>The Admin component allows you to query the status of the TrueBlocks system. You may query the status; query for information about TrueBlocks caches; control the creation, sharing, and pinning of the TrueBlocks index of appearances; and even serve the data through an API. See our <a href=/api>API documentation</a> for more information.</p>
-<h2 id=chifra-status>chifra status<a href=#chifra-status class=anchor aria-hidden=true>#</a> </h2>
-<p>The <code>chifra status</code> program allows you to manage the various TrueBlock caches. You may list all of the caches, some of the cache, or even individual caches either in terse or full detail. The cache of interest is specified with the <code>modes</code> option.</p>
-<p>TrueBlocks maintains caches for the index of address appearances, named addresses, abi files, as well as other data including blockchain data, address monitors, and groups of address monitors called collections.</p>
-<h3 id=usage>usage<a href=#usage class=anchor aria-hidden=true>#</a> </h3>
-<p><code>Usage:</code> chifra status [-d|-t|-v|-h] &lt;mode> [mode&mldr;]<br>
-<code>Purpose:</code> Report on the status of the TrueBlocks system.</p>
-<p><code>Where:</code></p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Option</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td nowrap></td>
-<td nowrap>modes</td>
-<td nowrap>the type of status info to retrieve, one or more of<br>[index, monitors, collections, names, abis, caches,<br>some, all]</td>
-</tr>
-<tr>
-<td nowrap>‐d</td>
-<td nowrap>‐‐details</td>
-<td nowrap>include details about items found in monitors, slurps,<br>abis, or price caches</td>
-</tr>
-<tr>
-<td nowrap>‐t</td>
-<td nowrap>‐‐types &lt;val></td>
-<td nowrap>for caches mode only, which type(s) of cache to report,<br>one or more of [blocks, txs, traces, slurps, prices,<br>all]</td>
-</tr>
-<tr>
-<td nowrap>‐x</td>
-<td nowrap>‐‐fmt &lt;val></td>
-<td nowrap>export format, one of [none, json, txt, csv, api]</td>
-</tr>
-<tr>
-<td nowrap>‐v</td>
-<td nowrap>‐‐verbose</td>
-<td nowrap>set verbose level (optional level defaults to 1)</td>
-</tr>
-<tr>
-<td nowrap>‐h</td>
-<td nowrap>‐‐help</td>
-<td nowrap>display this help screen</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/apps/cacheStatus><code>apps/cacheStatus</code></a></p>
 <h2 id=chifra-serve>chifra serve<a href=#chifra-serve class=anchor aria-hidden=true>#</a> </h2>
 <p><code>chifra serve</code> delivers a JSON API for each of the <code>chifra</code> commands along with each of its options. It does this through <code>flame</code> server which is written in Go.</p>
 <p><a href=https://www.tokenomics.io/api.html>Get help with the API here</a>.</p>
 <p>Another way to get help to run <code>chifra --help</code> or <code>chifra &lt;cmd> --help</code> on your command line. See below for an example of converting command line options to a call to the API. There&rsquo;s a one-to-one correspondence between the command line tools and options and the API routes and their options.</p>
-<h3 id=usage-1>usage<a href=#usage-1 class=anchor aria-hidden=true>#</a> </h3>
-<p><code>Usage:</code> chifra serve<br>
-<code>Purpose:</code> Present each chifra command along with all of its options as a JSON api.</p>
-<p><code>Where:</code></p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Option</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td>‐‐port</td>
-<td>specify the server&rsquo;s port (default &ldquo;:8080&rdquo;)</td>
-</tr>
-<tr>
-<td>‐v</td>
-<td>‐‐verbose</td>
-<td>set verbose level (optional level defaults to 1)</td>
-</tr>
-<tr>
-<td>‐h</td>
-<td>‐‐help</td>
-<td>display this help screen</td>
-</tr>
-</tbody>
-</table>
-<p><code>Notes:</code></p>
-<ul>
-<li>To use the API, first open a new terminal window and run <code>chifra serve</code></li>
-<li>Instead of the command line <code>chifra status index --details</code>, run <code>curl "http://localhost:8080/status?modes=index&details"</code>.</li>
-<li>Treat other commands similarly.</li>
-</ul>
+<pre><code class=language-[plaintext]>Purpose:
+  Serve the TrueBlocks API using the flame server.
+
+Usage:
+  chifra serve [flags]
+
+Flags:
+  -p, --port string   specify the server's port (:8080 default)
+
+Global Flags:
+  -x, --fmt string   export format, one of [none|json*|txt|csv|api]
+  -h, --help         display this help screen
+  -v, --verbose      enable verbose (increase detail with --log_level)
+
+Notes:
+  - To start API open terminal window and run chifra serve.
+  - See the API documentation for more information.
+</code></pre>
 <p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/go-apps/flame><code>go-apps/flame</code></a></p>
 <h2 id=chifra-scrape>chifra scrape<a href=#chifra-scrape class=anchor aria-hidden=true>#</a> </h2>
-<p>The <code>chifra scrape</code> application creates TrueBlocks' index of address appearances &ndash; the fundemental data structure of the entire system. It also, optionally, pins the index to IPFS.</p>
+<p>The <code>chifra scrape</code> application creates TrueBlocks' index of address appearances &ndash; the fundamental data structure of the entire system. It also, optionally, pins the index to IPFS.</p>
 <p><code>chifra scrape</code> is a long running process, therefore we advise you run it as a service or in terminal multiplexer such as <code>tmux</code>. It is possible to start and stop <code>chifra scrape</code> as needed, but doing so means the scraper needs to catch up to the front of the chain, a process that may take some time depending on how frequently the scraper is run. See below for a more in depth explanation of how the scraping process works and prerequisites for it proper operation.</p>
 <p>The scraper can scrape either the index only, previously created monitors only, both, or neither. If you specify <code>none</code>, timestamps will be scraped but nothing else. If you&rsquo;re scraping monitors, you may tell the system to cache traces and transactions. This will speed up access, but take addition hard drive space. You may also adjust the speed of operation on different machines with the <code>--sleep</code> and <code>--n_blocks</code> options. Finally, you may choose to optionally <code>--pin</code> each new chunk to IPFS.</p>
-<h3 id=usage-2>usage<a href=#usage-2 class=anchor aria-hidden=true>#</a> </h3>
-<p><code>Usage:</code> chifra scrape [-p|-s|-v|-h]<br>
-<code>Purpose:</code> Scan the chain and update the TrueBlocks index of appearances.</p>
-<p><code>Where:</code></p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Option</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td nowrap>‐p</td>
-<td nowrap>‐‐pin</td>
-<td nowrap>pin new chunks (and blooms) to IPFS (requires Pinata<br>key and running IPFS node)</td>
-</tr>
-<tr>
-<td nowrap>‐s</td>
-<td nowrap>‐‐sleep &lt;double></td>
-<td nowrap>the number of seconds to sleep between passes</td>
-</tr>
-<tr>
-<td nowrap>‐v</td>
-<td nowrap>‐‐verbose</td>
-<td nowrap>set verbose level (optional level defaults to 1)</td>
-</tr>
-<tr>
-<td nowrap>‐h</td>
-<td nowrap>‐‐help</td>
-<td nowrap>display this help screen</td>
-</tr>
-</tbody>
-</table>
-<p><code>Configurable Items:</code></p>
-<ul>
-<li><code>n_blocks</code>: maximum number of blocks to process (defaults to 5000).</li>
-<li><code>n_block_procs</code>: number of concurrent block channels for blaze.</li>
-<li><code>n_addr_procs</code>: number of concurrent address channels for blaze.</li>
-</ul>
+<pre><code class=language-[plaintext]>Purpose:
+  Scan the chain and update the TrueBlocks index of appearances.
+
+Usage:
+  chifra scrape [flags]
+
+Flags:
+  -p, --pin             pin new chunks (and blooms) to IPFS (requires Pinata key and running IPFS node)
+  -s, --sleep float     the number of seconds to sleep between passes (default 14)
+  -n, --n_blocks uint   maximum number of blocks to process (default 2000)
+
+Global Flags:
+  -x, --fmt string   export format, one of [none|json*|txt|csv|api]
+  -h, --help         display this help screen
+  -v, --verbose      enable verbose (increase detail with --log_level)
+</code></pre>
 <h3 id=explainer>explainer<a href=#explainer class=anchor aria-hidden=true>#</a> </h3>
-<p>Each time <code>chifra scrape</code> runs, it begins at the last block it completed (plus one) and decends as deeply as it can into the block&rsquo;s data. (This is why we need a <code>--tracing</code> node.) As address appearances are encountered, the system adds the appearance to a binary index. Periodically (at the end of the block containing the 2,000,000th appearance), the system consolidates a <strong>chunk</strong>.</p>
+<p>Each time <code>chifra scrape</code> runs, it begins at the last block it completed (plus one) and descends as deeply as it can into the block&rsquo;s data. (This is why we need a <code>--tracing</code> node.) As address appearances are encountered, the system adds the appearance to a binary index. Periodically (at the end of the block containing the 2,000,000th appearance), the system consolidates a <strong>chunk</strong>.</p>
 <p>A <strong>chunk</strong> is a portion of the index containing approximately 2,000,000 records. As part of the consolidation, the scraper creates a Bloom filter representing the chunk. The Bloom filters are an order of magnitude or more smaller than the chunks. The system then pushes both the chunk and the Bloom filter to IPFS. In this way, TrueBlocks creates an immutable, uncapturable index of appearances that can be used not only by TrueBlocks, but any member of the community who needs it. (Hint: we all need it.)</p>
-<p>Users of the <a href=https://github.com/TrueBlocks/trueblocks-explorer>TrueBlocks Explorer</a> (or any other software, for that matter) subsequently downloads the Bloom filters, queries them to determine which <strong>chunks</strong> need to be downloaded to the user&rsquo;s machine and thereby build a historical list of transacitons for a given address. This is accomplished while imposing a minimum amount of data on the end user&rsquo;s machine.</p>
-<p>In future versions of the software, we will pin these shared chunks and blooms on end user&rsquo;s machines. They need the data for the software to operate and sharing it makes all user&rsquo;s better off. A naturally-born network effect.</p>
+<p>Users of the <a href=https://github.com/TrueBlocks/trueblocks-explorer>TrueBlocks Explorer</a> (or any other software, for that matter) subsequently downloads the Bloom filters, queries them to determine which <strong>chunks</strong> need to be downloaded to the user&rsquo;s machine and thereby build a historical list of transactions for a given address. This is accomplished while imposing a minimum amount of data on the end user&rsquo;s machine.</p>
+<p>In future versions of the software, we will pin these shared chunks and blooms on end user&rsquo;s machines. They need the data for the software to operate and sharing it makes all users better off. A naturally-born network effect.</p>
 <h3 id=prerequisites>prerequisites<a href=#prerequisites class=anchor aria-hidden=true>#</a> </h3>
 <p><code>chifra scrape</code> does not work without an RPC endpoint to an Ethereum node. The software works without an <code>--archive</code> node, but it works significantly better with one. An additional requirement for the software to work properly is an RPC that provides OpenEthereum&rsquo;s <code>trace_</code> routines. We&rsquo;ve tested with OpenEthereum and Erigon.</p>
 <p>Please see <a href=.>this article</a> for more information about running the scraper and building and sharing the index of appearances.</p>
@@ -301,114 +191,48 @@ chifra status The chifra status program allows you to manage the various TrueBlo
 <p>If you stop <code>chifra init</code> before it finishes, it will pick up against where it left off the next time you run it.</p>
 <p>Certain parts of the system (<code>chifra list</code> and <code>chifra export</code> for example) if you have not previously run <code>chifra init</code> or <code>chifra scrape</code>. You will be warned by the system until it&rsquo;s satified.</p>
 <p>If you run <code>chifra init</code> and allow it to complete, the next time you run <code>chifra scrape</code>, it will start where <code>init</code> finished. This means that only the blooms will be stored on your hard drive. Subsequent scraping will produce both chunks and blooms, although you can, if you wish delete chunks that are not being used. You may periodically run <code>chifra init</code> if you prefer not to scrape.</p>
-<h3 id=usage-3>usage<a href=#usage-3 class=anchor aria-hidden=true>#</a> </h3>
-<p><code>Usage:</code> chifra init<br>
-<code>Purpose:</code> Leech the Bloom filters from IPFS by first downloading the pin manifest from a smart contract and then downloading the blooms. Optionally <code>--pin</code> the resulting download in order to share it with others.</p>
-<p><code>Where:</code></p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Option</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>‐i</td>
-<td>‐‐init</td>
-<td>initialize local index by downloading Bloom filters from pinning service</td>
-</tr>
-<tr>
-<td>‐k</td>
-<td>‐‐init_all</td>
-<td>initialize local index by downloading both Bloom filters and index chunks</td>
-</tr>
-<tr>
-<td>‐p</td>
-<td>‐‐pin_locally</td>
-<td>pin all local files in the index to an IPFS store (requires IPFS)</td>
-</tr>
-<tr>
-<td>‐v</td>
-<td>‐‐verbose</td>
-<td>set verbose level (optional level defaults to 1)</td>
-</tr>
-<tr>
-<td>‐h</td>
-<td>‐‐help</td>
-<td>display this help screen</td>
-</tr>
-</tbody>
-</table>
-<p><code>Notes:</code></p>
-<ul>
-<li>One of <code>--list</code>, <code>--init</code>, or <code>--init_all</code> is required.</li>
-<li>the <code>--pin_locally</code> option only works if the IPFS executable is in your path.
-<strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/apps/pinMan><code>apps/pinMan</code></a></li>
-</ul>
+<pre><code class=language-[plaintext]>Purpose:
+  Initialize the index of appearances by downloading Bloom filters.
+
+Usage:
+  chifra init [flags]
+
+Flags:
+  -a, --all   download full index chunks as well as Bloom filter
+
+Global Flags:
+  -x, --fmt string   export format, one of [none|json*|txt|csv|api]
+  -h, --help         display this help screen
+  -v, --verbose      enable verbose (increase detail with --log_level)
+
+Notes:
+  - chifra init is an alias for the chifra pins --init command.
+</code></pre>
+<p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/apps/pinMan><code>apps/pinMan</code></a></p>
 <h2 id=chifra-pins>chifra pins<a href=#chifra-pins class=anchor aria-hidden=true>#</a> </h2>
 <p>This tool is not yet ready for production use. Please return to this page later.</p>
-<h3 id=usage-4>usage<a href=#usage-4 class=anchor aria-hidden=true>#</a> </h3>
-<p><code>Usage:</code> chifra pins [-l|-i|-f|-a|-S|-v|-h]<br>
-<code>Purpose:</code> Manage pinned index of appearances and associated Bloom filters.</p>
-<p><code>Where:</code></p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Option</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td nowrap>‐l</td>
-<td nowrap>‐‐list</td>
-<td nowrap>list the index and Bloom filter hashes from local manifest<br>or pinning service</td>
-</tr>
-<tr>
-<td nowrap>‐i</td>
-<td nowrap>‐‐init</td>
-<td nowrap>initialize index of appearances by downloading Bloom<br>filters from pinning service</td>
-</tr>
-<tr>
-<td nowrap>‐f</td>
-<td nowrap>‐‐freshen</td>
-<td nowrap>freshen index of appearances using the same mode from<br>most recent &ndash;init</td>
-</tr>
-<tr>
-<td nowrap>‐a</td>
-<td nowrap>‐‐all</td>
-<td nowrap>for &ndash;init and &ndash;freshen modes only, download full<br>index chunks as well as Bloom filter</td>
-</tr>
-<tr>
-<td nowrap>‐S</td>
-<td nowrap>‐‐share</td>
-<td nowrap>pin downloaded files to your local IPFS store, that<br>is, share them (requires IPFS)</td>
-</tr>
-<tr>
-<td nowrap>‐x</td>
-<td nowrap>‐‐fmt &lt;val></td>
-<td nowrap>export format, one of [none, json, txt, csv, api]</td>
-</tr>
-<tr>
-<td nowrap>‐v</td>
-<td nowrap>‐‐verbose</td>
-<td nowrap>set verbose level (optional level defaults to 1)</td>
-</tr>
-<tr>
-<td nowrap>‐h</td>
-<td nowrap>‐‐help</td>
-<td nowrap>display this help screen</td>
-</tr>
-</tbody>
-</table>
-<p><code>Notes:</code></p>
-<ul>
-<li>One of <code>--list</code>, <code>--init</code>, or <code>--freshen</code> is required.</li>
-<li>the <code>--share</code> option only works if the IPFS executable is in your path.</li>
-</ul>
+<pre><code class=language-[plaintext]>Purpose:
+  Manage pinned index of appearances and associated Bloom filters.
+
+Usage:
+  chifra pins [flags]
+
+Flags:
+  -l, --list      list the index and Bloom filter hashes from local manifest or pinning service
+  -i, --init      initialize index of appearances by downloading Bloom filters from pinning service
+  -f, --freshen   freshen index of appearances using the same mode from most recent --init
+  -a, --all       for --init and --freshen modes only, download full index chunks as well as Bloom filter
+  -S, --share     pin downloaded files to your local IPFS store, that is, share them (requires IPFS)
+
+Global Flags:
+  -x, --fmt string   export format, one of [none|json*|txt|csv|api]
+  -h, --help         display this help screen
+  -v, --verbose      enable verbose (increase detail with --log_level)
+
+Notes:
+  - One of --list, --init, or --freshen is required.
+  - the --share option only works if the IPFS executable is in your path.
+</code></pre>
 <p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/apps/pinMan><code>apps/pinMan</code></a></p>
 <p class=edit-page><a href=https://github.com/TrueBlocks/trueblocks-docs/blob/master/content/docs/chifra/admin.md><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828.0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>Edit this page on GitHub</a></p>
 <div class="docs-navigation d-flex justify-content-between">
@@ -450,6 +274,6 @@ Other &rarr;
 </footer>
 <script src=/js/highlight.min.ec942a9dc705691c6545c0ea48b4a76dd7a730be9478c31c9139089f95e82ccfccaee7fd8b5823a0fe005ac3dec10b8f825d9ace55908f4b6e6da407af3df293.js integrity="sha512-7JQqnccFaRxlRcDqSLSnbdenML6UeMMckTkIn5XoLM/Mruf9i1gjoP4AWsPewQuPgl2azlWQj0tubaQHrz3ykw==" crossorigin=anonymous defer></script>
 <script src=/main.min.9e62c9b0c5dc8279689cc9cb693a32c8ea1d19032f574f98c782ff59a0417d3662ff94b1a7755ab72a7a1862644bf00a58492c65aa0adabbc58080f4018c61bc.js integrity="sha512-nmLJsMXcgnlonMnLaToyyOodGQMvV0+Yx4L/WaBBfTZi/5Sxp3Vatyp6GGJkS/AKWEksZaoK2rvFgID0AYxhvA==" crossorigin=anonymous defer></script>
-<script src=/index.min.a998f909ccecebf7823d30566aecc1ad8cd1886b5b9afbcaf51355f889d7e4ab7509f9687889823c7746a6569e948eae0e038fa711d363cef35409f0fd6d2ae2.js integrity="sha512-qZj5Cczs6/eCPTBWauzBrYzRiGtbmvvK9RNV+InX5Kt1CfloeImCPHdGplaelI6uDgOPpxHTY87zVAnw/W0q4g==" crossorigin=anonymous defer></script>
+<script src=/index.min.e1a3c6f1b588b6df53588fa2e896aec26025bc837229fa04fd670fd8e207ef56624acb7ed54840ff2ac9372f244180f4dd4f168cee500a24659e6e71c551a931.js integrity="sha512-4aPG8bWItt9TWI+i6JauwmAlvINyKfoE/WcP2OIH71ZiSst+1UhA/yrJNy8kQYD03U8WjO5QCiRlnm5xxVGpMQ==" crossorigin=anonymous defer></script>
 </body>
 </html>

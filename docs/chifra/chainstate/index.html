@@ -26,8 +26,8 @@ The two tools are chifra state and chifra tokens. The first allows you to query 
 <meta property="og:type" content="article">
 <meta property="og:url" content="/docs/chifra/chainstate/">
 <meta property="og:image" content="/trueblocks.png">
-<meta property="article:published_time" content="2021-10-01T21:28:07+00:00">
-<meta property="article:modified_time" content="2021-10-02T18:27:10-04:00">
+<meta property="article:published_time" content="2021-10-03T19:59:18+00:00">
+<meta property="article:modified_time" content="2021-10-03T21:09:53-04:00">
 <meta property="og:site_name" content="TrueBlocks">
 <meta property="article:publisher" content="https://www.facebook.com/">
 <meta property="article:author" content="https://www.facebook.com/">
@@ -117,16 +117,8 @@ The two tools are chifra state and chifra tokens. The first allows you to query 
 <h3>On this page</h3>
 <nav id=TableOfContents>
 <ul>
-<li><a href=#chifra-state>chifra state</a>
-<ul>
-<li><a href=#usage>usage</a></li>
-</ul>
-</li>
-<li><a href=#chifra-tokens>chifra tokens</a>
-<ul>
-<li><a href=#usage-1>usage</a></li>
-</ul>
-</li>
+<li><a href=#chifra-state>chifra state</a></li>
+<li><a href=#chifra-tokens>chifra tokens</a></li>
 </ul>
 </nav>
 </div>
@@ -148,139 +140,69 @@ The second tool, <code>chifra tokens</code>, deals with ERC20 and ERC721 token b
 <h2 id=chifra-state>chifra state<a href=#chifra-state class=anchor aria-hidden=true>#</a> </h2>
 <p>Use this tool to retrieve the balance of an address (or list of addresses) at the given block (or blocks). Specify multiple addresses and/or multiple blocks if you wish, but you must specify at least one address. If no block is specified, the latest block is reported.</p>
 <p>You may also query to see if an address is a smart contract as well as retrieve a contract&rsquo;s byte code.</p>
-<h3 id=usage>usage<a href=#usage class=anchor aria-hidden=true>#</a> </h3>
-<p><code>Usage:</code> chifra state [-p|-c|-n|-v|-h] &lt;address> [address&mldr;] [block&mldr;]<br>
-<code>Purpose:</code> Retrieve account balance(s) for one or more addresses at given block(s).</p>
-<p><code>Where:</code></p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Option</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td nowrap></td>
-<td nowrap>addrs</td>
-<td nowrap>one or more addresses (0x&mldr;) from which to retrieve<br>balances (required)</td>
-</tr>
-<tr>
-<td nowrap></td>
-<td nowrap>blocks</td>
-<td nowrap>an optional list of one or more blocks at which to<br>report balances, defaults to &lsquo;latest&rsquo;</td>
-</tr>
-<tr>
-<td nowrap>‐p</td>
-<td nowrap>‐‐parts &lt;val></td>
-<td nowrap>control which state to export, one or more of [none,<br>some, all, balance, nonce, code, storage, deployed,<br>accttype]</td>
-</tr>
-<tr>
-<td nowrap>‐c</td>
-<td nowrap>‐‐changes</td>
-<td nowrap>only report a balance when it changes from one block<br>to the next</td>
-</tr>
-<tr>
-<td nowrap>‐n</td>
-<td nowrap>‐‐no_zero</td>
-<td nowrap>suppress the display of zero balance accounts</td>
-</tr>
-<tr>
-<td nowrap>‐x</td>
-<td nowrap>‐‐fmt &lt;val></td>
-<td nowrap>export format, one of [none, json, txt, csv, api]</td>
-</tr>
-<tr>
-<td nowrap>‐v</td>
-<td nowrap>‐‐verbose</td>
-<td nowrap>set verbose level (optional level defaults to 1)</td>
-</tr>
-<tr>
-<td nowrap>‐h</td>
-<td nowrap>‐‐help</td>
-<td nowrap>display this help screen</td>
-</tr>
-</tbody>
-</table>
-<p><code>Notes:</code></p>
-<ul>
-<li>An <code>address</code> must start with &lsquo;0x&rsquo; and be forty-two characters long.</li>
-<li><code>blocks</code> may be a space-separated list of values, a start-end range, a <code>special</code>, or any combination.</li>
-<li>If the queried node does not store historical state, the results are undefined.</li>
-<li><code>special</code> blocks are detailed under <code>chifra when --list</code>.</li>
-<li><code>balance</code> is the default mode. To select a single mode use <code>none</code> first, followed by that mode.</li>
-<li>You may specify multiple <code>modes</code> on a single line.</li>
-</ul>
+<pre><code class=language-[plaintext]>Purpose:
+  Retrieve account balance(s) for one or more addresses at given block(s).
+
+Usage:
+  chifra state [flags] &lt;address&gt; [address...] [block...]
+
+Arguments:
+  addrs - one or more addresses (0x...) from which to retrieve balances (required)
+  blocks - an optional list of one or more blocks at which to report balances, defaults to 'latest'
+
+Flags:
+  -p, --parts strings   control which state to export
+                        One or more of none, some, all, balance, nonce, code, storage, deployed, accttype
+  -c, --changes         only report a balance when it changes from one block to the next
+  -n, --no_zero         suppress the display of zero balance accounts
+
+Global Flags:
+  -x, --fmt string   export format, one of [none|json*|txt|csv|api]
+  -h, --help         display this help screen
+  -v, --verbose      enable verbose (increase detail with --log_level)
+
+Notes:
+  - An address must start with '0x' and be forty-two characters long.
+  - blocks may be a space-separated list of values, a start-end range, a special, or any combination.
+  - If the queried node does not store historical state, the results are undefined.
+  - special blocks are detailed under chifra when --list.
+  - balance is the default mode. To select a single mode use none first, followed by that mode.
+  - You may specify multiple modes on a single line.
+</code></pre>
 <p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/tools/getState><code>tools/getState</code></a></p>
 <h2 id=chifra-tokens>chifra tokens<a href=#chifra-tokens class=anchor aria-hidden=true>#</a> </h2>
 <p>Given the address of an ERC20 token contract, this tool reports token balances for one or more additional addresses. Alternatively, the tool can report the token balances for multiple ERC20 tokens for a single addresses.</p>
 <p>In normal operation the <strong>first item</strong> in the <code>address_list</code> is assumed to be an ERC20 token contract whose balances are being queried, whereas the remainder of the list is assumed to be addresses on which to report.</p>
 <p>In <code>--byAcct</code> mode, <strong>all addresses</strong> in the <code>address_list</code> are assumed to be ERC20 token contracts, except the final one which is the account whose token balances are reported.</p>
 <p>You may optionally specify one or more blocks at which to report. If no block is specified, the latest block is assumed. You may also optionally specify which parts of the token data to extract.</p>
-<h3 id=usage-1>usage<a href=#usage-1 class=anchor aria-hidden=true>#</a> </h3>
-<p><code>Usage:</code> chifra tokens [-p|-b|-n|-v|-h] &lt;address> &lt;address> [address&mldr;] [block&mldr;]<br>
-<code>Purpose:</code> Retrieve token balance(s) for one or more addresses at given block(s).</p>
-<p><code>Where:</code></p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Option</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td nowrap></td>
-<td nowrap>addrs</td>
-<td nowrap>two or more addresses (0x&mldr;), the first is an ERC20<br>token, balances for the rest are reported (required)</td>
-</tr>
-<tr>
-<td nowrap></td>
-<td nowrap>blocks</td>
-<td nowrap>an optional list of one or more blocks at which to<br>report balances, defaults to &lsquo;latest&rsquo;</td>
-</tr>
-<tr>
-<td nowrap>‐p</td>
-<td nowrap>‐‐parts &lt;val></td>
-<td nowrap>which parts of the token information to retreive, one<br>or more of [name, symbol, decimals, totalSupply, version,<br>none, all]</td>
-</tr>
-<tr>
-<td nowrap>‐b</td>
-<td nowrap>‐‐by_acct</td>
-<td nowrap>consider each address an ERC20 token except the last,<br>whose balance is reported for each token</td>
-</tr>
-<tr>
-<td nowrap>‐n</td>
-<td nowrap>‐‐no_zero</td>
-<td nowrap>suppress the display of zero balance accounts</td>
-</tr>
-<tr>
-<td nowrap>‐x</td>
-<td nowrap>‐‐fmt &lt;val></td>
-<td nowrap>export format, one of [none, json, txt, csv, api]</td>
-</tr>
-<tr>
-<td nowrap>‐v</td>
-<td nowrap>‐‐verbose</td>
-<td nowrap>set verbose level (optional level defaults to 1)</td>
-</tr>
-<tr>
-<td nowrap>‐h</td>
-<td nowrap>‐‐help</td>
-<td nowrap>display this help screen</td>
-</tr>
-</tbody>
-</table>
-<p><code>Notes:</code></p>
-<ul>
-<li>An <code>address</code> must start with &lsquo;0x&rsquo; and be forty-two characters long.</li>
-<li><code>blocks</code> may be a space-separated list of values, a start-end range, a <code>special</code>, or any combination.</li>
-<li>If the token contract(s) from which you request balances are not ERC20 compliant, the results are undefined.</li>
-<li>If the queried node does not store historical state, the results are undefined.</li>
-<li><code>special</code> blocks are detailed under <code>chifra when --list</code>.</li>
-</ul>
+<pre><code class=language-[plaintext]>Purpose:
+  Retrieve token balance(s) for one or more addresses at given block(s).
+
+Usage:
+  chifra tokens [flags] &lt;address&gt; &lt;address&gt; [address...] [block...]
+
+Arguments:
+  addrs - two or more addresses (0x...), the first is an ERC20 token, balances for the rest are reported (required)
+  blocks - an optional list of one or more blocks at which to report balances, defaults to 'latest'
+
+Flags:
+  -p, --parts strings   which parts of the token information to retrieve
+                        One or more of name, symbol, decimals, totalSupply, version, none, all
+  -b, --by_acct         consider each address an ERC20 token except the last, whose balance is reported for each token
+  -n, --no_zero         suppress the display of zero balance accounts
+
+Global Flags:
+  -x, --fmt string   export format, one of [none|json*|txt|csv|api]
+  -h, --help         display this help screen
+  -v, --verbose      enable verbose (increase detail with --log_level)
+
+Notes:
+  - An address must start with '0x' and be forty-two characters long.
+  - blocks may be a space-separated list of values, a start-end range, a special, or any combination.
+  - If the token contract(s) from which you request balances are not ERC20 compliant, the results are undefined.
+  - If the queried node does not store historical state, the results are undefined.
+  - special blocks are detailed under chifra when --list.
+</code></pre>
 <p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/tools/getTokens><code>tools/getTokens</code></a></p>
 <p class=edit-page><a href=https://github.com/TrueBlocks/trueblocks-docs/blob/master/content/docs/chifra/chainstate.md><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828.0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>Edit this page on GitHub</a></p>
 <div class="docs-navigation d-flex justify-content-between">
@@ -322,6 +244,6 @@ Admin &rarr;
 </footer>
 <script src=/js/highlight.min.ec942a9dc705691c6545c0ea48b4a76dd7a730be9478c31c9139089f95e82ccfccaee7fd8b5823a0fe005ac3dec10b8f825d9ace55908f4b6e6da407af3df293.js integrity="sha512-7JQqnccFaRxlRcDqSLSnbdenML6UeMMckTkIn5XoLM/Mruf9i1gjoP4AWsPewQuPgl2azlWQj0tubaQHrz3ykw==" crossorigin=anonymous defer></script>
 <script src=/main.min.9e62c9b0c5dc8279689cc9cb693a32c8ea1d19032f574f98c782ff59a0417d3662ff94b1a7755ab72a7a1862644bf00a58492c65aa0adabbc58080f4018c61bc.js integrity="sha512-nmLJsMXcgnlonMnLaToyyOodGQMvV0+Yx4L/WaBBfTZi/5Sxp3Vatyp6GGJkS/AKWEksZaoK2rvFgID0AYxhvA==" crossorigin=anonymous defer></script>
-<script src=/index.min.a998f909ccecebf7823d30566aecc1ad8cd1886b5b9afbcaf51355f889d7e4ab7509f9687889823c7746a6569e948eae0e038fa711d363cef35409f0fd6d2ae2.js integrity="sha512-qZj5Cczs6/eCPTBWauzBrYzRiGtbmvvK9RNV+InX5Kt1CfloeImCPHdGplaelI6uDgOPpxHTY87zVAnw/W0q4g==" crossorigin=anonymous defer></script>
+<script src=/index.min.e1a3c6f1b588b6df53588fa2e896aec26025bc837229fa04fd670fd8e207ef56624acb7ed54840ff2ac9372f244180f4dd4f168cee500a24659e6e71c551a931.js integrity="sha512-4aPG8bWItt9TWI+i6JauwmAlvINyKfoE/WcP2OIH71ZiSst+1UhA/yrJNy8kQYD03U8WjO5QCiRlnm5xxVGpMQ==" crossorigin=anonymous defer></script>
 </body>
 </html>
