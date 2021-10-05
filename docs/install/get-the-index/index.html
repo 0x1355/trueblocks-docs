@@ -25,7 +25,7 @@
 <meta property="og:url" content="/docs/install/get-the-index/">
 <meta property="og:image" content="/trueblocks.png">
 <meta property="article:published_time" content="2021-08-09T10:19:51-03:00">
-<meta property="article:modified_time" content="2021-10-05T09:48:02-03:00">
+<meta property="article:modified_time" content="2021-10-05T10:37:18-03:00">
 <meta property="og:site_name" content="TrueBlocks">
 <meta property="article:publisher" content="https://www.facebook.com/">
 <meta property="article:author" content="https://www.facebook.com/">
@@ -158,7 +158,7 @@
 </tr>
 <tr>
 <td>have a fully-local index, built directly from your own node, that stays up with the chain and maximizes the speed of your queries&mldr;</td>
-<td>two to three days setup time and running your own local tracing / archive node (such as dAppnode)&mldr;.</td>
+<td>two to three days setup time and running your own local node (such as dAppnode)&mldr;.</td>
 <td><a href=#use-scrape-to-build-your-own-index><code>chifra scrape</code></a></td>
 </tr>
 </tbody>
@@ -204,6 +204,12 @@ Therefore, the query is significantly faster.
 In other words, the first time you run <code>chifra export &lt;transaction></code>, the process is much faster than it is if you initialize with <code>chifra init</code> alone.</p>
 <p>As is true of the previous methods, if you enable caching, subsequent queries for the same address return almost instantly.</p>
 <h2 id=use-chifra-scrape-to-build-your-own-index>Use chifra scrape to build your own index<a href=#use-chifra-scrape-to-build-your-own-index class=anchor aria-hidden=true>#</a> </h2>
+<blockquote>
+<p>👉 <strong>Note</strong>:
+If you don&rsquo;t have a node with tracing or archiving, <code>scrape</code> exits by default.
+You can still use scrape, but you need to
+<a href=../install-trueblocks#no-tracing>open your config and disable these checks</a></p></p>
+</blockquote>
 <p>To build your own index without any downloading, run <code>chifra scrape</code>.</p>
 <p>For detailed instructions, see the <a href=../../chifra/admin#chifra-scrape><code>chifra scrape</code> command documentation</a>.</p>
 <p><strong>Initial set up time</strong>: This method requires a locally-running tracing / archive node such as dAppNode running Erigon. Early users have reported 2-4 days to build the index from scratch. (You may wish to run <code>chifra scrape</code> in an application like <code>tmux</code>, so you can close the terminal window while it builds.)</p>
@@ -215,7 +221,7 @@ In other words, the first time you run <code>chifra export &lt;transaction></cod
 <h2 id=one-final-note-on-building--making-the-index>One final note on building / making the index<a href=#one-final-note-on-building--making-the-index class=anchor aria-hidden=true>#</a> </h2>
 <p>You can, if you wish, mix and match the above methods.</p>
 <p>For example, you can initially download only the Bloom filters with <code>chifra init</code> and then start up <code>chifra scrape</code> in the background. This would allow you to get started quickly but stay up to the front of the chain. Of course, as with everything, there&rsquo;s a tradeoff. You will be storing a few MB every time a new chunk is created (about three times a day). In return, it&rsquo;s way faster to query and the index stay up to the chain.</p>
-<p>Alternatively, you may choose to scrape (i.e. build) the index yourself and share it with others by pinning it on IPFS. In this case, you&rsquo;re being a good citizen and making the whole ecosystem better off becuase you&rsquo;re sharing you index.</p>
+<p>Alternatively, you may choose to scrape (i.e. build) the index yourself and share it with others by pinning it on IPFS. In this case, you&rsquo;re being a good citizen and making the whole ecosystem better off because you&rsquo;re sharing you index.</p>
 <p>You can download the index (either with <code>chifra init</code> or <code>chifra pins --init_all</code>) and pin that data (with the <code>--pin_locally</code> flag) as a way to share with the community, and then turn on the scraper. All options are available as a way to maximize the usefulness of the tool.</p>
 <h2 id=supplementary-how-can-i-see-when-the-manifest-was-last-published>Supplementary: how can I see when the manifest was last published?<a href=#supplementary-how-can-i-see-when-the-manifest-was-last-published class=anchor aria-hidden=true>#</a> </h2>
 <p>If you are using one of the <code>init</code> options, you may wish to know how &lsquo;fresh&rsquo; your index is.</p>
@@ -274,6 +280,6 @@ blocknumber     timestamp       date    name
 </footer>
 <script src=/js/highlight.min.ec942a9dc705691c6545c0ea48b4a76dd7a730be9478c31c9139089f95e82ccfccaee7fd8b5823a0fe005ac3dec10b8f825d9ace55908f4b6e6da407af3df293.js integrity="sha512-7JQqnccFaRxlRcDqSLSnbdenML6UeMMckTkIn5XoLM/Mruf9i1gjoP4AWsPewQuPgl2azlWQj0tubaQHrz3ykw==" crossorigin=anonymous defer></script>
 <script src=/main.min.9e62c9b0c5dc8279689cc9cb693a32c8ea1d19032f574f98c782ff59a0417d3662ff94b1a7755ab72a7a1862644bf00a58492c65aa0adabbc58080f4018c61bc.js integrity="sha512-nmLJsMXcgnlonMnLaToyyOodGQMvV0+Yx4L/WaBBfTZi/5Sxp3Vatyp6GGJkS/AKWEksZaoK2rvFgID0AYxhvA==" crossorigin=anonymous defer></script>
-<script src=/index.min.c0ac6c43ae8018e12fcb33287b3e44b865f9112d394cde36f02e3422c5625ec0ec27c9fa9507e4dc237f0e900c3b4243d507213e539fcf63db4544f1919713ed.js integrity="sha512-wKxsQ66AGOEvyzMoez5EuGX5ES05TN428C40IsViXsDsJ8n6lQfk3CN/DpAMO0JD1QchPlOfz2PbRUTxkZcT7Q==" crossorigin=anonymous defer></script>
+<script src=/index.min.6856c28d777d8dc2ea07814260057e08f54d250c1128184058207bd301b7a6605170825cb782e9f3c495118d76c51b2746fde8f80ebd9fcae266971c4c228f0c.js integrity="sha512-aFbCjXd9jcLqB4FCYAV+CPVNJQwRKBhAWCB70wG3pmBRcIJct4Lp88SVEY12xRsnRv3o+A69n8riZpccTCKPDA==" crossorigin=anonymous defer></script>
 </body>
 </html>
