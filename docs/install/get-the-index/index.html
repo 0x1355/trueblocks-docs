@@ -25,7 +25,7 @@
 <meta property="og:url" content="/docs/install/get-the-index/">
 <meta property="og:image" content="/trueblocks.png">
 <meta property="article:published_time" content="2021-08-09T10:19:51-03:00">
-<meta property="article:modified_time" content="2021-10-05T17:10:33-03:00">
+<meta property="article:modified_time" content="2021-10-06T19:47:41-03:00">
 <meta property="og:site_name" content="TrueBlocks">
 <meta property="article:publisher" content="https://www.facebook.com/">
 <meta property="article:author" content="https://www.facebook.com/">
@@ -173,7 +173,7 @@
 <h3 id=use-chifra-init-to-get-a-subset-of-the-data>Use chifra init to get a subset of the data<a href=#use-chifra-init-to-get-a-subset-of-the-data class=anchor aria-hidden=true>#</a> </h3>
 <p>To get only the Bloom filters, run <code>chifra init</code>.</p>
 <p>If you do this, you will have to periodically re-run the command to update your index. (<a href=#Supplementary-how-can-I-see-when-the-manifest-was-last-published>Read about the finding the latest manifest</a>).</p>
-<p>For more information, see the <a href=../../chifra/admin.md#chifra-init><code>chifra init</code> command documentation</a>.</p>
+<p>For more information, see the <a href=/docs/chifra/admin#chifra-init><code>chifra init</code> command documentation</a>.</p>
 <p><strong>Initial set up time</strong>: <code>chifra init</code> takes only about a half an hour on a machine with a good connection. (We&rsquo;ve had report from some users that it takes much longer, but we suspect they are on slow machines.) We highly prefer you have a capable machine.</p>
 <p><strong>Storage use</strong>: In this scenario, since you only download the Bloom filters, the space required is about 1GB. Subsequently, as you download individual chunk, each chunk occupies about 25MB.</p>
 <p>The number of index chunks you download depends entirely on the addresses you query. Of course, if you query a lightly used address, very few chunks will be downloaded. However, if you query are heavily used address, such as UniSwap, nearly every chunk will be downloaded. This is by design. In the later case, you would probably be better off using <code>chifra pins --init_all</code> to begin with.</p>
@@ -193,7 +193,7 @@
 <h3 id=use-chifra-pins---init_all-to-get-the-entirity-of-the-index>Use chifra pins &ndash;init_all to get the entirity of the index<a href=#use-chifra-pins---init_all-to-get-the-entirity-of-the-index class=anchor aria-hidden=true>#</a> </h3>
 <p>To get the entirety of the appearance index, run <code>chifra pins --init_all</code>.</p>
 <p>If you use this command and don&rsquo;t run <code>chifra scrape</code>, you will have to update the index periodically by running the command again. (<a href=#Supplementary-how-can-I-see-when-the-manifest-was-last-published>Read about the finding the latest manifest</a>).</p>
-<p>For detailed instructions, see the [<code>chifra pins</code>] documentation(../../chifra/admin#chifra-pins).</p>
+<p>For detailed instructions, see the <a href=/docs/chifra/admin#chifra-pins><code>chifra pins</code> documentation</a>.</p>
 <p><strong>Initial set up time</strong>: Somewhere between six and ten hours depending on the speed of your connection.</p>
 <p><strong>Storage use</strong>: About 60GB-80GB</p>
 <p><strong>How it works</strong></p>
@@ -208,10 +208,10 @@ In other words, the first time you run <code>chifra export &lt;transaction></cod
 <p>👉 <strong>Note</strong>:
 If you don&rsquo;t have a node with tracing or archiving, <code>scrape</code> exits by default.
 You can still use scrape, but you need to
-<a href=../install-trueblocks#no-tracing>open your config and disable these checks</a></p></p>
+<a href=/docs/install/install-trueblocks#no-tracing>open your config and disable these checks</a></p></p>
 </blockquote>
 <p>To build your own index without any downloading, run <code>chifra scrape</code>.</p>
-<p>For detailed instructions, see the <a href=../../chifra/admin#chifra-scrape><code>chifra scrape</code> command documentation</a>.</p>
+<p>For detailed instructions, see the <a href=/docs/chifra/admin#chifra-scrape><code>chifra scrape</code> command documentation</a>.</p>
 <p><strong>Initial set up time</strong>: This method requires a locally-running tracing / archive node such as dAppNode running Erigon. Early users have reported 2-4 days to build the index from scratch. (You may wish to run <code>chifra scrape</code> in an application like <code>tmux</code>, so you can close the terminal window while it builds.)</p>
 <p><strong>Storage use</strong>: About 60GB.</p>
 <p><strong>How it works</strong>:</p>
@@ -280,6 +280,6 @@ blocknumber     timestamp       date    name
 </footer>
 <script src=/js/highlight.min.ec942a9dc705691c6545c0ea48b4a76dd7a730be9478c31c9139089f95e82ccfccaee7fd8b5823a0fe005ac3dec10b8f825d9ace55908f4b6e6da407af3df293.js integrity="sha512-7JQqnccFaRxlRcDqSLSnbdenML6UeMMckTkIn5XoLM/Mruf9i1gjoP4AWsPewQuPgl2azlWQj0tubaQHrz3ykw==" crossorigin=anonymous defer></script>
 <script src=/main.min.9e62c9b0c5dc8279689cc9cb693a32c8ea1d19032f574f98c782ff59a0417d3662ff94b1a7755ab72a7a1862644bf00a58492c65aa0adabbc58080f4018c61bc.js integrity="sha512-nmLJsMXcgnlonMnLaToyyOodGQMvV0+Yx4L/WaBBfTZi/5Sxp3Vatyp6GGJkS/AKWEksZaoK2rvFgID0AYxhvA==" crossorigin=anonymous defer></script>
-<script src=/index.min.6cf1a6da4e3bf1d0a9116abbc0c38db9342bd09f59e281e44a3798c05bd84874d8ed7ff2575c378aafa4f22b4a38a1119bf4386c10a09c471289d2768002d17f.js integrity="sha512-bPGm2k478dCpEWq7wMONuTQr0J9Z4oHkSjeYwFvYSHTY7X/yV1w3iq+k8itKOKERm/Q4bBCgnEcSidJ2gALRfw==" crossorigin=anonymous defer></script>
+<script src=/index.min.39a09d14303ed19874c005b78c1a1cd6ad36de59861c85aba4f4ae4c466533a5c44f6f89a44218e0538201486f715584167d80fa0a3239c8b642cd8df4cbded3.js integrity="sha512-OaCdFDA+0Zh0wAW3jBoc1q023lmGHIWrpPSuTEZlM6XET2+JpEIY4FOCAUhvcVWEFn2A+goyOci2Qs2N9Mve0w==" crossorigin=anonymous defer></script>
 </body>
 </html>
