@@ -26,8 +26,8 @@ chifra serve chifra serve delivers a JSON API for each of the chifra commands al
 <meta property="og:type" content="article">
 <meta property="og:url" content="/docs/chifra/admin/">
 <meta property="og:image" content="/trueblocks.png">
-<meta property="article:published_time" content="2021-10-05T21:57:04+00:00">
-<meta property="article:modified_time" content="2021-10-05T21:59:46-04:00">
+<meta property="article:published_time" content="2021-10-05T22:20:10+00:00">
+<meta property="article:modified_time" content="2021-10-05T22:21:40-04:00">
 <meta property="og:site_name" content="TrueBlocks">
 <meta property="article:publisher" content="https://www.facebook.com/">
 <meta property="article:author" content="https://www.facebook.com/">
@@ -144,7 +144,7 @@ chifra serve chifra serve delivers a JSON API for each of the chifra commands al
 <p><code>chifra serve</code> delivers a JSON API for each of the <code>chifra</code> commands along with each of its options. It does this through <code>flame</code> server which is written in Go.</p>
 <p><a href=https://www.tokenomics.io/api.html>Get help with the API here</a>.</p>
 <p>Another way to get help to run <code>chifra --help</code> or <code>chifra &lt;cmd> --help</code> on your command line. See below for an example of converting command line options to a call to the API. There&rsquo;s a one-to-one correspondence between the command line tools and options and the API routes and their options.</p>
-<pre><code class=language-[yaml]>Purpose:
+<pre><code class=language-[plaintext]>Purpose:
   Serve the TrueBlocks API using the flame server.
 
 Usage:
@@ -167,7 +167,7 @@ Notes:
 <p>The <code>chifra scrape</code> application creates TrueBlocks' index of address appearances &ndash; the fundamental data structure of the entire system. It also, optionally, pins the index to IPFS.</p>
 <p><code>chifra scrape</code> is a long running process, therefore we advise you run it as a service or in terminal multiplexer such as <code>tmux</code>. It is possible to start and stop <code>chifra scrape</code> as needed, but doing so means the scraper needs to catch up to the front of the chain, a process that may take some time depending on how frequently the scraper is run. See below for a more in depth explanation of how the scraping process works and prerequisites for it proper operation.</p>
 <p>The scraper can scrape either the index only, previously created monitors only, both, or neither. If you specify <code>none</code>, timestamps will be scraped but nothing else. If you&rsquo;re scraping monitors, you may tell the system to cache traces and transactions. This will speed up access, but take addition hard drive space. You may also adjust the speed of operation on different machines with the <code>--sleep</code> and <code>--n_blocks</code> options. Finally, you may choose to optionally <code>--pin</code> each new chunk to IPFS.</p>
-<pre><code class=language-[yaml]>Purpose:
+<pre><code class=language-[plaintext]>Purpose:
   Scan the chain and update the TrueBlocks index of appearances.
 
 Usage:
@@ -197,7 +197,7 @@ Global Flags:
 <p>If you stop <code>chifra init</code> before it finishes, it will pick up against where it left off the next time you run it.</p>
 <p>Certain parts of the system (<code>chifra list</code> and <code>chifra export</code> for example) if you have not previously run <code>chifra init</code> or <code>chifra scrape</code>. You will be warned by the system until it&rsquo;s satified.</p>
 <p>If you run <code>chifra init</code> and allow it to complete, the next time you run <code>chifra scrape</code>, it will start where <code>init</code> finished. This means that only the blooms will be stored on your hard drive. Subsequent scraping will produce both chunks and blooms, although you can, if you wish delete chunks that are not being used. You may periodically run <code>chifra init</code> if you prefer not to scrape.</p>
-<pre><code class=language-[yaml]>Purpose:
+<pre><code class=language-[plaintext]>Purpose:
   Initialize the TrueBlocks system by downloading from IPFS.
 
 Usage:
@@ -218,7 +218,7 @@ Notes:
 <p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/apps/pinMan><code>apps/pinMan</code></a></p>
 <h2 id=chifra-pins>chifra pins<a href=#chifra-pins class=anchor aria-hidden=true>#</a> </h2>
 <p>This tool is not yet ready for production use. Please return to this page later.</p>
-<pre><code class=language-[yaml]>Purpose:
+<pre><code class=language-[plaintext]>Purpose:
   Manage pinned index of appearances and associated blooms.
 
 Usage:
@@ -285,6 +285,6 @@ Other &rarr;
 </footer>
 <script src=/js/highlight.min.ec942a9dc705691c6545c0ea48b4a76dd7a730be9478c31c9139089f95e82ccfccaee7fd8b5823a0fe005ac3dec10b8f825d9ace55908f4b6e6da407af3df293.js integrity="sha512-7JQqnccFaRxlRcDqSLSnbdenML6UeMMckTkIn5XoLM/Mruf9i1gjoP4AWsPewQuPgl2azlWQj0tubaQHrz3ykw==" crossorigin=anonymous defer></script>
 <script src=/main.min.9e62c9b0c5dc8279689cc9cb693a32c8ea1d19032f574f98c782ff59a0417d3662ff94b1a7755ab72a7a1862644bf00a58492c65aa0adabbc58080f4018c61bc.js integrity="sha512-nmLJsMXcgnlonMnLaToyyOodGQMvV0+Yx4L/WaBBfTZi/5Sxp3Vatyp6GGJkS/AKWEksZaoK2rvFgID0AYxhvA==" crossorigin=anonymous defer></script>
-<script src=/index.min.1a8cbdbee41c00819e169be0ff923e1c87fc3ae0b8ab9dfb592afca2c7c24d96ae89706dc33fc1e56789e7542c1fbc2d93efaeec8a8f20e7d86c415c1a2b3d79.js integrity="sha512-Goy9vuQcAIGeFpvg/5I+HIf8OuC4q537WSr8osfCTZauiXBtwz/B5WeJ51QsH7wtk++u7IqPIOfYbEFcGis9eQ==" crossorigin=anonymous defer></script>
+<script src=/index.min.6cf1a6da4e3bf1d0a9116abbc0c38db9342bd09f59e281e44a3798c05bd84874d8ed7ff2575c378aafa4f22b4a38a1119bf4386c10a09c471289d2768002d17f.js integrity="sha512-bPGm2k478dCpEWq7wMONuTQr0J9Z4oHkSjeYwFvYSHTY7X/yV1w3iq+k8itKOKERm/Q4bBCgnEcSidJ2gALRfw==" crossorigin=anonymous defer></script>
 </body>
 </html>
