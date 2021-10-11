@@ -10,29 +10,27 @@
 <meta name=robots content="index, follow">
 <meta name=googlebot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta name=bingbot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-<title>Chain state - TrueBlocks</title>
-<meta name=description content="Ethereum as it was meant to be: local-first, P2P, and accurate queries to all the data you’ll ever need.">
-<link rel=canonical href=/docs/chifra/chainstate/>
+<title>Design philosophy - TrueBlocks</title>
+<meta name=description content="The philosophy behind the technical design of TrueBlocks">
+<link rel=canonical href=/docs/prologue/design-philosophy/>
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="/trueblocks.png">
-<meta name=twitter:title content="Chain state">
-<meta name=twitter:description content="The two tools in this group deal with the Chain State. As chain state data concerns balances and byte code. it is distinct from Chain Data, which concerns things like blocks, transactions, or traces.
-The two tools are chifra state and chifra tokens. The first allows you to query account balances, the byte code of a smart contract (if available), the nonce, and other information about an address. The second tool, chifra tokens, deals with ERC20 and ERC721 token balances and other data.">
+<meta name=twitter:title content="Design philosophy">
+<meta name=twitter:description content="The philosophy behind the technical design of TrueBlocks">
 <meta name=twitter:site content="@TrueBlocks">
 <meta name=twitter:creator content="@TrueBlocks">
-<meta property="og:title" content="Chain state">
-<meta property="og:description" content="The two tools in this group deal with the Chain State. As chain state data concerns balances and byte code. it is distinct from Chain Data, which concerns things like blocks, transactions, or traces.
-The two tools are chifra state and chifra tokens. The first allows you to query account balances, the byte code of a smart contract (if available), the nonce, and other information about an address. The second tool, chifra tokens, deals with ERC20 and ERC721 token balances and other data.">
+<meta property="og:title" content="Design philosophy">
+<meta property="og:description" content="The philosophy behind the technical design of TrueBlocks">
 <meta property="og:type" content="article">
-<meta property="og:url" content="/docs/chifra/chainstate/">
+<meta property="og:url" content="/docs/prologue/design-philosophy/">
 <meta property="og:image" content="/trueblocks.png">
-<meta property="article:published_time" content="2021-10-05T22:20:10+00:00">
-<meta property="article:modified_time" content="2021-10-05T22:21:40-04:00">
+<meta property="article:published_time" content="2021-10-04T10:03:01-03:00">
+<meta property="article:modified_time" content="2021-10-10T21:19:39-03:00">
 <meta property="og:site_name" content="TrueBlocks">
 <meta property="article:publisher" content="https://www.facebook.com/">
 <meta property="article:author" content="https://www.facebook.com/">
 <meta property="og:locale" content="en_US">
-<script type=application/ld+json>{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"\/"},{"@type":"ListItem","position":2,"name":"Docschifrachainstate","item":"\/docschifrachainstate\/"}]}</script>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"\/"},{"@type":"ListItem","position":2,"name":"Docsprologuedesign Philosophy","item":"\/docsprologuedesign-philosophy\/"}]}</script>
 <meta name=theme-color content="#fff">
 <link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
@@ -96,7 +94,7 @@ The two tools are chifra state and chifra tokens. The first allows you to query 
 <ul class=list-unstyled>
 <li><a class="docs-link active" href=/docs/>What is this?</a></li>
 <li><a class=docs-link href=/docs/prologue/do-i-need-a-node/>Do I need a node?</a></li>
-<li><a class=docs-link href=/docs/prologue/design-philosophy/>Design philosophy</a></li>
+<li><a class="docs-link active" href=/docs/prologue/design-philosophy/>Design philosophy</a></li>
 </ul>
 <h3>Install</h3>
 <ul class=list-unstyled>
@@ -113,7 +111,7 @@ The two tools are chifra state and chifra tokens. The first allows you to query 
 <ul class=list-unstyled>
 <li><a class=docs-link href=/docs/chifra/accounts/>Accounts</a></li>
 <li><a class=docs-link href=/docs/chifra/chaindata/>Chain data</a></li>
-<li><a class="docs-link active" href=/docs/chifra/chainstate/>Chain state</a></li>
+<li><a class=docs-link href=/docs/chifra/chainstate/>Chain state</a></li>
 <li><a class=docs-link href=/docs/chifra/admin/>Admin</a></li>
 <li><a class=docs-link href=/docs/chifra/other/>Other</a></li>
 </ul>
@@ -124,106 +122,212 @@ The two tools are chifra state and chifra tokens. The first allows you to query 
 <h3>On this page</h3>
 <nav id=TableOfContents>
 <ul>
-<li><a href=#chifra-state>chifra state</a></li>
-<li><a href=#chifra-tokens>chifra tokens</a></li>
+<li><a href=#the-three-commandments>The three commandments</a></li>
+<li><a href=#how-trueblocks-prioritizes-design-features>How TrueBlocks prioritizes design features</a>
+<ul>
+<li><a href=#core-design-values>Core design values</a></li>
+<li><a href=#very-important-values>Very important values</a></li>
+<li><a href=#important-values>Important values</a></li>
+<li><a href=#not-priorities>Not priorities</a></li>
+</ul>
+</li>
+<li><a href=#mantras-for-decentralized-data>Mantras for decentralized data</a></li>
 </ul>
 </nav>
 </div>
 </nav>
 <main class="docs-content col-lg-11 col-xl-9">
-<h1>Chain state</h1>
-<p class=lead></p>
-<p>The two tools in this group deal with the <em>Chain State</em>.
-As chain state data concerns balances and byte code.
-it is distinct from Chain Data, which concerns things like blocks, transactions,
-or traces.</p>
-<p>The two tools are <code>chifra state</code> and <code>chifra tokens</code>.
-The first allows you to query account balances, the byte code of a smart contract (if available), the nonce, and other information about an address.
-The second tool, <code>chifra tokens</code>, deals with ERC20 and ERC721 token balances and other data.</p>
-<div class="alert alert-warning d-flex" role=alert>
-<div class="flex-shrink-1 alert-icon">👉</div>
-<div class=w-100>Note: The amount of information you can retrieve depends on the type of node you run. Archive nodes and tracing allow you to query historical state (that is, all the way back to the genesis block). TrueBlocks works with non-archive nodes, but they are much less informative.</div>
-</div>
-<h2 id=chifra-state>chifra state<a href=#chifra-state class=anchor aria-hidden=true>#</a> </h2>
-<p>Use this tool to retrieve the balance of an address (or list of addresses) at the given block (or blocks). Specify multiple addresses and/or multiple blocks if you wish, but you must specify at least one address. If no block is specified, the latest block is reported.</p>
-<p>You may also query to see if an address is a smart contract as well as retrieve a contract&rsquo;s byte code.</p>
-<pre><code class=language-[plaintext]>Purpose:
-  Retrieve account balance(s) for one or more addresses at given block(s).
-
-Usage:
-  chifra state [flags] &lt;address&gt; [address...] [block...]
-
-Arguments:
-  addrs - one or more addresses (0x...) from which to retrieve balances (required)
-  blocks - an optional list of one or more blocks at which to report balances, defaults to 'latest'
-
-Flags:
-  -p, --parts strings   control which state to export
-                        One or more of none, some, all, balance, nonce, code, storage, deployed, accttype
-  -c, --changes         only report a balance when it changes from one block to the next
-  -n, --no_zero         suppress the display of zero balance accounts
-
-Global Flags:
-  -x, --fmt string   export format, one of [none|json*|txt|csv|api]
-  -h, --help         display this help screen
-  -v, --verbose      enable verbose (increase detail with --log_level)
-
-Notes:
-  - An address must start with '0x' and be forty-two characters long.
-  - blocks may be a space-separated list of values, a start-end range, a special, or any combination.
-  - If the queried node does not store historical state, the results are undefined.
-  - special blocks are detailed under chifra when --list.
-  - balance is the default mode. To select a single mode use none first, followed by that mode.
-  - You may specify multiple modes on a single line.
-</code></pre>
-<p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/tools/getState><code>tools/getState</code></a></p>
-<h2 id=chifra-tokens>chifra tokens<a href=#chifra-tokens class=anchor aria-hidden=true>#</a> </h2>
-<p>Given the address of an ERC20 token contract, this tool reports token balances for one or more additional addresses. Alternatively, the tool can report the token balances for multiple ERC20 tokens for a single addresses.</p>
-<p>In normal operation the <strong>first item</strong> in the <code>address_list</code> is assumed to be an ERC20 token contract whose balances are being queried, whereas the remainder of the list is assumed to be addresses on which to report.</p>
-<p>In <code>--byAcct</code> mode, <strong>all addresses</strong> in the <code>address_list</code> are assumed to be ERC20 token contracts, except the final one which is the account whose token balances are reported.</p>
-<p>You may optionally specify one or more blocks at which to report. If no block is specified, the latest block is assumed. You may also optionally specify which parts of the token data to extract.</p>
-<pre><code class=language-[plaintext]>Purpose:
-  Retrieve token balance(s) for one or more addresses at given block(s).
-
-Usage:
-  chifra tokens [flags] &lt;address&gt; &lt;address&gt; [address...] [block...]
-
-Arguments:
-  addrs - two or more addresses (0x...), the first is an ERC20 token, balances for the rest are reported (required)
-  blocks - an optional list of one or more blocks at which to report balances, defaults to 'latest'
-
-Flags:
-  -p, --parts strings   which parts of the token information to retrieve
-                        One or more of name, symbol, decimals, totalSupply, version, none, all
-  -b, --by_acct         consider each address an ERC20 token except the last, whose balance is reported for each token
-  -n, --no_zero         suppress the display of zero balance accounts
-
-Global Flags:
-  -x, --fmt string   export format, one of [none|json*|txt|csv|api]
-  -h, --help         display this help screen
-  -v, --verbose      enable verbose (increase detail with --log_level)
-
-Notes:
-  - An address must start with '0x' and be forty-two characters long.
-  - blocks may be a space-separated list of values, a start-end range, a special, or any combination.
-  - If the token contract(s) from which you request balances are not ERC20 compliant, the results are undefined.
-  - If the queried node does not store historical state, the results are undefined.
-  - special blocks are detailed under chifra when --list.
-</code></pre>
-<p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/tools/getTokens><code>tools/getTokens</code></a></p>
-<p class=edit-page><a href=https://github.com/TrueBlocks/trueblocks-docs/blob/master/content/docs/chifra/chainstate.md><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828.0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>Edit this page on GitHub</a></p>
+<h1>Design philosophy</h1>
+<p class=lead>A core set of values guides every aspect of TrueBlocks' technical design.</p>
+<h2 id=the-three-commandments>The three commandments<a href=#the-three-commandments class=anchor aria-hidden=true>#</a> </h2>
+<ol>
+<li>
+<p><strong>Let users query this data without asking third-parties for permission.</strong></p>
+<p>If you can access blockchain data only through a third party (e.g. a cloud provider),
+is the data really decentralized?</p>
+</li>
+<li>
+<p><strong>Provide accurate access, to underived, consented-to, pure immutable data.</strong></p>
+<p>If the blockchain data is not accurate, what good is the blockchain?</p>
+</li>
+<li>
+<p><strong>Perform well on small machines</strong></p>
+<p>If an application requires web-scale computer infrastructure,
+does it really support decentralization?</p>
+</li>
+</ol>
+<h2 id=how-trueblocks-prioritizes-design-features>How TrueBlocks prioritizes design features<a href=#how-trueblocks-prioritizes-design-features class=anchor aria-hidden=true>#</a> </h2>
+<p>No application can do all things. All design decisions involve tradeoffs.
+TrueBlocks tries to make trade off <em>consciously</em>, so that we always
+make the application best serve our core values.</p>
+<h3 id=core-design-values>Core design values<a href=#core-design-values class=anchor aria-hidden=true>#</a> </h3>
+<p>These core design features are <em>imperative</em>.
+They underlie every single commit made to the TrueBlocks code base.</p>
+<table>
+<thead>
+<tr>
+<th>Core design values</th>
+<th>What they mean in practice matter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Decentralization</td>
+<td>No one should have to rely on anyone other than themselves for data. This including users who want data at the very end of the data journey</td>
+</tr>
+<tr>
+<td>Performance</td>
+<td>TrueBlocks should be fast on small machines, and provide options for minimal disc footprints</td>
+</tr>
+<tr>
+<td>Preserves integrity of data</td>
+<td>Blockchain data is mutually-agreed upon and consented-to. Don&rsquo;t tamper with it.</td>
+</tr>
+</tbody>
+</table>
+<h3 id=very-important-values>Very important values<a href=#very-important-values class=anchor aria-hidden=true>#</a> </h3>
+<p>These values are particularly important. They are naturally necessary to achieving
+the core design features.</p>
+<table>
+<thead>
+<tr>
+<th>Very important values</th>
+<th>What they mean in practice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Transparency</td>
+<td>Every person gets permissionless access to all the data they want; the application should be open source, letting users verify the data</td>
+</tr>
+<tr>
+<td>Reproducibility</td>
+<td>Required for transparency and decentralization</td>
+</tr>
+<tr>
+<td>Stability</td>
+<td>It should run forever with zero downtime</td>
+</tr>
+</tbody>
+</table>
+<h3 id=important-values>Important values<a href=#important-values class=anchor aria-hidden=true>#</a> </h3>
+<p>These values are important, and TrueBlocks tries to maximize these values wherever possible.
+However, if we have to make a tradeoff, these values come after the core values.</p>
+<table>
+<thead>
+<tr>
+<th>Important values</th>
+<th>What they mean in practice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Robustness</td>
+<td>App should work forever without needing to be futzed with</td>
+</tr>
+<tr>
+<td>Approachability</td>
+<td>Easy to understand how it works; easy to understand how to get started</td>
+</tr>
+<tr>
+<td>Simplicity</td>
+<td>Related to Approachability</td>
+</tr>
+<tr>
+<td>Extensibility</td>
+<td>Others should be able to add to it</td>
+</tr>
+<tr>
+<td>Maintainability</td>
+<td>Ideally requires no maintenance</td>
+</tr>
+<tr>
+<td>Debuggability</td>
+<td>An internal concern</td>
+</tr>
+</tbody>
+</table>
+<h3 id=not-priorities>Not priorities<a href=#not-priorities class=anchor aria-hidden=true>#</a> </h3>
+<p>While TrueBlocks does not <em>try</em> to sacrifice these values, they are not core concerns.</p>
+<table>
+<thead>
+<tr>
+<th>Not a priority</th>
+<th>Why these values aren&rsquo;t emphasized</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Compatibility</td>
+<td>Depends on programming languages that we use, so not a concern</td>
+</tr>
+<tr>
+<td>Composability</td>
+<td>Not really a concern</td>
+</tr>
+<tr>
+<td>Expressiveness</td>
+<td>Not a concern, readable commands more important</td>
+</tr>
+<tr>
+<td>Interoperability</td>
+<td>Only care about data being platform-independent. Production of the index needs to create something that is useful outside of TrueBlocks</td>
+</tr>
+<tr>
+<td>Mensurability</td>
+<td>For internal use only, so less of a concern</td>
+</tr>
+<tr>
+<td>Portability</td>
+<td>Depends on programming language, so not a concern</td>
+</tr>
+<tr>
+<td>Safety</td>
+<td>Not really. Consented to data is safe.</td>
+</tr>
+<tr>
+<td>Security</td>
+<td>Not really. Out of our code&rsquo;s purview other than basic software security. We hold no special data: our data is consented-to data. Reproducible, consented-to data is reproducibly safe. The app runs on local machines. If the local machine is compromised, TrueBlocks is not the user&rsquo;s biggest security concern.</td>
+</tr>
+<tr>
+<td>Thoroughness</td>
+<td>The application should do one thing perfectly &ndash; reconciliations</td>
+</tr>
+</tbody>
+</table>
+<p><em>This ranking of values was inspired by <a href="https://www.youtube.com/watch?v=2wZ1pCpJUIM">a talk given by Bryan Cantrill in 2018</a>.</em></p>
+<h2 id=mantras-for-decentralized-data>Mantras for decentralized data<a href=#mantras-for-decentralized-data class=anchor aria-hidden=true>#</a> </h2>
+<p>Because &ldquo;commandments&rdquo; sounds authoritarian and Abrahamic, we also keep an ongoing list of mantras.</p>
+<p>If repeated endlessly, they will eventually sink in:</p>
+<ul>
+<li>All the data, for all the people, all the time, but no data if the user doesn’t want it</li>
+<li>Use only consented-to data…
+<ul>
+<li>If you can’t do that, use only data derived directly from consented-to data</li>
+<li>If you can’t do that, find a way to force the data provider to prove their data</li>
+</ul>
+</li>
+<li>The paradigm has shifted, embrace it - the server is now called localhost</li>
+<li>Break yourself out of the browser. There’s a big wide desktop out there</li>
+<li>It’s easier to scale up than to scale down - decentralize first</li>
+<li>Most users care only about themselves and maybe a few smart contracts</li>
+<li>Some users, but not all, care about everything</li>
+<li>Everyone needs to do accounting and pay taxes</li>
+<li>The node can, and should be, be improved</li>
+</ul>
+<p class=edit-page><a href=https://github.com/TrueBlocks/trueblocks-docs/blob/master/content/docs/prologue/design-philosophy.md><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828.0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>Edit this page on GitHub</a></p>
 <div class="docs-navigation d-flex justify-content-between">
-<a href=/docs/chifra/chaindata/>
+<a href=/docs/install/install-explorer/>
 <div class="card my-1">
 <div class="card-body py-2">
-&larr; Chain data
+&larr; 3. Install the explorer app
 </div>
 </div>
 </a>
-<a class=ms-auto href=/docs/chifra/admin/>
+<a class=ms-auto href=/docs/using/introducing-chifra/>
 <div class="card my-1">
 <div class="card-body py-2">
-Admin &rarr;
+Introducing chifra &rarr;
 </div>
 </div>
 </a>
