@@ -6,4 +6,4 @@ Preliminaries To get started, we want to extract (from the TrueBlocks index) a l
 Note: The following assumes you have a copy of (either by having built it yourself or downloaded it) the TrueBlocks Appearance Index.
 Preliminaries We start by extracting from the chain all the transactions for the address in question. We will use a randomly selected address that we know owns a number of different tokens.
 chifra list 0x03fdcadc09559262f40f5ea61c720278264eb1da
-This produces a list of 2,129 appearances (at the time of this writing).</description></item><item><title>Recipes</title><link>/blog/recipes/</link><pubDate>Tue, 06 Oct 2020 08:48:45 +0000</pubDate><guid>/blog/recipes/</guid><description>If you have an interesting use case of TrueBlocks, feel free to make a recipe! You can make a PR to the /content/blog/recipes/ directory of the documentation repo. If it&amp;rsquo;s useful, we&amp;rsquo;ll add it and give you credit.</description></item></channel></rss>
+This produces a list of 2,129 appearances (at the time of this writing).</description></item></channel></rss>
