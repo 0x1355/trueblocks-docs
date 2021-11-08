@@ -21,7 +21,7 @@ Each data structure is created by one or more tools which are detailed below
 State The following commands produce and manage states:
    Tools     The balance of an address at a given block.
  CLI: chifra state API  State data is made of the following data fields:
-   Field Description Type     blockNumber the block number at which this state was taken blknum   balance the balance at the address at the given block height wei   nonce the nonce of the address at the given block height uint64   code the byte code at the address (if this is a smart contract) bytes   storage this field is un-implemented and current returns the first storage location in a smart contract bytes   address the address of the state being queried address   deployed the block number at which this smart contract was deployed (if a smart contact) blknum   accttype the type of the address at the given block string   ether the balance of the address in ethers double    Token The following commands produce and manage tokens:">
+   Field Description Type     blockNumber the block number at which this state was taken blknum   balance the balance at the address at the given block height wei   nonce the nonce of the address at the given block height uint64   code the byte code at the address (if this is a smart contract) bytes   storage this field is un-implemented and current returns the first storage location in a smart contract bytes   address the address of the state being queried address   deployed the block number at which this smart contract was deployed (if a smart contact) blknum   accttype the type of the address at the given block string   ether the balance of the address in ethers double    Result    Field Description Type     blockNumber the block number at which this call was made blknum   address the address of contract being called address   signature the canonical signature of the interface string   encoding the encoding for the function call string   bytes the bytes data following the encoding of the call string   callResult the result of the call to the contract CFunction   compressedResult the compressed version of the result of the call to the contract string   deployed the block number at which this smart contract was deployed (if a smart contact) blknum    Token The following commands produce and manage tokens:">
 <meta name=twitter:site content="@TrueBlocks">
 <meta name=twitter:creator content="@TrueBlocks">
 <meta property="og:title" content="Chain state">
@@ -30,12 +30,12 @@ Each data structure is created by one or more tools which are detailed below
 State The following commands produce and manage states:
    Tools     The balance of an address at a given block.
  CLI: chifra state API  State data is made of the following data fields:
-   Field Description Type     blockNumber the block number at which this state was taken blknum   balance the balance at the address at the given block height wei   nonce the nonce of the address at the given block height uint64   code the byte code at the address (if this is a smart contract) bytes   storage this field is un-implemented and current returns the first storage location in a smart contract bytes   address the address of the state being queried address   deployed the block number at which this smart contract was deployed (if a smart contact) blknum   accttype the type of the address at the given block string   ether the balance of the address in ethers double    Token The following commands produce and manage tokens:">
+   Field Description Type     blockNumber the block number at which this state was taken blknum   balance the balance at the address at the given block height wei   nonce the nonce of the address at the given block height uint64   code the byte code at the address (if this is a smart contract) bytes   storage this field is un-implemented and current returns the first storage location in a smart contract bytes   address the address of the state being queried address   deployed the block number at which this smart contract was deployed (if a smart contact) blknum   accttype the type of the address at the given block string   ether the balance of the address in ethers double    Result    Field Description Type     blockNumber the block number at which this call was made blknum   address the address of contract being called address   signature the canonical signature of the interface string   encoding the encoding for the function call string   bytes the bytes data following the encoding of the call string   callResult the result of the call to the contract CFunction   compressedResult the compressed version of the result of the call to the contract string   deployed the block number at which this smart contract was deployed (if a smart contact) blknum    Token The following commands produce and manage tokens:">
 <meta property="og:type" content="article">
 <meta property="og:url" content="/data-model/chainstate/">
 <meta property="og:image" content="https://trueblocks.io/trueblocks.png">
-<meta property="article:published_time" content="2021-10-05T21:53:25+00:00">
-<meta property="article:modified_time" content="2021-10-05T21:59:46-04:00">
+<meta property="article:published_time" content="2021-10-26T05:37:39+00:00">
+<meta property="article:modified_time" content="2021-11-07T22:28:33-05:00">
 <meta property="og:site_name" content="TrueBlocks">
 <meta property="article:publisher" content="https://www.facebook.com/">
 <meta property="article:author" content="https://www.facebook.com/">
@@ -121,6 +121,7 @@ State The following commands produce and manage states:
 <nav id=TableOfContents>
 <ul>
 <li><a href=#state>State</a></li>
+<li><a href=#result>Result</a></li>
 <li><a href=#token>Token</a></li>
 <li><a href=#base-types>Base types</a></li>
 </ul>
@@ -201,6 +202,58 @@ State The following commands produce and manage states:
 <td>ether</td>
 <td>the balance of the address in ethers</td>
 <td>double</td>
+</tr>
+</tbody>
+</table>
+<h2 id=result>Result<a href=#result class=anchor aria-hidden=true>#</a> </h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>blockNumber</td>
+<td>the block number at which this call was made</td>
+<td>blknum</td>
+</tr>
+<tr>
+<td>address</td>
+<td>the address of contract being called</td>
+<td>address</td>
+</tr>
+<tr>
+<td>signature</td>
+<td>the canonical signature of the interface</td>
+<td>string</td>
+</tr>
+<tr>
+<td>encoding</td>
+<td>the encoding for the function call</td>
+<td>string</td>
+</tr>
+<tr>
+<td>bytes</td>
+<td>the bytes data following the encoding of the call</td>
+<td>string</td>
+</tr>
+<tr>
+<td>callResult</td>
+<td>the result of the call to the contract</td>
+<td>CFunction</td>
+</tr>
+<tr>
+<td>compressedResult</td>
+<td>the compressed version of the result of the call to the contract</td>
+<td>string</td>
+</tr>
+<tr>
+<td>deployed</td>
+<td>the block number at which this smart contract was deployed (if a smart contact)</td>
+<td>blknum</td>
 </tr>
 </tbody>
 </table>
@@ -368,6 +421,6 @@ Admin &rarr;
 </footer>
 <script src=/js/highlight.min.ec942a9dc705691c6545c0ea48b4a76dd7a730be9478c31c9139089f95e82ccfccaee7fd8b5823a0fe005ac3dec10b8f825d9ace55908f4b6e6da407af3df293.js integrity="sha512-7JQqnccFaRxlRcDqSLSnbdenML6UeMMckTkIn5XoLM/Mruf9i1gjoP4AWsPewQuPgl2azlWQj0tubaQHrz3ykw==" crossorigin=anonymous defer></script>
 <script src=/main.min.9e62c9b0c5dc8279689cc9cb693a32c8ea1d19032f574f98c782ff59a0417d3662ff94b1a7755ab72a7a1862644bf00a58492c65aa0adabbc58080f4018c61bc.js integrity="sha512-nmLJsMXcgnlonMnLaToyyOodGQMvV0+Yx4L/WaBBfTZi/5Sxp3Vatyp6GGJkS/AKWEksZaoK2rvFgID0AYxhvA==" crossorigin=anonymous defer></script>
-<script src=/index.min.a1e5bd05a8ac269fb183de0cea4e87ea6bb33166863b8afeaa9ccc0ebf2538da46704c0afcb9b471234b3f9631963dafb6abd742ed0ed3306c8e124bbd7b8489.js integrity="sha512-oeW9BaisJp+xg94M6k6H6muzMWaGO4r+qpzMDr8lONpGcEwK/Lm0cSNLP5Yxlj2vtqvXQu0O0zBsjhJLvXuEiQ==" crossorigin=anonymous defer></script>
+<script src=/index.min.365ccc432bfe5429b9bf6d8b5a3cfe636a22b02ec806109858f7440896080205442fe006b6de8d60c15a21b716050c88695179695fb783288b3fc30945e31af1.js integrity="sha512-NlzMQyv+VCm5v22LWjz+Y2oisC7IBhCYWPdECJYIAgVEL+AGtt6NYMFaIbcWBQyIaVF5aV+3gyiLP8MJReMa8Q==" crossorigin=anonymous defer></script>
 </body>
 </html>

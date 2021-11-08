@@ -28,8 +28,8 @@ chifra list chifra list takes one or more addresses, queries the index of appear
 <meta property="og:type" content="article">
 <meta property="og:url" content="/docs/chifra/accounts/">
 <meta property="og:image" content="https://trueblocks.io/trueblocks.png">
-<meta property="article:published_time" content="2021-10-05T22:20:10+00:00">
-<meta property="article:modified_time" content="2021-10-05T22:21:40-04:00">
+<meta property="article:published_time" content="2021-11-07T12:45:23+00:00">
+<meta property="article:modified_time" content="2021-11-07T22:28:33-05:00">
 <meta property="og:site_name" content="TrueBlocks">
 <meta property="article:publisher" content="https://www.facebook.com/">
 <meta property="article:author" content="https://www.facebook.com/">
@@ -187,15 +187,15 @@ Flags:
   -t, --traces              export traces instead of transaction list
   -C, --accounting          export accounting records instead of transaction list
   -a, --articulate          articulate transactions, traces, logs, and outputs
-  -i, --cache_txs           write transactions to the cache (see notes)
+  -i, --cache               write transactions to the cache (see notes)
   -R, --cache_traces        write traces to the cache (see notes)
   -y, --factory             scan for contract creations from the given address(es) and report address of those contracts
-      --emitter             for log export only, export only if one of the given export addresses emitted the event
-      --source strings      for log export only, export only one of these addresses emitted the event
-      --relevant            for log and accounting export only, if true export only logs relevant to one of the given export addresses
   -U, --count               only available for --appearances mode, if present, return only the number of records
   -c, --first_record uint   the first record to process
   -e, --max_records uint    the maximum number of records to process before reporting (default 250)
+      --relevant            for log and accounting export only, export only logs relevant to one of the given export addresses
+      --emitter strings     for log export only, export only logs if emitted by one of these address(es)
+      --topic strings       for log export only, export only logs with this topic(s)
       --clean               clean (i.e. remove duplicate appearances) from all existing monitors
 
 Global Flags:
@@ -205,6 +205,8 @@ Global Flags:
 
 Notes:
   - An address must start with '0x' and be forty-two characters long.
+  - For the --logs option, you may optionally specify one or more --emmitter, one or more --topics, or both.
+  - The --logs option is significantly faster if you provide an --emitter or a --topic.
 </code></pre>
 <p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/apps/acctExport><code>apps/acctExport</code></a></p>
 <h2 id=chifra-monitors>chifra monitors<a href=#chifra-monitors class=anchor aria-hidden=true>#</a> </h2>
@@ -223,7 +225,10 @@ Arguments:
 Flags:
   -p, --appearances   export a list of appearances
   -U, --count         present only the number of records
-      --clean         clean (i.e. remove duplicate appearances) from all existing monitors
+      --clean         clean (i.e. remove duplicate appearances) from monitors
+      --delete        delete a monitor, but do not remove it
+      --undelete      undelete a previously deleted monitor
+      --remove        remove a previously deleted monitor
 
 Global Flags:
   -x, --fmt string   export format, one of [none|json*|txt|csv|api]
@@ -232,6 +237,7 @@ Global Flags:
 
 Notes:
   - An address must start with '0x' and be forty-two characters long.
+  - If no address is presented to the --clean command, all monitors will be cleaned.
 </code></pre>
 <p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/apps/acctExport><code>apps/acctExport</code></a></p>
 <h2 id=chifra-names>chifra names<a href=#chifra-names class=anchor aria-hidden=true>#</a> </h2>
@@ -286,8 +292,8 @@ Arguments:
 
 Flags:
   -k, --known          load common 'known' ABIs from cache
-  -s, --sol string     file name of .sol file from which to create a new known abi (without .sol)
-  -f, --find strings   try to search for a function declaration given a four byte code
+  -s, --sol            extract the abi definition from the provided .sol file(s)
+  -f, --find strings   search for function or event declarations given a four- or 32-byte code(s)
 
 Global Flags:
   -x, --fmt string   export format, one of [none|json*|txt|csv|api]
@@ -295,7 +301,8 @@ Global Flags:
   -v, --verbose      enable verbose (increase detail with --log_level)
 
 Notes:
-  - Solidity files found in the local folder with the name '&lt;address&gt;.sol' are converted to an ABI prior to processing (and then removed).
+  - For the --sol option, place the solidity files in the current working folder.
+  - Search for either four byte signatures or event signatures with the --find option.
 </code></pre>
 <p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/tools/grabABI><code>tools/grabABI</code></a></p>
 <p class=edit-page><a href=https://github.com/TrueBlocks/trueblocks-docs/blob/master/content/docs/chifra/accounts.md><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828.0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>Edit this page on GitHub</a></p>
@@ -338,6 +345,6 @@ Chain data &rarr;
 </footer>
 <script src=/js/highlight.min.ec942a9dc705691c6545c0ea48b4a76dd7a730be9478c31c9139089f95e82ccfccaee7fd8b5823a0fe005ac3dec10b8f825d9ace55908f4b6e6da407af3df293.js integrity="sha512-7JQqnccFaRxlRcDqSLSnbdenML6UeMMckTkIn5XoLM/Mruf9i1gjoP4AWsPewQuPgl2azlWQj0tubaQHrz3ykw==" crossorigin=anonymous defer></script>
 <script src=/main.min.9e62c9b0c5dc8279689cc9cb693a32c8ea1d19032f574f98c782ff59a0417d3662ff94b1a7755ab72a7a1862644bf00a58492c65aa0adabbc58080f4018c61bc.js integrity="sha512-nmLJsMXcgnlonMnLaToyyOodGQMvV0+Yx4L/WaBBfTZi/5Sxp3Vatyp6GGJkS/AKWEksZaoK2rvFgID0AYxhvA==" crossorigin=anonymous defer></script>
-<script src=/index.min.a1e5bd05a8ac269fb183de0cea4e87ea6bb33166863b8afeaa9ccc0ebf2538da46704c0afcb9b471234b3f9631963dafb6abd742ed0ed3306c8e124bbd7b8489.js integrity="sha512-oeW9BaisJp+xg94M6k6H6muzMWaGO4r+qpzMDr8lONpGcEwK/Lm0cSNLP5Yxlj2vtqvXQu0O0zBsjhJLvXuEiQ==" crossorigin=anonymous defer></script>
+<script src=/index.min.365ccc432bfe5429b9bf6d8b5a3cfe636a22b02ec806109858f7440896080205442fe006b6de8d60c15a21b716050c88695179695fb783288b3fc30945e31af1.js integrity="sha512-NlzMQyv+VCm5v22LWjz+Y2oisC7IBhCYWPdECJYIAgVEL+AGtt6NYMFaIbcWBQyIaVF5aV+3gyiLP8MJReMa8Q==" crossorigin=anonymous defer></script>
 </body>
 </html>

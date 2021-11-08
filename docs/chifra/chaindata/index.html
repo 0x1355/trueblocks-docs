@@ -28,8 +28,8 @@ By default, chifra blocks queries the full transactional details of the block (i
 <meta property="og:type" content="article">
 <meta property="og:url" content="/docs/chifra/chaindata/">
 <meta property="og:image" content="https://trueblocks.io/trueblocks.png">
-<meta property="article:published_time" content="2021-10-05T22:20:10+00:00">
-<meta property="article:modified_time" content="2021-10-05T22:21:40-04:00">
+<meta property="article:published_time" content="2021-11-06T17:52:53+00:00">
+<meta property="article:modified_time" content="2021-11-07T22:28:33-05:00">
 <meta property="og:site_name" content="TrueBlocks">
 <meta property="article:publisher" content="https://www.facebook.com/">
 <meta property="article:author" content="https://www.facebook.com/">
@@ -159,7 +159,7 @@ Flags:
   -e, --hashes    display only transaction hashes, default is to display full transaction detail
   -U, --uncles    display uncle blocks (if any) instead of the requested block
   -t, --trace     export the traces from the block as opposed to the block data
-  -a, --apps      display only the list of address appearances in the block
+  -s, --apps      display only the list of address appearances in the block
   -u, --uniq      display only the list of uniq address appearances in the block
   -n, --uniq_tx   display only the list of uniq address appearances in each transaction
   -c, --count     display the number of the lists of appearances for --apps, --uniq, or --uniq_tx
@@ -174,6 +174,10 @@ Notes:
   - blocks is a space-separated list of values, a start-end range, a special, or any combination.
   - blocks may be specified as either numbers or hashes.
   - special blocks are detailed under chifra when --list.
+  - With the --logs option, optionally specify one or more --emmitter, one or more --topics, either or both.
+  - The --logs option is significantly faster if you provide an --emitter and/or a --topic.
+  - Multiple topics match on topic0, topic1, and so on, not on different topic0's.
+  - Large block ranges may crash the node, use --big_range to specify a larger range.
 </code></pre>
 <p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/tools/getBlocks><code>tools/getBlocks</code></a></p>
 <h2 id=chifra-receipts>chifra receipts<a href=#chifra-receipts class=anchor aria-hidden=true>#</a> </h2>
@@ -198,7 +202,7 @@ Global Flags:
   -v, --verbose      enable verbose (increase detail with --log_level)
 
 Notes:
-  - The transactions list may be one or more space-separated identifiers which are either a transaction hash, a blockNumber.transactionID pair, or a blockHash.transactionID pair, or any combination.
+  - The transactions list may be one or more transaction hashes, blockNumber.transactionID pairs, or a blockHash.transactionID pairs.
   - This tool checks for valid input syntax, but does not check that the transaction requested actually exists.
   - If the queried node does not store historical state, the results for most older transactions are undefined.
 </code></pre>
@@ -213,12 +217,10 @@ Usage:
   chifra logs [flags] &lt;tx_id&gt; [tx_id...]
 
 Arguments:
-  transactions - a space-separated list of one or more transaction identifiers (required)
+  transactions - a space-separated list of one or more transaction identifiers
 
 Flags:
-  -t, --topic strings    filter by one or more log topics (not implemented)
-  -s, --source strings   export only if the given address emitted the event (not implemented)
-  -a, --articulate       articulate the retrieved data if ABIs can be found
+  -a, --articulate   articulate the retrieved data if ABIs can be found
 
 Global Flags:
   -x, --fmt string   export format, one of [none|json*|txt|csv|api]
@@ -226,7 +228,7 @@ Global Flags:
   -v, --verbose      enable verbose (increase detail with --log_level)
 
 Notes:
-  - The transactions list may be one or more space-separated identifiers which are either a transaction hash, a blockNumber.transactionID pair, or a blockHash.transactionID pair, or any combination.
+  - The transactions list may be one or more transaction hashes, blockNumber.transactionID pairs, or a blockHash.transactionID pairs.
   - This tool checks for valid input syntax, but does not check that the transaction requested actually exists.
   - If the queried node does not store historical state, the results for most older transactions are undefined.
   - If you specify a 32-byte hash, it will be assumed to be a transaction hash, if the transaction is not found, it will be used as a topic.
@@ -257,7 +259,7 @@ Global Flags:
   -v, --verbose      enable verbose (increase detail with --log_level)
 
 Notes:
-  - The transactions list may be one or more space-separated identifiers which are either a transaction hash, a blockNumber.transactionID pair, or a blockHash.transactionID pair, or any combination.
+  - The transactions list may be one or more transaction hashes, blockNumber.transactionID pairs, or a blockHash.transactionID pairs.
   - This tool checks for valid input syntax, but does not check that the transaction requested actually exists.
   - If the queried node does not store historical state, the results for most older transactions are undefined.
   - A bang separated filter has the following fields (at least one of which is required) and is separated with a bang (!): fromBlk, toBlk, fromAddr, toAddr, after, count.
@@ -331,6 +333,6 @@ Chain state &rarr;
 </footer>
 <script src=/js/highlight.min.ec942a9dc705691c6545c0ea48b4a76dd7a730be9478c31c9139089f95e82ccfccaee7fd8b5823a0fe005ac3dec10b8f825d9ace55908f4b6e6da407af3df293.js integrity="sha512-7JQqnccFaRxlRcDqSLSnbdenML6UeMMckTkIn5XoLM/Mruf9i1gjoP4AWsPewQuPgl2azlWQj0tubaQHrz3ykw==" crossorigin=anonymous defer></script>
 <script src=/main.min.9e62c9b0c5dc8279689cc9cb693a32c8ea1d19032f574f98c782ff59a0417d3662ff94b1a7755ab72a7a1862644bf00a58492c65aa0adabbc58080f4018c61bc.js integrity="sha512-nmLJsMXcgnlonMnLaToyyOodGQMvV0+Yx4L/WaBBfTZi/5Sxp3Vatyp6GGJkS/AKWEksZaoK2rvFgID0AYxhvA==" crossorigin=anonymous defer></script>
-<script src=/index.min.a1e5bd05a8ac269fb183de0cea4e87ea6bb33166863b8afeaa9ccc0ebf2538da46704c0afcb9b471234b3f9631963dafb6abd742ed0ed3306c8e124bbd7b8489.js integrity="sha512-oeW9BaisJp+xg94M6k6H6muzMWaGO4r+qpzMDr8lONpGcEwK/Lm0cSNLP5Yxlj2vtqvXQu0O0zBsjhJLvXuEiQ==" crossorigin=anonymous defer></script>
+<script src=/index.min.365ccc432bfe5429b9bf6d8b5a3cfe636a22b02ec806109858f7440896080205442fe006b6de8d60c15a21b716050c88695179695fb783288b3fc30945e31af1.js integrity="sha512-NlzMQyv+VCm5v22LWjz+Y2oisC7IBhCYWPdECJYIAgVEL+AGtt6NYMFaIbcWBQyIaVF5aV+3gyiLP8MJReMa8Q==" crossorigin=anonymous defer></script>
 </body>
 </html>
