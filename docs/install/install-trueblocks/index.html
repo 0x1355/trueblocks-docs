@@ -25,7 +25,7 @@
 <meta property="og:url" content="/docs/install/install-trueblocks/">
 <meta property="og:image" content="https://trueblocks.io/trueblocks.png">
 <meta property="article:published_time" content="2020-11-16T13:59:39+01:00">
-<meta property="article:modified_time" content="2021-11-12T11:05:01-05:00">
+<meta property="article:modified_time" content="2021-11-16T22:16:29-05:00">
 <meta property="og:site_name" content="TrueBlocks">
 <meta property="article:publisher" content="https://www.facebook.com/">
 <meta property="article:author" content="https://www.facebook.com/">
@@ -92,7 +92,7 @@
 <nav class=docs-links aria-label="Main navigation">
 <h3>Prologue</h3>
 <ul class=list-unstyled>
-<li><a class="docs-link active" href=/docs/>What is this?</a></li>
+<li><a class="docs-link active" href=/docs/>About TrueBlocks</a></li>
 <li><a class=docs-link href=/docs/prologue/do-i-need-a-node/>Do I need a node?</a></li>
 <li><a class=docs-link href=/docs/prologue/design-philosophy/>Design philosophy</a></li>
 </ul>
@@ -143,17 +143,24 @@
 </nav>
 <main class="docs-content col-lg-11 col-xl-9">
 <h1>1. Install TrueBlocks</h1>
-<p class=lead>TrueBlocks runs on Linux and Mac. There is no official Windows support. Some users have had success using WSL─you're on your own!</p>
-<p>These instructions assume you can navigate directories with the command line
-and edit configuration files.
-If you need help with a step, see the <a href=https://trueblocks.io/docs/install/install-trueblocks/#troubleshooting>installation&rsquo;s troubleshooting section</a>.</p>
+<p class=lead>TrueBlocks runs on Linux and Mac. We do not support Windows</p>
+<p>These instructions assume you can navigate the command line and edit configuration files.
+If you need help with a particular step, see the <a href=/docs/install/install-trueblocks/#troubleshooting>installation&rsquo;s troubleshooting section</a>.</p>
 <h2 id=quick-install>Quick Install<a href=#quick-install class=anchor aria-hidden=true>#</a> </h2>
 <ol start=0>
-<li>
-<p>Install dependencies</p>
+<li>Update GoLang installation
 <ul>
-<li>☑ <a href=https://golang.org/doc/install>Install the latest version of Go</a>.</li>
-<li>☑ Install the other dependencies with your command line: <code>build-essential</code> <code>git</code> <code>cmake</code> <code>python</code> <code>python-dev</code> <code>libcurl3-dev</code> <code>clang-format</code> <code>jq</code>.
+<li><code>go --version</code></li>
+<li><em>If your version is less than 1.14,</em> <a href=/docs/install/install-trueblocks/#how-do-i-check-my-go-version>install Go</a></li>
+</ul>
+</li>
+</ol>
+<br>
+<ol>
+<li>
+<p>Check other build dependancies or install</p>
+<ul>
+<li>☑ <a href=/docs/install/install-trueblocks/#how-do-i-install-packages-on-the-command-line>Install the other dependencies</a>
 <br><br></li>
 </ul>
 </li>
@@ -208,7 +215,7 @@ or ask us on discord.</p>
 <p>Run this command</p>
 <pre><code class=language-shell>go version
 </code></pre>
-<p>TrueBlocks needs version 1.12.x or later.</p>
+<p>TrueBlocks needs version 1.12.x or later. If you to install or update Go, <a href=https://golang.org/doc/install>see here</a>.</p>
 <h4 id=how-do-i-install-packages-on-the-command-line>How do I install packages on the command line?<a href=#how-do-i-install-packages-on-the-command-line class=anchor aria-hidden=true>#</a> </h4>
 <ul>
 <li>
@@ -336,6 +343,6 @@ archive = false
 </footer>
 <script src=/js/highlight.min.ec942a9dc705691c6545c0ea48b4a76dd7a730be9478c31c9139089f95e82ccfccaee7fd8b5823a0fe005ac3dec10b8f825d9ace55908f4b6e6da407af3df293.js integrity="sha512-7JQqnccFaRxlRcDqSLSnbdenML6UeMMckTkIn5XoLM/Mruf9i1gjoP4AWsPewQuPgl2azlWQj0tubaQHrz3ykw==" crossorigin=anonymous defer></script>
 <script src=/main.min.9e62c9b0c5dc8279689cc9cb693a32c8ea1d19032f574f98c782ff59a0417d3662ff94b1a7755ab72a7a1862644bf00a58492c65aa0adabbc58080f4018c61bc.js integrity="sha512-nmLJsMXcgnlonMnLaToyyOodGQMvV0+Yx4L/WaBBfTZi/5Sxp3Vatyp6GGJkS/AKWEksZaoK2rvFgID0AYxhvA==" crossorigin=anonymous defer></script>
-<script src=/index.min.520fe77c9dc59c2485a1385ab88f64ae36d24ba93e507a3bb8c1c71fee33ec7cb5da214d0b29ec2ef3e904badedb3f6176563d52d6c54116e16206cdccac6e7d.js integrity="sha512-Ug/nfJ3FnCSFoThauI9krjbSS6k+UHo7uMHHH+4z7Hy12iFNCynsLvPpBLre2z9hdlY9UtbFQRbhYgbNzKxufQ==" crossorigin=anonymous defer></script>
+<script src=/index.min.b0d327099cbdf1a303fab801128f20162da053ddfede587f0250523e1378b1091505f538d44950ed3ffc2fb3f94618058942295a1434e8061127430e5c1b2136.js integrity="sha512-sNMnCZy98aMD+rgBEo8gFi2gU93+3lh/AlBSPhN4sQkVBfU41ElQ7T/8L7P5RhgFiUIpWhQ06AYRJ0MOXBshNg==" crossorigin=anonymous defer></script>
 </body>
 </html>
