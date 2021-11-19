@@ -28,8 +28,8 @@ By default, chifra blocks queries the full transactional details of the block (i
 <meta property="og:type" content="article">
 <meta property="og:url" content="/docs/chifra/chaindata/">
 <meta property="og:image" content="https://trueblocks.io/trueblocks.png">
-<meta property="article:published_time" content="2021-11-06T17:52:53+00:00">
-<meta property="article:modified_time" content="2021-11-07T22:28:33-05:00">
+<meta property="article:published_time" content="2021-11-18T22:52:20+00:00">
+<meta property="article:modified_time" content="2021-11-19T00:11:30-05:00">
 <meta property="og:site_name" content="TrueBlocks">
 <meta property="article:publisher" content="https://www.facebook.com/">
 <meta property="article:author" content="https://www.facebook.com/">
@@ -156,19 +156,16 @@ Arguments:
   blocks - a space-separated list of one or more block identifiers (required)
 
 Flags:
-  -e, --hashes    display only transaction hashes, default is to display full transaction detail
-  -U, --uncles    display uncle blocks (if any) instead of the requested block
-  -t, --trace     export the traces from the block as opposed to the block data
-  -s, --apps      display only the list of address appearances in the block
-  -u, --uniq      display only the list of uniq address appearances in the block
-  -n, --uniq_tx   display only the list of uniq address appearances in each transaction
-  -c, --count     display the number of the lists of appearances for --apps, --uniq, or --uniq_tx
-  -o, --cache     force a write of the block to the cache
-
-Global Flags:
+  -e, --hashes       display only transaction hashes, default is to display full transaction detail
+  -U, --uncles       display uncle blocks (if any) instead of the requested block
+  -t, --trace        export the traces from the block as opposed to the block data
+  -s, --apps         display a list of uniq address appearances in the block
+  -u, --uniq         display a list of uniq address appearances per transaction
+  -c, --count        display the number of the lists of appearances for --addrs or --uniq
+  -o, --cache        force a write of the block to the cache
   -x, --fmt string   export format, one of [none|json*|txt|csv|api]
-  -h, --help         display this help screen
   -v, --verbose      enable verbose (increase detail with --log_level)
+  -h, --help         display this help screen
 
 Notes:
   - blocks is a space-separated list of values, a start-end range, a special, or any combination.
@@ -179,7 +176,7 @@ Notes:
   - Multiple topics match on topic0, topic1, and so on, not on different topic0's.
   - Large block ranges may crash the node, use --big_range to specify a larger range.
 </code></pre>
-<p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/tools/getBlocks><code>tools/getBlocks</code></a></p>
+<p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/apps/chifra/internal/blocks><code>internal/blocks</code></a></p>
 <h2 id=chifra-receipts>chifra receipts<a href=#chifra-receipts class=anchor aria-hidden=true>#</a> </h2>
 <p><code>chifra receipts</code> returns the given transaction&rsquo;s receipt. You may specify multiple transaction identifiers per invocation.</p>
 <p>The <code>--articulate</code> option fetches the ABI from each encountered smart contract (including those encountered in a trace&ndash;if the <code>--trace</code> option is enabled) to better describe the reported data.</p>
@@ -195,18 +192,16 @@ Arguments:
 
 Flags:
   -a, --articulate   articulate the retrieved data if ABIs can be found
-
-Global Flags:
   -x, --fmt string   export format, one of [none|json*|txt|csv|api]
-  -h, --help         display this help screen
   -v, --verbose      enable verbose (increase detail with --log_level)
+  -h, --help         display this help screen
 
 Notes:
   - The transactions list may be one or more transaction hashes, blockNumber.transactionID pairs, or a blockHash.transactionID pairs.
   - This tool checks for valid input syntax, but does not check that the transaction requested actually exists.
   - If the queried node does not store historical state, the results for most older transactions are undefined.
 </code></pre>
-<p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/tools/getReceipts><code>tools/getReceipts</code></a></p>
+<p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/apps/chifra/internal/receipts><code>internal/receipts</code></a></p>
 <h2 id=chifra-logs>chifra logs<a href=#chifra-logs class=anchor aria-hidden=true>#</a> </h2>
 <p><code>chifra logs</code> returns the given transaction&rsquo;s logs. You may specify multiple transaction identifiers per invocation.</p>
 <p>The <code>--articulate</code> option fetches the ABI from each encountered smart contract to better describe the reported data. The <code>--topic</code> and <code>--source</code> options allow you to filter your results.</p>
@@ -221,11 +216,9 @@ Arguments:
 
 Flags:
   -a, --articulate   articulate the retrieved data if ABIs can be found
-
-Global Flags:
   -x, --fmt string   export format, one of [none|json*|txt|csv|api]
-  -h, --help         display this help screen
   -v, --verbose      enable verbose (increase detail with --log_level)
+  -h, --help         display this help screen
 
 Notes:
   - The transactions list may be one or more transaction hashes, blockNumber.transactionID pairs, or a blockHash.transactionID pairs.
@@ -233,7 +226,7 @@ Notes:
   - If the queried node does not store historical state, the results for most older transactions are undefined.
   - If you specify a 32-byte hash, it will be assumed to be a transaction hash, if the transaction is not found, it will be used as a topic.
 </code></pre>
-<p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/tools/getLogs><code>tools/getLogs</code></a></p>
+<p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/apps/chifra/internal/logs><code>internal/logs</code></a></p>
 <h2 id=chifra-traces>chifra traces<a href=#chifra-traces class=anchor aria-hidden=true>#</a> </h2>
 <p>The <code>chifra traces</code> tool retrieves a transaction&rsquo;s traces. You may specify multiple transaction identifiers per invocation.</p>
 <p>The <code>--articulate</code> option fetches the ABI from each encountered smart contract to better describe the reported data.</p>
@@ -252,11 +245,9 @@ Flags:
   -f, --filter string   call the node's trace_filter routine with bang-separated filter
   -d, --statediff       export state diff traces (not implemented)
   -c, --count           show the number of traces for the transaction only (fast)
-
-Global Flags:
-  -x, --fmt string   export format, one of [none|json*|txt|csv|api]
-  -h, --help         display this help screen
-  -v, --verbose      enable verbose (increase detail with --log_level)
+  -x, --fmt string      export format, one of [none|json*|txt|csv|api]
+  -v, --verbose         enable verbose (increase detail with --log_level)
+  -h, --help            display this help screen
 
 Notes:
   - The transactions list may be one or more transaction hashes, blockNumber.transactionID pairs, or a blockHash.transactionID pairs.
@@ -265,7 +256,7 @@ Notes:
   - A bang separated filter has the following fields (at least one of which is required) and is separated with a bang (!): fromBlk, toBlk, fromAddr, toAddr, after, count.
   - A state diff trace describes, for each modified address, what changed during that trace.
 </code></pre>
-<p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/tools/getTraces><code>tools/getTraces</code></a></p>
+<p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/apps/chifra/internal/traces><code>internal/traces</code></a></p>
 <h2 id=chifra-when>chifra when<a href=#chifra-when class=anchor aria-hidden=true>#</a> </h2>
 <p>The <code>chifra when</code> tool answers one of two questions: (1) &ldquo;At what date and time did a given block occur?&rdquo; or (2) &ldquo;What block occurred at or before a given date and time?&rdquo;</p>
 <p>In the first case, supply a block number or hash and the date and time of that block are displayed. In the later case, supply a date (and optionally a time) and the block number that occurred at or just prior to that date is displayed.</p>
@@ -282,17 +273,15 @@ Arguments:
 Flags:
   -l, --list         export a list of the 'special' blocks
   -t, --timestamps   ignore other options and generate timestamps only
-
-Global Flags:
   -x, --fmt string   export format, one of [none|json*|txt|csv|api]
-  -h, --help         display this help screen
   -v, --verbose      enable verbose (increase detail with --log_level)
+  -h, --help         display this help screen
 
 Notes:
   - The block list may contain any combination of number, hash, date, special named blocks.
   - Dates must be formatted in JSON format: YYYY-MM-DD[THH[:MM[:SS]]].
 </code></pre>
-<p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/tools/whenBlock><code>tools/whenBlock</code></a></p>
+<p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/apps/chifra/internal/when><code>internal/when</code></a></p>
 <p class=edit-page><a href=https://github.com/TrueBlocks/trueblocks-docs/blob/master/content/docs/chifra/chaindata.md><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828.0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>Edit this page on GitHub</a></p>
 <div class="docs-navigation d-flex justify-content-between">
 <a href=/docs/chifra/accounts/>
@@ -333,6 +322,6 @@ Chain state &rarr;
 </footer>
 <script src=/js/highlight.min.ec942a9dc705691c6545c0ea48b4a76dd7a730be9478c31c9139089f95e82ccfccaee7fd8b5823a0fe005ac3dec10b8f825d9ace55908f4b6e6da407af3df293.js integrity="sha512-7JQqnccFaRxlRcDqSLSnbdenML6UeMMckTkIn5XoLM/Mruf9i1gjoP4AWsPewQuPgl2azlWQj0tubaQHrz3ykw==" crossorigin=anonymous defer></script>
 <script src=/main.min.9e62c9b0c5dc8279689cc9cb693a32c8ea1d19032f574f98c782ff59a0417d3662ff94b1a7755ab72a7a1862644bf00a58492c65aa0adabbc58080f4018c61bc.js integrity="sha512-nmLJsMXcgnlonMnLaToyyOodGQMvV0+Yx4L/WaBBfTZi/5Sxp3Vatyp6GGJkS/AKWEksZaoK2rvFgID0AYxhvA==" crossorigin=anonymous defer></script>
-<script src=/index.min.b0d327099cbdf1a303fab801128f20162da053ddfede587f0250523e1378b1091505f538d44950ed3ffc2fb3f94618058942295a1434e8061127430e5c1b2136.js integrity="sha512-sNMnCZy98aMD+rgBEo8gFi2gU93+3lh/AlBSPhN4sQkVBfU41ElQ7T/8L7P5RhgFiUIpWhQ06AYRJ0MOXBshNg==" crossorigin=anonymous defer></script>
+<script src=/index.min.2611a5e636c051a3a13b9d839cff645a3b23129c6de39f0d95efd0e22a90e97e9c4525bcba48eb59cea3f25638f2c95f83ee1575d62539b7e644490938a67e72.js integrity="sha512-JhGl5jbAUaOhO52DnP9kWjsjEpxt458Nle/Q4iqQ6X6cRSW8ukjrWc6j8lY48slfg+4VddYlObfmREkJOKZ+cg==" crossorigin=anonymous defer></script>
 </body>
 </html>

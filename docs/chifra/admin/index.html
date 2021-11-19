@@ -28,8 +28,8 @@ chifra serve chifra serve delivers a JSON API for each of the chifra commands al
 <meta property="og:type" content="article">
 <meta property="og:url" content="/docs/chifra/admin/">
 <meta property="og:image" content="https://trueblocks.io/trueblocks.png">
-<meta property="article:published_time" content="2021-11-07T22:22:20+00:00">
-<meta property="article:modified_time" content="2021-11-07T22:28:33-05:00">
+<meta property="article:published_time" content="2021-11-18T23:43:46+00:00">
+<meta property="article:modified_time" content="2021-11-19T00:11:30-05:00">
 <meta property="og:site_name" content="TrueBlocks">
 <meta property="article:publisher" content="https://www.facebook.com/">
 <meta property="article:author" content="https://www.facebook.com/">
@@ -159,18 +159,16 @@ Usage:
   chifra serve [flags]
 
 Flags:
-  -p, --port string   specify the server's port (:8080 default)
-
-Global Flags:
-  -x, --fmt string   export format, one of [none|json*|txt|csv|api]
-  -h, --help         display this help screen
-  -v, --verbose      enable verbose (increase detail with --log_level)
+  -p, --port string   specify the server's port (default &quot;:8080&quot;)
+  -x, --fmt string    export format, one of [none|json*|txt|csv|api]
+  -v, --verbose       enable verbose (increase detail with --log_level)
+  -h, --help          display this help screen
 
 Notes:
   - To start API open terminal window and run chifra serve.
   - See the API documentation for more information.
 </code></pre>
-<p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/develop/src/apps/chifra/cmd/serve.go><code>serve.go</code></a></p>
+<p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/apps/chifra/server><code>server</code></a></p>
 <h2 id=chifra-scrape>chifra scrape<a href=#chifra-scrape class=anchor aria-hidden=true>#</a> </h2>
 <p>The <code>chifra scrape</code> application creates TrueBlocks' index of address appearances &ndash; the fundamental data structure of the entire system. It also, optionally, pins the index to IPFS.</p>
 <p><code>chifra scrape</code> is a long running process, therefore we advise you run it as a service or in terminal multiplexer such as <code>tmux</code>. It is possible to start and stop <code>chifra scrape</code> as needed, but doing so means the scraper needs to catch up to the front of the chain, a process that may take some time depending on how frequently the scraper is run. See below for a more in depth explanation of how the scraping process works and prerequisites for it proper operation.</p>
@@ -192,11 +190,9 @@ Flags:
   -p, --pin              pin chunks (and blooms) to IPFS as they are created (requires pinning service)
   -u, --publish          after pinning the chunk, publish it to UnchainedIndex
   -n, --block_cnt uint   maximum number of blocks to process per pass (default 2000)
-
-Global Flags:
-  -x, --fmt string   export format, one of [none|json*|txt|csv|api]
-  -h, --help         display this help screen
-  -v, --verbose      enable verbose (increase detail with --log_level)
+  -x, --fmt string       export format, one of [none|json*|txt|csv|api]
+  -v, --verbose          enable verbose (increase detail with --log_level)
+  -h, --help             display this help screen
 
 Notes:
   - if no mode is presented, chifra scrape indexer --action run is assumed.
@@ -211,7 +207,7 @@ Notes:
 <h3 id=prerequisites>prerequisites<a href=#prerequisites class=anchor aria-hidden=true>#</a> </h3>
 <p><code>chifra scrape</code> does not work without an RPC endpoint to an Ethereum node. The software works without an <code>--archive</code> node, but it works significantly better with one. An additional requirement for the software to work properly is an RPC that provides OpenEthereum&rsquo;s <code>trace_</code> routines. We&rsquo;ve tested with OpenEthereum and Erigon.</p>
 <p>Please see <a href=.>this article</a> for more information about running the scraper and building and sharing the index of appearances.</p>
-<p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/apps/blockScrape><code>apps/blockScrape</code></a></p>
+<p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/apps/chifra/internal/scrape><code>internal/scrape</code></a></p>
 <h2 id=chifra-chunks>chifra chunks<a href=#chifra-chunks class=anchor aria-hidden=true>#</a> </h2>
 <p>This tool is not yet ready for production use. Please return to this page later.</p>
 <pre><code class=language-[plaintext]>Purpose:
@@ -224,22 +220,19 @@ Arguments:
   blocks - an optional list of blocks to process
 
 Flags:
-  -l, --list             list the bloom and index hashes from local cache or IPFS
   -c, --check            check the validity of the chunk or bloom
   -e, --extract string   show some or all of the contents of the chunk or bloom filters
                          One of [ header | addr_table | app_table | chunks | blooms ]
   -s, --stats            for the --list option only, display statistics about each chunk or bloom
   -a, --save             for the --extract option only, save the entire chunk to a similarly named file as well as display
-
-Global Flags:
-  -x, --fmt string   export format, one of [none|json*|txt|csv|api]
-  -h, --help         display this help screen
-  -v, --verbose      enable verbose (increase detail with --log_level)
+  -x, --fmt string       export format, one of [none|json*|txt|csv|api]
+  -v, --verbose          enable verbose (increase detail with --log_level)
+  -h, --help             display this help screen
 
 Notes:
   - Only a single block in a given chunk needs to be supplied.
 </code></pre>
-<p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/apps/chunkMan><code>apps/chunkMan</code></a></p>
+<p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/apps/chifra/internal/chunks><code>internal/chunks</code></a></p>
 <h2 id=chifra-init>chifra init<a href=#chifra-init class=anchor aria-hidden=true>#</a> </h2>
 <p>When invoked, <code>chifra init</code> looks at a smart contract called <strong>The Unchained Index</strong> (<a href=https://etherscan.io/address/0xcfd7f3b24f3551741f922fd8c4381aa4e00fc8fd>0xcfd7f3b24f3551741f922fd8c4381aa4e00fc8fd</a>). From this smart contract, it extracts a data item called <code>manifestHash</code>. The <code>manifestHash</code> is an IPFS hash that points to a file (a manifest) that contains every previously pinned Bloom filter and index chunk. TrueBlocks periodically publishes the manifest&rsquo;s hash to the smart contract. This makes the entire index both available for our software to use and impossible for us to withhold. Both of these aspects of the manifest are included by design.</p>
 <p>If you stop <code>chifra init</code> before it finishes, it will pick up against where it left off the next time you run it.</p>
@@ -252,18 +245,16 @@ Usage:
   chifra init [flags]
 
 Flags:
-  -a, --all   in addition to Bloom filters, download full index chunks
-
-Global Flags:
+  -a, --all          in addition to Bloom filters, download full index chunks
   -x, --fmt string   export format, one of [none|json*|txt|csv|api]
-  -h, --help         display this help screen
   -v, --verbose      enable verbose (increase detail with --log_level)
+  -h, --help         display this help screen
 
 Notes:
   - chifra init is an alias for the chifra pins --init command.
   - See chifra pins --help for more information.
 </code></pre>
-<p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/develop/src/apps/chifra/cmd/init.go><code>init.go</code></a></p>
+<p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/apps/chifra/internal/init><code>internal/init</code></a></p>
 <h2 id=chifra-pins>chifra pins<a href=#chifra-pins class=anchor aria-hidden=true>#</a> </h2>
 <p>This tool is not yet ready for production use. Please return to this page later.</p>
 <pre><code class=language-[plaintext]>Purpose:
@@ -278,18 +269,16 @@ Flags:
   -a, --all           in addition to Bloom filters, download full index chunks
   -S, --share         share downloaded data by pinning it to IPFS (the IPFS daemon must be running)
   -s, --sleep float   throttle requests by this many seconds (default 0.25)
-
-Global Flags:
-  -x, --fmt string   export format, one of [none|json*|txt|csv|api]
-  -h, --help         display this help screen
-  -v, --verbose      enable verbose (increase detail with --log_level)
+  -x, --fmt string    export format, one of [none|json*|txt|csv|api]
+  -v, --verbose       enable verbose (increase detail with --log_level)
+  -h, --help          display this help screen
 
 Notes:
   - One of --list or --init is required.
   - Re-run chifra init as often as you wish. It will repair or freshen the index.
   - The --share option works only if an IPFS daemon is running.
 </code></pre>
-<p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/develop/src/apps/chifra/cmd/pins.go><code>pins.go</code></a></p>
+<p><strong>Source code</strong>: <a href=https://github.com/TrueBlocks/trueblocks-core/tree/master/src/apps/chifra/internal/pins><code>internal/pins</code></a></p>
 <p class=edit-page><a href=https://github.com/TrueBlocks/trueblocks-docs/blob/master/content/docs/chifra/admin.md><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828.0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>Edit this page on GitHub</a></p>
 <div class="docs-navigation d-flex justify-content-between">
 <a href=/docs/chifra/chainstate/>
@@ -330,6 +319,6 @@ Other &rarr;
 </footer>
 <script src=/js/highlight.min.ec942a9dc705691c6545c0ea48b4a76dd7a730be9478c31c9139089f95e82ccfccaee7fd8b5823a0fe005ac3dec10b8f825d9ace55908f4b6e6da407af3df293.js integrity="sha512-7JQqnccFaRxlRcDqSLSnbdenML6UeMMckTkIn5XoLM/Mruf9i1gjoP4AWsPewQuPgl2azlWQj0tubaQHrz3ykw==" crossorigin=anonymous defer></script>
 <script src=/main.min.9e62c9b0c5dc8279689cc9cb693a32c8ea1d19032f574f98c782ff59a0417d3662ff94b1a7755ab72a7a1862644bf00a58492c65aa0adabbc58080f4018c61bc.js integrity="sha512-nmLJsMXcgnlonMnLaToyyOodGQMvV0+Yx4L/WaBBfTZi/5Sxp3Vatyp6GGJkS/AKWEksZaoK2rvFgID0AYxhvA==" crossorigin=anonymous defer></script>
-<script src=/index.min.b0d327099cbdf1a303fab801128f20162da053ddfede587f0250523e1378b1091505f538d44950ed3ffc2fb3f94618058942295a1434e8061127430e5c1b2136.js integrity="sha512-sNMnCZy98aMD+rgBEo8gFi2gU93+3lh/AlBSPhN4sQkVBfU41ElQ7T/8L7P5RhgFiUIpWhQ06AYRJ0MOXBshNg==" crossorigin=anonymous defer></script>
+<script src=/index.min.2611a5e636c051a3a13b9d839cff645a3b23129c6de39f0d95efd0e22a90e97e9c4525bcba48eb59cea3f25638f2c95f83ee1575d62539b7e644490938a67e72.js integrity="sha512-JhGl5jbAUaOhO52DnP9kWjsjEpxt458Nle/Q4iqQ6X6cRSW8ukjrWc6j8lY48slfg+4VddYlObfmREkJOKZ+cg==" crossorigin=anonymous defer></script>
 </body>
 </html>
